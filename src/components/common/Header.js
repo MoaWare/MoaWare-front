@@ -18,7 +18,7 @@ const Header = ({ empName, onLogout }) => {
       <button className={HeaderCSS.logo}>
         MOAWARE
       </button>
-      <nav className={HeaderCSS.nav}>
+      <div className={HeaderCSS.wrap}>
         <ul className={`${HeaderCSS.menu} ${isMenuOpen ? HeaderCSS.open : ''}`}>
           <li><Link to="/">홈</Link></li>
           <li><Link to="/">프로젝트</Link></li>
@@ -30,12 +30,7 @@ const Header = ({ empName, onLogout }) => {
           <li><Link to="/">메신저</Link></li>
           <li><Link to="/">조직도</Link></li>
         </ul>
-        <div className={HeaderCSS.menuToggle} onClick={handleMenuToggle}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </nav>
+      </div>
       <div className={HeaderCSS.userInfo}>
         <span>{empName}님</span>
         <button className={HeaderCSS.headerBtn} onClick={handleLogout}>

@@ -1,50 +1,90 @@
-*{padding:0;margin:0}
+* {
+    padding: 0;
+    margin: 0;
+}
 
 .wrapper {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    /* background-color: rgba(37, 79, 112, 1); */
-    background-color: gold;
+    justify-content: space-between;
+    background-color: rgba(37, 79, 112, 1);
+    color: white;
+    position: relative;
 }
 
 .logo {
-    color: white;
     background-color: transparent;
     border: none;
+    color: white;
     cursor: pointer;
+    font-size: 20px;
+    padding: 20px;
+}
+
+.wrap {
+    position: relative;
 }
 
 .menu {
     display: flex;
-    border: 2px blue solid;
+    flex-direction: column;
+    position: absolute;
+    /* top: 100%;
+    left: 0;
+    width: 100%; */
     list-style: none;
+    background-color: rgba(37, 79, 112, 1);
+    transition: opacity 0.3s ease-in-out;
+    visibility: hidden;
+    opacity: 0;
+    font-size: 18px;
 }
 
-.menu li {
-    font-size: 16px;
-    color: white;
-    cursor: pointer;
+.menu.open {
+    visibility: visible;
+    opacity: 1;
 }
 
 .menu li a {
+    display: block;
     color: white;
     text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+    /* padding: 20px; */
+    padding: 20px 5rem;
 }
 
-.HeaderBtn {
-    background-color: #f7f7f7;
-    border: none;
-    border-radius: 4px;
-    color: #333;
+.menu li:hover {
+    background-color: rgba(23, 41, 54, 1);
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
     font-size: 16px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
 }
 
-.HeaderBtn:hover {
-    background-color: #333;
-    color: #fff;
+.userInfo span {
+    padding: 20px;
+}
+
+.headerBtn {
+    background-color: transparent;
+    border-style: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 20px;
+}
+
+@media (min-width: 768px) {
+
+.menu {
+    position: static;
+    width: auto;
+    flex-direction: row;
+    opacity: 1;
+    visibility: visible;
+}
+
 }
