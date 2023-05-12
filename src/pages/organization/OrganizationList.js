@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import orgCSS from './OrganizationList.module.css';
 import { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { CallOrganizationListAPI } from '../../apis/OrganizationAPICalls';
 
 function OrganizaionList() {
 
@@ -8,7 +10,9 @@ function OrganizaionList() {
         dept : false,
         refDept : false
     });
-
+    const dispatch = useDispatch();
+    const org = useSelector( state => state.organizaionReducer);
+    console.log("org : ", org);
     const ref = useRef();
 
     const MouseDownHandler= (e) => {
@@ -35,6 +39,13 @@ function OrganizaionList() {
             })
         }
     }
+
+    useEffect(
+        ()=>{
+            dispatch(CallOrganizationListAPI());
+        },
+        []
+    );
 
     return (
         <div className={ orgCSS.background}>
