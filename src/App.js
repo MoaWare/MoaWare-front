@@ -1,4 +1,6 @@
 import Layout from "./layouts/Layout";
+import Main from "./pages/users/Main";
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import OrganizaionList from "./pages/organization/OrganizationList";
 import './App.css';
