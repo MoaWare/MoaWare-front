@@ -9,12 +9,12 @@ const Header = ({ empName, onLogout }) => {
   };
 
   return (
-    <div class="header">
+    <div className="header">
         <div>
-            <button class="logo">MOAWARE</button>
+            <button className="logo">MOAWARE</button>
         </div>
-        <div class="mainmenu">
-            <ul class="menuList">
+        <div className="mainmenu">
+            <ul className="menuList">
                 <li><Link to="/">홈</Link></li>
                 <li><Link to="/">프로젝트</Link></li>
                 <li><Link to="/">전자결재</Link></li>
@@ -26,9 +26,9 @@ const Header = ({ empName, onLogout }) => {
                 <li><Link to="/">조직도</Link></li>
             </ul>
         </div>
-        <div class="userInfo">
+        <div className="userInfo">
             <span>홍길동님</span>        
-            <button class="logout">로그아웃</button>
+            <button className="logout">로그아웃</button>
         </div>
     </div>
   );
