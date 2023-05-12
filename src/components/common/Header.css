@@ -22,13 +22,17 @@
     font-weight: 700;
 }
 
+.mainmenu {
+    display: flex;
+}
+
 .menuList {
     display: flex;
     list-style: none;
 }
 
 .menuList li {
-    padding: 0 3rem;  
+    padding: 0 3rem;
 }
 
 .menuList li:hover {
@@ -41,7 +45,6 @@
     text-decoration: none;
     line-height: 5vh;
     font-size: 14px;
-    
 }
 
 .userInfo {
