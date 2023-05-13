@@ -1,4 +1,3 @@
-import { Outlet } from 'react-router';
 import Header from '../components/common/Header';
 import Navbar from '../components/common/Navbar';
 import './Layout.css'
@@ -10,9 +9,6 @@ function Layout() {
         <Header />
         <Outlet/>
         <Navbar />
-        <main>
-          <Outlet/>
-        </main>
     </>
   );
 }
