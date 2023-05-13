@@ -47,7 +47,7 @@ function OrganizaionList() {
         },
         []
     );
-   console.log("org : ", org.map( org => org.deptName));
+   
     return (
         <div className={ orgCSS.background}>
             <div className={ orgCSS.div}>
