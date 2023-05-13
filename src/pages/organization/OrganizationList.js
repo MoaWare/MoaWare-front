@@ -11,8 +11,8 @@ function OrganizaionList() {
         refDept : false
     });
     const dispatch = useDispatch();
-    const org = useSelector( state => state.organizaionReducer);
-    console.log("org : ", org);
+    const {org} = useSelector( state => state.organizaionReducer);
+   
     const ref = useRef();
 
     const MouseDownHandler= (e) => {
@@ -43,10 +43,11 @@ function OrganizaionList() {
     useEffect(
         ()=>{
             dispatch(CallOrganizationListAPI());
+            
         },
         []
     );
-
+   
     return (
         <div className={ orgCSS.background}>
             <div className={ orgCSS.div}>
@@ -72,7 +73,7 @@ function OrganizaionList() {
                     <img src="./icon/CloseFolder.png" className={ orgCSS.folderImg} alt='folder' name="dept"/></> )
 
                     }
-                    <div className={ orgCSS.orgText} name="dept" > Moa 그룹</div>
+                    <div className={ orgCSS.orgText} name="dept" ></div>
                 </div>
                 <div className={ orgCSS.orgRefDeptBox} name="refDept" onClick={ onClickImgHandler } >
                 { isOpen.refDept && isOpen.refDept ? 
