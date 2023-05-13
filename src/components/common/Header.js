@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import './Header.css'
+// import HeaderCSS from './Header.module.css';
 
 const Header = ({ empName, onLogout }) => {
 
+  const navigate = useNavigate();
+    
   const handleLogout = () => {
     onLogout(); // 로그아웃 이벤트 핸들러 호출
   };
+
+  const onClickWorkHandler = () => {
+    navigate("/work");
+  }
+  
 
   return (
     <div className="header">
@@ -36,3 +44,17 @@ const Header = ({ empName, onLogout }) => {
 };
 
 export default Header;
+
+
+
+
+
+
+
+
+
+
+
+{/* <li><button className={ HeaderCSS.btn}
+                  onClick={ onClickWorkHandler }
+                >근태관리</button> */}
