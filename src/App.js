@@ -4,6 +4,7 @@ import Main from "./pages/users/Main";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import OrganizaionList from "./pages/organization/OrganizationList";
 import './App.css';
+import Login from "./pages/member/Login";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="org">
             <Route index element={<OrganizaionList/>}/>
           </Route>
+          <Route path="auth" element={<Login/>}/> 
         </Route>
       </Routes>
     </BrowserRouter>
