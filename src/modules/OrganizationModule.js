@@ -7,11 +7,12 @@ const initialState = {};
 const GET_ORGANIZATION = 'org/GET_ORGANIZATION';
 
 export const { org : { getOrganization }} = createActions({
-    [GET_ORGANIZATION] : res => res
+    [GET_ORGANIZATION] : res => res.data
 })
 
 /* 리듀서 */
 const organizationReducer = handleActions({
+    [GET_ORGANIZATION] : (state, { payload } ) => ({org : payload})
 
 }, initialState)
 
