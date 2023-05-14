@@ -21,8 +21,7 @@ function App() {
             <Route index element={<OrganizaionList/>}/>
           </Route>
           {/* 로그인  */}
-          <Route path="auth" element={<Login/>}/> 
-
+          <Route path="login" element={<Login/>}/>
           {/* 근태관리 */}
             <Route path="work">
           {/* <Route path="work" element={ <WorkLayout/>}> */}
