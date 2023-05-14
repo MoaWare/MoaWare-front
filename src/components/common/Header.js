@@ -23,7 +23,7 @@ const Header = ({ empName, onLogout }) => {
                 <li><Link to="/">게시판</Link></li>
                 <li><Link to="/">근태관리</Link></li>
                 <li><Link to="/">메신저</Link></li>
-                <li><Link to="/">조직도</Link></li>
+                <li><Link to="/org">조직도</Link></li>
             </ul>
         </div>
         <div className="userInfo">
