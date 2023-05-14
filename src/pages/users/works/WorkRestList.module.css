@@ -1,0 +1,111 @@
+.main {
+    margin-top: 90px;
+    margin-left: 22%;
+    width: 77%;
+    height: 1000px;
+    border-radius: 20px;
+    background-color: #fff;
+    position: fixed;
+    /* display: flex; */
+    /* flex-direction: column;
+    align-items: center; */
+}
+
+.btnContainer {
+    text-align: center;
+    display: flex; 
+    justify-content :center;
+    margin-bottom: 30px;
+  }
+
+.btn {
+    margin-top: 0.7%;
+    width: 20px;
+    height: 20px;
+}
+
+.btn2 {
+    margin-top: 0.7%;
+    width: 20px;
+    height: 20px;
+}
+
+.btn3 {
+    background-color: rgba(37, 79, 112, 1);
+    color: white;
+    border-radius: 10px;
+    /* margin-top: 1.2%; */
+    margin-left: 10px;
+    width: 60px;
+    height: 30px;
+}
+
+.p {
+    position: relative;
+    top: 40px;
+    color:  rgba(37, 79, 112, 1);
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.pMonth {
+    color: #254f70;
+    font-size: 24px;
+    font-weight: 600;
+    /* margin-top: 1%; */
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.btnContainer2 {
+    text-align: center;
+    display: flex; 
+    justify-content :flex-start
+  }
+
+.dateSelect {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    margin-left: 20px;
+}
+
+.hr{
+    background-color: #B6BDC6;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.inputBox {
+    margin-left: 20px;
+    margin-top: 2px;
+}
+
+.table {
+    margin-left: 20px;
+    border-collapse: collapse;
+    width: 97%;
+    border-spacing: 2px;
+    border: #B6BDC6 solid 1px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    margin-bottom: 30px;
+    color: #254F70;
+
+}
+
+.th {
+    padding: 20px 0px;
+    line-height: 3rem;
+}
+
+.td {
+    font-size: 15px;
+    border: 1px solid;
+    text-align: center;
+    border-right: none;
+    border-left: none;
+    line-height: 3rem;
+}
