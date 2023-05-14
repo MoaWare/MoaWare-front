@@ -20,9 +20,6 @@ function App() {
           <Route path="org">
             <Route index element={<OrganizaionList/>}/>
           </Route>
-          {/* 로그인  */}
-          <Route path="auth" element={<Login/>}/> 
-
           {/* 근태관리 */}
             <Route path="work">
           {/* <Route path="work" element={ <WorkLayout/>}> */}
@@ -30,6 +27,8 @@ function App() {
           </Route>
 
         </Route>
+          {/* 로그인  */}
+          <Route path="login" element={<Login/>}/>
       </Routes>
     </BrowserRouter>
   );
