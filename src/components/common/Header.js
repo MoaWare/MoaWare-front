@@ -7,9 +7,16 @@ const Header = ({ empName, onLogout }) => {
 
   const navigate = useNavigate();
     
-  const handleLogout = () => {
-    onLogout(); // 로그아웃 이벤트 핸들러 호출
-  };
+  const onClickLogoutHandler = () => {
+    
+    if(window.confirm('로그아웃 하시겠습니까?')){
+      console.log('로그아웃 확인');
+      window.localStorage.removeItem('accessToken');
+      navigate('/', { replace : true });
+    } else{
+      console.log('로그아웃 취소');
+    }
+  } 
 
   const onClickWorkHandler = () => {
     navigate("/work");
@@ -36,7 +43,7 @@ const Header = ({ empName, onLogout }) => {
         </div>
         <div className="userInfo">
             <span>홍길동님</span>        
-            <button className="logout">로그아웃</button>
+            <button className="logout" onClick={onClickLogoutHandler}>로그아웃</button>
         </div>
     </div>
   );
