@@ -6,13 +6,13 @@ import { CallOrganizationListAPI } from '../../apis/OrganizationAPICalls';
 
 function OrganizaionList() {
 
-    const [ isOpen, setIsOpen ] = useState({
+    
+    const dispatch = useDispatch();
+    const { org } = useSelector( (state) => state.organizationReducer);
+   const [ isOpen, setIsOpen ] = useState({
         dept : false,
         refDept : false
     });
-    const dispatch = useDispatch();
-    const {org} = useSelector( state => state.organizaionReducer);
-   
     const ref = useRef();
 
     const MouseDownHandler= (e) => {
@@ -47,12 +47,13 @@ function OrganizaionList() {
         },
         []
     );
-   
+   console.log('org : ', org);
     return (
         <div className={ orgCSS.background}>
             <div className={ orgCSS.div}>
                 <input type="text" className={ orgCSS.inputBox} 
                 placeholder='이름 / 부서 / 직급'></input>
+
                 <button className={ orgCSS.button} 
                     onMouseDown={ MouseDownHandler }
                     onMouseUp={ MouseUPHandler }
@@ -64,7 +65,8 @@ function OrganizaionList() {
                 <div className={ orgCSS.orgDeptBox}>
                     <div className={ orgCSS.orgTitle}> Moa 그룹</div>
                 </div>
-                <div className={ orgCSS.orgDeptBox} name="dept" onClick={ onClickImgHandler }>
+                { org&&org.map(org =>   org.refDeptCode? "" :  
+                <div className={ orgCSS.orgDeptBox} name="dept" onClick={ onClickImgHandler } key={org.detpCode} >
                     { isOpen.dept && isOpen.dept ? 
                     (<><img src="./icon/Down.png" className={ orgCSS.directionImg} alt='Down' name="dept"/>
                     <img src="./icon/OpenFolder.png" className={ orgCSS.folderImg} alt='folder' name="dept"/></> )
@@ -73,8 +75,10 @@ function OrganizaionList() {
                     <img src="./icon/CloseFolder.png" className={ orgCSS.folderImg} alt='folder' name="dept"/></> )
 
                     }
-                    <div className={ orgCSS.orgText} name="dept" ></div>
+                    <div className={ orgCSS.orgText} name="dept" > {org.deptName} </div>
                 </div>
+                
+                )}
                 <div className={ orgCSS.orgRefDeptBox} name="refDept" onClick={ onClickImgHandler } >
                 { isOpen.refDept && isOpen.refDept ? 
                     (<><img src="./icon/Down.png" className={ orgCSS.directionImg} alt='Down'name="refDept"/>

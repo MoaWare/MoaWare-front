@@ -9,8 +9,10 @@ function Layout() {
   return (
     <>
         <Header />
-        <Outlet/>
         <Navbar />
+        <main>
+          <Outlet/>
+        </main>
     </>
   );
 }

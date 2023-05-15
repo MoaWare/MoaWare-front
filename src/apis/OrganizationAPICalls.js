@@ -38,7 +38,7 @@ export const CallOrganizationSearchAPI = ({ search }) => {
         console.log( result);
         if ( result.status === 200 ) {
             console.log ("[OrganizationAPICalls] CallOrganizationSearchAPI result : ", result);
-            dispatch(getOrganization(result));
+           
         }
     };
 

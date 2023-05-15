@@ -4,7 +4,7 @@ import { useState } from "react";
 import LoginCSS from "./Login.module.css"
 import { useNavigate } from "react-router-dom";
 
-function Loginform(){
+function IdFind(){
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -19,10 +19,10 @@ function Loginform(){
             ...form,
             [e.target.name] : e.target.value
         });
+        console.log(form);
     };
-    
+
     const onClickHandler = () => {
-        console.log("callLoginAPI",form);
         dispatch(callLoginAPI(form));
     }
 
@@ -36,28 +36,31 @@ function Loginform(){
 
     return (
         <>
-            <h1>Login</h1><br/>
-            <span>모아웨어에 오신 것을 환영합니다.</span>
+            <h1>아이디 찾기</h1><br/>
+            <span>사번</span>
             <input 
                 type="text" 
-                name="empId"
-                placeholder="아이디"
-                autoComplete="off"
+                name="empNo"
                 onChange={onChangeHandler}
                 /><br/>
+            <span>이름</span>
             <input 
-                type="password" 
-                name="empPwd"
-                placeholder="비밀번호"
-                autoComplete="off"
+                type="text" 
+                name="empName"
                 onChange={onChangeHandler}
                 /><br/>
-            <button onClick={onClickHandler} className="login-button">LOGIN</button><br/>
+            <span>이메일</span>
+            <input 
+                type="email" 
+                name="email"
+                onChange={onChangeHandler}
+                /><br/>
+            <button onClick={onClickHandler} className="login-button">아이디 찾기</button><br/>
             <div className={ LoginCSS.loginfind }>
-                <button onClick={onClickIdHandler}>아이디 찾기</button><span>|</span><button onClick={onClickPwdHandler}>비밀번호 찾기</button>
+                <button onClick={onClickIdHandler}>로그인</button><span>|</span><button onClick={onClickPwdHandler}>비밀번호 찾기</button>
             </div>
         </>
     )
 }
 
-export default Loginform;
+export default IdFind;
