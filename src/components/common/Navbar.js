@@ -8,7 +8,7 @@ function Navbar() {
         <div className={NavbarCSS.title}>근태 관리</div>
         <ul className={NavbarCSS.submenu}>
           <li>
-            <NavLink to="/" activeclassnamee={NavbarCSS.active} exact="true">
+            <NavLink to="/" activeclassname={NavbarCSS.active} exact="true">
               내 근태현황
             </NavLink>
           </li>

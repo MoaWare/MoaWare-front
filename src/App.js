@@ -12,6 +12,7 @@ import WorkLayout from './layouts/WorkLayout';
 import WorkRestReq from './pages/users/works/WorkRestReq';
 import WorkRestReqList from './pages/users/works/WorkRestReqList';
 import WorkRestList from './pages/users/works/WorkRestList';
+import LoginIdFind from "./pages/member/LoginIdFind";
 
 
 
@@ -36,7 +37,10 @@ function App() {
 
         </Route>
           {/* 로그인  */}
-          <Route path="login" element={<Login/>}/>
+          <Route path="login" element={<Login/>}>
+            <Route path="idfind" element={<LoginIdFind/>}/>
+            <Route path="pwdfind" element={<LoginIdFind/>}/>
+          </Route>
       </Routes>
     </BrowserRouter>
   );
