@@ -8,7 +8,7 @@ const POST_LOGIN = 'emp/POST_LOGIN';
 const RESET_EMP = 'emp/RESET_EMP'
 
 export const { emp : { postLogin,resetEmp }} = createActions({
-    [POST_LOGIN] : res => res.data,
+    [POST_LOGIN] : res => res,
     [RESET_EMP] : () => {}
 })
 
