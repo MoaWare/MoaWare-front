@@ -45,9 +45,9 @@ function App() {
             <ProtectedRoute loginCheck={false}>
               <Login />
             </ProtectedRoute>}>
-          <Route path="idfind" element={<LoginIdFind/>}/>
-          <Route path="pwdfind" element={<LoginIdFind/>}/>
         </Route>
+        <Route path="idfind" element={<LoginIdFind/>}/>
+        <Route path="pwdfind" element={<LoginIdFind/>}/>
       </Routes>
     </BrowserRouter>
   );
