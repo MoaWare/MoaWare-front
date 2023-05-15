@@ -29,13 +29,13 @@ function OrganizaionList() {
 
         if(isOpen[e.target.getAttribute("name")]) {
             setIsOpen({
-                ...isOpen,
+                
                 [e.target.getAttribute("name")] : false
             })
             
         } else {
             setIsOpen({
-                ...isOpen,
+                
                 [e.target.getAttribute("name")] : true
             })
             

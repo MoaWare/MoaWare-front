@@ -1,7 +1,9 @@
 import { createActions, handleActions } from "redux-actions";
 
 /* 초기값 */
-const initialState = {};
+const initialState = {
+    subOrg: []
+};
 
 /* 액션 */
 const GET_ORGANIZATION = 'org/GET_ORGANIZATION';
@@ -17,7 +19,7 @@ const organizationReducer = handleActions({
     [GET_ORGANIZATION] : (state, { payload } ) => ({org : payload}),
     [GET_ORGANIZATIONSUB]: (state, { payload }) => ({
         ...state,
-        subOrg: payload 
+        subOrg: payload
       }),
 
 }, initialState)
