@@ -1,8 +1,9 @@
 .main {
-    margin-top: 90px;
+    margin-top: 4.7%;
     margin-left: 22%;
     width: 77%;
-    height: 1000px;
+    min-height: 88%;
+    overflow-y: scroll;
     border-radius: 20px;
     background-color: #fff;
     position: fixed;
