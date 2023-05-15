@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import orgCSS from './OrganizationList.module.css';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { CallOrganizationListAPI, CallOrganizationSubListAPI } from '../../apis/OrganizationAPICalls';
+import { CallOrganizationListAPI, CallOrganizationSearchAPI, CallOrganizationSubListAPI } from '../../apis/OrganizationAPICalls';
 import OrganizaionSubList from './OrganizationSubList';
+import { useNavigate } from 'react-router-dom';
+
 
 function OrganizaionList() {
 
@@ -11,6 +13,8 @@ function OrganizaionList() {
     const dispatch = useDispatch();
     const { org, subOrg } = useSelector( (state) => state.organizationReducer);
     const [ isOpen, setIsOpen ] = useState({});
+    const [ search, setSearch ] = useState('');
+    const navigate = useNavigate();
 
     const ref = useRef();
 
@@ -29,19 +33,30 @@ function OrganizaionList() {
 
         if(isOpen[e.target.getAttribute("name")]) {
             setIsOpen({
-                ...isOpen,
+                
                 [e.target.getAttribute("name")] : false
             })
             
         } else {
             setIsOpen({
-                ...isOpen,
+                
                 [e.target.getAttribute("name")] : true
             })
             
         }
     }
 
+    const searchClickHandler = () => {
+        navigate(`./search?search=${search}`);
+    }
+
+    const searchChangeHandler =(e)=>{
+        setSearch(
+           e.target.value
+        )
+
+    }
+    console.log("search :" ,search);
     useEffect(
         ()=>{
             dispatch(CallOrganizationListAPI());
@@ -56,10 +71,11 @@ function OrganizaionList() {
         <div className={ orgCSS.background}>
             <div className={ orgCSS.div}>
                 <input type="text" className={ orgCSS.inputBox} 
-                placeholder='이름 / 부서 / 직급'></input>
+                placeholder='이름 / 부서 / 직급' onChange={searchChangeHandler} name="search"></input>
                 <button className={ orgCSS.button} 
                     onMouseDown={ MouseDownHandler }
                     onMouseUp={ MouseUPHandler }
+                    onClick={searchClickHandler}
                 >
                     검색</button>
             </div>

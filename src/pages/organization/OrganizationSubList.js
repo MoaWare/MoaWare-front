@@ -34,14 +34,17 @@ function OrganizaionSubList ({deptCode, isOpen, setIsOpen}) {
             dispatch(CallOrganizationSubListAPI({deptCode}));
         
         },
-        []
+        [deptCode]
     );
         console.log("ddd : ", deptCode );
     return (
         <>
         {
             subOrg && subOrg.map( sub => ( 
+                sub.refDeptCode === deptCode ?
+              
                 <div key={sub.deptCode}>
+               
                     <div className={ orgCSS.orgRefDeptBox} name={sub.deptCode}  onClick={ onClickImgHandler } key={sub.deptCode}>
                         { isOpen[sub.deptCode] && isOpen[sub.deptCode] ? 
                             (<><img src="./icon/Down.png" className={ orgCSS.directionImg} alt='Down' name={sub.deptCode}/>
@@ -61,7 +64,7 @@ function OrganizaionSubList ({deptCode, isOpen, setIsOpen}) {
                     :   
                     ''
                     }
-                </div>
+                </div>: ''
             ))
         }
         </>
