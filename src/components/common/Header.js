@@ -6,9 +6,15 @@ import HeaderCSS from './Header.module.css';
 
 const Header = ({ empName, onLogout }) => {
 
+  const navigate = useNavigate();
   const handleLogout = () => {
     onLogout(); // 로그아웃 이벤트 핸들러 호출
   };
+
+  const onClickWorkHandler = () => {
+    navigate("/work");
+  }
+
 
   return (
     <div className={HeaderCSS.header}>
