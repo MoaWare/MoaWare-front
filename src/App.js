@@ -13,6 +13,7 @@ import WorkRestReq from './pages/users/works/WorkRestReq';
 import WorkRestReqList from './pages/users/works/WorkRestReqList';
 import WorkRestList from './pages/users/works/WorkRestList';
 import LoginIdFind from "./pages/member/LoginIdFind";
+import ProtectedRoute from "./components/router/ProtectedRoute";
 
 
 
@@ -20,7 +21,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={
+          <ProtectedRoute loginCheck={true}>
+            <Layout />
+          </ProtectedRoute>}>
           <Route index element={<Main/>} />
           {/* 조직도 */}
           <Route path="org">
@@ -36,11 +40,14 @@ function App() {
           </Route>
 
         </Route>
-          {/* 로그인  */}
-          <Route path="login" element={<Login/>}>
-            <Route path="idfind" element={<LoginIdFind/>}/>
-            <Route path="pwdfind" element={<LoginIdFind/>}/>
-          </Route>
+        {/* 로그인  */}
+        <Route path="login" element={
+            <ProtectedRoute loginCheck={false}>
+              <Login />
+            </ProtectedRoute>}>
+          <Route path="idfind" element={<LoginIdFind/>}/>
+          <Route path="pwdfind" element={<LoginIdFind/>}/>
+        </Route>
       </Routes>
     </BrowserRouter>
   );

@@ -1,20 +1,4 @@
 
-/* .loginDiv{    
-    height: 480px;
-    width: 850px;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column; 
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
-    background-color: white;
-    border: solid 1px black;
-    border-radius: 25px;    
-} */
-
-
 .loginDiv input {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -27,18 +11,32 @@
 .login-button button{
     border: none;
     background-color: white;
-    /* margin-top: 5px;
-    margin-bottom: 5px;
-    height: 30px;
-    width: 250px;
-    border-radius: 25px;
-    background-color: white;
-    font-weight: bold; */
+}
+
+button.loginbutton {
+    width: 253px;
+    height: 25px;
+    border: none;
+    border-radius: 5px;
+    background-color: #254F70;
+    color: white;
+    font-weight: bolder;
+}
+
+.titleblue{
+    color: #254F70;
 }
 
 .loginfind button{
     border: none;
     background-color: white;
+    margin: 0px 20px;
+}
+
+.subtitleTiny{
+    font-size: small;
+    color: #254F70;
+    font-weight: bold;
 }
 
 .loginDivForm {
@@ -47,4 +45,8 @@
     flex-direction: column;
     margin-right: 51px;
     margin-left: 30px;
+}
+
+.loginfind > *{
+    padding: 10pxq;
 }
