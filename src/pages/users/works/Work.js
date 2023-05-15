@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import WorkCSS from './Work.module.css';
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
 import DateSelect from '../../../components/Work/DateSelect';
 // import PagingBar from "../../components/common/PagingBar";
 
