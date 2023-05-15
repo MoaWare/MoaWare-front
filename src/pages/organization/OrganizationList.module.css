@@ -3,6 +3,11 @@
     text-align: center;
 }
 
+.background{
+    margin-top : 10vh;
+    margin-left: 20vw;
+}
+
 .inputBox{
     margin-right: 20px;
     text-align: center;
