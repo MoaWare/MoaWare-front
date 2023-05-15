@@ -53,6 +53,7 @@ function OrganizaionList() {
             <div className={ orgCSS.div}>
                 <input type="text" className={ orgCSS.inputBox} 
                 placeholder='이름 / 부서 / 직급'></input>
+
                 <button className={ orgCSS.button} 
                     onMouseDown={ MouseDownHandler }
                     onMouseUp={ MouseUPHandler }
