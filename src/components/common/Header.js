@@ -28,8 +28,8 @@ const Header = ({ empName, onLogout }) => {
            onClick={ onClickWorkHandler }
            >근태관리</button></li>
           <li><Link to="/">메신저</Link></li>
-          <li><Link to="/">조직도</Link></li>
-        </ul> 
+          <li><Link to="/org">조직도</Link></li>
+        </ul>
       </div>
       <div className={HeaderCSS.userInfo}>
         <span>홍길동님</span>
