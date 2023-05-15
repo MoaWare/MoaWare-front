@@ -6,13 +6,13 @@ import { CallOrganizationListAPI } from '../../apis/OrganizationAPICalls';
 
 function OrganizaionList() {
 
-    const [ isOpen, setIsOpen ] = useState({
+    
+    const dispatch = useDispatch();
+    const { org } = useSelector( (state) => state.organizationReducer);
+   const [ isOpen, setIsOpen ] = useState({
         dept : false,
         refDept : false
     });
-    const dispatch = useDispatch();
-    const { org } = useSelector( (state) => state.organizationReducer);
-   
     const ref = useRef();
 
     const MouseDownHandler= (e) => {
