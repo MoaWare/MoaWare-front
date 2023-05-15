@@ -1,53 +1,203 @@
 .navbar {
-/* border: 1px solid red;s */
-height: 95vh;
-position: fixed;
-top: 5vh;
-left: 0;
-right: 0;
-width: 20vw;
-background-color: rgba(239, 239, 239, 1);
+    /* border: 1px solid red;s */
+    height: 95vh;
+    position: fixed;
+    top: 5vh;
+    left: 0;
+    right: 0;
+    width: 20vw;
+    /* background-color: rgba(239, 239, 239, 1); */
 }
 
 .submenu {
-/* border: 1px solid blue;s */
-text-align: center;
-list-style: none;
+    /* border: 1px solid blue;s */
+    text-align: center;
+    list-style: none;
 }
 
 .submenu li {
-margin: 20px 0;
-padding: 20px;
+    margin: 20px 0;
+    padding: 20px;
 }
 
 .submenu li:hover {
-background-color: rgba(80, 164, 228, 0.5);
+    background-color: rgba(80, 164, 228, 0.5);
 }
 
 .submenu a {
-text-decoration-line: none;
-color: rgba(37, 79, 112, 1);
-font-size: 14px;
-font-weight: 700;
+    text-decoration-line: none;
+    color: rgba(37, 79, 112, 1);
+    font-size: 14px;
+    font-weight: 700;
 }
 
 .title {
-background-color: rgba(37, 79, 112, 1);
-color: white;
-text-align: center;
-/* padding: 2vh; */
-border-radius: 40px;
-font-size: 20px;
-font-weight: 700;
-margin: 2vw;
-padding: 2vh;
+    background-color: rgba(37, 79, 112, 1);
+    color: white;
+    text-align: center;
+    /* padding: 2vh; */
+    border-radius: 40px;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 2vw;
+    padding: 2vh;
 }
 
 .wrap {
-/* margin: 30px; */
-border: white 1px solid;
-background-color: white;
-border-radius: 30px;
-margin: 4vh 2vw;
-height: 87vh;
-}  
+    /* margin: 30px; */
+    border: white 1px solid;
+    background-color: white;
+    border-radius: 30px;
+    margin: 3vh 2vw;
+    height: 56vh;
+    min-height: 50vh;
+    /* border: 2px solid blue; */
+    text-align: center;
+    color: rgba(37, 79, 112, 1);
+}
+
+.profile {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    /* padding-bottom: 0.5rem; */
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.myInfo {
+    margin: 1rem;
+    padding: 1rem;
+    /* border: 2px solid red; */
+    border-top: 2px solid rgba(182, 189, 198, 0.5);
+    border-bottom: 2px solid rgba(182, 189, 198, 0.5);
+}
+
+.myInfo img {
+    width: 132px;
+    height: 170px;
+    /* border: 2px solid black; */
+    /* align-items: center; */
+    max-width: 100%;
+    height: auto;
+}
+
+.team {
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin: 0.5rem;
+}
+
+.name {
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+.work {
+    font-size: 14px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.time {
+    color: rgba(80, 164, 228, 1);
+    font-weight: bold;
+    letter-spacing: 2px;
+    padding: 0.5rem;
+}
+
+.workon {
+    background-color: rgba(37, 79, 112, 1);
+    color: white;
+    border-radius: 10px;
+    border: transparent;
+    width: 10vh;
+    height: 4vh;
+    font-weight: bold;
+    /* flex-direction: column */
+}
+
+.workdown {
+    background-color: white;
+    color:  rgba(37, 79, 112, 1);
+    border-radius: 10px;
+    border: solid 2px rgba(37, 79, 112, 1);
+    width: 10vh;
+    height: 4vh;
+    font-weight: bold;
+    margin-left: 0.5vw;
+    /* flex-direction: column */
+}
+
+.myWork {
+    /* margin: 1rem; */
+    margin: 1rem;
+}
+
+.worktime {
+    color: #254F70;
+    font-size: 14px;
+    text-align: left;
+    padding: 0.5rem;
+    /* font-weight: bold; */
+}
+
+/* 날씨 */
+
+.wrap2 {
+    /* margin: 30px; */
+    border: white 1px solid;
+    background-color: white;
+    border-radius: 30px;
+    margin: 3vh 2vw;
+    height: 30vh;
+    /* border: 2px solid blue; */
+    text-align: center;
+    color: rgba(37, 79, 112, 1);
+    font-size: 14px;
+}
+
+.weather {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    /* padding-bottom: 0.5rem; */
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.myWeather {
+    margin: 1rem;
+    padding: 1rem;
+    border-top: 2px solid rgba(182, 189, 198, 0.5);
+}
+
+.today {
+    font-weight: bold;
+}
+
+.myWeather img {
+    height: 10vh;
+    width: 5vw;
+}
+
+.local {
+    margin: 1rem;
+}
+
+.sky {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.temperature {
+    margin-left: 1rem;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 2rem;
+}
+
+.yesterday {
+    margin: 0.5rem;
+}

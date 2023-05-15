@@ -23,7 +23,6 @@ const Header = ({ empName, onLogout }) => {
     navigate("/work");
   }
 
-
   return (
     <div className={HeaderCSS.header}>
       <div>
@@ -38,7 +37,6 @@ const Header = ({ empName, onLogout }) => {
           <li><Link to="/">일정관리</Link></li>
           <li><Link to="/">게시판</Link></li>
           {/* <li><Link to="/">근태관리</Link></li> */}
-
           <li>
             <button className={ HeaderCSS.btn}onClick={ onClickWorkHandler }>
               근태관리
