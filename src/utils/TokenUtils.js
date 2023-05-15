@@ -12,7 +12,22 @@ export function isLogin() {
 
 export function isAdmin() {
     const token = decodeJwt();
-    return (token && token.exp * 1000 > Date.now() && token.auth[0] === 'ROLE_ADMIN');
+    return (token && token.exp * 1000 > Date.now() && token.auth[0] === 'ADMIN');
+}
+
+export function isProject() {
+    const token = decodeJwt();
+    return (token && token.exp * 1000 > Date.now() && token.auth[0] === 'PROJECT');
+}
+
+export function isBoardAdmin() {
+    const token = decodeJwt();
+    return (token && token.exp * 1000 > Date.now() && token.auth[0] === 'BOARD');
+}
+
+export function isPost() {
+    const token = decodeJwt();
+    return (token && token.exp * 1000 > Date.now() && token.auth[0] === 'POST');
 }
 
 export function getMemberId() {

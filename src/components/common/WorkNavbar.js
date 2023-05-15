@@ -8,22 +8,22 @@ function Navbar() {
         <div className={WorkNavbarCSS.title}>근태 관리</div>
         <ul className={WorkNavbarCSS.submenu}>
           <li>
-            <NavLink to="/work" activeClassName="active" exact>
+            <NavLink to="/work" activeclassname="active" exact="true">
               내 근태현황
             </NavLink>
           </li>
           <li>
-            <NavLink to="/work/restReq" activeClassName="active">
+            <NavLink to="/work/restReq" activeclassname="active">
               연차 신청
             </NavLink>
           </li>
           <li>
-            <NavLink to="/work/restReqList" activeClassName="active">
+            <NavLink to="/work/restReqList" activeclassname="active">
               연차 신청 목록
             </NavLink>
           </li>
           <li>
-            <NavLink to="/work/restList" activeClassName="active">
+            <NavLink to="/work/restList" activeclassname="active">
               연차 내역
             </NavLink>
           </li>
