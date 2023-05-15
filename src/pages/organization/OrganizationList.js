@@ -53,7 +53,6 @@ function OrganizaionList() {
             <div className={ orgCSS.div}>
                 <input type="text" className={ orgCSS.inputBox} 
                 placeholder='이름 / 부서 / 직급'></input>
-
                 <button className={ orgCSS.button} 
                     onMouseDown={ MouseDownHandler }
                     onMouseUp={ MouseUPHandler }
@@ -66,7 +65,7 @@ function OrganizaionList() {
                     <div className={ orgCSS.orgTitle}> Moa 그룹</div>
                 </div>
                 { org&&org.map(org =>   org.refDeptCode? "" :  
-                <div className={ orgCSS.orgDeptBox} name="dept" onClick={ onClickImgHandler } key={org.detpCode} >
+                <div className={ orgCSS.orgDeptBox} name="dept" onClick={ onClickImgHandler } key={org.deptCode} >
                     { isOpen.dept && isOpen.dept ? 
                     (<><img src="./icon/Down.png" className={ orgCSS.directionImg} alt='Down' name="dept"/>
                     <img src="./icon/OpenFolder.png" className={ orgCSS.folderImg} alt='folder' name="dept"/></> )
