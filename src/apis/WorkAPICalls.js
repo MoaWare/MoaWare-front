@@ -9,7 +9,13 @@ export const callWorkMyListAPI = ({ workDate, currenPage = 1 }) => {
     const requestURL = `${PRE_URL}/work/works/${workDate}?page=${currenPage}`;
     return async (dispatch, getState) => {
 
-        const result = await fetch(requestURL).then(response => response.json());
+        const result = await fetch(requestURL, {
+            method : 'GET',
+            headers : {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
 
         if(result.status === 200) {
             console.log("[WorkAPICalls] callWorkMyListAPI result : ", result);
