@@ -1,4 +1,4 @@
-import { postLogin } from "../modules/EmployeeModule";
+import { postFindAccount, postLogin } from "../modules/EmployeeModule";
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${ process.env.REACT_APP_RESTAPI_SERVER_PORT}`
@@ -20,12 +20,38 @@ export const callLoginAPI = (form) => {
         })
         .then(response => response.json());
 
-        console.log('[callLoginAPI] callLoginAPI result : ', result);
+        console.log('[callLoginAPI] result : ', result);
 
         if(result.status === 200) {
             window.localStorage.setItem('accessToken', result.data.accessToken);
         }
         
         dispatch(postLogin(result));
+    }
+}
+
+
+/* 아이디 찾기 */ 
+export const callFindAccountAPI = (form) => {
+
+    const requestURL = `${PRE_URL}/auth/idfind`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : "POST",
+            headers : {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify(form)
+        }).then(res => res.json());
+        
+        if( result.status === 200 ){
+            console.log("[callIdFindAPI] result :", result);
+            dispatch(postFindAccount(result));
+        } else {
+            alert(result.message);
+        }
+
     }
 }

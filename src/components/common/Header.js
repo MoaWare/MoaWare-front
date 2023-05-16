@@ -11,9 +11,10 @@ const Header = ({ empName, onLogout }) => {
   const onClickLogoutHandler = () => {
     
     if(window.confirm('로그아웃 하시겠습니까?')){
-      console.log('로그아웃 확인');
       window.localStorage.removeItem('accessToken');
-      navigate('/', { replace : true });
+      console.log('로그아웃 확인');
+      navigate('/');
+      console.log('로그아웃 확인');
     } else{
       console.log('로그아웃 취소--------------------------');
     }

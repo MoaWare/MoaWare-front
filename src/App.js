@@ -11,10 +11,13 @@ import WorkRestReqList from './pages/users/works/WorkRestReqList';
 import WorkRestList from './pages/users/works/WorkRestList';
 import LoginIdFind from "./pages/member/LoginIdFind";
 import ProtectedRoute from "./components/router/ProtectedRoute";
+import LoginIdFindResult from "./form/LoginIdFindResult";
+import OrganizaionSearch from "./pages/organization/OrganizationSearch";
 import OrganizationSearch from "./pages/organization/OrganizationSearch";
 import OrganizationMain from "./pages/organization/OrganizationMain";
 import OrganizationDetail from "./pages/organization/OrganizationDetail";
 import OrgLayout from "./layouts/OrgLayout";
+
 
 
 
@@ -49,7 +52,20 @@ function App() {
               <Login />
             </ProtectedRoute>}>
         </Route>
-        <Route path="idfind" element={<LoginIdFind/>}/>
+        <Route 
+          path="idfind" 
+          element={
+            <ProtectedRoute loginCheck={false}>
+              <LoginIdFind/>
+            </ProtectedRoute>
+          }/>
+        <Route 
+          path="idresult" 
+          element={
+            <ProtectedRoute>
+              <LoginIdFindResult/>
+            </ProtectedRoute>
+          }/>
         <Route path="pwdfind" element={<LoginIdFind/>}/>
       </Routes>
     </BrowserRouter>
