@@ -6,7 +6,6 @@ import OrganizaionList from "./pages/organization/OrganizationList";
 import './App.css';
 
 import Login from "./pages/member/Login";
-
 import Work from "./pages/users/works/Work";
 import WorkLayout from './layouts/WorkLayout';
 import WorkRestReq from './pages/users/works/WorkRestReq';
@@ -15,6 +14,7 @@ import WorkRestList from './pages/users/works/WorkRestList';
 import LoginIdFind from "./pages/member/LoginIdFind";
 import ProtectedRoute from "./components/router/ProtectedRoute";
 import LoginIdFindResult from "./form/LoginIdFindResult";
+import OrganizaionSearch from "./pages/organization/OrganizationSearch";
 
 
 
@@ -30,6 +30,7 @@ function App() {
           {/* 조직도 */}
           <Route path="org">
             <Route index element={<OrganizaionList/>}/>
+            <Route path="search" element={<OrganizaionSearch/>}/>
           </Route>
           {/* 근태관리 */}
             {/* <Route path="work"> */}
