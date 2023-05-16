@@ -18,7 +18,7 @@ function Login(){
             if( login?.status === 200 ){
                 navigate("/", { replace : true });
                 dispatch(resetEmp());
-            } else if( login?.status === 400 ){
+            } else if( login?.state === 400 ){
                 alert(login.message);
                 dispatch(resetEmp());   
             }
