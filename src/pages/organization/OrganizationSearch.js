@@ -1,27 +1,31 @@
 import { useSearchParams } from 'react-router-dom';
-import orgCSS from './OrganizationList.module.css';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { CallOrganizationSearchAPI } from '../../apis/OrganizationAPICalls';
+import OrganizaionList from './OrganizationList';
 
-function OrganizaionSearch (){
+function OrganizationSearch (){
 
     const[ searchParams ] = useSearchParams();
     const search = searchParams.get('search');
     console.log("search : ", search);
     const dispatch = useDispatch();
+    const { searchOrg } = useSelector( (state) => state.organizationReducer);
+    const [isSearch, setIsSearch] = useState(true);
 
-
+    console.log("searchOrg : ", searchOrg);
 
     useEffect(
         ()=>{
             dispatch(CallOrganizationSearchAPI({search}));
-        },[]
+        },[search]
     );
 
     return(
-        <div className={ orgCSS.background}>dd</div>
+        <div>
+            {searchOrg&&<OrganizaionList org={searchOrg} isSearch={isSearch}/>}
+        </div>
     )
 }
 
-export default OrganizaionSearch;
+export default OrganizationSearch;
