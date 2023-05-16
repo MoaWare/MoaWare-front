@@ -1,18 +1,21 @@
 import { useState } from "react";
 
 export default function DateSelect(props) {
-    const [year, setYear] = useState(new Date().getFullYear());
-    const [month, setMonth] = useState(new Date().getMonth() + 1);
+    const [year2, setYear] = useState(new Date().getFullYear());
+    const [month2, setMonth] = useState(new Date().getMonth() + 1);
   
-    const handleYearChange = (event) => {
-      setYear(parseInt(event.target.value));
-      props.onDateChange(year, parseInt(event.target.value));
+    const onChangeYearHandler = (e) => {
+      setYear(parseInt(e.target.value));
+      props.onYearChange(year2, parseInt(e.target.value));
     };
+
+    console.log(month2);
   
-    const handleMonthChange = (event) => {
-      setMonth(parseInt(event.target.value));
-      props.onDateChange(parseInt(event.target.value), month);
+    const onChangeMonthHandler = (e) => {
+      setMonth(parseInt(e.target.value));
+      props.onMonthChange(month2, parseInt(e.target.value));
     };
+
   
     const years = [];
     for (let i = 2000; i <= new Date().getFullYear(); i++) {
@@ -21,14 +24,14 @@ export default function DateSelect(props) {
   
     return (
       <div>
-        <select value={year} onChange={handleYearChange}>
+        <select value={year2} name="year" onChange={onChangeYearHandler}>
           {years.map((year) => (
             <option key={year} value={year}>
               {year}
             </option>
           ))}
         </select>
-        <select value={month} onChange={handleMonthChange}>
+        <select value={month2} name="month" onChange={onChangeMonthHandler}>
           <option value="1">1월</option>
           <option value="2">2월</option>
           <option value="3">3월</option>

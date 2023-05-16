@@ -23,6 +23,7 @@ const organizationReducer = handleActions({
         ...state,
         subOrg: payload
       }),
+      [GET_ORGANIZATION_SEARCH] : (state, { payload } ) => ({searchOrg : payload}),
 
 }, initialState)
 

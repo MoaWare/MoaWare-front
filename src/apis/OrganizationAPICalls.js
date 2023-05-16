@@ -1,4 +1,4 @@
-import { getOrganization, getOrganizationSub } from "../modules/OrganizationModule";
+import { getOrganization, getOrganizationSearch, getOrganizationSub } from "../modules/OrganizationModule";
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${ process.env.REACT_APP_RESTAPI_SERVER_PORT}`
@@ -59,7 +59,7 @@ export const CallOrganizationSearchAPI = ({ search }) => {
         console.log( result);
         if ( result.status === 200 ) {
             console.log ("[OrganizationAPICalls] CallOrganizationSearchAPI result : ", result);
-           
+            dispatch(getOrganizationSearch(result));
         }
     };
 
