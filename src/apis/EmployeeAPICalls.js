@@ -55,3 +55,28 @@ export const callFindAccountAPI = (form) => {
 
     }
 }
+
+/* 비밀번호 찾기 */ 
+export const callFindPwdAccountAPI = (form) => {
+
+    const requestURL = `${PRE_URL}/auth/pwdfind`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : "POST",
+            headers : {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify(form)
+        }).then(res => res.json());
+        
+        if( result.status === 200 ){
+            console.log("[callFindPwdAccountAPI] result :", result);
+            dispatch(postFindAccount(result));
+        } else {
+            alert(result.message);
+        }
+
+    }
+}

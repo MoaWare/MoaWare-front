@@ -55,42 +55,46 @@ function LoginIdFind(){
     }
 
     const onClickPwdFindHandler = () => {
-        navigate("/idfind");
+        navigate("/pwdfind");
     }
 
     return getAccount ? <LoginIdFindResult/> : (
         <div className={LoginCSS.backgroundDiv}>
             <div className={ LoginCSS.loginDiv }>
                 <img src="./icon/moawareLoginMain.png" alt='Down' name="login"/><br/>
-                <img src="./icon/Line 1.png" alt='Down' name="login" className={LoginCSS.line}/><br/>
-                <h1 className={LoginCSS.titleblue}>아이디 찾기</h1><br/>
-                <label>사번
-                <input 
-                    className={LoginCSS.inputbox}
-                    type="text" 
-                    name="empCode"
-                    onChange={onChangeHandler}
-                    />
-                </label>
-                <label>이름 
-                <input 
-                    className={LoginCSS.inputbox}
-                    type="text" 
-                    name="empName"
-                    onChange={onChangeHandler}
-                    />
-                </label>
-                <label>이메일
-                <input 
-                    className={LoginCSS.inputbox}
-                    type="text" 
-                    name="email"
-                    onChange={onChangeHandler}
-                    />
-                </label>
-                <button onClick={onClickHandler} className={LoginCSS.loginbutton}>아이디 찾기</button><br/>
-                <div className={ LoginCSS.loginfind }>
-                    <button onClick={onClickLoginHandler}>로그인</button><span>|</span><button onClick={onClickPwdFindHandler}>비밀번호 찾기</button>
+                <img src="./icon/Line 1.png" alt='Down' name="login" className={LoginCSS.line}/>
+                <div className={LoginCSS.loginDivForm}>
+                    <h1 className={LoginCSS.titleblue}>아이디 찾기</h1><br/>
+                    <div className={LoginCSS.findFormInput}>
+                        <label>사번
+                        <input 
+                            className={LoginCSS.inputbox}
+                            type="text" 
+                            name="empCode"
+                            onChange={onChangeHandler}
+                            />
+                        </label>
+                        <label>이름 
+                        <input 
+                            className={LoginCSS.inputbox}
+                            type="text" 
+                            name="empName"
+                            onChange={onChangeHandler}
+                            />
+                        </label>
+                        <label>이메일
+                        <input 
+                            className={LoginCSS.inputbox}
+                            type="text" 
+                            name="email"
+                            onChange={onChangeHandler}
+                            />
+                        </label>
+                    </div>
+                    <button onClick={onClickHandler} className={LoginCSS.loginbutton}>아이디 찾기</button><br/>
+                    <div className={ LoginCSS.loginfind }>
+                        <button onClick={onClickLoginHandler}>로그인</button><span className={LoginCSS.spaceBar}>|</span><button onClick={onClickPwdFindHandler}>비밀번호 찾기</button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -14,6 +14,7 @@ import WorkRestList from './pages/users/works/WorkRestList';
 import LoginIdFind from "./pages/member/LoginIdFind";
 import ProtectedRoute from "./components/router/ProtectedRoute";
 import LoginIdFindResult from "./form/LoginIdFindResult";
+import LoginPwdFindResult from "./pages/member/LoginPwdFind";
 import OrganizaionSearch from "./pages/organization/OrganizationSearch";
 
 
@@ -62,7 +63,13 @@ function App() {
               <LoginIdFindResult/>
             </ProtectedRoute>
           }/>
-        <Route path="pwdfind" element={<LoginIdFind/>}/>
+        <Route 
+          path="pwdfind" 
+          element={
+            <ProtectedRoute>
+              <LoginPwdFindResult/>
+            </ProtectedRoute>
+          }/>
       </Routes>
     </BrowserRouter>
   );
