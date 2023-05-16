@@ -1,0 +1,28 @@
+.background{
+    margin-top : 10vh;
+    margin-left: 20vw;
+}
+
+.table{
+    margin: 20vh auto;
+    text-align: center;
+    background-color: white;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.table .td{
+    width: 8vw;
+}
+
+.tableName{
+    font-size: 30px;
+}
+
+.tableMargin{
+    height: 30px;
+}
+
+.tableTdMargin{
+    width: 2vw;
+}

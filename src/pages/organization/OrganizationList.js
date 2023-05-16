@@ -57,6 +57,11 @@ function OrganizationList({org, isSearch}) {
         setSearch(false);
     }
 
+    const detailClickHandler = (empCode) => {
+        
+        navigate(`/org/detail/${empCode}`);
+    }
+
     const searchChangeHandler =(e)=>{
         setSearch(
            e.target.value
@@ -102,7 +107,7 @@ function OrganizationList({org, isSearch}) {
                             {isSearch? 
                             isOpen[org.deptCode]  && isOpen[org.deptCode] ? 
                             (org.orgEmp.map(emp => 
-                                <div className={ orgCSS.orgRefDeptBox} key={emp.empCode} onClick={ homeClickHandler }> 
+                                <div className={ orgCSS.orgRefDeptBox} key={emp.empCode} onClick={()=> detailClickHandler(emp.empCode)}> 
                                     <div className={ orgCSS.orgEmpText} > {emp.empName} {emp.job.jobName}</div>
                                 </div>)
                             )  : '' 
@@ -123,7 +128,7 @@ function OrganizationList({org, isSearch}) {
                                     </div> 
                                     {isOpen[sub.deptCode]  && isOpen[sub.deptCode] ? 
                                         (sub.orgEmp.map(emp => 
-                                            <div className={ orgCSS.orgEmpBox} key={emp.empCode} onClick={ homeClickHandler } > 
+                                            <div className={ orgCSS.orgEmpBox} key={emp.empCode} onClick={()=> detailClickHandler(emp.empCode)} > 
                                                 <div className={ orgCSS.orgEmpText} > {emp.empName} {emp.job.jobName}</div>
                                             </div>)
                                     )  : '' }   

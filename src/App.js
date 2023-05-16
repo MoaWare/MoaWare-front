@@ -1,8 +1,6 @@
 import Layout from "./layouts/Layout";
 import Main from "./pages/users/Main";
-
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import OrganizationList from "./pages/organization/OrganizationList";
 import './App.css';
 
 import Login from "./pages/member/Login";
@@ -17,6 +15,8 @@ import LoginIdFindResult from "./form/LoginIdFindResult";
 import OrganizaionSearch from "./pages/organization/OrganizationSearch";
 import OrganizationSearch from "./pages/organization/OrganizationSearch";
 import OrganizationMain from "./pages/organization/OrganizationMain";
+import OrganizationDetail from "./pages/organization/OrganizationDetail";
+import OrgLayout from "./layouts/OrgLayout";
 
 
 
@@ -31,9 +31,10 @@ function App() {
           </ProtectedRoute>}>
           <Route index element={<Main/>} />
           {/* 조직도 */}
-          <Route path="org">
+          <Route path="org" element={<OrgLayout/>}>
             <Route index element={<OrganizationMain/>}/>
             <Route path="search" element={<OrganizationSearch/>}/>
+            <Route path="detail/:empCode" element={<OrganizationDetail/>}/>
           </Route>
           {/* 근태관리 */}
             {/* <Route path="work"> */}
