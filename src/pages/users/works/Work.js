@@ -13,11 +13,10 @@ function Work() {
     const [year, setYear] = useState(new Date().getFullYear());
     const [month, setMonth] = useState(new Date().getMonth() + 1);
     const [currentPage, setCurrentPage] = useState(1);
-    // const [year2, setYear2] = useState();
-    // const [month2, setMonth2 ] = useState();
     const [year2, setYear2] = useState(new Date().getFullYear());
     const [month2, setMonth2 ] = useState(new Date().getMonth() + 1);
-  
+    //nabvar 에서의 변경값이 있을 떄 변경 해주기 위한 설정 
+    const { insert } = useSelector(state => state.workReducer);
     // const [isFirstRender, setFirstRender] = useState(true);
     // const pageInfo = myWork.pageInfo;
     const pageInfo = myWork && myWork ? myWork.pageInfo : null;
@@ -93,36 +92,36 @@ function Work() {
     //         setFormattedDate(formattedDate);
     //     }, []);
 
-    useEffect(() => {
-            if (formattedDate) {
-                console.log('formattedDate : ', formattedDate)
-                dispatch(callWorkMyListAPI({ workDate: formattedDate, currentPage }));
-                // setFirstRender(false);
-                } 
-                else {
-                dispatch(callWorkMyListAPI({ workDate: formattedDate, currentPage }));
-                }
-        }, [formattedDate, currentPage]);
-
+    
     const handleYearChange = (bYear, year) => {
         setYear2(year);
         console.log('bYear : ', bYear);
         console.log('year : ', year);
-
-
+        setCurrentPage(1);
     };
-
+    
     const handleMonthChange = (bMonth, month) => {
         setMonth2(month);
         console.log('bMonth : ', bMonth);
         console.log('month : ', month);
-    
+        setCurrentPage(1);
     }
+
+    useEffect(() => {
+        if (formattedDate) {
+            console.log('formattedDate : ', formattedDate)
+            dispatch(callWorkMyListAPI({ workDate: formattedDate, currentPage }));
+            // setFirstRender(false);
+            } 
+            else {
+            dispatch(callWorkMyListAPI({ workDate: formattedDate, currentPage }));
+            }
+    }, [formattedDate, insert ]);
 
     useEffect(() => {
         console.log('year2 : ', year2);
         console.log('month2 : ', month2);
-
+        
         if(year2 && month2) {
             if(month2 <10 ){
                 const month = '0'+month2.toString()
@@ -138,7 +137,7 @@ function Work() {
 
     },[year2, month2, currentPage]);
 
-
+    console.log('currentPage : ', currentPage);
 
 
       
@@ -186,13 +185,13 @@ function Work() {
                             <tr className={WorkCSS.td} key={work.workPk.workDate}>
                             <td>{work.workPk.workDate.substring(0, 10)}</td>
                             <td>{work.workTime.substring(11, 19)}</td>
-                            <td>{work.quitTime.substring(11, 19)}
+                            <td>{work.quitTime ? work.quitTime.substring(11, 19) : ""}
                             </td>
                             <td>
-                                {formatDuration3(formatDuration2(work.workTime, work.quitTime)-timeInMs2)}
+                                {work.quitTime ? formatDuration3(formatDuration2(work.workTime, work.quitTime)-timeInMs2) : ""}
                             </td>
                             <td>
-                                {formatDuration3(formatDuration2(work.workTime, work.quitTime)-timeInMs-timeInMs2)}  
+                                {work.quitTime ? formatDuration3(formatDuration2(work.workTime, work.quitTime)-timeInMs-timeInMs2) : ""}  
                             </td>
                             <td>{work.workStatus}</td>
                             </tr>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import './Header.css'
@@ -8,6 +8,10 @@ const Header = ({ empName, onLogout }) => {
 
   const navigate = useNavigate();
 
+  useEffect(()=>{
+    
+  },[])
+
   const onClickLogoutHandler = () => {
     
     if(window.confirm('로그아웃 하시겠습니까?')){
@@ -15,9 +19,7 @@ const Header = ({ empName, onLogout }) => {
       console.log('로그아웃 확인');
       navigate('/');
       console.log('로그아웃 확인');
-    } else{
-      console.log('로그아웃 취소--------------------------');
-    }
+    } 
   } 
 
   

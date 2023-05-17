@@ -1,7 +1,60 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import WorkNavbarCSS from './WorkNavbar.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { callTimeInsertAPI, callTimeModifyAPI } from '../../apis/WorkAPICalls';
 
 function Navbar() {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // const [ btn, setBtn ] = useState(0);
+  const { insert } = useSelector(state => state.workReducer);
+
+  
+  const onClickStartTime = () => {
+    
+    const today = new Date();
+    // const hours = today.getHours();
+    // const min = today.getMinutes();
+    // const sec = today.getSeconds();
+    // console.log(formattedTime);
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0")
+    // console.log('클릭환이요');
+    // setBtn(1);
+    // const formattedTime = `${hours}:${min}:${sec}`;
+    const workDate = `${year}-${month}-${day}`
+        dispatch(callTimeInsertAPI( {workDate} ));
+  }
+
+  useEffect(
+    () => {
+      if(insert?.status === 200) {
+        alert('출근 등록 되었습니다.')
+        navigate("/work");
+      } else if (insert?.state === 400) {
+        alert(insert.message);
+      }
+    }, [insert]
+    )
+
+  console.log('insert : ', insert);
+
+  const onClickEndTime = () => {
+
+    // const today = new Date();
+    // const year = today.getFullYear();
+    // const month = String(today.getMonth() + 1).padStart(2, "0");
+    // const day = String(today.getDate()).padStart(2, "0")
+    // const workDate = `${year}-${month}-${day}`
+    //     dispatch(callTimeModifyAPI( {workDate} ));
+  }
+  
+
+
   return (
     <nav className={WorkNavbarCSS.navbar}>
       <div className={WorkNavbarCSS.wrap}>
@@ -34,8 +87,22 @@ function Navbar() {
           <p className={WorkNavbarCSS.p}>근태 관리</p>
           <p className={WorkNavbarCSS.ptime}>01 : 23 : 45</p>
           <div className={WorkNavbarCSS.workBtn}>
-          <button className={WorkNavbarCSS.workBtn1}>출근하기</button>
-          <button className={WorkNavbarCSS.workBtn2}>퇴근하기</button>
+          <button className={WorkNavbarCSS.workBtn1}
+
+            onClick={ onClickStartTime }
+
+          >
+            출근하기
+          </button>
+          <button className={WorkNavbarCSS.workBtn2}
+          
+            onClick={ onClickEndTime }
+
+          >
+          
+          퇴근하기
+          
+          </button>
           </div>
           <div className={WorkNavbarCSS.p2}>
           <p className={WorkNavbarCSS.ptime2}>출근 시간 09:00:00</p>

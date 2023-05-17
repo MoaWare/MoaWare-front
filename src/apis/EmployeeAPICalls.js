@@ -1,4 +1,4 @@
-import { postFindAccount, postLogin } from "../modules/EmployeeModule";
+import { postFindId, postFindPwd, postLogin } from "../modules/EmployeeModule";
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${ process.env.REACT_APP_RESTAPI_SERVER_PORT}`
@@ -48,11 +48,10 @@ export const callFindAccountAPI = (form) => {
         
         if( result.status === 200 ){
             console.log("[callIdFindAPI] result :", result);
-            dispatch(postFindAccount(result));
+            dispatch(postFindId(result));
         } else {
             alert(result.message);
         }
-
     }
 }
 
@@ -71,12 +70,11 @@ export const callFindPwdAccountAPI = (form) => {
             body: JSON.stringify(form)
         }).then(res => res.json());
         
-        if( result.status === 200 ){
+        if( result?.status === 200 ){
             console.log("[callFindPwdAccountAPI] result :", result);
-            dispatch(postFindAccount(result));
+            dispatch(postFindPwd(result));
         } else {
             alert(result.message);
         }
-
     }
 }

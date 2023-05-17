@@ -11,16 +11,16 @@ import WorkRestReqList from './pages/users/works/WorkRestReqList';
 import WorkRestList from './pages/users/works/WorkRestList';
 import LoginIdFind from "./pages/member/LoginIdFind";
 import ProtectedRoute from "./components/router/ProtectedRoute";
-import LoginIdFindResult from "./form/LoginIdFindResult";
-import LoginPwdFindResult from "./pages/member/LoginPwdFind";
 import OrganizaionSearch from "./pages/organization/OrganizationSearch";
 import OrganizationSearch from "./pages/organization/OrganizationSearch";
 import OrganizationMain from "./pages/organization/OrganizationMain";
+import LoginPwdFind from "./pages/member/LoginPwdFind";
 import OrganizationDetail from "./pages/organization/OrganizationDetail";
 import OrgLayout from "./layouts/OrgLayout";
-
-
-
+import ProjectLayout from "./layouts/ProjectLayout";
+import Project from "./pages/project/Project";
+import ProjDetail from "./pages/project/ProjDetail";
+import ProjDetailLayout from "./layouts/ProjDetailLayout";
 
 function App() {
   return (
@@ -45,7 +45,10 @@ function App() {
             <Route path="restReqList" element={<WorkRestReqList/>}/>
             <Route path="restList" element={<WorkRestList/>}/>
           </Route>
-
+          {/* 프로젝트 */}
+          <Route path="project" element={<ProjectLayout/>}>
+            <Route index element={<Project/>}/>
+          </Route>
         </Route>
         {/* 로그인  */}
         <Route path="login" element={
@@ -61,19 +64,15 @@ function App() {
             </ProtectedRoute>
           }/>
         <Route 
-          path="idresult" 
-          element={
-            <ProtectedRoute>
-              <LoginIdFindResult/>
-            </ProtectedRoute>
-          }/>
-        <Route 
           path="pwdfind" 
           element={
             <ProtectedRoute>
-              <LoginPwdFindResult/>
+              <LoginPwdFind/>
             </ProtectedRoute>
           }/>
+          <Route path="proj" element={<ProjDetailLayout/>}>
+            <Route path="detail" element={<ProjDetail/>}/>
+          </Route>
       </Routes>
     </BrowserRouter>
   );
