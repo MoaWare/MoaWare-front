@@ -1,12 +1,13 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import WorkNavbarCSS from './WorkNavbar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
-import { callTimeInsertAPI } from '../../apis/WorkAPICalls';
+import { useEffect, useState } from 'react';
+import { callTimeInsertAPI, callTimeModifyAPI } from '../../apis/WorkAPICalls';
 
 function Navbar() {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // const [ btn, setBtn ] = useState(0);
   const { insert } = useSelector(state => state.workReducer);
@@ -29,9 +30,27 @@ function Navbar() {
         dispatch(callTimeInsertAPI( {workDate} ));
   }
 
+  useEffect(
+    () => {
+      if(insert?.status === 200) {
+        alert('출근 등록 되었습니다.')
+        navigate("/work");
+      } else if (insert?.state === 400) {
+        alert(insert.message);
+      }
+    }, [insert]
+    )
+
   console.log('insert : ', insert);
 
   const onClickEndTime = () => {
+
+    // const today = new Date();
+    // const year = today.getFullYear();
+    // const month = String(today.getMonth() + 1).padStart(2, "0");
+    // const day = String(today.getDate()).padStart(2, "0")
+    // const workDate = `${year}-${month}-${day}`
+    //     dispatch(callTimeModifyAPI( {workDate} ));
   }
   
 

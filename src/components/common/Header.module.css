@@ -99,5 +99,6 @@ white-space: nowrap;
     font-size: 14px;
     outline: none;
     background-color: transparent;
+    /* 글자 고정 */
     white-space: nowrap;
 }
