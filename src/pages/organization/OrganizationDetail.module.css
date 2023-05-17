@@ -26,3 +26,9 @@
 .tableTdMargin{
     width: 2vw;
 }
+
+.img {
+    margin-left: 1vw;
+    width: 132px;
+    height: 170px;
+}
