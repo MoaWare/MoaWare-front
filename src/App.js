@@ -17,6 +17,10 @@ import OrganizationMain from "./pages/organization/OrganizationMain";
 import LoginPwdFind from "./pages/member/LoginPwdFind";
 import OrganizationDetail from "./pages/organization/OrganizationDetail";
 import OrgLayout from "./layouts/OrgLayout";
+import ProjectLayout from "./layouts/ProjectLayout";
+import Project from "./pages/project/Project";
+import ProjDetail from "./pages/project/ProjDetail";
+import ProjDetailLayout from "./layouts/ProjDetailLayout";
 
 
 
@@ -44,7 +48,10 @@ function App() {
             <Route path="restReqList" element={<WorkRestReqList/>}/>
             <Route path="restList" element={<WorkRestList/>}/>
           </Route>
-
+          {/* 프로젝트 */}
+          <Route path="project" element={<ProjectLayout/>}>
+            <Route index element={<Project/>}/>
+          </Route>
         </Route>
         {/* 로그인  */}
         <Route path="login" element={
@@ -66,6 +73,9 @@ function App() {
               <LoginPwdFind/>
             </ProtectedRoute>
           }/>
+          <Route path="proj" element={<ProjDetailLayout/>}>
+            <Route path="detail" element={<ProjDetail/>}/>
+          </Route>
       </Routes>
     </BrowserRouter>
   );
