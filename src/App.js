@@ -19,9 +19,6 @@ import OrganizationMain from "./pages/organization/OrganizationMain";
 import OrganizationDetail from "./pages/organization/OrganizationDetail";
 import OrgLayout from "./layouts/OrgLayout";
 
-
-
-
 function App() {
   return (
     <BrowserRouter>
