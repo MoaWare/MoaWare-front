@@ -5,25 +5,26 @@ import { useNavigate } from "react-router-dom";
 
 function LoginIdFind(){
 
-    const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { getAccount }= useSelector(state => state.employeeReducer);
+    const { id }= useSelector(state => state.employeeReducer);
     
     const onClickLoginHandler = () => {
         navigate("/login");
     }
 
     const onClickIdFindHandler = () => {
-        navigate("/idfind");
+        navigate("/pwdfind");
     }
     return (
         <div className={LoginCSS.backgroundDiv}>
             <div className={ LoginCSS.loginDiv }>
-                <h1>아이디 찾기</h1>
-                <p>입력하신 정보로 조회된 아이디는 {getAccount.data}입니다.</p>
+                <h1>아이디 찾기</h1><br/>
+                <p>입력하신 정보로 조회된 아이디는 <span className={LoginCSS.fontBolder}>{id.data}</span>입니다.</p><br/>
                 <button onClick={onClickLoginHandler} className={LoginCSS.loginbutton}>로그인</button><br/>
-                <button onClick={onClickIdFindHandler}>비밀번호 찾기</button>
+                <div className={LoginCSS.loginfind}>
+                    <button onClick={onClickIdFindHandler}>비밀번호 찾기</button>
+                </div>
             </div>
         </div>
     )     

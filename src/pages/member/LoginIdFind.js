@@ -9,22 +9,13 @@ function LoginIdFind(){
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [ flip, setFlip ] = useState(false);
-    const { getAccount }= useSelector(state => state.employeeReducer);
+    const { id } = useSelector(state => state.employeeReducer);
 
     const [ form, setForm ] = useState({
         empCode : "",
         empName : "",
         email : ""
     });
-
-    useEffect(()=>{
-        setForm({
-            empCode : "",
-            empName : "",
-            email : ""
-        });
-    },[flip])
 
     const onChangeHandler = (e) => {
 
@@ -35,8 +26,18 @@ function LoginIdFind(){
         console.log(e.target.value);
     };
 
+    useEffect(() => {
+        if( id?.status === 200 ){
+            navigate("/");
+        } else if( id?.state === 400 ){
+            console.log(id);
+            alert(id.message);
+            setForm({});
+        }
+    },[id])
+
     const onClickHandler =()=>{
-        
+
         if(
             !form.empCode ||
             !form.empName ||
@@ -47,7 +48,7 @@ function LoginIdFind(){
         }
 
         dispatch(callFindAccountAPI(form));
-        setFlip((current) => !current);
+        console.log(id);
     };
 
     const onClickLoginHandler = () => {
@@ -58,7 +59,7 @@ function LoginIdFind(){
         navigate("/pwdfind");
     }
 
-    return getAccount ? <LoginIdFindResult/> : (
+    return id ? <LoginIdFindResult/> : (
         <div className={LoginCSS.backgroundDiv}>
             <div className={ LoginCSS.loginDiv }>
                 <img src="./icon/moawareLoginMain.png" alt='Down' name="login"/><br/>
@@ -71,6 +72,7 @@ function LoginIdFind(){
                             className={LoginCSS.inputbox}
                             type="text" 
                             name="empCode"
+                            value={form.empCode}
                             onChange={onChangeHandler}
                             />
                         </label>
@@ -79,6 +81,7 @@ function LoginIdFind(){
                             className={LoginCSS.inputbox}
                             type="text" 
                             name="empName"
+                            value={form.empName}
                             onChange={onChangeHandler}
                             />
                         </label>
@@ -87,6 +90,7 @@ function LoginIdFind(){
                             className={LoginCSS.inputbox}
                             type="text" 
                             name="email"
+                            value={form.email}
                             onChange={onChangeHandler}
                             />
                         </label>

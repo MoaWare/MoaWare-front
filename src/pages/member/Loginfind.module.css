@@ -39,14 +39,14 @@
     width: 850px;
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column; /*수평 정렬*/
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     margin: 0;
     padding: 0;
     background-color: white;
     border: solid 1px black;
-    border-radius: 25px;    
+    border-radius: 25px;
     border: none;
 
 }
@@ -97,13 +97,15 @@ label:not(:last-child) input {
 
 .loginbutton {
     width: 293px;
-    height: 25px;
+    height: 27px;
     border: none;
     border-radius: 5px;
     background-color: #254F70;
     color: white;
     font-weight: normal;
     margin-top: 15px;
+    font-size: 14px;
+    /* font-weight: bold; */
 }
 
 .loginfind button{
@@ -138,4 +140,8 @@ label:not(:last-child) input {
 
 .spaceBar{
     margin: 0px 24px;
+}
+
+.fontBolder {
+    font-weight: bolder;
 }
