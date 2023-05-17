@@ -15,7 +15,8 @@ function Work() {
     const [currentPage, setCurrentPage] = useState(1);
     const [year2, setYear2] = useState(new Date().getFullYear());
     const [month2, setMonth2 ] = useState(new Date().getMonth() + 1);
-  
+    //nabvar 에서의 변경값이 있을 떄 변경 해주기 위한 설정 
+    const { insert } = useSelector(state => state.workReducer);
     // const [isFirstRender, setFirstRender] = useState(true);
     // const pageInfo = myWork.pageInfo;
     const pageInfo = myWork && myWork ? myWork.pageInfo : null;
@@ -115,7 +116,7 @@ function Work() {
             else {
             dispatch(callWorkMyListAPI({ workDate: formattedDate, currentPage }));
             }
-    }, [formattedDate]);
+    }, [formattedDate, insert ]);
 
     useEffect(() => {
         console.log('year2 : ', year2);
