@@ -21,6 +21,8 @@ import ProjectLayout from "./layouts/ProjectLayout";
 import Project from "./pages/project/Project";
 import ProjDetail from "./pages/project/ProjDetail";
 import ProjDetailLayout from "./layouts/ProjDetailLayout";
+import PayLayout from "./layouts/PayLayout";
+import Payment from "./pages/payment/Payment";
 
 function App() {
   return (
@@ -49,6 +51,10 @@ function App() {
           {/* 프로젝트 */}
           <Route path="project" element={<ProjectLayout />}>
             <Route index element={<Project />} />
+          </Route>
+          {/* 전자 결재 */}
+          <Route path="pay" element={<PayLayout/>}>
+            <Route index element={<Payment/>}/>
           </Route>
         </Route>
         {/* 로그인  */}
