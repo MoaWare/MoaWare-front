@@ -21,13 +21,14 @@ import ProjectLayout from "./layouts/ProjectLayout";
 import Project from "./pages/project/Project";
 import ProjDetail from "./pages/project/ProjDetail";
 import ProjDetailLayout from "./layouts/ProjDetailLayout";
-import PayLayout from "./layouts/PayLayout";
 import Payment from "./pages/payment/Payment";
+import PayLayout from "./layouts/PayLayout";
+import Schedule from "./pages/schedule/Schedule";
+import ScheduleLayout from "./layouts/ScheduleLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import Admin from "./pages/admin/Admin";
 import BoardLayout from "./layouts/BoardLayout";
 import BoardPostList from "./pages/board/BoardPostList";
-
 
 
 
@@ -66,6 +67,12 @@ function App() {
           </Route>
           {/* 전자 결재 */}
           <Route path="pay" element={<PayLayout/>}>
+            <Route index element={<Payment />}/>
+          </Route>
+
+          {/* 일정 관리 */}
+          <Route path="schedule" element={<ScheduleLayout/>}>
+            <Route index element={<Schedule />}/>
             <Route index element={<Payment/>}/>
             <Route path="draft" element={<Payment/>}/>
           </Route>
@@ -74,6 +81,7 @@ function App() {
             <Route index element={<Admin />} />
           </Route>
         </Route>
+
         {/* 로그인  */}
         <Route path="login" element={
           <ProtectedRoute loginCheck={false}>
