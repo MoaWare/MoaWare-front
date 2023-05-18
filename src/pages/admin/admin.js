@@ -27,7 +27,7 @@ const Admin = () => {
         </div>
     );
 };
-
+//ss
 ReactDOM.render(<Admin />, document.getElementById('root'));
 
 export default Admin;
