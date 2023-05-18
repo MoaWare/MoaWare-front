@@ -152,7 +152,7 @@
 
 }
 
-.docutext{
+.docuText{
     overflow-y: scroll;
     height: 100%;
 }
@@ -160,4 +160,24 @@
 .docuMain{
     height: 25vh !important ; 
 }
+.docuDiv{
+    margin-top: 1vh;
+    margin-left: 1vw;
+    text-align: center;
+    width: 67vw;
+}
 
+.docuTitle{
+    color: white;
+    background-color: rgba(37, 79, 112, 1);
+    text-align: center;
+    height: 6vh;
+    font-size: 2rem;
+    line-height: 6vh;
+}
+
+.docuLabel{
+
+}
+
+.docuInput{}
