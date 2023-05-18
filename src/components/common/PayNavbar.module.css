@@ -18,16 +18,17 @@ list-style: none;
 .submenu li {
 margin: 20px 0;
 padding: 20px;
+color: rgba(37, 79, 112, 1);
 }
 
 .submenu li:hover {
 background-color: rgba(80, 164, 228, 0.5);
-
+color: white !important;
 }
 
 .submenu a {
 text-decoration-line: none;
-color: rgba(37, 79, 112, 1);
+/* color: rgba(37, 79, 112, 1); */
 font-size: 14px;
 font-weight: 700;
 }
@@ -60,4 +61,10 @@ height: 87vh;
     color: rgba(37, 79, 112, 1);
     font-size: 14px;
     font-weight: 600;
+}
+
+.active{
+    background-color: rgba(80, 164, 228, 0.5);
+    color: white !important;
+
 }
