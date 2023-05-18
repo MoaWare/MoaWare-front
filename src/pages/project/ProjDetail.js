@@ -7,6 +7,9 @@ import TaskList from "./TaskList";
 
 
 function ProjDetail() {
+
+    const dispatch = useDispatch();
+    const stat=1;
    
     useEffect(
         ()=>{
@@ -30,7 +33,9 @@ function ProjDetail() {
                     </div>
                 </div>
                 <div className={ProjCSS.titleMiddle}>
-                    <span>{"여기에 프로젝트 상세 설명 moaware MOAWARE 12345 \n 여기에 프로젝트 상세 설명 \n 여기에 프로젝트 상세 설명 \n 여기에 프로젝트 상세 설명 \n "}</span>
+                    <div>
+                        <span>{"여기에 프로젝트 상세 설명 moaware MOAWARE 12345 \n 여기에 프로젝트 상세 설명 \n 여기에 프로젝트 상세 설명 \n 여기에 프로젝트 상세 설명 \n "}</span>
+                    </div>
                 </div>
                 <div className={ProjCSS.low}>
                     <div className={ProjCSS.titleLow}>
