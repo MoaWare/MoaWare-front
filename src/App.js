@@ -21,8 +21,10 @@ import ProjectLayout from "./layouts/ProjectLayout";
 import Project from "./pages/project/Project";
 import ProjDetail from "./pages/project/ProjDetail";
 import ProjDetailLayout from "./layouts/ProjDetailLayout";
-import PayLayout from "./layouts/PayLayout";
 import Payment from "./pages/payment/Payment";
+import PayLayout from "./layouts/PayLayout";
+import Schedule from "./pages/schedule/Schedule";
+import ScheduleLayout from "./layouts/ScheduleLayout";
 
 function App() {
   return (
@@ -32,55 +34,62 @@ function App() {
           <ProtectedRoute loginCheck={true}>
             <Layout />
           </ProtectedRoute>}>
-          <Route index element={<Main/>} />
+          <Route index element={<Main />} />
           {/* 조직도 */}
-          <Route path="org" element={<OrgLayout/>}>
-            <Route index element={<OrganizationMain/>}/>
-            <Route path="search" element={<OrganizationSearch/>}/>
-            <Route path="detail/:empCode" element={<OrganizationDetail/>}/>
+          <Route path="org" element={<OrgLayout />}>
+            <Route index element={<OrganizationMain />} />
+            <Route path="search" element={<OrganizationSearch />} />
+            <Route path="detail/:empCode" element={<OrganizationDetail />} />
           </Route>
           {/* 근태관리 */}
-            {/* <Route path="work"> */}
-          <Route path="work" element={ <WorkLayout/>}>
-            <Route index element={<Work/>}/>
-            <Route path="restReq" element={<WorkRestReq/>}/>
-            <Route path="restReqList" element={<WorkRestReqList/>}/>
-            <Route path="restList" element={<WorkRestList/>}/>
+          {/* <Route path="work"> */}
+          <Route path="work" element={<WorkLayout />}>
+            <Route index element={<Work />} />
+            <Route path="restReq" element={<WorkRestReq />} />
+            <Route path="restReqList" element={<WorkRestReqList />} />
+            <Route path="restList" element={<WorkRestList />} />
           </Route>
+
           {/* 프로젝트 */}
-          <Route path="project" element={<ProjectLayout/>}>
-            <Route index element={<Project/>}/>
+          <Route path="project" element={<ProjectLayout />}>
+            <Route index element={<Project />} />
           </Route>
           {/* 전자 결재 */}
           <Route path="pay" element={<PayLayout/>}>
-            <Route index element={<Payment/>}/>
+            <Route index element={<Payment />}/>
+          </Route>
+
+          {/* 일정 관리 */}
+          <Route path="schedule" element={<ScheduleLayout/>}>
+            <Route index element={<Schedule />}/>
           </Route>
         </Route>
+
         {/* 로그인  */}
         <Route path="login" element={
-            <ProtectedRoute loginCheck={false}>
-              <Login />
-            </ProtectedRoute>}>
+          <ProtectedRoute loginCheck={false}>
+            <Login />
+          </ProtectedRoute>}>
         </Route>
-        <Route 
-          path="idfind" 
+        <Route
+          path="idfind"
           element={
             <ProtectedRoute loginCheck={false}>
-              <LoginIdFind/>
+              <LoginIdFind />
             </ProtectedRoute>
-          }/>
-        <Route 
-          path="pwdfind" 
+          } />
+        <Route
+          path="pwdfind"
           element={
             <ProtectedRoute>
-              <LoginPwdFind/>
+              <LoginPwdFind />
             </ProtectedRoute>
-          }/>
-          <Route path="proj" element={<ProjDetailLayout/>}>
-            <Route path="detail" element={<ProjDetail/>}/>
-          </Route>
+          } />
+        <Route path="proj" element={<ProjDetailLayout />}>
+          <Route path="detail" element={<ProjDetail />} />
+        </Route>
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 }
 
