@@ -64,8 +64,8 @@ a {
 }
 
 .prog {
-    margin-top: 1rem;
-    margin-left: 1rem;
+    padding-top: 1rem;
+    padding-left: 1rem;
     font-size: 14px;
     font-weight: bold;
 }
@@ -93,7 +93,7 @@ a {
     /* background-color: white; */
     display: flex;
     justify-content: space-around;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
     color: #4B5766;
     /* border: 1px solid red; */
@@ -139,13 +139,14 @@ a {
     width: 60vw;
     padding: 2vh;
     border-top: 1px solid rgba(182, 189, 198, 0.5);
+    font-size: 12px;
 }
 
 .myPrj td {
     text-align: center;
     padding: 2vh;
-    border-top: 1px solid rgba(182, 189, 198, 0.5);
     font-size: 12px;
+    border-top: 1px solid rgba(182, 189, 198, 0.5);
 }
 
 /* 진행률 */
@@ -155,9 +156,8 @@ a {
 }
 
 .progress::-webkit-progress-bar {
-    background:#f0f0f0;
+    background:#E0E9F4;
     border-radius:10px;
-    box-shadow: inset 3px 3px 10px #ccc;
 }
 
 .progress::-webkit-progress-value {
@@ -191,7 +191,28 @@ a {
     border-radius: 30px;
     margin: 3vh 2vw;
     width: 16vw;
-    height: 30vh;
+    height: 28vh;
+}
+
+.notice {
+    border-collapse : collapse;
+    color: rgba(37, 79, 112, 1);
+    margin: 1rem;
+}
+
+.notice th {
+    font-size: 12px;
+    /* border: 1px solid blue; */
+    width: 20vw;
+    padding: 1vh;
+    border-top: 1px solid rgba(182, 189, 198, 0.5);
+}
+
+.notice td {
+    font-size: 12px;
+    text-align: center;
+    padding: 1vh 0;
+    border-top: 1px solid rgba(182, 189, 198, 0.5);
 }
 
 .calendar {
@@ -199,5 +220,14 @@ a {
     border-radius: 30px;
     margin: 3vh 2vw;
     width: 16vw;
-    height: 30vh;
+    height: 35vh;
+}
+
+.schedule {
+    border-bottom: 1px solid rgba(182, 189, 198, 0.5);
+    margin: 0 1rem;
+    padding: 1rem 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: rgba(37, 79, 112, 1);
 }
