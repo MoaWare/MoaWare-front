@@ -76,11 +76,10 @@ function Payment () {
                   <div className={payCSS.docuText}>
                   <div className={payCSS.docuDiv}>
                   <div className={payCSS.docuTitle}>출퇴근 사유서</div>
-                  <div></div>
                   <label className={payCSS.docuLabel}>성 명</label>
                   <input type='text' className={payCSS.docuInput}/>
                   <label>부 서</label>
-                  <input type='text'/>
+                  <input type='text' className={payCSS.docuInput}/>
                   <label>직 급</label>
                   <input type='text'/>
                   <label>처리 구분</label>
