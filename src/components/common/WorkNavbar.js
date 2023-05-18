@@ -24,6 +24,7 @@ function Navbar() {
     const month = String(today.getMonth() + 1).padStart(2, "0");
     const day = String(today.getDate()).padStart(2, "0")
 
+    startTimer();
     const workDate = `${year}-${month}-${day}`
         dispatch(callTimeInsertAPI( {workDate} ));
   }
@@ -45,6 +46,22 @@ function Navbar() {
       }
     }, [insert, quit ]
     )
+
+    function startTimer() {
+      let seconds = 0;
+    
+      setInterval(() => {
+        const hours = Math.floor(seconds / 3600).toString().padStart(2, "0");
+        const minutes = Math.floor((seconds % 3600) / 60).toString().padStart(2, "0");
+        const formattedSeconds = (seconds % 60).toString().padStart(2, "0");
+    
+        console.log(`${hours}:${minutes}:${formattedSeconds}`);
+    
+        seconds++;
+      }, 1000);
+    }
+    
+
 
   console.log('insert : ', insert);
 
@@ -93,7 +110,7 @@ function Navbar() {
       {myWork && myWork.data && (
         <div>
           <p className={WorkNavbarCSS.p}>근태 관리</p>
-          <p className={WorkNavbarCSS.ptime}>01 : 23 : 45</p>
+          <p className={WorkNavbarCSS.ptime}>{}</p>
           <div className={WorkNavbarCSS.workBtn}>
           <button className={WorkNavbarCSS.workBtn1}
 
