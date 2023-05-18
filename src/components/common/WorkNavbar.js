@@ -3,32 +3,46 @@ import WorkNavbarCSS from './WorkNavbar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { callTimeInsertAPI, callTimeQuitAPI,  } from '../../apis/WorkAPICalls';
+import WorkTime from '../Work/WorkTime';
+// import { setBtnState } from '../../modules/WorkTimeModule';
 
 function Navbar() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { myWork } = useSelector(state => state.workReducer);
-
-  console.log('myWork 네브바에서 콘솔', myWork);
-  // const [ btn, setBtn ] = useState(0);
+  // const [ btn, setBtn ] = useState(false);
+  // true와 비교했을대 true라면 true 반환 아니라면false 반환
+  // const [btn, setBtn] = useState(localStorage.getItem('btn') === 'true' || false);
+  const btn = useSelector(state => state.workTimeReducer.btn);
   const { insert } = useSelector(state => state.workReducer);
   const { quit } = useSelector(state => state.workReducer);
-
-  let startTime;
-  
+  //변수를 함수 안에 넣은 이유 함수 밖에서 같이 쓰면 오류남
   const onClickStartTime = () => {
     
     const today = new Date();
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, "0");
     const day = String(today.getDate()).padStart(2, "0")
-
-    startTimer();
     const workDate = `${year}-${month}-${day}`
-        dispatch(callTimeInsertAPI( {workDate} ));
+    // setBtn(true);
+    // dispatch(setBtnState(btn));
+    dispatch(callTimeInsertAPI( {workDate} ));
   }
+  const onClickEndTime = () => {
 
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const min = now.getMinutes().toString().padStart(2, '0');
+    const sec = now.getSeconds().toString().padStart(2, '0');
+    
+    const quitTime = new Date().toISOString().substr(0, 11) + `${hours}:${min}:${sec}`;
+    console.log(quitTime);
+    // setBtn(false);
+    // dispatch(setBtnState(!btn));
+    dispatch(callTimeQuitAPI( {quitTime} ));
+  }
+  
   useEffect(
     () => {
       if(insert?.status === 200) {
@@ -47,37 +61,8 @@ function Navbar() {
     }, [insert, quit ]
     )
 
-    function startTimer() {
-      let seconds = 0;
-    
-      setInterval(() => {
-        const hours = Math.floor(seconds / 3600).toString().padStart(2, "0");
-        const minutes = Math.floor((seconds % 3600) / 60).toString().padStart(2, "0");
-        const formattedSeconds = (seconds % 60).toString().padStart(2, "0");
-    
-        console.log(`${hours}:${minutes}:${formattedSeconds}`);
-    
-        seconds++;
-      }, 1000);
-    }
-    
-
-
   console.log('insert : ', insert);
-
-  const onClickEndTime = () => {
-
-    const now = new Date();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const min = now.getMinutes().toString().padStart(2, '0');
-    const sec = now.getSeconds().toString().padStart(2, '0');
-    
-    const quitTime = new Date().toISOString().substr(0, 11) + `${hours}:${min}:${sec}`;
-    console.log(quitTime);
-    dispatch(callTimeQuitAPI( {quitTime} ));
-  }
-  
-
+  console.log('btn : ', btn);
 
   return (
     <nav className={WorkNavbarCSS.navbar}>
@@ -110,30 +95,17 @@ function Navbar() {
       {myWork && myWork.data && (
         <div>
           <p className={WorkNavbarCSS.p}>근태 관리</p>
-          <p className={WorkNavbarCSS.ptime}>{}</p>
+          <div className={WorkNavbarCSS.ptime}></div>
           <div className={WorkNavbarCSS.workBtn}>
-          <button className={WorkNavbarCSS.workBtn1}
-
-            onClick={ onClickStartTime }
-
-          >
-            출근하기
-          </button>
-          <button className={WorkNavbarCSS.workBtn2}
-          
-            onClick={ onClickEndTime }
-
-          >
-          
-          퇴근하기
-          
-          </button>
+          <WorkTime
+            onClickStartHandler={onClickStartTime}
+            onClickEndHandler={onClickEndTime}
+            // btn={btn}
+          />
           </div>
-          {/* {myWork && myWork.data && ( */}
             <div className={WorkNavbarCSS.p2} key={myWork.data[0].workPk.workTime}>
               <p className={WorkNavbarCSS.ptime2}>출근 시간 {myWork.data[0].workTime.substring(11, 19)}</p>
               <p className={WorkNavbarCSS.ptime2}>퇴근 시간 { myWork.data[0].quitTime ? myWork.data[0].quitTime.substring(11, 19) : ""}</p>
-              <p className={WorkNavbarCSS.ptime2}>필요 근무 시간 99:99:99</p>
             </div>
         </div>
           )}
