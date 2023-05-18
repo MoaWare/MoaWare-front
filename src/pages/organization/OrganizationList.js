@@ -151,5 +151,5 @@ function OrganizationList({org, isSearch}) {
         
     );
 }
-
+  
 export default OrganizationList;
