@@ -32,7 +32,7 @@ function Payment () {
         </div>
       `;
       setHtmlString(html);
-      // 변환된 HTML 문자열을 서버에 저장하는 로직을 추가해야 합니다.
+      // 변환된 HTML 문자열을 서버에 저장하는 로직을 추가해야 합니다. 와우
     };
 
     useEffect(
