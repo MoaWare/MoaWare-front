@@ -9,6 +9,7 @@ function Main() {
                     <div className={MainCSS.myWait}>
                         <div className={MainCSS.wait}>결재 대기</div>
                         <table className={MainCSS.waitList}>
+                            <tbody>
                             <tr>
                                 <td>2023.05.01</td>
                                 <td>회계품의서</td>
@@ -37,11 +38,13 @@ function Main() {
                                 <td>0004</td>
                                 <td>홍길동</td>
                             </tr>
+                            </tbody>
                         </table>
                     </div>
                     <div className={MainCSS.myProg}>
                         <div className={MainCSS.prog}>결재 진행</div>
                         <table className={MainCSS.progList}>
+                            <tbody>
                             <tr>
                                 <td>2023.05.01</td>
                                 <td>회계품의서</td>
@@ -70,6 +73,7 @@ function Main() {
                                 <td>0004</td>
                                 <td>홍길동</td>
                             </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -115,6 +119,7 @@ function Main() {
                 <div className={MainCSS.program}>
                     <div className={MainCSS.project}>프로젝트</div>
                     <table className={MainCSS.myPrj}>
+                        <tbody>
                         <tr>
                             <th>업무 번호</th>
                             <th>업무 제목</th>
@@ -153,6 +158,7 @@ function Main() {
                             <td>진행중</td>
                             <td>홍길동 이사</td>
                         </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -160,6 +166,7 @@ function Main() {
                 <div className={MainCSS.notification}>
                     <div className={MainCSS.announcement}>공지사항</div>
                     <table>
+                        <tbody>
                         <tr>
                             <th>날짜</th>
                             <th>제목</th>
@@ -185,6 +192,7 @@ function Main() {
                             <td>공부하기 싫다..</td>
                             <td>홍길동</td>
                         </tr>
+                        </tbody>
                     </table>
                 </div>
                 <div className={MainCSS.calendar}>달력</div>
