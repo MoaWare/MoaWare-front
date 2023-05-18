@@ -55,6 +55,7 @@ function App() {
           {/* 전자 결재 */}
           <Route path="pay" element={<PayLayout/>}>
             <Route index element={<Payment/>}/>
+            <Route path="draft" element={<Payment/>}/>
           </Route>
         </Route>
         {/* 로그인  */}
