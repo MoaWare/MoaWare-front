@@ -69,8 +69,9 @@
     padding-top: 0.3vh;
 }
 
-.titleMiddle span{
+.titleMiddle div{
     color: #4B5766;
+    margin-top: 10px;
 }
 
 .titleLow{

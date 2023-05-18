@@ -169,12 +169,8 @@ function Main() {
             <div className={MainCSS.wrap2}>
                 <div className={MainCSS.notification}>
                     <div className={MainCSS.announcement}>공지사항</div>
-<<<<<<< HEAD
-                    <table className={MainCSS.notice}>
-=======
                     <table>
                         <tbody>
->>>>>>> 640210547a7d2c1507049b8dedc8730053e6ea25
                         <tr>
                             <th>날짜</th>
                             <th>제목</th>
@@ -200,6 +196,7 @@ function Main() {
                             <td>공부하기 싫다..</td>
                             <td>홍길동</td>
                         </tr>
+                        </tbody>
                     </table>
                 </div>
                 <div className={MainCSS.calendar}>달력</div>
