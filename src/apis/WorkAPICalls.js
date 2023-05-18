@@ -57,7 +57,7 @@ export const callTimeInsertAPI = ({ workDate }) => {
 
 }
 
-export const callTimeModifyAPI = ({ quitTime }) => {
+export const callTimeQuitAPI = ({ quitTime }) => {
 
     const requestURL = `${PRE_URL}/work/quit`;
 
@@ -68,7 +68,7 @@ export const callTimeModifyAPI = ({ quitTime }) => {
             console.log('quitTime : ', quitTime);
 
             const result = await fetch(requestURL, {
-                method: 'POST',
+                method: 'PUT',
                 headers: {
                     'Content-type': 'application/json',
                     "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
