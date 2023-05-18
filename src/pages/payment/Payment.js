@@ -8,7 +8,6 @@ import payCSS from './Payment.module.css';
 
 function Payment () {
 
-  const htmlString = ``;
 
     return (
       <div className={payCSS.background}>
@@ -26,7 +25,7 @@ function Payment () {
             <div className={payCSS.paySign}><img src="/icon/sign.png" className={payCSS.signImg}/></div>
           </div>
         </div>
-        <div className={payCSS.titleDiv}>
+        <div className={payCSS.tableDiv}>
           <table className={payCSS.tbody}>
             <tbody >
               <tr>
@@ -57,7 +56,7 @@ function Payment () {
               </tbody>
           </table>
         </div>
-        <div className={payCSS.titleDiv}>
+        <div className={payCSS.tableDiv}>
           <table className={payCSS.tbody}>
             <tbody >
               <tr>
@@ -74,25 +73,41 @@ function Payment () {
               <tr>
                 <td colSpan='3' className={payCSS.docuMain}>
                   <div className={payCSS.docuText}>
-                  <div className={payCSS.docuDiv}>
-                  <div className={payCSS.docuTitle}>출퇴근 사유서</div>
-                  <label className={payCSS.docuLabel}>성 명</label>
-                  <input type='text' className={payCSS.docuInput}/>
-                  <label>부 서</label>
-                  <input type='text' className={payCSS.docuInput}/>
-                  <label>직 급</label>
-                  <input type='text'/>
-                  <label>처리 구분</label>
-                  <input type='text'/>
-                  <label>일시</label>
-                  <input type='text'/>
-                  <label>출근 시간</label>
-                  <input type='text'/>
-                  <label>퇴근 시간</label>
-                  <input type='text'/>
-                  <label>사유</label>
-                  <input type='text'/>
-                  </div>
+                  
+                    <table className={payCSS.docuDiv}>
+                      <tbody className={payCSS.docuDiv}>
+                        <tr>
+                          <th colSpan='4' className={payCSS.docuTitle}>출퇴근 사유서</th>
+                        </tr>
+                        <tr>
+                          <th className={payCSS.docuLabel}>성 명</th>
+                          <td><input type='text' className={payCSS.docuInput}/></td>
+                          <th>부 서</th>
+                          <td><input type='text' className={payCSS.docuInput}/></td>
+                        </tr>
+                        <tr>
+                          <th>직 급</th>
+                          <td><input type='text' className={payCSS.docuInput}/></td>
+                          <th>처리 구분</th>
+                          <td><input type='text' className={payCSS.docuInput}/></td>
+                        </tr>
+                        <tr>
+                          <th>일시</th>
+                          <td colSpan='3'><input type='text' className={payCSS.docuInput}/></td>
+                        </tr>
+                        <tr>
+                          <th>출근 시간</th>
+                          <td><input type='text' className={payCSS.docuInput}/></td>
+                          <th>퇴근 시간</th>
+                          <td><input type='text' className={payCSS.docuInput}/></td>
+                        </tr>
+                        <tr>
+                          <th rowSpan="2">사유</th>
+                          <td rowSpan="2" colSpan="3"><input type='text' className={payCSS.docuInputText}/></td>
+                        </tr>
+                      </tbody>
+                    </table>
+
                   </div>
                 </td>
               </tr>
