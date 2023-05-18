@@ -206,10 +206,7 @@ function Main() {
             <div className={MainCSS.wrap2}>
                 <div className={MainCSS.notification}>
                     <div className={MainCSS.announcement}>공지사항</div>
-                    <table>
-                        <tbody>
                     <table className={MainCSS.notice}>
-
                         <tr>
                             <th>날짜</th>
                             <th>제목</th>
@@ -240,7 +237,6 @@ function Main() {
                             <td>공부하기 싫다</td>
                             <td>홍길동</td>
                         </tr>
-                        </tbody>
                     </table>
                 </div>
                 <div className={MainCSS.calendar}>
