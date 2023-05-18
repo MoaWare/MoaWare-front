@@ -18,7 +18,7 @@ const workReducer = handleActions(
     {
         [GET_WORKLIST] : (state, { payload }) => ({ myWork : payload }),
         [POST_INSERTSTART] : (state, { payload }) => ({ insert : payload}),
-        [PUT_QUITTIME] : (state, { payload }) => ({ modify : payload })
+        [PUT_QUITTIME] : (state, { payload }) => ({ quit : payload })
 
     }
 , initalState)

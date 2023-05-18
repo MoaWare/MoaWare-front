@@ -17,6 +17,7 @@ function Work() {
     const [month2, setMonth2 ] = useState(new Date().getMonth() + 1);
     //nabvar 에서의 변경값이 있을 떄 변경 해주기 위한 설정 
     const { insert } = useSelector(state => state.workReducer);
+    const { quit } = useSelector(state => state.workReducer);
     // const [isFirstRender, setFirstRender] = useState(true);
     // const pageInfo = myWork.pageInfo;
     const pageInfo = myWork && myWork ? myWork.pageInfo : null;
@@ -57,7 +58,7 @@ function Work() {
         //근무 시간을 문자열이 아닌 밀리초 단위로 반환
         return new Date(duration);
     }
-
+    //시간 계사을 다시 ::: 의 형태로
     function formatDuration3(plusTime) {
         const plus = new Date(plusTime);
         const hours = Math.floor(plus / (1000 * 60 * 60)).toString().padStart(2, '0');
@@ -67,10 +68,15 @@ function Work() {
     }
 
     // 연장 시간을 계산하기 위한 기본 근무 시간 
-    const baicTime = '08:00:00';
-
+    const baicTime = '09:00:00';
+    const quitTIme = '18:00:00';
+    //퇴근 시간 이후에 퇴근 했;는지 알기위한 퇴근 고정시간
+    // const fiexdQuit = new Date("18:00:00");
+    // const fiexdQuit = new Date(formatQuit)
       // Date 객체 생성
+    
     const dateObj = new Date(`1970-01-01T${baicTime}.000Z`);
+    const dateObj2 = new Date(`1970-01-01T${quitTIme}.000Z`);
 
     // getTime() 메서드로 밀리초 단위 시간으로 변환
     const timeInMs = dateObj.getTime();
@@ -80,7 +86,7 @@ function Work() {
 
     const lunchObj = new Date(`1970-01-01T${lunchTime}.000Z`);
 
-    const timeInMs2 = lunchObj.getTime();
+    // const timeInMs2 = lunchObj.getTime();
 
     // // 다시 Date 객체로 변환
     // const timeObj = new Date(timeInMs);
@@ -116,7 +122,7 @@ function Work() {
             else {
             dispatch(callWorkMyListAPI({ workDate: formattedDate, currentPage }));
             }
-    }, [formattedDate, insert ]);
+    }, [formattedDate, insert, quit ]);
 
     useEffect(() => {
         console.log('year2 : ', year2);
@@ -188,10 +194,14 @@ function Work() {
                             <td>{work.quitTime ? work.quitTime.substring(11, 19) : ""}
                             </td>
                             <td>
-                                {work.quitTime ? formatDuration3(formatDuration2(work.workTime, work.quitTime)-timeInMs2) : ""}
+                                {work.quitTime ? formatDuration3(formatDuration2(work.workTime, work.quitTime)) : ""}
                             </td>
                             <td>
-                                {work.quitTime ? formatDuration3(formatDuration2(work.workTime, work.quitTime)-timeInMs-timeInMs2) : ""}  
+                            {work.quitTime
+                                ? formatDuration2(work.workTime, work.quitTime) > timeInMs
+                                ? formatDuration3(formatDuration2(work.workTime, work.quitTime) - timeInMs)
+                                : ""
+                            : ""}  
                             </td>
                             <td>{work.workStatus}</td>
                             </tr>
