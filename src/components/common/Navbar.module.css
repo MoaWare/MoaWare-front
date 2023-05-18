@@ -133,6 +133,7 @@
 .myWork {
     /* margin: 1rem; */
     margin: 1rem;
+    font-weight: bold;
 }
 
 .worktime {
@@ -159,8 +160,9 @@
 }
 
 .weather {
-    padding-top: 1rem;
-    padding-left: 1rem;
+    margin: 0 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(182, 189, 198, 0.5);
     /* padding-bottom: 0.5rem; */
     text-align: left;
     font-size: 14px;
@@ -168,9 +170,7 @@
 }
 
 .myWeather {
-    margin: 1rem;
     padding: 1rem;
-    border-top: 1px solid rgba(182, 189, 198, 0.5);
 }
 
 .today {
