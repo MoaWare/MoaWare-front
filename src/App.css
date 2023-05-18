@@ -5,3 +5,16 @@ body {
     font-family: 'Nanum Gothic', sans-serif;
     letter-spacing: 1px;
 }
+
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: #e0e0e000  ;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #9292927a;
+    border-radius: 15px;
+}
+::-webkit-scrollbar-track {
+    background-color: #e0e0e000  ;
+}

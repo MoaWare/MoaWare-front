@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
-body{font-family: 'Nanum Gothic', sans-serif;
-}
+
 
 .wrapper{
     top: 5vh;
@@ -71,8 +69,9 @@ body{font-family: 'Nanum Gothic', sans-serif;
     padding-top: 0.3vh;
 }
 
-.titleMiddle span{
+.titleMiddle div{
     color: #4B5766;
+    margin-top: 10px;
 }
 
 .titleLow{
