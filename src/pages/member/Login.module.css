@@ -1,3 +1,28 @@
+.header {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5vh;
+    background-color: rgba(37, 79, 112, 1);
+    color: white;
+}
+
+.logo {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    letter-spacing: 4px;
+    /* text-align: left;     */
+    line-height: 5vh;
+    font-weight: 700;
+    margin-left: 25px;
+}
+
+
 .backgroundDiv{
     height: 100vh;
     display: flex;
@@ -15,19 +40,21 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: column; /*수평 정렬*/
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     margin: 0;
     padding: 0;
     background-color: white;
     border: solid 1px black;
     border-radius: 25px;    
+    border: none;
+
 }
 
 .loginDiv img {
     margin-top: 10px;
-    margin-left: 10px;
-    margin-right: -87px;
+    margin-left: 39px;
+    margin-right: -129px;
 }
 
 .loginDiv input {
@@ -35,8 +62,8 @@
     margin-bottom: 5px;
     height: 30px;
     width: 250px;
-    border-radius: 25px;
     text-indent: 10px;
+    border: 0.8px solid lightgray;
 }
 
 .login-button button{
@@ -51,10 +78,25 @@
     font-weight: bold; */
 }
 
+label {
+    font-size: medium;
+}
+
+.loginbutton {
+    width: 253px;
+    height: 25px;
+    border: none;
+    border-radius: 5px;
+    background-color: #254F70;
+    color: white;
+    font-weight: bolder;
+}
+
 .loginfind button{
     border: none;
     background-color: white;
 }
+
 
 .line{
     height: 420px;

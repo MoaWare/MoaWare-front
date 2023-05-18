@@ -3,6 +3,11 @@
     text-align: center;
 }
 
+.background{
+    margin-top : 10vh;
+    margin-left: 20vw;
+}
+
 .inputBox{
     margin-right: 20px;
     text-align: center;
@@ -85,13 +90,15 @@
 }
 
 .orgText{
-    padding-left: 5%;
+    width: 10vw;
+    padding-left: 3%;
     border-radius: 15px;
     color : #254F70;
     font-weight: bold;
 }
 
 .orgEmpText{
+    width: 10vw;
     padding-right: 10%;
     border-radius: 15px;
     color : #254F70;

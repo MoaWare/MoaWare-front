@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+body{font-family: 'Nanum Gothic', sans-serif;
+}
+
+/* background-color: 
+       #d7c9fe9e; 기획
+       #fdd0d09d; 설계
+       #fce9a3b3; 테스트
+       #d9f58d89; 개발
+       #cdeef99d; 시연
+*/
+
+.taskDiv{
+    margin-top: 1vh;
+    width: 25vw;
+    height: 8.5vh;
+    margin: 1.4vh 1.2vw;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.divTop{
+    display: flex;
+    justify-content: space-between;
+    margin: 0vh 1vw;
+    margin-top: 1.2vh;
+}
+
+.divRight button{
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+}
+
+.divLow{
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 1vw;
+    margin-top: 1.2vh;
+}
+
+.lowLeft{
+}
+
+.lowMiddle{
+    margin-right: 12vw;
+
+}
+
+.lowRight{
+}

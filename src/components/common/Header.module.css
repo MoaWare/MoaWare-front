@@ -90,3 +90,15 @@ white-space: nowrap;
 }
 
 }
+
+.btn {
+    color: white;
+    text-decoration: none;
+    line-height: 5vh;
+    border: none;
+    font-size: 14px;
+    outline: none;
+    background-color: transparent;
+    /* 글자 고정 */
+    white-space: nowrap;
+}
