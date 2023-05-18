@@ -23,6 +23,14 @@ import ProjDetail from "./pages/project/ProjDetail";
 import ProjDetailLayout from "./layouts/ProjDetailLayout";
 import PayLayout from "./layouts/PayLayout";
 import Payment from "./pages/payment/Payment";
+import AdminLayout from "./layouts/AdminLayout";
+import Admin from "./pages/admin/Admin";
+import BoardLayout from "./layouts/BoardLayout";
+import BoardPostList from "./pages/board/BoardPostList";
+
+
+
+
 
 function App() {
   return (
@@ -47,14 +55,22 @@ function App() {
             <Route path="restReqList" element={<WorkRestReqList />} />
             <Route path="restList" element={<WorkRestList />} />
           </Route>
+          {/* 게시판 */}
+          <Route path="board" element={<BoardLayout />}>
+            <Route index element={<BoardPostList />} />
 
+          </Route>
           {/* 프로젝트 */}
           <Route path="project" element={<ProjectLayout />}>
             <Route index element={<Project />} />
           </Route>
           {/* 전자 결재 */}
-          <Route path="pay" element={<PayLayout/>}>
-            <Route index element={<Payment/>}/>
+          <Route path="pay" element={<PayLayout />}>
+            <Route index element={<Payment />} />
+          </Route>
+          {/* 관리자 */}
+          <Route path="admin" element={<AdminLayout />}>
+            <Route index element={<Admin />} />
           </Route>
         </Route>
         {/* 로그인  */}
