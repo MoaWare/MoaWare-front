@@ -40,6 +40,7 @@ const Header = ({ empName, onLogout }) => {
           <li><Link to="/work">근태관리</Link></li>
           <li><Link to="/">메신저</Link></li>
           <li><Link to="/org">조직도</Link></li>
+          <li><Link to="/admin">관리자</Link></li>
         </ul>
       </div>
       <div className={HeaderCSS.userInfo}>
