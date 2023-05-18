@@ -45,12 +45,14 @@ function Navbar() {
 
   const onClickEndTime = () => {
 
-    // const today = new Date();
-    // const year = today.getFullYear();
-    // const month = String(today.getMonth() + 1).padStart(2, "0");
-    // const day = String(today.getDate()).padStart(2, "0")
-    // const workDate = `${year}-${month}-${day}`
-    //     dispatch(callTimeModifyAPI( {workDate} ));
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const min = now.getMinutes().toString().padStart(2, '0');
+    const sec = now.getSeconds().toString().padStart(2, '0');
+    
+    const quitTime = new Date().toISOString().substr(0, 11) + `${hours}:${min}:${sec}`;
+    console.log(quitTime);
+    dispatch(callTimeInsertAPI( {quitTime} ));
   }
   
 
