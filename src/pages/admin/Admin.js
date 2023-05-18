@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+//import ReactDOM from 'react-dom';
 import './Admin.module.css';
 
 
@@ -27,7 +27,7 @@ const Admin = () => {
         </div>
     );
 };
-
-ReactDOM.render(<Admin />, document.getElementById('root'));
+//ss
+//ReactDOM.render(<Admin />, document.getElementById('root'));
 
 export default Admin;
