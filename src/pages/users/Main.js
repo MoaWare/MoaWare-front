@@ -21,34 +21,34 @@ function Main() {
                         <div className={MainCSS.wait}>결재 대기</div>
                         <table className={MainCSS.waitList}>
                             <tbody>
-                                <tr>
-                                    <td>2023.05.01</td>
-                                    <td>회계품의서</td>
-                                    <td>최신 노트북 추가구매</td>
-                                    <td>0004</td>
-                                    <td>홍길동</td>
-                                </tr>
-                                <tr>
-                                    <td>2023.05.01</td>
-                                    <td>회계품의서</td>
-                                    <td>최신 노트북 추가구매</td>
-                                    <td>0004</td>
-                                    <td>홍길동</td>
-                                </tr>
-                                <tr>
-                                    <td>2023.05.01</td>
-                                    <td>회계품의서</td>
-                                    <td>최신 노트북 추가구매</td>
-                                    <td>0004</td>
-                                    <td>홍길동</td>
-                                </tr>
-                                <tr>
-                                    <td>2023.05.01</td>
-                                    <td>회계품의서</td>
-                                    <td>최신 노트북 추가구매</td>
-                                    <td>0004</td>
-                                    <td>홍길동</td>
-                                </tr>
+                            <tr>
+                                <td>2023.05.01</td>
+                                <td>회계품의서</td>
+                                <td>최신 노트북 추가구매</td>
+                                <td>0004</td>
+                                <td>홍길동</td>
+                            </tr>
+                            <tr>
+                                <td>2023.05.01</td>
+                                <td>회계품의서</td>
+                                <td>최신 노트북 추가구매</td>
+                                <td>0004</td>
+                                <td>홍길동</td>
+                            </tr>
+                            <tr>
+                                <td>2023.05.01</td>
+                                <td>회계품의서</td>
+                                <td>최신 노트북 추가구매</td>
+                                <td>0004</td>
+                                <td>홍길동</td>
+                            </tr>
+                            <tr>
+                                <td>2023.05.01</td>
+                                <td>회계품의서</td>
+                                <td>최신 노트북 추가구매</td>
+                                <td>0004</td>
+                                <td>홍길동</td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -56,34 +56,34 @@ function Main() {
                         <div className={MainCSS.prog}>결재 진행</div>
                         <table className={MainCSS.progList}>
                             <tbody>
-                                <tr>
-                                    <td>2023.05.01</td>
-                                    <td>회계품의서</td>
-                                    <td>최신 노트북 추가구매</td>
-                                    <td>0004</td>
-                                    <td>홍길동</td>
-                                </tr>
-                                <tr>
-                                    <td>2023.05.01</td>
-                                    <td>회계품의서</td>
-                                    <td>최신 노트북 추가구매</td>
-                                    <td>0004</td>
-                                    <td>홍길동</td>
-                                </tr>
-                                <tr>
-                                    <td>2023.05.01</td>
-                                    <td>회계품의서</td>
-                                    <td>최신 노트북 추가구매</td>
-                                    <td>0004</td>
-                                    <td>홍길동</td>
-                                </tr>
-                                <tr>
-                                    <td>2023.05.01</td>
-                                    <td>회계품의서</td>
-                                    <td>최신 노트북 추가구매</td>
-                                    <td>0004</td>
-                                    <td>홍길동</td>
-                                </tr>
+                            <tr>
+                                <td>2023.05.01</td>
+                                <td>회계품의서</td>
+                                <td>최신 노트북 추가구매</td>
+                                <td>0004</td>
+                                <td>홍길동</td>
+                            </tr>
+                            <tr>
+                                <td>2023.05.01</td>
+                                <td>회계품의서</td>
+                                <td>최신 노트북 추가구매</td>
+                                <td>0004</td>
+                                <td>홍길동</td>
+                            </tr>
+                            <tr>
+                                <td>2023.05.01</td>
+                                <td>회계품의서</td>
+                                <td>최신 노트북 추가구매</td>
+                                <td>0004</td>
+                                <td>홍길동</td>
+                            </tr>
+                            <tr>
+                                <td>2023.05.01</td>
+                                <td>회계품의서</td>
+                                <td>최신 노트북 추가구매</td>
+                                <td>0004</td>
+                                <td>홍길동</td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -131,44 +131,44 @@ function Main() {
                     <div className={MainCSS.project}>프로젝트</div>
                     <table className={MainCSS.myPrj}>
                         <tbody>
-                            <tr>
-                                <th>업무 번호</th>
-                                <th>업무 제목</th>
-                                <th>완료기한</th>
-                                <th>진행률</th>
-                                <th>상태</th>
-                                <th>담당자</th>
-                            </tr>
-                            <tr>
-                                <td>0001</td>
-                                <td>모아웨어 프로젝트</td>
-                                <td>~ 2023.06.09</td>
-                                <td>
-                                    <progress className={MainCSS.progress} value={50} min={0} max={100}></progress>
-                                </td>
-                                <td>진행중</td>
-                                <td>홍길동 이사</td>
-                            </tr>
-                            <tr>
-                                <td>0001</td>
-                                <td>모아웨어 프로젝트</td>
-                                <td>~ 2023.06.09</td>
-                                <td>
-                                    <progress className={MainCSS.progress} value={50} min={0} max={100}></progress>
-                                </td>
-                                <td>진행중</td>
-                                <td>홍길동 이사</td>
-                            </tr>
-                            <tr>
-                                <td>0001</td>
-                                <td>모아웨어 프로젝트</td>
-                                <td>~ 2023.06.09</td>
-                                <td>
-                                    <progress className={MainCSS.progress} value={50} min={0} max={100}></progress>
-                                </td>
-                                <td>진행중</td>
-                                <td>홍길동 이사</td>
-                            </tr>
+                        <tr>
+                            <th>업무 번호</th>
+                            <th>업무 제목</th>
+                            <th>완료기한</th>
+                            <th>진행률</th>
+                            <th>상태</th>
+                            <th>담당자</th>
+                        </tr>
+                        <tr>
+                            <td>0001</td>
+                            <td>모아웨어 프로젝트</td>
+                            <td>~ 2023.06.09</td>
+                            <td>
+                                <progress className={MainCSS.progress} value={50} min={0} max={100}></progress>
+                            </td>
+                            <td>진행중</td>
+                            <td>홍길동 이사</td>
+                        </tr>
+                        <tr>
+                            <td>0001</td>
+                            <td>모아웨어 프로젝트</td>
+                            <td>~ 2023.06.09</td>
+                            <td>
+                                <progress className={MainCSS.progress} value={50} min={0} max={100}></progress>
+                            </td>
+                            <td>진행중</td>
+                            <td>홍길동 이사</td>
+                        </tr>
+                        <tr>
+                            <td>0001</td>
+                            <td>모아웨어 프로젝트</td>
+                            <td>~ 2023.06.09</td>
+                            <td>
+                                <progress className={MainCSS.progress} value={50} min={0} max={100}></progress>
+                            </td>
+                            <td>진행중</td>
+                            <td>홍길동 이사</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -180,46 +180,46 @@ function Main() {
                     <table className={MainCSS.notice}>
                         <tbody>
 
-                            <tr>
-                                <th>날짜</th>
-                                <th>분류</th>
-                                <th>제목</th>
-                            </tr>
-                            <tr>
-                                <td>2023.05.01</td>
-                                <td>정부정책</td>
-                                <td>공부하기 싫다</td>
-                            </tr>
-                            <tr>
-                                <td>2023.05.01</td>
-                                <td>정부정책</td>
-                                <td>공부하기 싫다</td>
-                            </tr>
-                            <tr>
-                                <td>2023.05.01</td>
-                                <td>정부정책</td>
-                                <td>냐냐냐냐뇨뇬ㄴ뇨뇬뇨뇨뇨뇨뇨링~</td>
-                            </tr>
-                            <tr>
-                                <td>2023.05.01</td>
-                                <td>정부정책</td>
-                                <td>공부하기 싫다</td>
-                            </tr>
+                        <tr>
+                            <th>날짜</th>
+                            <th>분류</th>
+                            <th>제목</th>
+                        </tr>
+                        <tr>
+                            <td>2023.05.01</td>
+                            <td>정부정책</td>
+                            <td>공부하기 싫다</td>
+                        </tr>
+                        <tr>
+                            <td>2023.05.01</td>
+                            <td>정부정책</td>
+                            <td>공부하기 싫다</td>
+                        </tr>
+                        <tr>
+                            <td>2023.05.01</td>
+                            <td>정부정책</td>
+                            <td>냐냐냐냐뇨뇬ㄴ뇨뇬뇨뇨뇨뇨뇨링~</td>
+                        </tr>
+                        <tr>
+                            <td>2023.05.01</td>
+                            <td>정부정책</td>
+                            <td>공부하기 싫다</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
                 <div className={MainCSS.calendar}>
                     <div className={MainCSS.schedule}>캘린더</div>
-                    <Calendar
-                        onChange={handleDateChange}
+                    <Calendar 
+                        onChange={handleDateChange} 
                         value={date}
                         calendarType={"US"}
                         next2Label={null}
                         prev2Label={null}
                         formatDay={(locale, date) =>
                             new Date(date).toLocaleDateString("en-us", {
-                                day: "2-digit",
-                            })}
+                              day: "2-digit",
+                        })} 
                     />
                 </div>
             </div>

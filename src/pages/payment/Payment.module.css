@@ -1,8 +1,163 @@
 .background{
-    margin-top : 10vh;
-    margin-left: 20vw;
+
+    padding: 1rem;
     background-color: white;
-    width: 90px;
+    width: 76vw;
+    height: 82.5vh;
     border-radius: 15px;
+    top: 5vh;
+    position: fixed;
+    top: 10vh;
+    left: 20vw;
+    right: 0;
+    overflow-y: scroll;
+    height: 81%;
+}
+
+.title{
+    color: rgba(37, 79, 112, 1);
+    font-size: 20px;
+    font-weight: bold;
+    width: 35vw;
+    height: 5vh;
+    line-height: 5vh;
+}
+
+.button{
+    color: white;
+    background-color: rgba(37, 79, 112, 1);
+    width: 7vw;
+    height: 4vh;
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.buttonCancel {
+    color: rgba(37, 79, 112, 1);
+    background-color: white;
+    width: 7vw;
+    height: 4vh;
+    border: 2px solid rgba(37, 79, 112, 1);;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
 
 }
+
+
+.titleDiv{
+    width: 74vw;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+.payApproval{
+    width: 73vw;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.payDiv{
+    text-align: center;
+    width: 100px;
+}
+
+.payTitle{
+    background-color: rgba(37, 79, 112, 1);
+    color: white;
+    height: 2vh;
+    line-height: 2vh;
+    font-size: 14px;
+    border : 1px solid gray;
+    border-bottom: none;
+}
+
+.payName{
+    height: 3vh;
+    line-height: 3vh;
+    border :1px solid gray;
+    border-bottom: none;
+    font-weight: 700;
+}
+
+.paySign{
+    border : 1px solid gray; 
+      
+}
+
+.signImg{
+    width: 4vw;
+    height: 5vh;
+}
+
+.tbody{
+    border-spacing: 0 7px;
+}
+
+.tbody td{
+    border: 1px solid gray;
+    font-size: 14px;
+    height: 5vh;
+    width: 25vw;
+    text-indent: 1rem;
+}
+
+.input  {
+    border: none;
+    font-size: 14px;
+    height: 5vh;
+    width: 61vw;
+    line-height: 5vh;
+}
+::-webkit-file-upload-button {
+    display: none;
+}
+
+.tbody th{
+    background-color: rgba(37, 79, 112, 1);
+    color: white;
+    border: 1px solid gray;
+    font-size: 14px;
+    text-align: center;
+    width: 8vw;
+    height: 5vh;
+
+}
+
+.tbody select {
+    border: none;
+    font-size: 14px;
+    height: 5vh;
+    width: 61vw;
+    appearance:none;
+    background:url('/public/icon/document.png') no-repeat right 24px center;
+}
+
+.refMemeber {
+   margin-right: 1vw;
+
+}
+
+.refMemebertd{
+    font-size: 14px;
+    height: 5vh;
+    display: flex;
+    justify-content: space-between;
+    line-height: 5vh;
+
+}
+
+.docutext{
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.docuMain{
+    height: 25vh !important ; 
+}
+

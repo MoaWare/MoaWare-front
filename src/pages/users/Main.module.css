@@ -22,7 +22,7 @@ a {
 .payment {
     margin-top: 3vh;
     /* width: 60vw; */
-    height: 25vh;
+    /* height: 25vh; */
     border-radius: 30px;
     background-color: white;
     display: flex;
@@ -134,6 +134,11 @@ a {
     margin: 1rem;
 }
 
+.myPrj tr:last-child {
+    /* border: 1px solid blue; */
+    padding: 1rem;
+}
+
 .myPrj th {
     /* border: 1px solid blue; */
     width: 60vw;
@@ -190,37 +195,49 @@ a {
     background-color: white;
     border-radius: 30px;
     margin: 3vh 2vw;
+    margin-bottom: 0;
+    /* padding-bottom: 1rem; */
     width: 16vw;
-    height: 28vh;
+    /* height: 28vh; */
 }
 
 .notice {
     border-collapse : collapse;
     color: rgba(37, 79, 112, 1);
     margin: 1rem;
+    font-size: 12px;
+    
 }
 
 .notice th {
     font-size: 12px;
     /* border: 1px solid blue; */
     width: 20vw;
-    padding: 1vh;
+    padding: 1.5vh;
     border-top: 1px solid rgba(182, 189, 198, 0.5);
 }
 
 .notice td {
     font-size: 12px;
     text-align: center;
-    padding: 1vh 0;
+    padding: 1vh;
     border-top: 1px solid rgba(182, 189, 198, 0.5);
+}
+
+.notice td:first-child {
+    width: 30%;
+}
+
+.notice td:last-child {
+    width: 40%;
 }
 
 .calendar {
     background-color: white;
     border-radius: 30px;
-    margin: 3vh 2vw;
+    margin: 0 2vw;
     width: 16vw;
-    height: 35vh;
+    /* height: 35vh; */
 }
 
 .schedule {
