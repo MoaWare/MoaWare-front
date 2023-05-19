@@ -16,7 +16,7 @@ function TaskItem() {
 
     return (
         <div >
-            <div style={ { "background-color" : "#cdeef99d" } } className={taskCSS.taskDiv}>
+            <div style={ { "backgroundColor" : "#cdeef99d" } } className={taskCSS.taskDiv}>
                 <div className={taskCSS.divTop}>
                     <div className={taskCSS.divLeft}>
                         <span>피그마 완성</span>

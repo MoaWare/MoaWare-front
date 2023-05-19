@@ -3,56 +3,44 @@ import { useDispatch, useSelector } from "react-redux";
 import ProjCSS from "./ProjDetail.module.css";
 import TaskItem from "./TaskItem";
 import TaskList from "./TaskList";
-
-
+import { useParams } from "react-router-dom";
+import { callProjectAPI, callTaskListAPI } from "../../apis/ProjectAPICalls";
+import ProjDetailTitle from "./ProjDetailTitle";
 
 function ProjDetail() {
 
     const dispatch = useDispatch();
-    const stat=1;
-   
+    const params = useParams();
+    const projCode = params.projCode;
+    const project = useSelector(state => state.projectReducer);
+    // const taskList = tasks.data;
+    
+    console.log(projCode);
+    
     useEffect(
         ()=>{
-            
+            if(projCode){
+                dispatch(callProjectAPI({projCode}));
+            }
         },[]
-    );
-
+        );
+        
+        console.log("ProjDetail : ", project);
+        
     return (
         <div className={ProjCSS.wrapper}>
-            <div className={ProjCSS.topDiv}>
-                <div className={ProjCSS.titleTop}>
-                    <div className={ProjCSS.titleTopLeft}>
-                        <button className={ProjCSS.beforeBtn}>
-                            <img src="/icon/before.png"/>
-                        </button>
-                        <span>프로젝트 업무 관리</span>
-                    </div>
-                    <div className={ProjCSS.titleTopRight}>
-                        <p>2023. 05. 23 ~ 2023. 05. 31</p>
-                        <span>D-{}23</span>
-                    </div>
-                </div>
-                <div className={ProjCSS.titleMiddle}>
-                    <div>
-                        <span>{"여기에 프로젝트 상세 설명 moaware MOAWARE 12345 \n 여기에 프로젝트 상세 설명 \n 여기에 프로젝트 상세 설명 \n 여기에 프로젝트 상세 설명 \n "}</span>
-                    </div>
-                </div>
-                <div className={ProjCSS.low}>
-                    <div className={ProjCSS.titleLow}>
-                        <div className={ProjCSS.titleLowLeft}>
-                            <span>현재 진행율</span>
-                        </div>
-                        <div className={ProjCSS.titleLowRight}>
-                            <span>65%</span>
-                        </div>
-                    </div>
-                    <div className={ProjCSS.bar}>
-                        <progress className={ProjCSS.progress} value={50} min={0} max={100}></progress>
-                    </div>
-                </div>
-            </div>
+            <ProjDetailTitle project={project}/>
             <div className={ProjCSS.lowDiv}>
-               <TaskList />
+                <div className={ProjCSS.todoBox}>
+                    <div className={ProjCSS.taskTop}>
+                        <span>해야할 일</span>
+                        <button><img src="/icon/plus.png"/></button>
+                    </div>
+                        <hr/>
+                    <div className={ProjCSS.taskLow}>
+                        <TaskItem /><TaskItem /><TaskItem /><TaskItem /><TaskItem /><TaskItem />
+                    </div>
+                </div>
                 <div className={ProjCSS.progressBox}>
                     <div className={ProjCSS.taskTop}>
                         <span>진행중</span>
@@ -74,7 +62,6 @@ function ProjDetail() {
                     </div>
                 </div>
             </div>
-            
         </div>
     )
 }

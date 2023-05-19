@@ -4,10 +4,11 @@ import organizationReducer from "./OrganizationModule";
 import employeeReducer from "./EmployeeModule";
 import workReducer from "./WorkModule";
 import workTimeReducer from "./WorkTimeModule";
+import projectReducer from "./ProjectModule";
 
 
 const rootReducer = combineReducers({
-    boardReducer, organizationReducer, employeeReducer, workReducer ,workTimeReducer
+    boardReducer, organizationReducer, projectReducer, employeeReducer, workReducer ,workTimeReducer
 });
 
 export default rootReducer
