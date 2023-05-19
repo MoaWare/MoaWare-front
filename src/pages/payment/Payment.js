@@ -1,5 +1,8 @@
-import { useEffect,useState } from 'react';
+import { useEffect,useRef,useState } from 'react';
 import payCSS from './Payment.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { CallPaymentListAPI } from '../../apis/PaymentAPICalls';
+
 
 
 
@@ -8,13 +11,103 @@ import payCSS from './Payment.module.css';
 
 function Payment () {
 
+  const [ form, setForm ] = useState({});
+  const dispatch = useDispatch();
+  const { pay } = useSelector( state => state.paymentReducer );
+  const [htmlString, setHtmlString] = useState("");
+  const payPath = pay&&pay[0].form.formPath;
+  const htmlRef = useRef();
+  const [ select, setSelect ] = useState();
+
+    const onChangeHandler = (e) => {
+      const { name, value } = e.target;
+      setForm(prevForm => ({
+        ...prevForm,
+        [name]: value
+      }));
+
+      console.log( "폼의 값 : ", form);
+    }
+
+
+    const onChangeSelect= (e) => {
+      console.log("셀렉트 값 : ", e.target.value)
+      setSelect(e.target.value)
+    
+    }
+
+    const [ isButton, setIsButton ] = useState(false);
+    const onButtonHandler= () => {
+      if(isButton){
+        setIsButton(false);
+      } else {
+        setIsButton(true)
+      }
+    }
+
+
+    useEffect( 
+      ()=> {
+        dispatch(CallPaymentListAPI());
+
+        const processHtmlString = (html) => {
+
+          let modifiedHTML = html;
+          // modifiedHTML = modifiedHTML.replace(/<input/g, '<input readOnly');
+          Object.entries(form).forEach(([key, value]) => {
+            const regex = new RegExp(`{${key}}`, "g");
+  
+            if (form[key] === undefined || form[key] === null) {
+              modifiedHTML = modifiedHTML.replace(regex, "");
+            } else {
+              modifiedHTML = modifiedHTML.replace(regex, `"${value}"`.trim() || " ");
+            }
+         
+          });  
+     
+          return modifiedHTML;
+        };
+        
+        console.log("form : ", form);
+        // DB에서 가져온 HTML 문자열
+        const htmlFromDB = payPath;
+        if (payPath) {
+        const filteredHTML = processHtmlString(htmlFromDB);
+        console.log( "filteredHTML : ", filteredHTML);
+        setHtmlString(filteredHTML);
+        setForm({});
+        }
+    
+    },[isButton,select]
+    
+    );
+
+    useEffect(() => {
+      // const targetElement = htmlRef.current;
+      // if (targetElement) {
+      //   targetElement.addEventListener('change', onChangeHandler);
+      //   targetElement.value=""
+      // }
+
+      const targetElement = htmlRef.current.getElementsByTagName('input');
+      if (targetElement) {
+        for (let i = 0; i < targetElement.length; i++) {
+          targetElement[i].addEventListener('change', onChangeHandler);
+          targetElement[i].value=""
+        }
+      }
+      console.log("htmlRef : ", htmlRef.current.getElementsByTagName('input'));
+    }, [htmlString]);
+    console.log( "htmlString : ", htmlString);
+
+    
 
     return (
       <div className={payCSS.background}>
         <div className={payCSS.titleDiv}>
           <div className={payCSS.title}>기안문 작성</div>
           <button className={payCSS.button}>결재선</button>
-          <button className={payCSS.button}>결재요청</button>
+          <button className={payCSS.button} onClick={onButtonHandler}>결재요청</button>
           <button className={payCSS.button}>임시저장</button>
           <button className={payCSS.buttonCancel}>취소</button>
         </div>
@@ -62,19 +155,19 @@ function Payment () {
               <tr>
                 <th>양식 종류</th>
                 <td colSpan='3'>
-                  <select defaultValue="null">
+                  <select defaultValue="null" onChange={onChangeSelect}>
                     <option value="null" disabled hidden>선택하세요</option>
-                    <option value="dd">지출결의서</option>
-                    <option value="dd">출퇴근 사유서</option>
-                    <option value="dd">프로젝트 기안서</option>
+                    <option value="1">지출결의서</option>
+                    <option value="2">출퇴근 사유서</option>
+                    <option value="3">프로젝트 기안서</option>
                   </select>
                 </td>
               </tr>
               <tr>
                 <td colSpan='3' className={payCSS.docuMain}>
                   <div className={payCSS.docuText}>
-                  
-                    <table className={payCSS.docuDiv}>
+                  <div ref={htmlRef&&htmlRef} dangerouslySetInnerHTML={{ __html: htmlString }} />
+                    {/* <table className={payCSS.docuDiv}>
                       <tbody className={payCSS.docuDiv}>
                         <tr>
                           <th colSpan='4' className={payCSS.docuTitle}>출퇴근 사유서</th>
@@ -106,7 +199,7 @@ function Payment () {
                           <td rowSpan="2" colSpan="3"><input type='text' className={payCSS.docuInputText}/></td>
                         </tr>
                       </tbody>
-                    </table>
+                    </table> */}
 
                   </div>
                 </td>
