@@ -1,5 +1,5 @@
 .wrapper {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     height: 95vh;
     width: 100vw;
     position: fixed;
@@ -20,7 +20,21 @@
 }
 
 .fc {
-    border: 1px solid orange;
-    height: 80vh;
-    width: 70vw;
+    /* border: 1px solid orange; */
+    padding: 4vh 2vw;
+    height: 87vh;
+    /* width: 70vw; */
+    font-size: 0.85rem;
+}
+
+.fc-header-toolbar {
+    /* border: 1px solid black; */
+}
+
+.fc-toolbar-chunk:first-child button {
+    /* border: 2px solid #254F70; */
+    /* border: solid 2px yellow; */
+    background-color: #254F70;
+    color: #FFFFFF;
+    /* margin-right: 10px; */
 }
