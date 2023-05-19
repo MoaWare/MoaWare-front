@@ -1,4 +1,4 @@
-import { getBoardPosts } from "../modules/BoardPostModule";
+import { getBoardposts } from "../modules/BoardPostModule";
 
 /* React App에서 .env를 사용할 때는 REACT_APP 접두어가 필요^^;; */
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -15,7 +15,7 @@ export const callBoardPostListAPI = ({ currentPage = 1 }) => {
 
         if (result.status === 200) {
             console.log('[BoardPostAPICalls] : callBoardPostListAPI result : ', result);
-            dispatch(getBoardPosts(result));
+            dispatch(getBoardposts(result));
         }
     }
 }

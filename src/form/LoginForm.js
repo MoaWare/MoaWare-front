@@ -34,6 +34,13 @@ function Loginform(){
         navigate('/pwdfind');
     }
 
+    const onEnterKeyHandler = (e) => {
+        if(e.key === 'Enter' ) {
+            console.log("callLoginAPI",form);
+            dispatch(callLoginAPI(form));
+        }
+    }
+
     return (
         <>
             <h1 className={LoginCSS.titleblue}>Login</h1><br/>
@@ -52,6 +59,7 @@ function Loginform(){
                 placeholder="비밀번호"
                 autoComplete="off"
                 onChange={onChangeHandler}
+                onKeyUp={ onEnterKeyHandler}
                 /><br/>
             <button onClick={onClickHandler} className={LoginCSS.loginbutton}>L O G I N</button><br/>
             <div className={ LoginCSS.loginfind }>

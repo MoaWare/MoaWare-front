@@ -29,6 +29,7 @@ import AdminLayout from "./layouts/AdminLayout";
 import Admin from "./pages/admin/Admin";
 import BoardLayout from "./layouts/BoardLayout";
 import BoardPostList from "./pages/board/BoardPostList";
+import PaymentList from "./pages/payment/PaymentList";
 
 
 
@@ -68,6 +69,8 @@ function App() {
           {/* 전자 결재 */}
           <Route path="pay" element={<PayLayout/>}>
             <Route index element={<Payment />}/>
+            <Route path="draft" element={<Payment />}/>
+            <Route path="paying" element={<PaymentList/>}/>
           </Route>
 
           {/* 일정 관리 */}
