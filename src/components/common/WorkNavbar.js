@@ -25,8 +25,6 @@ function WorkNavbar() {
     const month = String(today.getMonth() + 1).padStart(2, "0");
     const day = String(today.getDate()).padStart(2, "0")
     const workDate = `${year}-${month}-${day}`
-    // setBtn(true);
-    // dispatch(setBtnState(btn));
     dispatch(callTimeInsertAPI({ workDate }));
   }
   const onClickEndTime = () => {
@@ -38,8 +36,6 @@ function WorkNavbar() {
 
     const quitTime = new Date().toISOString().substr(0, 11) + `${hours}:${min}:${sec}`;
     console.log(quitTime);
-    // setBtn(false);
-    // dispatch(setBtnState(!btn));
     dispatch(callTimeQuitAPI({ quitTime }));
   }
 
