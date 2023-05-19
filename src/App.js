@@ -59,22 +59,21 @@ function App() {
           {/* 게시판 */}
           <Route path="board" element={<BoardLayout />}>
             <Route index element={<BoardPostList />} />
-
           </Route>
           {/* 프로젝트 */}
           <Route path="project" element={<ProjectLayout />}>
             <Route index element={<Project />} />
           </Route>
           {/* 전자 결재 */}
-          <Route path="pay" element={<PayLayout/>}>
-            <Route index element={<Payment />}/>
+          <Route path="pay" element={<PayLayout />}>
+            <Route index element={<Payment />} />
           </Route>
 
           {/* 일정 관리 */}
-          <Route path="schedule" element={<ScheduleLayout/>}>
-            <Route index element={<Schedule />}/>
-            <Route index element={<Payment/>}/>
-            <Route path="draft" element={<Payment/>}/>
+          <Route path="schedule" element={<ScheduleLayout />}>
+            <Route index element={<Schedule />} />
+            <Route index element={<Payment />} />
+            <Route path="draft" element={<Payment />} />
           </Route>
           {/* 관리자 */}
           <Route path="admin" element={<AdminLayout />}>

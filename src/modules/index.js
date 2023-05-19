@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
-import boardReducer from "./BoardPostModule";
 import organizationReducer from "./OrganizationModule";
 import employeeReducer from "./EmployeeModule";
 import workReducer from "./WorkModule";
+import boardPostReducer from "./BoardPostModule";
 
 
 const rootReducer = combineReducers({
-    boardReducer, organizationReducer, employeeReducer, workReducer
+    organizationReducer, employeeReducer, workReducer, boardPostReducer
 });
 
 export default rootReducer
