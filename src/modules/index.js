@@ -1,14 +1,16 @@
 import { combineReducers } from "redux";
-import boardReducer from "./BoardPostModule";
 import organizationReducer from "./OrganizationModule";
 import employeeReducer from "./EmployeeModule";
 import workReducer from "./WorkModule";
+import boardPostReducer from "./BoardPostModule";
 import workTimeReducer from "./WorkTimeModule";
 import projectReducer from "./ProjectModule";
 
 
 const rootReducer = combineReducers({
-    boardReducer, organizationReducer, projectReducer, employeeReducer, workReducer ,workTimeReducer
+  
+    boardReducer, organizationReducer, employeeReducer, workReducer ,workTimeReducer, boardPostReducer, projectReducer
+
 });
 
 export default rootReducer
