@@ -4,7 +4,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import './Header.css'
 import HeaderCSS from './Header.module.css';
 
-const Header = ({ empName, onLogout }) => {
+const Header = ({ empName }) => {
 
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ const Header = ({ empName, onLogout }) => {
     if (window.confirm('로그아웃 하시겠습니까?')) {
       window.localStorage.removeItem('accessToken');
       console.log('로그아웃 확인');
-      navigate('/');
+      navigate('/login');
       console.log('로그아웃 확인');
     }
   }
@@ -34,7 +34,7 @@ const Header = ({ empName, onLogout }) => {
       <div className={HeaderCSS.mainmenu}>
         <ul className={HeaderCSS.menuList}>
           <li><Link to="/">홈</Link></li>
-          <li><Link to="/">프로젝트</Link></li>
+          <li><Link to="/project">프로젝트</Link></li>
           <li><Link to="/pay">전자결재</Link></li>
           <li><Link to="/">시설예약</Link></li>
 
