@@ -2,18 +2,23 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callBoardPostListAPI } from '../../apis/BoardPostAPICalls';
 import PagingBar from "../../components/common/PagingBar";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import CSS from "./BoardPostList.module.css";
 import Work from "../users/works/Work.module.css";
 
-function BoardPostList() {
+function BoardPostDetail() {
     const dispatch = useDispatch();
+    {/* 스토어 안의 값을 가져와서 구독함. */ }
     const boardPost = useSelector(state => state.boardPostReducer);
+    const params = useParams();
+    const postCode = params.postCode;
+
     const [currentPage, setCurrentPage] = useState(1);
 
+
     useEffect(() => {
-        dispatch(callBoardPostListAPI(currentPage));
-    }, [currentPage]);
+        dispatch(callBoardPostDetailAPI({ postCode }));
+    }, []);
 
     return (
         <div className={`${Work.main} content2`}>
@@ -49,4 +54,4 @@ function BoardPostList() {
     );
 }
 
-export default BoardPostList;
+export default BoardPostDetail;
