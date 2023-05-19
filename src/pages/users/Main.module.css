@@ -195,8 +195,7 @@ a {
     background-color: white;
     border-radius: 30px;
     margin: 3vh 2vw;
-    margin-bottom: 0;
-    /* padding-bottom: 1rem; */
+    padding-bottom: 0.5rem;
     width: 16vw;
     /* height: 28vh; */
 }
@@ -235,7 +234,7 @@ a {
 .calendar {
     background-color: white;
     border-radius: 30px;
-    margin: 0 2vw;
+    margin: 3vh 2vw;
     width: 16vw;
     /* height: 35vh; */
 }
