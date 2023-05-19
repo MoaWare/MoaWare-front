@@ -62,7 +62,9 @@
 
 .p {
     margin-top: 10px;
+    font-size: 14px;
     text-align: center;
+    font-weight: bold;
     color:  rgba(37, 79, 112, 1);
 
 }

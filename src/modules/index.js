@@ -3,10 +3,11 @@ import organizationReducer from "./OrganizationModule";
 import employeeReducer from "./EmployeeModule";
 import workReducer from "./WorkModule";
 import boardPostReducer from "./BoardPostModule";
+import workTimeReducer from "./WorkTimeModule";
 
 
 const rootReducer = combineReducers({
-    organizationReducer, employeeReducer, workReducer, boardPostReducer
+    boardReducer, organizationReducer, employeeReducer, workReducer ,workTimeReducer, boardPostReducer
 });
 
 export default rootReducer

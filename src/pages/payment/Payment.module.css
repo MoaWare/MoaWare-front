@@ -51,13 +51,21 @@
     margin: 0 auto;
     display: flex;
     justify-content: space-evenly;
+    border-bottom: 0.5px solid gray;
+}
+
+.tableDiv {
+    width: 74vw;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 
 .payApproval{
     width: 73vw;
-    margin-top: 3vh;
-    margin-bottom: 3vh;
+    margin-top: 1vh;
+
     display: flex;
     justify-content: flex-end;
 }
@@ -101,18 +109,18 @@
 
 .tbody td{
     border: 1px solid gray;
-    font-size: 14px;
-    height: 5vh;
+    font-size: 12px;
+    height: 3vh;
     width: 25vw;
     text-indent: 1rem;
 }
 
 .input  {
     border: none;
-    font-size: 14px;
-    height: 5vh;
+    font-size: 12px;
+    height: 3vh;
     width: 61vw;
-    line-height: 5vh;
+    line-height: 3vh;
 }
 ::-webkit-file-upload-button {
     display: none;
@@ -122,20 +130,21 @@
     background-color: rgba(37, 79, 112, 1);
     color: white;
     border: 1px solid gray;
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
     width: 8vw;
-    height: 5vh;
+    height: 3vh;
 
 }
 
 .tbody select {
     border: none;
     font-size: 14px;
-    height: 5vh;
+    height: 3vh;
     width: 61vw;
     appearance:none;
     background:url('/public/icon/document.png') no-repeat right 24px center;
+    background-size: 20px
 }
 
 .refMemeber {
@@ -145,10 +154,10 @@
 
 .refMemebertd{
     font-size: 14px;
-    height: 5vh;
+    height: 3vh;
     display: flex;
     justify-content: space-between;
-    line-height: 5vh;
+    line-height: 3vh;
 
 }
 
@@ -158,32 +167,55 @@
 }
 
 .docuMain{
-    height: 25vh !important ; 
+    height: 37vh !important ; 
 }
 .docuDiv{
     margin-top: 1vh;
     margin-left: 1.5vw;
-    text-align: center;
     width: 67vw;
    
 }
 
-.docuTitle{
+.docuDiv .docuTitle{
     color: white;
     background-color: rgba(37, 79, 112, 1);
     text-align: center;
     height: 6vh;
-    font-size: 2rem;
+    font-size: 1.5rem;
     line-height: 6vh;
     margin-bottom: 2vh;
     
 }
-
-.docuLabel{
-    font-size: 1rem;
-    display: inline-block;
+.docuDiv td {
+    border: 1px solid gray;
+    font-size: 14px;
+    height: 3vh;
+    width: 25vw;
+    text-indent: 0.5rem;
 }
 
 .docuInput{
-    display: inline;
+    border: none;
+    width: 30vw;
+    font-size: 0.7rem;
+    height: 4vh;
+    width: 24vw;
+    color: red;
+    
+}
+:focus {
+    outline:none;
+}
+
+:disabled {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+}
+
+
+.docuInputText{
+    border: none;
+    width: 58vw;
+    height: 10vh;
 }
