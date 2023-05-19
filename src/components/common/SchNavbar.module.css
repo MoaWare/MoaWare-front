@@ -27,5 +27,21 @@
     font-size: 20px;
     font-weight: 700;
     margin: 2vw;
-    padding: 2vh;
+    margin-bottom: 1vw;
+    padding: 1.5vh;
+}
+
+.createSch button {
+    background-color: white;
+    color: rgba(37, 79, 112, 1);
+    border: 2px solid rgba(37, 79, 112, 1);
+    text-align: center;
+    /* padding: 2vh; */
+    border-radius: 40px;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 2vw;
+    margin-top: 1vw;
+    padding: 1vh;
+    width: 12vw;
 }
