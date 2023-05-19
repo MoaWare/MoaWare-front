@@ -104,8 +104,9 @@ function App() {
               <LoginPwdFind />
             </ProtectedRoute>
           } />
+        {/* 프로젝트 */}
         <Route path="proj" element={<ProjDetailLayout />}>
-          <Route path="detail" element={<ProjDetail />} />
+          <Route path="detail/:projCode" element={<ProjDetail />} />
         </Route>
       </Routes>
     </BrowserRouter >
