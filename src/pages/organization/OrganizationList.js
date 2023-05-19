@@ -68,6 +68,21 @@ function OrganizationList({org, isSearch}) {
         )
 
     }
+
+    const onEnterKeyHandler = (e) =>{
+        
+        if(e.key === 'Enter'){
+            if(search){
+                navigate(`/org/search?search=${search}`);
+                setIsOpen({});
+            } else {
+                navigate(`/org`);
+                setIsOpen({});
+                setSearch(false);
+            } 
+        } 
+    }
+
     console.log("search :" ,search);
   
        
@@ -75,7 +90,9 @@ function OrganizationList({org, isSearch}) {
         <div className={ orgCSS.background}>
             <div className={ orgCSS.div}>
                 <input type="text" className={ orgCSS.inputBox} 
-                placeholder='이름 / 팀 / 직급' onChange={searchChangeHandler} name="search"></input>
+                placeholder='이름 / 팀 / 직급' onChange={searchChangeHandler} name="search"
+                onKeyUp={ onEnterKeyHandler }
+                ></input>
                 <button className={ orgCSS.button} 
                     onMouseDown={ MouseDownHandler }
                     onMouseUp={ MouseUPHandler }
