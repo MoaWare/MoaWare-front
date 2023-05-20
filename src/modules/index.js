@@ -8,6 +8,7 @@ import boardPostReducer from "./BoardPostModule";
 
 const rootReducer = combineReducers({
     organizationReducer, employeeReducer, workReducer, workTimeReducer, boardPostReducer
+
 });
 
 export default rootReducer

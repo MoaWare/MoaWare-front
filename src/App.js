@@ -71,7 +71,6 @@ function App() {
             <Route index element={<Project />} />
           </Route>
           {/* 전자 결재 */}
-
           <Route path="pay" element={<PayLayout />}>
             <Route index element={<Payment />} />
             <Route path="draft" element={<Payment />} />

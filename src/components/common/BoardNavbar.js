@@ -23,6 +23,8 @@ function BoardNavbar() {
                         </NavLink>
                     </li>
 
+                    {/* asdasdaswww */}
+                    {/* qweqwe */}
                 </ul>
             </div>
         </nav>
