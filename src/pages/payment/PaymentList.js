@@ -1,4 +1,4 @@
-import { useEffect,useState } from 'react';
+import { useEffect,useRef,useState } from 'react';
 import payCSS from './Payment.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { CallPaymentListAPI } from '../../apis/PaymentAPICalls';
@@ -20,6 +20,8 @@ function PaymentList () {
     const [htmlString, setHtmlString] = useState('');
     const dispatch = useDispatch();
     const { pay } = useSelector( state => state.paymentReducer );
+
+    const htmlRef = useRef(document.createElement('div'));
 
     const [ form, setForm ] = useState({});
 
@@ -72,6 +74,7 @@ function PaymentList () {
       const processHtmlString = (html) => {
 
         let modifiedHTML = html;
+        // modifiedHTML = modifiedHTML.replace(/<input/g, '<input readOnly');
         Object.entries(form).forEach(([key, value]) => {
           const regex = new RegExp(`{${key}}`, "g");
 
@@ -100,6 +103,27 @@ function PaymentList () {
 
     console.log("htmlString : ", htmlString);
     // console.log("filteredHTML : ", filteredHTML);
+
+    useEffect(() => {
+      const targetElement = htmlRef.current.getElementsByTagName('input');
+      if (targetElement) {
+        for (let i = 0; i < targetElement.length; i++) {
+          targetElement[i].addEventListener('change', onChangeHandler);
+          targetElement[i].value=""
+        }
+        // return () => {
+        //   for (let i = 0; i < targetElement.length; i++) {
+        //     targetElement[i].removeEventListener('change', onChangeHandler);
+        //   }
+          
+        // };
+      }
+      console.log("htmlRef : ", htmlRef.current.getElementsByTagName('input'));
+    }, [htmlString]);
+
+  
+
+    
     return (
       <div className={payCSS.background}>
         <div>
@@ -111,7 +135,8 @@ function PaymentList () {
           <input type="text" value={number} onChange={handleNumberChange} />.
         </div>
         <button onClick={onButtonHandler}>HTML 보여주기</button>
-        <div dangerouslySetInnerHTML={{ __html: `${htmlString}` }} />
+        <div ref={htmlRef} dangerouslySetInnerHTML={{ __html: `${htmlString}` }} />
+             
               <table className={payCSS.docuDiv}>
                 <tbody className={payCSS.docuDiv}>
                   <tr>
