@@ -2,11 +2,11 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import WorkNavbarCSS from './WorkNavbar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { callTimeInsertAPI, callTimeQuitAPI,  } from '../../apis/WorkAPICalls';
+import { callTimeInsertAPI, callTimeQuitAPI, } from '../../apis/WorkAPICalls';
 import WorkTime from '../Work/WorkTime';
 // import { setBtnState } from '../../modules/WorkTimeModule';
 
-function Navbar() {
+function WorkNavbar() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,15 +19,13 @@ function Navbar() {
   const { quit } = useSelector(state => state.workReducer);
   //변수를 함수 안에 넣은 이유 함수 밖에서 같이 쓰면 오류남
   const onClickStartTime = () => {
-    
+
     const today = new Date();
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, "0");
     const day = String(today.getDate()).padStart(2, "0")
     const workDate = `${year}-${month}-${day}`
-    // setBtn(true);
-    // dispatch(setBtnState(btn));
-    dispatch(callTimeInsertAPI( {workDate} ));
+    dispatch(callTimeInsertAPI({ workDate }));
   }
   const onClickEndTime = () => {
 
@@ -35,31 +33,29 @@ function Navbar() {
     const hours = now.getHours().toString().padStart(2, '0');
     const min = now.getMinutes().toString().padStart(2, '0');
     const sec = now.getSeconds().toString().padStart(2, '0');
-    
+
     const quitTime = new Date().toISOString().substr(0, 11) + `${hours}:${min}:${sec}`;
     console.log(quitTime);
-    // setBtn(false);
-    // dispatch(setBtnState(!btn));
-    dispatch(callTimeQuitAPI( {quitTime} ));
+    dispatch(callTimeQuitAPI({ quitTime }));
   }
-  
+
   useEffect(
     () => {
-      if(insert?.status === 200) {
+      if (insert?.status === 200) {
         alert('출근 등록 되었습니다.')
         navigate("/work");
       } else if (insert?.state === 400) {
         alert(insert.message);
       }
 
-      if(quit?.status === 200) {
+      if (quit?.status === 200) {
         alert('퇴근 등록 되었습니다.')
         navigate("/work")
       } else if (quit?.state === 400) {
         alert(quit.message);
       }
-    }, [insert, quit ]
-    )
+    }, [insert, quit]
+  )
 
   console.log('insert : ', insert);
   console.log('btn : ', btn);
@@ -92,26 +88,42 @@ function Navbar() {
         </ul>
       </div>
       <div className={WorkNavbarCSS.wrap2}>
-      {myWork && myWork.data && (
-        <div>
-          <p className={WorkNavbarCSS.p}>근태 관리</p>
-          <div className={WorkNavbarCSS.ptime}></div>
-          <div className={WorkNavbarCSS.workBtn}>
-          <WorkTime
-            onClickStartHandler={onClickStartTime}
-            onClickEndHandler={onClickEndTime}
-            // btn={btn}
-          />
-          </div>
-            <div className={WorkNavbarCSS.p2} key={myWork.data[0].workPk.workTime}>
-              <p className={WorkNavbarCSS.ptime2}>출근 시간 {myWork.data[0].workTime.substring(11, 19)}</p>
-              <p className={WorkNavbarCSS.ptime2}>퇴근 시간 { myWork.data[0].quitTime ? myWork.data[0].quitTime.substring(11, 19) : ""}</p>
+        {/* myWork객체가 있다면  */}
+        {myWork ? (
+          <div>
+            <p className={WorkNavbarCSS.p}>근태 관리</p>
+            <div className={WorkNavbarCSS.ptime}></div>
+            <div className={WorkNavbarCSS.workBtn}>
+              <WorkTime
+                onClickStartHandler={onClickStartTime}
+                onClickEndHandler={onClickEndTime}
+              // btn={btn}
+              />
             </div>
-        </div>
-          )}
+            {/* data 객체가 있다면 */}
+            {myWork.data && myWork.data.length > 0 ? (
+              <div className={WorkNavbarCSS.p2} key={myWork.data[0].workPk.workTime}>
+                <p className={WorkNavbarCSS.ptime2}>출근 시간 {myWork.data[0].workTime.substring(11, 19)}</p>
+                <p className={WorkNavbarCSS.ptime2}>퇴근 시간 {myWork.data[0].quitTime ? myWork.data[0].quitTime.substring(11, 19) : ""}</p>
+              </div>
+            ) : 
+            // data객체가 없다면
+            (
+              <div>
+                <p></p>
+              </div>
+            )}
+          </div>
+        ) : 
+        // mywork 가없다면
+        (
+          <div>
+            <p></p>
+          </div>
+        )}
       </div>
     </nav>
   );
 }
 
-export default Navbar;
+export default WorkNavbar;
