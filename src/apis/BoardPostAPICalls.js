@@ -49,22 +49,22 @@ export const callBoardPostListAPI = ({ currentPage = 1 }) => {
 //     }
 // }
 
-export const callBoardPostDetailAPI = ({ postCode }) => {
+// export const callBoardPostDetailAPI = ({ postCode }) => {
 
-    const requestURL = `${PRE_URL}/boardPosts/${postCode}`;
+//     const requestURL = `${PRE_URL}/boardPosts/${postCode}`;
 
 
-    return async (dispatch, getState) => {
+//     return async (dispatch, getState) => {
 
-        const result = await fetch(requestURL).then(response => response.json());
+//         const result = await fetch(requestURL).then(response => response.json());
 
-        if (result.status === 200) {
-            console.log("[BoardPostAPICalls] callBoardPostDetailAPI result : ", result);
-            dispatch(getBoardpost(result));
-        }
-    }
-}
-
+//         if (result.status === 200) {
+//             console.log("[BoardPostAPICalls] callBoardPostDetailAPI result : ", result);
+//             dispatch(getBoardpost(result));
+//         }
+//     }
+// }
+//aaaa
 // export const callBoardPostListForAdminAPI = ({ currentPage = 1 }) => {
 
 //     const requestURL = `${PRE_URL}/boardPosts-management?page=${currentPage}`;

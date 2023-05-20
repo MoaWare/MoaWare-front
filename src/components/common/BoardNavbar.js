@@ -5,24 +5,26 @@ function BoardNavbar() {
     return (
         <nav className={NavbarCSS.navbar}>
             <div className={NavbarCSS.wrap}>
-                <div className={NavbarCSS.title}>게시판</div>
+                <div className={NavbarCSS.title}>  게시판</div>
                 <ul className={NavbarCSS.submenu}>
                     <li>
-                        <NavLink to="/" activeclassname={NavbarCSS.active} exact="ture">
+                        <NavLink to="/boardPosts/boards/1 " activeclassname={NavbarCSS.active} exact="ture">
                             공지사항
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/" activeclassname={NavbarCSS.active}>
+                        <NavLink to="/boardPosts/boards/2 " activeclassname={NavbarCSS.active}>
                             자유 게시판
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/" activeclassname={NavbarCSS.active}>
+                        <NavLink to="/boardPosts0/boards/3 " activeclassname={NavbarCSS.active}>
                             부서&직급 게시판
                         </NavLink>
                     </li>
 
+                    {/* asdasdaswww */}
+                    {/* qweqwe */}
                 </ul>
             </div>
         </nav>
