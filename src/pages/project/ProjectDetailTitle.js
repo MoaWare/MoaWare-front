@@ -1,7 +1,4 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import ProjCSS from "./ProjDetail.module.css";
-import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 
@@ -12,7 +9,6 @@ function ProjDetailTitle({ project }){
     const goBack = () => {
         navigate(-1); 
     }
-    // const [task] = tasks;
 
     console.log("project", project.project.projName);
 
@@ -21,9 +17,9 @@ function ProjDetailTitle({ project }){
             <div className={ProjCSS.titleTop}>
                 <div className={ProjCSS.titleTopLeft}>
                     <button onClick={goBack} className={ProjCSS.beforeBtn}>
-                        <img src="/icon/before.png"/>
-                    </button>
-                    <span>{project.project.projName}</span>
+                        <img src="/icon/before.png" alt="before"/>
+                        </button>
+                    <span>{project?.project?.projName}</span>
                 </div>
                 <div className={ProjCSS.titleTopRight}>
                     <p>2023. 05. 23 ~ 2023. 05. 31</p>
@@ -32,7 +28,7 @@ function ProjDetailTitle({ project }){
             </div>
             <div className={ProjCSS.titleMiddle}>
                 <div>
-                    <span>{project.project.projContent}</span>
+                    <span>{project?.project?.projContent}</span>
                 </div>
             </div>
             <div className={ProjCSS.low}>

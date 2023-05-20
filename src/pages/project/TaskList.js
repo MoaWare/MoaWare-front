@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import ProjCSS from "./ProjDetail.module.css";
 import TaskItem from "./TaskItem";
 
@@ -12,12 +11,13 @@ function TaskList() {
             
         },[]
     );
+
 return (
     <>
         <div className={ProjCSS.todoBox}>
             <div className={ProjCSS.taskTop}>
                 <span>해야할 일</span>
-                <button><img src="/icon/plus.png"/></button>
+                <button><img src="/icon/plus.png" alt="plus"/></button>
             </div>
                 <hr/>
             <div className={ProjCSS.taskLow}>

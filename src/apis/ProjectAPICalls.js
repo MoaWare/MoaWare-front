@@ -1,4 +1,4 @@
-import { getProject, getTasks } from "../modules/ProjectModule";
+import { getProject } from "../modules/ProjectModule";
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;

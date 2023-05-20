@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProjCSS from "./ProjDetail.module.css";
 import TaskItem from "./TaskItem";
-import TaskList from "./TaskList";
+// import TaskList from "./TaskList";
 import { useParams } from "react-router-dom";
-import { callProjectAPI, callTaskListAPI } from "../../apis/ProjectAPICalls";
-import ProjDetailTitle from "./ProjDetailTitle";
+import { callProjectAPI } from "../../apis/ProjectAPICalls";
+import ProjDetailTitle from "./ProjectDetailTitle";
 
 function ProjDetail() {
 
@@ -29,12 +29,12 @@ function ProjDetail() {
         
     return (
         <div className={ProjCSS.wrapper}>
-            <ProjDetailTitle project={project}/>
+            { project && <ProjDetailTitle project={project}/>}
             <div className={ProjCSS.lowDiv}>
                 <div className={ProjCSS.todoBox}>
                     <div className={ProjCSS.taskTop}>
                         <span>해야할 일</span>
-                        <button><img src="/icon/plus.png"/></button>
+                        <button><img src="/icon/plus.png" alt="plus"/></button>
                     </div>
                         <hr/>
                     <div className={ProjCSS.taskLow}>
@@ -44,7 +44,7 @@ function ProjDetail() {
                 <div className={ProjCSS.progressBox}>
                     <div className={ProjCSS.taskTop}>
                         <span>진행중</span>
-                        <button><img src="/icon/plus.png"/></button>
+                        <button><img src="/icon/plus.png" alt="plus"/></button>
                     </div>
                         <hr/>
                     <div className={ProjCSS.taskLow}>
@@ -54,7 +54,7 @@ function ProjDetail() {
                 <div className={ProjCSS.doneBox}>
                     <div className={ProjCSS.taskTop}>
                         <span>완료</span>
-                        <button><img src="/icon/plus.png"/></button>
+                        <button><img src="/icon/plus.png" alt="plus"/></button>
                     </div>
                     <hr/>
                     <div className={ProjCSS.taskLow}>

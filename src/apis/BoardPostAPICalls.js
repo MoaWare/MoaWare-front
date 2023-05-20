@@ -1,4 +1,4 @@
-import { getBoardposts } from "../modules/BoardPostModule";
+import { getBoardpost, getBoardposts } from "../modules/BoardPostModule";
 
 /* React App에서 .env를 사용할 때는 REACT_APP 접두어가 필요^^;; */
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
