@@ -196,10 +196,9 @@
 
 .docuInput{
     border: none;
-    width: 30vw;
     font-size: 0.7rem;
     height: 4vh;
-    width: 24vw;
+    width: 98%;
     color: red;
     
 }
@@ -216,6 +215,6 @@
 
 .docuInputText{
     border: none;
-    width: 58vw;
+    width: 98%;
     height: 10vh;
 }

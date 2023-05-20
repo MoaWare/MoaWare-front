@@ -69,22 +69,22 @@ function Work() {
 
     // 연장 시간을 계산하기 위한 기본 근무 시간 
     const baicTime = '09:00:00';
-    const quitTIme = '18:00:00';
+    // const quitTIme = '18:00:00';
     //퇴근 시간 이후에 퇴근 했;는지 알기위한 퇴근 고정시간
     // const fiexdQuit = new Date("18:00:00");
     // const fiexdQuit = new Date(formatQuit)
       // Date 객체 생성
     
     const dateObj = new Date(`1970-01-01T${baicTime}.000Z`);
-    const dateObj2 = new Date(`1970-01-01T${quitTIme}.000Z`);
+    // const dateObj2 = new Date(`1970-01-01T${quitTIme}.000Z`);
 
     // getTime() 메서드로 밀리초 단위 시간으로 변환
     const timeInMs = dateObj.getTime();
 
     // 점심 시간을 계산하기 위한 변수 설정
-    const lunchTime = '01:00:00';
+    // const lunchTime = '01:00:00';
 
-    const lunchObj = new Date(`1970-01-01T${lunchTime}.000Z`);
+    // const lunchObj = new Date(`1970-01-01T${lunchTime}.000Z`);
 
     // const timeInMs2 = lunchObj.getTime();
 
