@@ -28,7 +28,7 @@
 }
 
 .fc-header-toolbar {
-    /* border: 1px solid black; */
+    border: 1px solid black;
 }
 
 .fc-toolbar-chunk:first-child button {
