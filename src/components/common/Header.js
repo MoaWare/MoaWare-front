@@ -3,14 +3,21 @@ import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import './Header.css'
 import HeaderCSS from './Header.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { getHeaderName } from '../../modules/EmployeeModule';
+import { callHeaderNameAPI } from '../../apis/EmployeeAPICalls';
 
-const Header = ({ empName }) => {
+const Header = () => {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { name } = useSelector(state=> state.employeeReducer);
 
   useEffect(() => {
-
+    dispatch(callHeaderNameAPI(getHeaderName));
+    console.log("Header name: ",name);
   }, [])
+
 
   const onClickLogoutHandler = () => {
 
@@ -48,7 +55,7 @@ const Header = ({ empName }) => {
         </ul>
       </div>
       <div className={HeaderCSS.userInfo}>
-        <span>님</span>
+          <span>{ name && name }님</span>
         <button className={HeaderCSS.logout} onClick={onClickLogoutHandler}>로그아웃</button>
       </div>
     </div>

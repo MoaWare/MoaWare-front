@@ -27,9 +27,13 @@ import Schedule from "./pages/schedule/Schedule";
 import ScheduleLayout from "./layouts/ScheduleLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import Admin from "./pages/admin/Admin";
+import PaymentList from "./pages/payment/PaymentList";
 import BoardLayout from "./layouts/BoardLayout";
 import BoardPostList from "./pages/board/BoardPostList";
-import PaymentList from "./pages/payment/PaymentList";
+// import Notice from "./pages/board/Notice";
+// import Free from "./pages/board/Free";
+// import DeptRank from "./pages/board/DeptRank";
+
 
 
 
@@ -60,22 +64,24 @@ function App() {
           {/* 게시판 */}
           <Route path="board" element={<BoardLayout />}>
             <Route index element={<BoardPostList />} />
+            <Route path="boardPost/boards/:boardCode" element={<BoardPostList />} />
           </Route>
           {/* 프로젝트 */}
           <Route path="project" element={<ProjectLayout />}>
             <Route index element={<Project />} />
           </Route>
           {/* 전자 결재 */}
-          <Route path="pay" element={<PayLayout/>}>
-            <Route index element={<Payment />}/>
-            <Route path="draft" element={<Payment />}/>
-            <Route path="paying" element={<PaymentList/>}/>
+          <Route path="pay" element={<PayLayout />}>
+            <Route index element={<Payment />} />
+            <Route path="draft" element={<Payment />} />
+            <Route path="paying" element={<PaymentList />} />
+
           </Route>
 
           {/* 일정 관리 */}
           <Route path="schedule" element={<ScheduleLayout />}>
             <Route index element={<Schedule />} />
-            <Route index element={<Payment />} />
+            <Route index e lement={<Payment />} />
             <Route path="draft" element={<Payment />} />
           </Route>
           {/* 관리자 */}
@@ -100,12 +106,18 @@ function App() {
         <Route
           path="pwdfind"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute loginCheck={false}>
               <LoginPwdFind />
             </ProtectedRoute>
           } />
         {/* 프로젝트 */}
-        <Route path="proj" element={<ProjDetailLayout />}>
+        <Route 
+          path="proj" 
+          element={
+            <ProtectedRoute loginCheck={true}>
+              <ProjDetailLayout />
+            </ProtectedRoute>
+          }>
           <Route path="detail/:projCode" element={<ProjDetail />} />
         </Route>
       </Routes>

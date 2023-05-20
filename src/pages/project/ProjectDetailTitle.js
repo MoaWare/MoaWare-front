@@ -5,12 +5,20 @@ import { useNavigate } from "react-router-dom";
 function ProjDetailTitle({ project }){
 
     const navigate = useNavigate();
+    const startDate =  project.startDate.substring(10, 0).replace('-','.');
+    const endDate = project.endDate.substring(10, 0).replace('-','.');
+
+    /* 디데이 계산 */
+    const dday = Math.floor((new Date() - new Date(project.endDate)) / (1000*60*60*24));
+    console.log(dday);
+
+    // 완료 갯수 / (해야할일 갯수 + 진행중 갯수 + 완료 갯수) * 100
 
     const goBack = () => {
         navigate(-1); 
     }
 
-    console.log("project", project.project.projName);
+    console.log("project", project.projName);
 
     return(
         <div className={ProjCSS.topDiv}>
@@ -19,16 +27,16 @@ function ProjDetailTitle({ project }){
                     <button onClick={goBack} className={ProjCSS.beforeBtn}>
                         <img src="/icon/before.png" alt="before"/>
                         </button>
-                    <span>{project?.project?.projName}</span>
+                    <span>{project && project.projName}</span>
                 </div>
                 <div className={ProjCSS.titleTopRight}>
-                    <p>2023. 05. 23 ~ 2023. 05. 31</p>
-                    <span>D-{}23</span>
+                    <p>{startDate} ~ {endDate}</p>
+                    <span>D-{dday}</span>
                 </div>
             </div>
             <div className={ProjCSS.titleMiddle}>
                 <div>
-                    <span>{project?.project?.projContent}</span>
+                    <span>{project?.projContent}</span>
                 </div>
             </div>
             <div className={ProjCSS.low}>

@@ -12,24 +12,21 @@ function ProjDetail() {
     const dispatch = useDispatch();
     const params = useParams();
     const projCode = params.projCode;
-    const project = useSelector(state => state.projectReducer);
-    // const taskList = tasks.data;
+    const { project } = useSelector(state => state.projectReducer);
     
     console.log(projCode);
     
     useEffect(
         ()=>{
-            if(projCode){
-                dispatch(callProjectAPI({projCode}));
-            }
+            dispatch(callProjectAPI({projCode}));
         },[]
         );
         
         console.log("ProjDetail : ", project);
         
-    return (
+    return project && (
         <div className={ProjCSS.wrapper}>
-            { project && <ProjDetailTitle project={project}/>}
+            <ProjDetailTitle project={project}/>
             <div className={ProjCSS.lowDiv}>
                 <div className={ProjCSS.todoBox}>
                     <div className={ProjCSS.taskTop}>
@@ -63,7 +60,7 @@ function ProjDetail() {
                 </div>
             </div>
         </div>
-    )
+    ) 
 }
 
 export default ProjDetail;
