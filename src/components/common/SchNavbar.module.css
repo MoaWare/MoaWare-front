@@ -31,17 +31,51 @@
     padding: 1.5vh;
 }
 
+.myCal {
+    padding: 0 1rem;
+}
+
 .createSch button {
     background-color: white;
     color: rgba(37, 79, 112, 1);
     border: 2px solid rgba(37, 79, 112, 1);
     text-align: center;
-    /* padding: 2vh; */
     border-radius: 40px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     margin: 2vw;
     margin-top: 1vw;
     padding: 1vh;
     width: 12vw;
+}
+
+.share {
+    padding: 0 3rem;
+    padding-bottom: 1.5rem;
+    font-size: 14px;
+    font-weight: bold;
+    color: #254F70;
+}
+
+.share div {
+    margin-bottom: 2.5vh;
+}
+
+.type {
+    font-size: 18px;
+    font-weight: bold;
+    color: #254F70;
+    border-bottom: 2px solid rgba(182, 189, 198, 0.5);
+    padding-bottom: 1vh;
+}
+
+.unshare {
+    padding: 0 3rem;
+    font-size: 14px;
+    font-weight: bold;
+    color: #254F70;
+}
+
+.unshare div {
+    margin-bottom: 2.5vh;
 }

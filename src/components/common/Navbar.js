@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import NavbarCSS from './Navbar.module.css';
+import Weather from '../../pages/weather/Weather';
 
 function Navbar() {
   return (
@@ -24,13 +25,14 @@ function Navbar() {
       <div className={NavbarCSS.wrap2}>
         <div className={NavbarCSS.weather}>오늘의 날씨</div>
         <div className={NavbarCSS.myWeather}>
-          <div className={NavbarCSS.today}>5월 1일 월요일</div>
+          <Weather />
+          {/* <div className={NavbarCSS.today}>5월 1일 월요일</div>
           <div className={NavbarCSS.local}>서울 특별시 종로구 인사동길 12</div>
           <div className={NavbarCSS.sky}>
             <img src="./icon/cloud.png"/>
             <div className={NavbarCSS.temperature}>16.8°<br/>구름 많음</div>
           </div>
-          <div className={NavbarCSS.yesterday}>어제보다 1.2° 높아요</div>
+          <div className={NavbarCSS.yesterday}>어제보다 1.2° 높아요</div> */}
         </div>
       </div>
     </nav>
