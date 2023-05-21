@@ -12,9 +12,10 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #9292927a;
+    background-color: #B6BDC6;
     border-radius: 15px;
 }
+
 ::-webkit-scrollbar-track {
     background-color: transparent;
 }
