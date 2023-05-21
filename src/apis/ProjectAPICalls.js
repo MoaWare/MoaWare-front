@@ -1,4 +1,4 @@
-import { getProject, getTasks } from "../modules/ProjectModule";
+import { getDone, getProgress, getProject, getTasks } from "../modules/ProjectModule";
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -24,3 +24,117 @@ export const callProjectAPI = ({projCode}) => {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const callProjectProgressListAPI = ({ currentPage = 1 }) => {
+    const requestURL = `${PRE_URL}/progress?page=${currentPage}`;
+  
+    return async (dispatch, getState) => {
+      const result = await fetch(requestURL, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
+        },
+      }).then((response) => response.json());
+  
+      if (result.status === 200) {
+        console.log("[ProjectAPICalls] callProjectProgressListAPI result : ", result);
+  
+        dispatch(getProgress(result));
+      }
+    };
+  };
+
+
+
+  export const callProjectDoneListAPI = ({ currentPage = 1 }) => {
+    const requestURL = `${PRE_URL}/progress?page=${currentPage}`;
+  
+    return async (dispatch, getState) => {
+      const result = await fetch(requestURL, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
+        },
+      }).then((response) => response.json());
+  
+      if (result.status === 200) {
+        console.log("[ProjectAPICalls] callProjectDoneListAPI result : ", result);
+  
+        dispatch(getDone(result));
+      }
+    };
+  };

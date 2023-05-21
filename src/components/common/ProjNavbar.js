@@ -8,7 +8,7 @@ function ProjNavbar() {
         <div className={NavbarCSS.title}>프로젝트</div>
         <ul className={NavbarCSS.submenu}>
           <li>
-            <NavLink to="/" activeclassname={NavbarCSS.active}>
+            <NavLink to="/project/createProject" activeclassname={NavbarCSS.active}>
               프로젝트 생성
             </NavLink>
           </li>
