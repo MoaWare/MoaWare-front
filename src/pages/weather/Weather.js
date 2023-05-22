@@ -9,12 +9,33 @@ const Weather = () => {
   const [desc, setDesc] = useState('');
   const [icon, setIcon] = useState('');
   const [loading, setLoading] = useState(true);
+  const [location, setLocation] = useState(null);
+
+  const getCurrentLocation = () => {
+    // Get current location
+    navigator.geolocation.getCurrentPosition((position) => {
+      let lat = position.coords.latitude;
+      let lon = position.coords.longitude;
+      console.log("Current location", lat, lon);
+      setLocation({ lat, lon });
+    });
+  };
+
+  useEffect(() => {
+    getCurrentLocation();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       const cityName = 'Seoul';
       const apiKey = process.env.REACT_APP_WEATHER_KEY;
-      const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
+      const lang = 'kr';
+      let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&lang=${lang}`;
+
+      if (location) {
+        const { lat, lon } = location;
+        url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&lang=${lang}`;
+      }
 
       try {
         const response = await axios.get(url);
@@ -32,7 +53,7 @@ const Weather = () => {
     };
 
     fetchData();
-  }, []);
+  }, [location]);
 
   const imgSrc = `https://openweathermap.com/img/w/${icon}.png`;
 
@@ -41,20 +62,21 @@ const Weather = () => {
   } else {
     return (
       <>
+        <div className='today'></div>
         <div>
-          오늘의 온도 : {(temp - 273.15).toFixed(0)}°
+          오늘의 온도: {(temp - 273.15).toFixed(0)}°
         </div>
         <div>
-            <img src={imgSrc} />
-            {/* 날씨 표현 */}
-            {desc}
+          <img src={imgSrc} alt="Weather Icon" />
+          {/* 날씨 표현 */}
+          {desc}
         </div>
         <div>
-            최고: {(temp_max - 273.15).toFixed(0)}° 최저: {(temp_min - 273.15).toFixed(0)}°
+          최고: {(temp_max - 273.15).toFixed(0)}° 최저: {(temp_min - 273.15).toFixed(0)}°
         </div>
         <div>
-            {/* 습도 */}
-            {humidity}
+          {/* 습도 */}
+          {humidity}
         </div>
       </>
     );
