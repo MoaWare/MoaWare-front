@@ -30,6 +30,7 @@ import Admin from "./pages/admin/Admin";
 import PaymentList from "./pages/payment/PaymentList";
 import BoardLayout from "./layouts/BoardLayout";
 import BoardPostList from "./pages/board/BoardPostList";
+import BoardPostDetail from "./pages/board/BoardPostDetail";
 import PaymentMain from "./pages/payment/PaymentMain";
 import MemberInfoLayout from "./layouts/MemberInfoLayout";
 import MemberInfo from "./pages/member/MemberInfo";
@@ -66,9 +67,15 @@ function App() {
             <Route path="restList" element={<WorkRestList />} />
           </Route>
           {/* 게시판 */}
-          <Route path="board" element={<BoardLayout />}>
+          <Route path="boardPosts" element={<BoardLayout />}>
             <Route index element={<BoardPostList />} />
-            <Route path="boardPost/boards/:boardCode" element={<BoardPostList />} />
+            <Route path=":postCode" element={<BoardPostDetail />} />
+            <Route path="boards/:boardCode" element={<BoardPostList />} />
+
+
+          
+            
+
           </Route>
           {/* 프로젝트 */}
           <Route path="project" element={

@@ -19,20 +19,40 @@ export const callBoardPostListAPI = ({ currentPage = 1 }) => {
         }
     }
 }
-// export const callBoardpostBoardsListAPI = ({ boardCode, currentPage = 1 }) => {
 
-//     const requestURL = `${PRE_URL}/boardposts/boards/${boardCode}?page=${currentPage}`;
+// 상세 조회
+export const callBoardPostDetailAPI = ({ postCode }) => {
 
-//     return async (dispatch, getState) => {
+    const requestURL = `${PRE_URL}/boardPosts/${postCode}`;
 
-//         const result = await fetch(requestURL).then(response => response.json());
+    return async (dispatch, getState) => {
 
-//         if (result.status === 200) {
-//             console.log("[BoardpostAPICalls] callBoardpostBoardsListAPI result : ", result);
-//             dispatch(getBoardPosts(result));
-//         }
-//     }
-// }
+        const result = await fetch(requestURL).then(response => response.json());
+
+        if (result.status === 200) {
+            console.log("[BoardPostAPICalls] callBoardPostDetailAPI result : ", result);
+            dispatch(getBoardpost(result));
+        }
+    }
+}
+
+
+
+// 게시판 코드별 조회
+ export const callBoardpostBoardsListAPI = ({ boardCode, currentPage = 1 }) => {
+
+     const requestURL = `${PRE_URL}/boardPosts/boards/${boardCode}?page=${currentPage}`;
+
+     return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL).then(response => response.json());
+
+        if (result.status === 200) {
+             console.log("[BoardpostAPICalls] callBoardpostBoardsListAPI result : ", result);
+             dispatch(getBoardposts(result));
+       }
+     }
+ }
 
 // export const callBoardpostSearchListAPI = ({ search, currentPage = 1 }) => {
 
@@ -49,21 +69,7 @@ export const callBoardPostListAPI = ({ currentPage = 1 }) => {
 //     }
 // }
 
-// export const callBoardPostDetailAPI = ({ postCode }) => {
 
-//     const requestURL = `${PRE_URL}/boardPosts/${postCode}`;
-
-
-//     return async (dispatch, getState) => {
-
-//         const result = await fetch(requestURL).then(response => response.json());
-
-//         if (result.status === 200) {
-//             console.log("[BoardPostAPICalls] callBoardPostDetailAPI result : ", result);
-//             dispatch(getBoardpost(result));
-//         }
-//     }
-// }
 //aaaa
 // export const callBoardPostListForAdminAPI = ({ currentPage = 1 }) => {
 
