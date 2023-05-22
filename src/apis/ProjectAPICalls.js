@@ -1,5 +1,4 @@
 import { getProject, getTaskDone, getTaskIng, getTaskTodo, getTasks } from "../modules/ProjectModule";
-import { CallOrganizationSubListAPI } from "./OrganizationAPICalls";
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;

@@ -11,7 +11,8 @@ const POST_FIND_ID = 'emp/POST_FIND_ID';
 const GET_HEADER_NAME = 'emp/GET_HEADER_NAME';
 
 
-export const { emp : { postLogin,resetEmp, postFindPwd, postFindId, getHeaderName }} = createActions({
+
+export const { emp : { postLogin,resetEmp, postFindPwd, postFindId, getHeaderName}} = createActions({
     [POST_LOGIN] : res => res,
     [RESET_EMP] : () => {},
     [POST_FIND_PWD] : res => res,

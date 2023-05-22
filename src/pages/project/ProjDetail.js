@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProjCSS from "./ProjDetail.module.css";
 import { useParams } from "react-router-dom";
-import { callProjectAPI, callTaskDoneAPI, callTaskIngAPI, callTaskListAPI, callTaskTodoAPI } from "../../apis/ProjectAPICalls";
+import { callTaskListAPI, callTaskTodoAPI } from "../../apis/ProjectAPICalls";
 import ProjDetailTitle from "./ProjectDetailTitle";
 import TaskList from "./TaskList";
 

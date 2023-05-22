@@ -1,4 +1,5 @@
 import { getHeaderName, postFindId, postFindPwd, postLogin } from "../modules/EmployeeModule";
+import { postMemberInfo, getMemberInfo } from "../modules/MemberModule";
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${ process.env.REACT_APP_RESTAPI_SERVER_PORT}`
@@ -98,3 +99,4 @@ export const callHeaderNameAPI = () => {
         }
     }
 }
+

@@ -30,6 +30,9 @@ import Admin from "./pages/admin/Admin";
 import PaymentList from "./pages/payment/PaymentList";
 import BoardLayout from "./layouts/BoardLayout";
 import BoardPostList from "./pages/board/BoardPostList";
+import MemberInfoLayout from "./layouts/MemberInfoLayout";
+import MemberInfo from "./pages/member/MemberInfo";
+import MemberInfoModify from "./pages/member/MemberInfoModify";
 // import Notice from "./pages/board/Notice";
 // import Free from "./pages/board/Free";
 // import DeptRank from "./pages/board/DeptRank";
@@ -126,6 +129,17 @@ function App() {
           }>
           <Route path="detail/:projCode" element={<ProjDetail />} />
         </Route>
+        {/* 회원 정보 */}
+        <Route 
+          path="member"
+          element={
+            <ProtectedRoute loginCheck={true}>
+              <MemberInfoLayout />
+            </ProtectedRoute>
+          }>
+            <Route index element={<MemberInfo />}/>
+            <Route path="modify" element={<MemberInfoModify />} />
+          </Route>
       </Routes>
     </BrowserRouter >
   );
