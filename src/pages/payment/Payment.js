@@ -11,21 +11,32 @@ import { CallPaymentListAPI } from '../../apis/PaymentAPICalls';
 
 function Payment () {
 
-  const [ form, setForm ] = useState({});
+  const [ form, setForm ] = useState({ });
   const dispatch = useDispatch();
   const { pay } = useSelector( state => state.paymentReducer );
   const [htmlString, setHtmlString] = useState("");
   const payPath = pay&&pay[0].form.formPath;
   const htmlRef = useRef();
   const [ select, setSelect ] = useState();
+  const [ saveHtml , setSaveHtml] = useState();
+  const [ conutInput, setCountInput ] = useState();
 
     const onChangeHandler = (e) => {
       const { name, value } = e.target;
+      if(name === 'total'){
+        setForm(prevForm => ({
+          ...prevForm,
+          [name]: value,
+          supply:  Math.round(value/1.1),
+          tax: Math.round(value/1.1*0.1)
+        }));
+      }
+      else{
       setForm(prevForm => ({
         ...prevForm,
         [name]: value
       }));
-
+    }
       console.log( "폼의 값 : ", form);
     }
 
@@ -38,10 +49,15 @@ function Payment () {
 
     const [ isButton, setIsButton ] = useState(false);
     const onButtonHandler= () => {
+      console.log("버튼 클릭", Object.keys(form).length, conutInput);
+      if(Object.keys(form).length == conutInput){
       if(isButton){
         setIsButton(false);
       } else {
         setIsButton(true)
+      }}
+      else{
+        alert("양식을 전체 채우세요");
       }
     }
 
@@ -75,32 +91,69 @@ function Payment () {
         const filteredHTML = processHtmlString(htmlFromDB);
         console.log( "filteredHTML : ", filteredHTML);
         setHtmlString(filteredHTML);
+        if(!form.total){setForm({})};
+        }
+
+        
+    
+    },[select, form.total]
+    
+    );
+
+    useEffect( 
+      ()=> {
+        dispatch(CallPaymentListAPI());
+
+        const processHtmlString = (html) => {
+
+          let modifiedHTML = html;
+          modifiedHTML = modifiedHTML.replace(/<input(?! readOnly)/g, '<input readOnly');
+          Object.entries(form).forEach(([key, value]) => {
+            const regex = new RegExp(`{${key}}`, "g");
+  
+            if (form[key] === undefined || form[key] === null) {
+              modifiedHTML = modifiedHTML.replace(regex, "");
+            } else {
+              modifiedHTML = modifiedHTML.replace(regex, `"${value}"`.trim() || " ");
+            }
+         
+          });  
+     
+          return modifiedHTML;
+        };
+        
+        console.log("form : ", form);
+        // DB에서 가져온 HTML 문자열
+        const htmlFromDB = payPath;
+        if (payPath) {
+        const filteredHTML = processHtmlString(htmlFromDB);
+        console.log( "filteredHTML : ", filteredHTML);
+        setSaveHtml(filteredHTML);
         setForm({});
         }
     
-    },[isButton,select]
+    },[isButton]
     
     );
 
     useEffect(() => {
-      // const targetElement = htmlRef.current;
-      // if (targetElement) {
-      //   targetElement.addEventListener('change', onChangeHandler);
-      //   targetElement.value=""
-      // }
 
       const targetElement = htmlRef.current.getElementsByTagName('input');
       if (targetElement) {
         for (let i = 0; i < targetElement.length; i++) {
           targetElement[i].addEventListener('change', onChangeHandler);
-          targetElement[i].value=""
+          const valuePattern = /\{(\w+)\}/g;
+          if(targetElement[i].value.match(valuePattern)){
+            targetElement[i].value=""
+          }
         }
+
       }
+      setCountInput(targetElement.length);
       console.log("htmlRef : ", htmlRef.current.getElementsByTagName('input'));
     }, [htmlString]);
     console.log( "htmlString : ", htmlString);
-
-    
+    console.log( "saved : ", saveHtml);
 
     return (
       <div className={payCSS.background}>
@@ -144,7 +197,8 @@ function Payment () {
               </tr>
               <tr>
                 <th>문서제목</th>
-                <td colSpan='3'><input type='text' className={payCSS.input}/></td>
+                <td colSpan='3'><input type='text' name="payMainTitle" value={form.payMainTitle} className={payCSS.input}
+                onChange={onChangeHandler}/></td>
               </tr>
               </tbody>
           </table>
@@ -166,7 +220,7 @@ function Payment () {
               <tr>
                 <td colSpan='3' className={payCSS.docuMain}>
                   <div className={payCSS.docuText}>
-                  <div ref={htmlRef&&htmlRef} dangerouslySetInnerHTML={{ __html: htmlString }} />
+                  <div ref={htmlRef&&htmlRef} dangerouslySetInnerHTML={{ __html: saveHtml ? saveHtml :htmlString }} />
                     {/* <table className={payCSS.docuDiv}>
                       <tbody className={payCSS.docuDiv}>
                         <tr>
