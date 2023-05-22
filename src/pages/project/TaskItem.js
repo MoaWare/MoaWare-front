@@ -1,16 +1,11 @@
-import { useEffect } from "react";
 import taskCSS from "./TaskItem.module.css";
 
 
-function TaskItem() {
+function TaskItem({ task }) {
 
-   
-    useEffect(
-        ()=>{
-            
-        },[]
-    );
+    const onClickHandler = () => {
 
+    }
 
 
     return (

@@ -67,7 +67,10 @@ function App() {
             <Route path="boardPost/boards/:boardCode" element={<BoardPostList />} />
           </Route>
           {/* 프로젝트 */}
-          <Route path="project" element={<ProjectLayout />}>
+          <Route path="project" element={
+            <ProtectedRoute projectCheck={true}>
+              <ProjectLayout />
+            </ProtectedRoute>}>
             <Route index element={<Project />} />
           </Route>
           {/* 전자 결재 */}
@@ -75,7 +78,6 @@ function App() {
             <Route index element={<Payment />} />
             <Route path="draft" element={<Payment />} />
             <Route path="paying" element={<PaymentList />} />
-
           </Route>
 
           {/* 일정 관리 */}
@@ -85,7 +87,11 @@ function App() {
             <Route path="draft" element={<Payment />} />
           </Route>
           {/* 관리자 */}
-          <Route path="admin" element={<AdminLayout />}>
+          <Route path="admin" element={
+            <ProtectedRoute authCheck={true}>
+              <AdminLayout />
+            </ProtectedRoute> 
+            }>
             <Route index element={<Admin />} />
           </Route>
         </Route>
@@ -114,7 +120,7 @@ function App() {
         <Route 
           path="proj" 
           element={
-            <ProtectedRoute loginCheck={true}>
+            <ProtectedRoute projectCheck={true}>
               <ProjDetailLayout />
             </ProtectedRoute>
           }>
