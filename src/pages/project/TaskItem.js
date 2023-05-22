@@ -1,17 +1,11 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import taskCSS from "./TaskItem.module.css";
 
 
-function TaskItem() {
+function TaskItem({ task }) {
 
-   
-    useEffect(
-        ()=>{
-            
-        },[]
-    );
+    const onClickHandler = () => {
 
+    }
 
 
     return (
