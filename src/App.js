@@ -145,6 +145,7 @@ function App() {
           }>
           <Route path="detail/:projCode" element={<ProjDetail />} />
         </Route>
+        </Route>
         {/* 회원 정보 */}
         <Route 
           path="member"
