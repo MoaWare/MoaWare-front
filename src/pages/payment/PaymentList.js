@@ -159,59 +159,68 @@ function PaymentList () {
               <table className={payCSS.docuDiv}>
                 <tbody className={payCSS.docuDiv}>
                   <tr>
-                    <th colSpan='6' className={payCSS.docuTitle}>지출결의서</th>
+                    <th colSpan='6' className={payCSS.docuTitle}>프로젝트 기안서</th>
                   </tr>
                   <tr>
-                    <th className={payCSS.docuLabel}>성 명</th>
-                    <td colSpan='2'><input type='text' name="name"className={payCSS.docuInput}
+                    <th className={payCSS.docuLabel}>작성일자</th>
+                    <td ><input type='text' name="name"className={payCSS.docuInput}
                       value={form.name} onChange={onChangeHandler}/></td>
-                    <th>부 서</th>
-                    <td colSpan='2' ><input type='text' className={payCSS.docuInput} name="dept"
+                    <th>담당자</th>
+                    <td ><input type='text' className={payCSS.docuInput} name="dept"
                     value={form.dept} onChange={onChangeHandler}/></td>
                   </tr>
                   <tr>
                     <th>직 급</th>
-                    <td colSpan='2'><input type='text' className={payCSS.docuInput}
+                    <td colSpan='3'><input type='text' className={payCSS.docuInput}
                     name="job" value={form.job} onChange={onChangeHandler}/></td>
-                    <th>일시</th>
-                    <td colSpan='2'><input type='text' className={payCSS.docuInput}
-                    name="payDate" value={form.payDate} onChange={onChangeHandler}/></td>
                   </tr>
+
                   <tr>
-                  <th colSpan='6' className={payCSS.test}>
-                  
-                  ※ 지출결의서 기안시 영수증 첨부 필수<br/>
-                  ※ 차량 주유비는 네이버지도 첨부 하여 해당 비용으로 처리 한다.<br/>
-                  ※ 기본적으로 법인카드를 사용하며, 부득히한 경우 본인이 직접 결재 후 기안문을 작성한다.<br/>
-                  ※ 본인이 직접 결재한 경우 급여 통장으로 입금이 된다.<br/>
-                  
-                  </th> 
+                    <th>직 급</th>
+                    <td colSpan='3'><input type='text' className={payCSS.docuInput}
+                    name="job" value={form.job} onChange={onChangeHandler}/></td>
                   </tr>
-                  
+
                   <tr>
-                    <th>결재 일자</th>
-                    <th>내용</th>
-                    <th>공급가액</th>
-                    <th>부가세</th>
-                    <th>결재 합계</th>
-                    <th>결재 방식</th>
+                    <th>직 급</th>
+                    <td colSpan='3'><input type='text' className={payCSS.docuInput}
+                    name="job" value={form.job} onChange={onChangeHandler}/></td>
                   </tr>
+
                   <tr>
-                  <td><input type='text' className={payCSS.docuInput}
-                    name="payDate" value={form.payDate} onChange={onChangeHandler}/></td>
-                    
-                    <td><input type='text' className={payCSS.docuInput}
-                    name="payText" value={form.payText} onChange={onChangeHandler}/></td>
-                    
-                    <td >{form.supply}</td>
-                    
-                    <td>{form.tax} </td>
-                    
-                    <td><input type='number' className={payCSS.docuInput}
-                    name="total" value={form.total} onChange={onChangeHandler}/></td>
-                    
-                    <td><input type='text' className={payCSS.docuInput}
-                    name="closeTime" value={form.closeTime} onChange={onChangeHandler}/></td> 
+                    <th>직 급</th>
+                    <td colSpan='3'><input type='text' className={payCSS.docuInput}
+                    name="job" value={form.job} onChange={onChangeHandler}/></td>
+                  </tr>
+
+                  <tr>
+                    <th>직 급</th>
+                    <td colSpan='3'><input type='text' className={payCSS.docuInput}
+                    name="job" value={form.job} onChange={onChangeHandler}/></td>
+                  </tr>
+
+                  <tr>
+                    <th>직 급</th>
+                    <td colSpan='3'><input type='text' className={payCSS.docuInput}
+                    name="job" value={form.job} onChange={onChangeHandler}/></td>
+                  </tr>
+
+                  <tr>
+                    <th>직 급</th>
+                    <td colSpan='3'><input type='text' className={payCSS.docuInput}
+                    name="job" value={form.job} onChange={onChangeHandler}/></td>
+                  </tr>
+
+                  <tr>
+                    <th>직 급</th>
+                    <td colSpan='3'><input type='text' className={payCSS.docuInput}
+                    name="job" value={form.job} onChange={onChangeHandler}/></td>
+                  </tr>
+
+                  <tr>
+                    <th>직 급</th>
+                    <td colSpan='3'><input type='text' className={payCSS.docuInput}
+                    name="job" value={form.job} onChange={onChangeHandler}/></td>
                   </tr>
                 </tbody>
               </table>
