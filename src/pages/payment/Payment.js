@@ -69,7 +69,6 @@ function Payment () {
         const processHtmlString = (html) => {
 
           let modifiedHTML = html;
-          // modifiedHTML = modifiedHTML.replace(/<input/g, '<input readOnly');
           Object.entries(form).forEach(([key, value]) => {
             const regex = new RegExp(`{${key}}`, "g");
   
@@ -221,40 +220,6 @@ function Payment () {
                 <td colSpan='3' className={payCSS.docuMain}>
                   <div className={payCSS.docuText}>
                   <div ref={htmlRef&&htmlRef} dangerouslySetInnerHTML={{ __html: saveHtml ? saveHtml :htmlString }} />
-                    {/* <table className={payCSS.docuDiv}>
-                      <tbody className={payCSS.docuDiv}>
-                        <tr>
-                          <th colSpan='4' className={payCSS.docuTitle}>출퇴근 사유서</th>
-                        </tr>
-                        <tr>
-                          <th className={payCSS.docuLabel}>성 명</th>
-                          <td><input type='text' className={payCSS.docuInput}/></td>
-                          <th>부 서</th>
-                          <td><input type='text' className={payCSS.docuInput}/></td>
-                        </tr>
-                        <tr>
-                          <th>직 급</th>
-                          <td><input type='text' className={payCSS.docuInput}/></td>
-                          <th>처리 구분</th>
-                          <td><input type='text' className={payCSS.docuInput}/></td>
-                        </tr>
-                        <tr>
-                          <th>일시</th>
-                          <td colSpan='3'><input type='text' className={payCSS.docuInput}/></td>
-                        </tr>
-                        <tr>
-                          <th>출근 시간</th>
-                          <td><input type='text' className={payCSS.docuInput}/></td>
-                          <th>퇴근 시간</th>
-                          <td><input type='text' className={payCSS.docuInput}/></td>
-                        </tr>
-                        <tr>
-                          <th rowSpan="2">사유</th>
-                          <td rowSpan="2" colSpan="3"><input type='text' className={payCSS.docuInputText}/></td>
-                        </tr>
-                      </tbody>
-                    </table> */}
-
                   </div>
                 </td>
               </tr>
