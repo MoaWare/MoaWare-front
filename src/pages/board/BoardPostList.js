@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callBoardPostListAPI } from '../../apis/BoardPostAPICalls';
+import { callBoardpostBoardsListAPI, callBoardPostListAPI } from '../../apis/BoardPostAPICalls';
 import PagingBar from "../../components/common/PagingBar";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import CSS from "./BoardPostList.module.css";
@@ -12,18 +12,35 @@ function BoardPostList() {
     const navigate = useNavigate();
     const boardPost = useSelector(state => state.boardPostReducer);
 
-    const pageInfo = boardPost.pageInfo;
+    //    const pageInfo = boardPost.pageInfo;
 
 
     const [currentPage, setCurrentPage] = useState(1);
-    /* 게시판 코드별 요청시 사요알 값*/
-    const params = useParams();
-    const boardCode = params.boardCode;
+/* 게시판 코드별 요청시 사용할 값 */
+    const { boardCode } = useParams();
     console.log("boardCode : ", boardCode);
+
+
+
 
     useEffect(() => {
         dispatch(callBoardPostListAPI(currentPage));
     }, [currentPage]);
+
+
+    useEffect(
+        () => {
+            if (boardCode) {
+                /* 게시판 코드별 게시판에 대한 요청 */
+                dispatch(callBoardpostBoardsListAPI({ boardCode, currentPage }));
+            } else {
+                /* 모든 게시물 대한 요청 */
+                dispatch(callBoardPostListAPI({ currentPage }));
+            }
+        },
+        [currentPage, boardCode] //의존성 배열에 값도 확장됨
+    );
+
 
 
     const onClickTableTr = (postCode) => {
@@ -32,53 +49,58 @@ function BoardPostList() {
 
     };
 
-    const onClickProductInsert = () => {
-        navigate("/product-registration");
-    };
+    // const onClickProductInsert = () => {
+    //     navigate("/product-registration");
+    // };
 
     return (
         <>
+
+        
             <div className={`${Work.main} content2`}>
-                <table>
-                    <tbody>
-                        <tr>
-                            <th className="table-header"><input type="checkbox" id="checkAll" /></th>
-                            <th className="table-header">No</th>
-                            <th className="table-header">분류</th>
-                            <th className="table-header">제목</th>
-                            <th className="table-header">작성일</th>
-                            <th className="table-header">수정일</th>
-                            <th className="table-header">조회수</th>
-                            <th className="table-header">
-                                상세정보
+                <div className={CSS.content2}>
 
-                            </th>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th className="table-header"><input type="checkbox" id="checkAll" /></th>
+                                <th className="table-header">No</th>
+                                <th className="table-header">분류</th>
+                                <th className="table-header">제목</th>
+                                <th className="table-header">작성일</th>
+                                <th className="table-header">수정일</th>
+                                <th className="table-header">조회수</th>
+                                <th className="table-header">
+                                    상세정보
 
-                        </tr>
-                        {boardPost.data &&
-                            boardPost.data.map((boardPost) => (
+                                </th>
 
-                                <tr
-                                    className="table-content"
-                                    key={boardPost.postCode}
-                                    onClick={() => onClickTableTr(boardPost.postCode)}
-                                >                                <td></td>
-                                    <td>{boardPost.postCode}</td>
-                                    <td>{boardPost.postCategory}</td>
-                                    <td>{boardPost.postTitle}</td>
-                                    <td>{new Date(boardPost.writeDate).toLocaleString()}</td>
-                                    <td>{new Date().toLocaleString()}</td>
-                                    <td>{boardPost.views}</td>
-                                    <td>    <button className="view-post-button" onClick={onClickProductInsert}>
+                            </tr>
+                            {boardPost.data &&
+                                boardPost.data.map((post) => (
+
+                                    <tr
+                                        className="table-content"
+                                        key={post.postCode}
+                                        onClick={() => onClickTableTr(post.postCode)}
+                                    >   <td></td>
+                                        <td>{post.postCode}</td>
+                                        <td>{post.postCategory}</td>
+                                        <td>{post.postTitle}</td>
+                                        <td>{post.createDate}</td>
+                                        <td>{post.modifyDate}</td>
+                                        <td>{post.views}</td>
+                                        {/* <td>    <button className="view-post-button" onClick={onClickProductInsert}>
                                         게시물 조회
-                                    </button></td>
-                                </tr>
-                            ))}
-                    </tbody>
-                </table>
+                                    </button></td> */}
+                                    </tr>
+                                ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div>
-                {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
+                {/* {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />} */}
             </div>
         </>
     );

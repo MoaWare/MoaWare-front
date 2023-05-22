@@ -20,7 +20,7 @@ export const { boardPost: { getBoardposts, getBoardpost } } = createActions({
 const boardPostReducer = handleActions(
     {
         [GET_BOARDPOSTS]: (state, { payload }) => payload,
-        [GET_BOARDPOST]: (state, { payload }) => payload,
+        [GET_BOARDPOST]: (state, { payload }) => ({ detail: payload }),
         // [POST_BOARDPOST]: (state, { payload }) => ({ regist: payload }),
         // [PUT_BOARDPOST]: (state, { payload }) => ({ modify: payload }),
     }

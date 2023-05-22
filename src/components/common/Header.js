@@ -39,7 +39,7 @@ const Header = ({ empName }) => {
           <li><Link to="/">시설예약</Link></li>
 
           <li><Link to="/schedule">일정관리</Link></li>
-          <li><Link to="/board">게시판</Link></li>
+          <li><Link to="/boardPosts">게시판</Link></li>
 
           <li><Link to="/work">근태관리</Link></li>
           <li><Link to="/">메신저</Link></li>

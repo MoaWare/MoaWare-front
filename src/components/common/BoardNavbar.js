@@ -18,13 +18,12 @@ function BoardNavbar() {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/boardPosts0/boards/3 " activeclassname={NavbarCSS.active}>
+                        <NavLink to="/boardPosts/boards/3 " activeclassname={NavbarCSS.active}>
                             부서&직급 게시판
                         </NavLink>
                     </li>
 
-                    {/* asdasdaswww */}
-                    {/* qweqwe */}
+                
                 </ul>
             </div>
         </nav>
