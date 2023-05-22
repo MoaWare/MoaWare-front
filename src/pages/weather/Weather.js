@@ -8,7 +8,6 @@ const Weather = () => {
   const [temp, setTemp] = useState(0);
   const [temp_max, setTempMax] = useState(0);
   const [temp_min, setTempMin] = useState(0);
-  const [humidity, setHumidity] = useState(0);
   const [desc, setDesc] = useState('');
   const [icon, setIcon] = useState('');
   const [loading, setLoading] = useState(true);
@@ -57,7 +56,6 @@ const Weather = () => {
           setTemp(data.main.temp);
           setTempMax(data.main.temp_max);
           setTempMin(data.main.temp_min);
-          setHumidity(data.main.humidity);
           setDesc(data.weather[0].description);
           setIcon(data.weather[0].icon);
           setLoading(false);
@@ -111,19 +109,18 @@ const Weather = () => {
     return <div className={WeatherCSS.loading}>Loading . . .</div>;
   } else {
     return (
-      <>
+      <div className={WeatherCSS.wrapper}>
         <div className={WeatherCSS.today}>{getFormattedDate()}</div>
         <div className={WeatherCSS.addr}>{address}</div>
         <div className={WeatherCSS.myWeather}>
           <div className={WeatherCSS.icon}>{selectIcon()}</div>
           <div className={WeatherCSS.temperature}>
             <div className={WeatherCSS.now}>{(temp - 273.15).toFixed(0)}°</div>
-            {/* <div>▴{(temp_max - 273.15).toFixed(0)}°▾{(temp_min - 273.15).toFixed(0)}°</div> */}
+            <div className={WeatherCSS.maxmin}>▲ {(temp_max - 273.15).toFixed(0)}° ▼{(temp_min - 273.15).toFixed(0)}°</div>
           </div>
         </div>
-        {/* <div>습도 : {humidity}</div> */}
-        <div className={WeatherCSS.comment}>현재 날씨는... {desc}</div>
-      </>
+        <div className={WeatherCSS.comment}>현재 날씨는? {desc}</div>
+      </div>
     );
   }
 };

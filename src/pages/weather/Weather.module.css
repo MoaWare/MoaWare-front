@@ -1,43 +1,45 @@
-.loading {
-    margin: 1rem;
-    font-size: 14px;
-    font-weight: bold;
+.wrapper {
+    /* border: 1px solid black; */
 }
 
 .today {
-    font-weight: bold;
+    margin-bottom: 1rem;
 }
 
 .addr {
-    font-size: 14px;
-    /* font-weight: bold; */
-    /* border: 1px solid blue; */
+    /* margin-bottom: 1rem; */
 }
 
 .myWeather {
-    /* display: flex; */
+    display: flex;
+    /* justify-content: center; */
+    justify-content: space-evenly;
+    /* border: 1px solid orange; */
+}
+
+.temperature {
     /* border: 1px solid red; */
+    text-align: end;
+}
+
+.now {
+    margin: 1rem 0;
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 5px;
+}
+
+.maxmin {
+    font-size: 12px;
+    letter-spacing: 3px;
 }
 
 .icon {
-    font-size: 5rem;
+    /* border: 1px solid blue; */
     color: #50A4E4;
-    border: 1px solid blue;
 }
 
 .icon svg {
     height: 100%;
-    border: 1px solid orange;
-}
-
-.temperature {
-    letter-spacing: 3px;
-    border: 1px solid blue;
-}
-
-.now {
-    font-weight: bold;
-}
-
-.comment {
+    width: 6vw;
 }
