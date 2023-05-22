@@ -31,7 +31,10 @@ import PaymentList from "./pages/payment/PaymentList";
 import BoardLayout from "./layouts/BoardLayout";
 import BoardPostList from "./pages/board/BoardPostList";
 import BoardPostDetail from "./pages/board/BoardPostDetail";
-
+import PaymentMain from "./pages/payment/PaymentMain";
+import MemberInfoLayout from "./layouts/MemberInfoLayout";
+import MemberInfo from "./pages/member/MemberInfo";
+import MemberInfoModify from "./pages/member/MemberInfoModify";
 // import Notice from "./pages/board/Notice";
 // import Free from "./pages/board/Free";
 // import DeptRank from "./pages/board/DeptRank";
@@ -75,15 +78,17 @@ function App() {
 
           </Route>
           {/* 프로젝트 */}
-          <Route path="project" element={<ProjectLayout />}>
+          <Route path="project" element={
+            <ProtectedRoute projectCheck={true}>
+              <ProjectLayout />
+            </ProtectedRoute>}>
             <Route index element={<Project />} />
           </Route>
           {/* 전자 결재 */}
           <Route path="pay" element={<PayLayout />}>
-            <Route index element={<Payment />} />
+            <Route index element={<PaymentMain />} />
             <Route path="draft" element={<Payment />} />
             <Route path="paying" element={<PaymentList />} />
-
           </Route>
 
           {/* 일정 관리 */}
@@ -93,7 +98,11 @@ function App() {
             <Route path="draft" element={<Payment />} />
           </Route>
           {/* 관리자 */}
-          <Route path="admin" element={<AdminLayout />}>
+          <Route path="admin" element={
+            <ProtectedRoute authCheck={true}>
+              <AdminLayout />
+            </ProtectedRoute> 
+            }>
             <Route index element={<Admin />} />
           </Route>
         </Route>
@@ -114,14 +123,31 @@ function App() {
         <Route
           path="pwdfind"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute loginCheck={false}>
               <LoginPwdFind />
             </ProtectedRoute>
           } />
         {/* 프로젝트 */}
-        <Route path="proj" element={<ProjDetailLayout />}>
+        <Route 
+          path="proj" 
+          element={
+            <ProtectedRoute projectCheck={true}>
+              <ProjDetailLayout />
+            </ProtectedRoute>
+          }>
           <Route path="detail/:projCode" element={<ProjDetail />} />
         </Route>
+        {/* 회원 정보 */}
+        <Route 
+          path="member"
+          element={
+            <ProtectedRoute loginCheck={true}>
+              <MemberInfoLayout />
+            </ProtectedRoute>
+          }>
+            <Route index element={<MemberInfo />}/>
+            <Route path="modify" element={<MemberInfoModify />} />
+          </Route>
       </Routes>
     </BrowserRouter >
   );

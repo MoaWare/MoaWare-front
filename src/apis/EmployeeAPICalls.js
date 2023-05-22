@@ -1,4 +1,5 @@
-import { postFindId, postFindPwd, postLogin } from "../modules/EmployeeModule";
+import { getHeaderName, postFindId, postFindPwd, postLogin } from "../modules/EmployeeModule";
+import { postMemberInfo, getMemberInfo } from "../modules/MemberModule";
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${ process.env.REACT_APP_RESTAPI_SERVER_PORT}`
@@ -78,3 +79,24 @@ export const callFindPwdAccountAPI = (form) => {
         }
     }
 }
+
+/* 메인 헤더 이름 띄우기 */
+export const callHeaderNameAPI = () => {
+    const requestURL = `${PRE_URL}/auth/name`
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : 'GET',
+            headers : {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(res => res.json());
+
+        if(result.status === 200){
+            console.log(result);
+            dispatch(getHeaderName(result));
+        }
+    }
+}
+
