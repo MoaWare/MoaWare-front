@@ -30,6 +30,7 @@ import Admin from "./pages/admin/Admin";
 import PaymentList from "./pages/payment/PaymentList";
 import BoardLayout from "./layouts/BoardLayout";
 import BoardPostList from "./pages/board/BoardPostList";
+import PaymentMain from "./pages/payment/PaymentMain";
 // import Notice from "./pages/board/Notice";
 // import Free from "./pages/board/Free";
 // import DeptRank from "./pages/board/DeptRank";
@@ -72,7 +73,7 @@ function App() {
           </Route>
           {/* 전자 결재 */}
           <Route path="pay" element={<PayLayout />}>
-            <Route index element={<Payment />} />
+            <Route index element={<PaymentMain />} />
             <Route path="draft" element={<Payment />} />
             <Route path="paying" element={<PaymentList />} />
 

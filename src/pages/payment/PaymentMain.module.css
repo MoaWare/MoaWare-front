@@ -1,0 +1,86 @@
+.background{
+
+    padding: 1rem;
+    width: 76vw;
+    height: 82.5vh;
+    border-radius: 15px;
+    top: 5vh;
+    position: fixed;
+    top: 8vh;
+    left: 20vw;
+    right: 0;
+    overflow-y: scroll;
+    height: 87%;
+}
+
+
+.paySummary{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    color: rgba(37, 79, 112, 1);
+    font-weight: bold;
+}
+
+.paySummaryItem{
+    background-color: white;
+    border-radius: 10px;
+    width: 15vw;
+    height: 13vh;
+    margin-bottom: 2vw;
+    font-size: 1.1rem;
+
+}
+
+.itemTitle{
+    height: 4vh;
+    line-height: 4vh;
+
+}
+
+.itemText{
+    font-size: 1.5rem;
+    line-height: 8vh;
+}
+
+.itemHr{
+    margin: 0 auto;
+    width: 80%;
+    color: gray;
+}
+
+
+.payList{
+    background-color: white;
+    border-radius: 20px;
+    width: 100%;
+    height: 80%;
+ 
+}
+
+.payListTitle{
+    padding-top: 2rem;
+    padding-left: 2rem;
+    font-weight: bold;
+    color: rgba(37, 79, 112, 1);
+}
+
+.payListTable{
+    border-collapse: collapse;
+    margin: 1rem;
+    width: 96%;
+    color: rgba(37, 79, 112, 1);
+}
+.payListTable th {
+    width: 60vw;
+    padding: 2vh;
+    border-top: 1px solid rgba(182, 189, 198, 0.5);
+    border-bottom: 1px solid rgba(182, 189, 198, 0.5);
+    height: 5vh;
+    font-weight: 700;
+}
+
+.payListTable td {
+    text-align: center;
+    height: 5vh;
+}
