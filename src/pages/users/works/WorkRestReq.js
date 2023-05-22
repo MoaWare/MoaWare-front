@@ -6,8 +6,8 @@ import { useEffect } from 'react';
 
 function WorkRestReq() {
 
-    const [selectedMonth, setSelectedMonth] = useState(null)
-    const [selectedDate, setSelectedDate] = useState(null)
+    const [selectedStartDate, setSelectedStartDate] = useState(null)
+    const [selectedEndDate, setSelectedEndDate] = useState(null)
     const [selectedOption, setSelectedOption] = useState("");
     const today = new Date().toISOString().slice(0, 10);
     // 현재 시간
@@ -19,6 +19,11 @@ function WorkRestReq() {
     //     }, 1000);
     //     return () => clearInterval(interval);
     //   }, []);
+
+
+    // const handleDateChange = (date) => {
+    //     setSelectedDate(date.toISOString());
+    //   };
 
     const options = ["연차", "반차", "공무","경조사"];
     
@@ -35,16 +40,16 @@ function WorkRestReq() {
                 <span className={ WorkRestReqCSS.span1 }>연차 시작일</span>
                 <div className={ WorkRestReqCSS.date }>
                 <DatePicker className={ WorkRestReqCSS.datepicker }
-                    selected={selectedMonth}
-                    onChange={(month) => setSelectedMonth(month)}
+                    selected={selectedStartDate}
+                    onChange={(startDate) => setSelectedStartDate(startDate.toISOString())}
                     dateFormat='yyyy-MM-dd'
                 />
                 </div>
                 <span className={ WorkRestReqCSS.span1 }>연차 종료일</span>
                 <div className={ WorkRestReqCSS.date }>
                 <DatePicker className={ WorkRestReqCSS.datepicker }
-                    selected={selectedDate}
-                    onChange={(date) => setSelectedDate(date)}
+                    selected={selectedEndDate}
+                    onChange={(endDate) => setSelectedEndDate(endDate.toISOString())}
                     dateFormat='yyyy-MM-dd'
                 />
                 </div>
@@ -90,6 +95,7 @@ function WorkRestReq() {
             </div>
             <div>
                 <button className={ WorkRestReqCSS.workBtn1 }>신청하기</button>
+                <button className={ WorkRestReqCSS.workBtn2 }>신청하기</button>
             </div>
         </div>
         </>
