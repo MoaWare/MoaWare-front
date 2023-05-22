@@ -139,10 +139,6 @@
     color: #999999;
 }
 
-.bar{
-    /* display: flex; */
-}
-
 .progress{
     width: 85vw;
     height: 2.6vh;

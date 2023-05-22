@@ -46,7 +46,7 @@ const Header = () => {
           <li><Link to="/">시설예약</Link></li>
 
           <li><Link to="/schedule">일정관리</Link></li>
-          <li><Link to="/boardPosts">게시판</Link></li>
+          <li><Link to="/board">게시판</Link></li>
 
           <li><Link to="/work">근태관리</Link></li>
           <li><Link to="/">메신저</Link></li>
@@ -55,7 +55,7 @@ const Header = () => {
         </ul>
       </div>
       <div className={HeaderCSS.userInfo}>
-          { name && <span> {name} 님</span> }
+          <span>{ name && name }님</span>
         <button className={HeaderCSS.logout} onClick={onClickLogoutHandler}>로그아웃</button>
       </div>
     </div>
