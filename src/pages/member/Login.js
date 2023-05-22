@@ -14,6 +14,7 @@ function Login(){
     const { login } = useSelector(state => state.employeeReducer);
 
     useEffect(
+        
         ()=>{
             if( login?.status === 200 ){
                 navigate("/", { replace : true });
@@ -23,7 +24,7 @@ function Login(){
                 dispatch(resetEmp());   
             }
         },[login]
-    )
+    );
 
 
     return (

@@ -55,45 +55,50 @@ function LoginPwdFind(){
     }
 
     return (
-        <div className={LoginCSS.backgroundDiv}>
-            <div className={ LoginCSS.loginDiv }>
-                <img src="./icon/moawareLoginMain.png" alt='Down' name="login"/><br/>
-                <img src="./icon/Line 1.png" alt='Down' name="login" className={LoginCSS.line}/><br/>
-                <div className={LoginCSS.loginDivForm}>
-                    <h1 className={LoginCSS.titleblue}>비밀번호 찾기</h1><br/>
-                    <div className={LoginCSS.findFormInput}>
-                        <label>아이디<span className={LoginCSS.space}></span>
-                        <input 
-                            className={LoginCSS.inputbox}
-                            type="text" 
-                            name="empId"
-                            onChange={onChangeHandler}
-                            />
-                        </label>
-                        <label>사번
-                        <input 
-                            className={LoginCSS.inputbox}
-                            type="text" 
-                            name="empCode"
-                            onChange={onChangeHandler}
-                            />
-                        </label>
-                        <label>이메일
-                        <input 
-                            className={LoginCSS.inputbox}
-                            type="text" 
-                            name="email"
-                            onChange={onChangeHandler}
-                            />
-                        </label>
-                    </div>
-                    <button onClick={onClickHandler} className={LoginCSS.loginbutton}>임시 비밀번호 이메일로 전송</button><br/>
-                    <div className={ LoginCSS.loginfind }>
-                        <button onClick={onClickLoginHandler}>로그인</button><span className={LoginCSS.spaceBar}>|</span><button onClick={onClickIdFindHandler}>아이디 찾기</button>
+        <>
+            <header className={LoginCSS.header}>
+                <h3 className={LoginCSS.logo}>MOAWARE</h3>
+            </header>
+            <div className={LoginCSS.backgroundDiv}>
+                <div className={ LoginCSS.loginDiv }>
+                    <img src="./icon/moawareLoginMain.png" alt='Down' name="login"/><br/>
+                    <img src="./icon/Line 1.png" alt='Down' name="login" className={LoginCSS.line}/><br/>
+                    <div className={LoginCSS.loginDivForm}>
+                        <h1 className={LoginCSS.titleblue}>비밀번호 찾기</h1><br/>
+                        <div className={LoginCSS.findFormInput}>
+                            <label>아이디<span className={LoginCSS.space}></span>
+                            <input 
+                                className={LoginCSS.inputbox}
+                                type="text" 
+                                name="empId"
+                                onChange={onChangeHandler}
+                                />
+                            </label>
+                            <label>사번
+                            <input 
+                                className={LoginCSS.inputbox}
+                                type="text" 
+                                name="empCode"
+                                onChange={onChangeHandler}
+                                />
+                            </label>
+                            <label>이메일
+                            <input 
+                                className={LoginCSS.inputbox}
+                                type="text" 
+                                name="email"
+                                onChange={onChangeHandler}
+                                />
+                            </label>
+                        </div>
+                        <button onClick={onClickHandler} className={LoginCSS.loginbutton}>임시 비밀번호 이메일로 전송</button><br/>
+                        <div className={ LoginCSS.loginfind }>
+                            <button onClick={onClickLoginHandler}>로그인</button><span className={LoginCSS.spaceBar}>|</span><button onClick={onClickIdFindHandler}>아이디 찾기</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )   
 }
 
