@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@expo/vector-icons": "^13.0.0",
     "@fullcalendar/core": "^6.1.7",
     "@fullcalendar/daygrid": "^6.1.7",
     "@fullcalendar/google-calendar": "^6.1.7",

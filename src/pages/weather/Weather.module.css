@@ -1,0 +1,43 @@
+.loading {
+    margin: 1rem;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.today {
+    font-weight: bold;
+}
+
+.addr {
+    font-size: 14px;
+    /* font-weight: bold; */
+    /* border: 1px solid blue; */
+}
+
+.myWeather {
+    /* display: flex; */
+    /* border: 1px solid red; */
+}
+
+.icon {
+    font-size: 5rem;
+    color: #50A4E4;
+    border: 1px solid blue;
+}
+
+.icon svg {
+    height: 100%;
+    border: 1px solid orange;
+}
+
+.temperature {
+    letter-spacing: 3px;
+    border: 1px solid blue;
+}
+
+.now {
+    font-weight: bold;
+}
+
+.comment {
+}
