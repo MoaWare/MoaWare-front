@@ -78,16 +78,16 @@
     font-weight: bold; */
 }
 
-label {
+.findFormInput label {
     font-size: medium;
     padding: 4px;
 }
 
-label input{
+.findFormInput label input{
     margin-left: 28px;
 }
 
-label:not(:last-child) input {
+.findFormInput label:not(:last-child) input {
     margin-left: 44px;
 }
 

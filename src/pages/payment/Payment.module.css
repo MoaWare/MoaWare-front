@@ -156,7 +156,7 @@
     font-size: 14px;
     height: 3vh;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     line-height: 3vh;
 
 }
@@ -170,6 +170,7 @@
     height: 37vh !important ; 
 }
 .docuDiv{
+
     margin-top: 1vh;
     margin-left: 1.5vw;
     width: 67vw;
@@ -198,7 +199,7 @@
     border: none;
     font-size: 0.7rem;
     height: 4vh;
-    width: 98%;
+    width: 95%;
     color: red;
     
 }
@@ -215,6 +216,11 @@
 
 .docuInputText{
     border: none;
-    width: 98%;
+    width: 95%;
     height: 10vh;
+}
+
+.test{
+    border: 1px solid black;
+    text-align: left;
 }
