@@ -11,12 +11,20 @@ function MemberInfoModify(){
     const imageInput = useRef();
     const { info } = useSelector((state) => state.memberReducer);
     const [ image , setImage ] = useState(null);
-    const [ form , setForm ] = useState({ empPwd : "" });
+    const [ form , setForm ] = useState({ 
+        empPwd : "",
+        email : "",
+        phone : "",
+        extensionNum : ""
+     });
     const [imageUrl, setImageUrl] = useState('');
+    const [ isCheck , setIsCheck ] = useState(false);
 
 
     const onChangeHandler = (e) => {
+
         setForm({
+            ...form,
             [e.target.name] : e.target.value
         });
     };
@@ -39,6 +47,18 @@ function MemberInfoModify(){
     }, 
     [image]
     );
+
+    useEffect(()=>{
+
+        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{10,18}$/;
+
+        if(passwordRegex.test(form?.empPwd)){
+            setIsCheck(true);
+        } else {
+            setIsCheck(false);
+        }
+
+    },[form])
 
     const onChangeImageUpload = (e) => {
         const image = e.target.files[0];
@@ -83,7 +103,7 @@ function MemberInfoModify(){
                             className={ MemCSS.memberImageButton }
                             onClick={ onClickImageUpload } 
                         >
-                            이미지 업로드
+                            프로필 사진 변경
                             </button>
                     </div>
                 </div>
@@ -110,11 +130,10 @@ function MemberInfoModify(){
                             placeholder="********************************"
                             autoComplete="off"
                             onChange={ onChangeHandler }
-                            onKeyUp={ onEnterKeyHandler }
                             value={form.empPwd}
                             />
                     </label>
-                    <span className={MemCSS.pwdInfo}>영문, 숫자를 포함한 10~14자 이내로 작성해주세요.</span>
+                    { !isCheck && <span className={MemCSS.pwdInfo}>영문, 숫자를 포함한 10~14자 이내로 작성해주세요.</span> }
                     <label className={MemCSS.midForm}>
                         이메일
                         <input 
@@ -122,7 +141,6 @@ function MemberInfoModify(){
                             name="email"
                             placeholder={ info?.email }
                             onChange={ onChangeHandler }
-                            onKeyUp={ onEnterKeyHandler }
                             value={form.email}
                             />
                     </label>
@@ -133,7 +151,6 @@ function MemberInfoModify(){
                             name="phone"
                             placeholder={ info?.phone }
                             onChange={ onChangeHandler }
-                            onKeyUp={ onEnterKeyHandler }
                             value={form.phone}
                             />
                     </label>
@@ -144,7 +161,6 @@ function MemberInfoModify(){
                             name="extensionNum"
                             placeholder={ info?.extensionNum }
                             onChange={ onChangeHandler }
-                            onKeyUp={ onEnterKeyHandler }
                             value={form.extensionNum}
                             />
                     </label>

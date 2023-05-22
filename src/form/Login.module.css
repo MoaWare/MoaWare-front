@@ -22,11 +22,12 @@ button.loginbutton {
     border-radius: 5px;
     background-color: #254F70;
     color: white;
-    font-weight: bolder;
+    font-weight: 2px;
 }
 
 .titleblue{
     color: #254F70;
+    font-weight: 900;
 }
 
 .loginfind button{
@@ -38,7 +39,7 @@ button.loginbutton {
 .subtitleTiny{
     font-size: small;
     color: #254F70;
-    font-weight: bold;
+    font-weight: 900;
 }
 
 .loginDivForm {

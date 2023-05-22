@@ -90,7 +90,7 @@ function Main() {
                 </div>
                 <div className={MainCSS.icon}>
                     <div>
-                        <NavLink to="/">
+                        <NavLink to="/member">
                             <img src='/icon/icon1.png' alt='회원정보' />
                             <span>회원정보</span>
                         </NavLink>
