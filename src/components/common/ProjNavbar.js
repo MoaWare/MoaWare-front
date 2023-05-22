@@ -13,12 +13,12 @@ function ProjNavbar() {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/" activeclassname={NavbarCSS.active} exact="ture">
+            <NavLink to="/project" activeclassname={NavbarCSS.active} exact="ture">
               진행 중 프로젝트 {}
             </NavLink>
           </li>
           <li>
-            <NavLink to="/" activeclassname={NavbarCSS.active}>
+            <NavLink to="/project/done" activeclassname={NavbarCSS.active}>
               완료한 프로젝트 {}
             </NavLink>
           </li>

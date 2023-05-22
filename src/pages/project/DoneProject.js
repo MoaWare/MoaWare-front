@@ -2,25 +2,24 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProjectCSS from './ProjectList.module.css';
 import PagingBar from "../../components/common/PagingBar";
-import { callProjectProgressListAPI } from '../../apis/ProjectAPICalls';
+import { callProjectDoneListAPI } from '../../apis/ProjectAPICalls';
 import ProjectList from "./ProjectList";
 
-function Project() {
+function DoneProject() {
     
     const [currentPage, setCurrentPage] = useState(1);
     // const [year2, setYear2] = useState(new Date().getFullYear());
     // const [month2, setMonth2 ] = useState(new Date().getMonth() + 1);
-    const { progress } = useSelector(state => state.projectReducer);
+    const { done } = useSelector(state => state.projectReducer);
     const dispatch = useDispatch();
-    const pageInfo = progress && progress ? progress.data.pageInfo : null;
+    const pageInfo = done && done ? done.data.pageInfo : null;
     
-    console.log('progress', progress);
-    console.log('pageInfo', pageInfo);
-    const projectList = progress && progress.data ? progress.data.data : '';
+    console.log('progress', done);
+    const projectList = done && done.data ? done.data.data : '';
     // console.log('projectList', projectList);
     useEffect(
         ()=>{
-                dispatch(callProjectProgressListAPI({ currentPage }))
+                 dispatch(callProjectDoneListAPI({ currentPage }))
         },[currentPage, dispatch]
     );
 
@@ -29,7 +28,7 @@ function Project() {
     return (
         <>
             <div className={ProjectCSS.main}>
-                <p className={ProjectCSS.p}>진행중인 프로젝트</p>
+                <p className={ProjectCSS.p}>완료 프로젝트</p>
                 <div className={ProjectCSS.btnContainer}>
                 </div>
                 <hr className={ProjectCSS.hr}></hr>
@@ -72,5 +71,5 @@ function Project() {
             )
 }
 
-export default Project;
+export default DoneProject;
 

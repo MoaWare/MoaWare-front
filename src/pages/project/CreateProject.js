@@ -10,6 +10,8 @@ function CreateProject() {
     const [selectedOption, setSelectedOption] = useState("");
     const today = new Date().toISOString().slice(0, 10);
 
+    
+
     return (
         <>
             <div className={CreteProjCSS.main}>
@@ -18,9 +20,13 @@ function CreateProject() {
                 <div className={CreteProjCSS.center}>
                     <div className={CreteProjCSS.container}>
                         <span className={CreteProjCSS.span1}>프로젝트 이름</span>
-                        <div className={CreteProjCSS.span2}>
-                            아
-                        </div>
+                        <input className={CreteProjCSS.span2}
+                            type="text"
+                            name="projTitle"
+                            placeholder="프로젝트 이름"
+                            autoComplete='off'
+                        >
+                        </input>
                     </div>
                     <div className={CreteProjCSS.container}>
                         <span className={CreteProjCSS.span1}>프로젝트 팀장</span>
@@ -58,7 +64,7 @@ function CreateProject() {
                         </input>
                     </div>
                     <div>
-                        <button className={CreteProjCSS.workBtn1}>신청하기</button>
+                        <button className={CreteProjCSS.workBtn1}>생성하기</button>
                         <button className={CreteProjCSS.workBtn2}>취소하기</button>
                     </div>
                 </div>

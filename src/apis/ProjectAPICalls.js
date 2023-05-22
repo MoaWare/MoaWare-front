@@ -98,14 +98,14 @@ export const callProjectAPI = ({projCode}) => {
 
 
 export const callProjectProgressListAPI = ({ currentPage = 1 }) => {
-    const requestURL = `${PRE_URL}/progress?page=${currentPage}`;
+    const requestURL = `${PRE_URL}/progressProj?page=${currentPage}`;
   
     return async (dispatch, getState) => {
       const result = await fetch(requestURL, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
+          "Authorization": "Bearer " + window.localStorage.getItem("accessToken"),
         },
       }).then((response) => response.json());
   
@@ -127,7 +127,7 @@ export const callProjectProgressListAPI = ({ currentPage = 1 }) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
+          "Authorization": "Bearer " + window.localStorage.getItem("accessToken"),
         },
       }).then((response) => response.json());
   

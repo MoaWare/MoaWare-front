@@ -33,6 +33,8 @@ import BoardPostList from "./pages/board/BoardPostList";
 // import Notice from "./pages/board/Notice";
 // import Free from "./pages/board/Free";
 // import DeptRank from "./pages/board/DeptRank";
+import CreateProject from "./pages/project/CreateProject";
+import DoneProject from "./pages/project/DoneProject";
 
 
 
@@ -69,6 +71,11 @@ function App() {
           {/* 프로젝트 */}
           <Route path="project" element={<ProjectLayout />}>
             <Route index element={<Project />} />
+            <Route path="createProject" element={<CreateProject />} />
+            <Route path="done" element={<DoneProject />} />
+            {/* <Route path="proj" element={<ProjDetailLayout />}>
+              <Route path="detail/:projCode" element={<ProjDetail />} />
+              </Route> */}
           </Route>
           {/* 전자 결재 */}
           <Route path="pay" element={<PayLayout />}>
@@ -111,7 +118,7 @@ function App() {
             </ProtectedRoute>
           } />
         {/* 프로젝트 */}
-        <Route path="proj" element={<ProjDetailLayout />}>
+        <Route path="project/proj" element={<ProjDetailLayout />}>
           <Route path="detail/:projCode" element={<ProjDetail />} />
         </Route>
       </Routes>
