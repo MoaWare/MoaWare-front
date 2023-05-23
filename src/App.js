@@ -80,16 +80,13 @@ function App() {
 
           </Route>
           {/* 프로젝트 */}
-          <Route path="project" element={
-            <ProtectedRoute projectCheck={true}>
-              <ProjectLayout />
-            </ProtectedRoute>}>
-            <Route index element={<Project />} />
+          <Route path="project" element={<ProjectLayout />}>
+            <Route index element={<ProtectedRoute projectCheck={true}><Project /></ProtectedRoute>} />
             <Route path="createProject" element={<CreateProject />} />
             <Route path="done" element={<DoneProject />} />
             {/* <Route path="proj" element={<ProjDetailLayout />}>
               <Route path="detail/:projCode" element={<ProjDetail />} />
-              </Route> */}
+            </Route> */}
           </Route>
           {/* 전자 결재 */}
           <Route path="pay" element={<PayLayout />}>
@@ -135,7 +132,7 @@ function App() {
             </ProtectedRoute>
           } />
         {/* 프로젝트 */}
-        <Route path="project/proj" element={<ProjDetailLayout />}>
+        {/* <Route path="project/proj" element={<ProjDetailLayout />}>
         <Route 
           path="proj" 
           element={
@@ -143,8 +140,9 @@ function App() {
               <ProjDetailLayout />
             </ProtectedRoute>
           }>
-          <Route path="detail/:projCode" element={<ProjDetail />} />
+            <Route path="detail/:projCode" element={<ProjDetail />} />
         </Route>
+        </Route> */}
         {/* 회원 정보 */}
         <Route 
           path="member"
