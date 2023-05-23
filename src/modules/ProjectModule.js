@@ -14,7 +14,6 @@ const GET_TASK_DONE = 'project/GET_TASK_DONE';
 const GET_PROGRESS = 'project/GET_PROGRESS';
 const GET_DONE = 'project/GET_DONE';
 
-
 export const { project : { getProject, getTasks, getTaskDone, getTaskIng, getTaskTodo , getProgress ,getDone }} = createActions({
     [GET_PROJECT] : res => res.data,
     [GET_TASKS] : res => res.data,
