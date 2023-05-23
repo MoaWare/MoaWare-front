@@ -4,7 +4,7 @@ import OrgList from "./OrgListModal";
 import { CallOrganizationListAPI } from "../../../apis/OrganizationAPICalls";
 
 
-function OrgMainModal({setFocusEmp}) {
+function OrgMainModal() {
 
     const { org } = useSelector( (state) => state.organizationReducer);
     const dispatch = useDispatch();
@@ -21,7 +21,7 @@ function OrgMainModal({setFocusEmp}) {
 
     return (
         <div >
-            <OrgList org={org} setFocusEmp={setFocusEmp}/>
+            <OrgList org={org} />
         </div>
     )
 }

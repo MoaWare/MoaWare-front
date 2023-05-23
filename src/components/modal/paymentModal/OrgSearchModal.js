@@ -4,7 +4,7 @@ import { CallOrganizationSearchAPI } from '../../../apis/OrganizationAPICalls';
 import OrgListModal from './OrgListModal';
 import { orgContext } from './PaymentModal';
 
-function OrgSearchModal ({setFocusEmp}){
+function OrgSearchModal (){
 
     const{searchForm, setSearchForm} = useContext(orgContext);
 
@@ -23,7 +23,7 @@ function OrgSearchModal ({setFocusEmp}){
 
     return(
         <div>
-            {searchOrg&&<OrgListModal org={searchOrg} setFocusEmp={setFocusEmp}/>}
+            {searchOrg&&<OrgListModal org={searchOrg} />}
         </div>
     )
 }
