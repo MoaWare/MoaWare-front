@@ -85,10 +85,18 @@
     margin-left: 3vw;
 }
 
-.titleLow span{
+.titleLowLeft span{
     color: #4B5766;
     font-size: 1.9vh;
     margin-bottom: 1vh;
+}
+
+.titLowRight span{
+    color: #1066a8;
+    font-size: 2.9vh;
+    margin-bottom: 1vh;
+    margin-right: 2vw;
+    font-weight: bold;
 }
 
 .low{

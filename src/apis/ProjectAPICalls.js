@@ -139,6 +139,7 @@ export const callProjectProgressListAPI = ({ currentPage = 1 }) => {
       }
     };
   };
+  
 /* 프로젝트 업무 리스트 조회 */
 export const callTaskListAPI = ({ projCode }) => {
     const requestURL = `${PRE_URL}/tasks/${projCode}`;

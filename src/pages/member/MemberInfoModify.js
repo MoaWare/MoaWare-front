@@ -92,7 +92,7 @@ function MemberInfoModify(){
                     <div className={ MemCSS.memberImageDiv }>
                     <img src={ !imageUrl ? info.fileCategory.file.filePath : imageUrl} className={ MemCSS.memberImage } alt="preview"/>
                         <input                
-                            style={ { display: 'none' }}
+                            style={{ display: 'none' }}
                             type="file"
                             name='productImage' 
                             accept='image/jpg,image/png,image/jpeg,image/gif'
