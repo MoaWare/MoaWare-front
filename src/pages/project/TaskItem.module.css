@@ -1,10 +1,10 @@
 
 
 /* background-color: 
-       #d7c9fe9e; 기획
-       #fdd0d09d; 설계
-       #fce9a3b3; 테스트
-       #d9f58d89; 개발
+       #d7c9fe3c; 기획
+       #fdd0d06e; 설계
+       #fce9a34c; 테스트
+       #d9f58d2d; 개발
        #cdeef99d; 시연
 */
 
@@ -15,14 +15,17 @@
     margin: 1.4vh 1.2vw;
     border-radius: 5px;
     display: flex;
+    color: #505050;
     flex-direction: column;
+    font-weight: bold;
+    font-size: 1.83vh;
 }
 
 .divTop{
     display: flex;
     justify-content: space-between;
     margin: 0vh 1vw;
-    margin-top: 1.2vh;
+    margin-top: 1.38vh;
 }
 
 .divRight button{
@@ -40,7 +43,6 @@
 
 
 .lowMiddle{
-    margin-right: 12vw;
-
+    margin-right: 11vw;
 }
 

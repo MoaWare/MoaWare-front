@@ -27,6 +27,8 @@ export const callMemberInfoLoginAPI = (form) => {
 
         if(result.status === 200) {
             dispatch(postMemberInfo(result));
+        } else {
+            alert(result?.message);
         }
     }
 }
