@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import orgCSS from './OrganizationList.module.css';
-import { useNavigate } from 'react-router-dom';
+import {orgContext} from './PaymentModal';
+import { useDrag, useDrop } from 'react-dnd';
 
 
-function OrganizationList({org, isSearch}) {
+
+function OrgListModal({org, setFocusEmp}) {
+
+    const{searchForm, setSearchForm} = useContext(orgContext);
 
     console.log("org : ", org);
     const [ isOpen, setIsOpen ] = useState({});
-    const [ search, setSearch ] = useState('');
-    const navigate = useNavigate();
-
     
 
     const MouseDownHandler= (e) => {
@@ -41,54 +42,72 @@ function OrganizationList({org, isSearch}) {
     }
 
     const searchClickHandler = () => {
-        if(search){
-            navigate(`/org/search?search=${search}`);
+        if(searchForm.search){
+            setSearchForm({
+                ...searchForm,
+                'isSearch' : true
+            });
             setIsOpen({});
         } else {
-            navigate(`/org`);
             setIsOpen({});
-            setSearch('');
+            setSearchForm({
+                ...searchForm,
+                'search' : ''
+            });
         } 
     }
 
     const homeClickHandler = () => {
-        navigate(`/org`);
         setIsOpen({});
-        setSearch('');
-    }
-
-    const detailClickHandler = (empCode) => {
-        
-        navigate(`/org/detail/${empCode}`);
+        setSearchForm({
+            'isSearch' : false,
+            'search' : ''
+        })
     }
 
     const searchChangeHandler =(e)=>{
-        setSearch(
-           e.target.value
-        )
+        setSearchForm({
+            ...searchForm,
+            [e.target.name] : e.target.value
+        })
 
     }
 
     const onEnterKeyHandler = (e) =>{
         
         if(e.key === 'Enter'){
-            if(search){
-                navigate(`/org/search?search=${search}`);
+            if(searchForm.search){
                 setIsOpen({});
+                setSearchForm({
+                    ...searchForm,
+                    'isSearch' : true
+                });
             } else {
-                navigate(`/org`);
                 setIsOpen({});
-                setSearch('');
+                setSearchForm({
+                    'isSearch' : false,
+                    'search' : ''
+                })
+
             } 
         } 
     }
 
-    console.log("search :" ,search);
-  
+    const onClickEmp = (e, emp) => {
+        console.log("클릭 emp " , emp)
+        console.log("클릭 e: " , e)
+        // setFocusEmp({
+        //     [emp] : emp
+        // }
+        // )
+    }
+
+    console.log("searchForm :" ,searchForm);
        
     return (
         <div className={ orgCSS.background}>
             <div className={ orgCSS.div}>
+                <div className={orgCSS.orgTitleName}>조직도</div>
                 <input type="text" className={ orgCSS.inputBox} 
                 placeholder='이름 / 팀 / 직급' onChange={searchChangeHandler} name="search"
                 onKeyUp={ onEnterKeyHandler }
@@ -100,7 +119,7 @@ function OrganizationList({org, isSearch}) {
                 >
                     검색</button>
             </div>
-            <hr className={ orgCSS.hr} />
+            {/* <hr className={ orgCSS.hr} /> */}
             <div className={ orgCSS.org}>
                 <div className={ orgCSS.orgDeptBox} onClick={ homeClickHandler }>
                     <div className={ orgCSS.orgTitle} > Moa 그룹</div>
@@ -121,10 +140,10 @@ function OrganizationList({org, isSearch}) {
                                 <div className={ orgCSS.orgText} name={org.deptCode}> {org.deptName} </div>
                             </div>
                           
-                            {isSearch? 
+                            {searchForm.isSearch? 
                             isOpen[org.deptCode]  && isOpen[org.deptCode] ? 
                             (org.orgEmp.map(emp => 
-                                <div className={ orgCSS.orgRefDeptBox} key={emp.empCode} onClick={()=> detailClickHandler(emp.empCode)}> 
+                                <div className={ orgCSS.searchOrgRefDeptBox} key={emp.empCode} > 
                                     <div className={ orgCSS.orgEmpText} > {emp.empName} {emp.job.jobName}</div>
                                 </div>)
                             )  : '' 
@@ -145,8 +164,8 @@ function OrganizationList({org, isSearch}) {
                                     </div> 
                                     {isOpen[sub.deptCode]  && isOpen[sub.deptCode] ? 
                                         (sub.orgEmp.map(emp => 
-                                            <div className={ orgCSS.orgEmpBox} key={emp.empCode} onClick={()=> detailClickHandler(emp.empCode)} > 
-                                                <div className={ orgCSS.orgEmpText} > {emp.empName} {emp.job.jobName}</div>
+                                            <div className={ orgCSS.orgEmpBox} key={emp.empCode} > 
+                                                <div className={ orgCSS.orgEmpText} onMouseDown={ onClickEmp(emp) }> {emp.empName} {emp.job.jobName}</div>
                                             </div>)
                                     )  : '' }   
                                 </div>
@@ -169,4 +188,4 @@ function OrganizationList({org, isSearch}) {
     );
 }
   
-export default OrganizationList;
+export default OrgListModal;
