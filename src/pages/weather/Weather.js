@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { TiWeatherSunny, TiWeatherStormy, TiWeatherShower, TiWeatherDownpour, TiWeatherSnow, TiWeatherCloudy } from 'react-icons/ti';
-import { BsCloudFog } from 'react-icons/bs';
+import { WiDaySunny, WiThunderstorm, WiRainMix, WiRain, WiSnowWind, WiFog, WiCloudy } from 'react-icons/wi';
 import WeatherCSS from './Weather.module.css';
 
 const Weather = () => {
@@ -83,23 +82,23 @@ const Weather = () => {
   }, [location]);
 
   const selectIcon = () => {
-    let iconId = parseInt(icon);
+    let iconId = setIcon === 800 ? 0 : (parseInt(icon) / 100).toFixed(0);
 
     switch (iconId) {
-      case 800:
-        return <TiWeatherSunny />;
-      case 2:
-        return <TiWeatherStormy />;
-      case 3:
-        return <TiWeatherShower />;
-      case 5:
-        return <TiWeatherDownpour />;
-      case 6:
-        return <TiWeatherSnow />;
-      case 7:
-        return <BsCloudFog />;
-      default:
-        return <TiWeatherCloudy />;
+      case "0":
+        return <WiDaySunny />;
+      case "2":
+        return <WiThunderstorm />;
+      case "3":
+        return <WiRainMix />;
+      case "5":
+        return <WiRain />;
+      case "6":
+        return <WiSnowWind />;
+      case "7":
+        return <WiFog />;
+      case "8":
+        return <WiCloudy />;
     }
   };
 
@@ -119,7 +118,7 @@ const Weather = () => {
             <div className={WeatherCSS.maxmin}>▲ {(temp_max - 273.15).toFixed(0)}° ▼{(temp_min - 273.15).toFixed(0)}°</div>
           </div>
         </div>
-        <div className={WeatherCSS.comment}>현재 날씨는? {desc}</div>
+        <div className={WeatherCSS.comment}>현재의 날씨는 {desc}입니다☺</div>
       </div>
     );
   }

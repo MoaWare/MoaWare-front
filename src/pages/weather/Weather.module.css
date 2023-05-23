@@ -12,14 +12,14 @@
 
 .myWeather {
     display: flex;
-    /* justify-content: center; */
-    justify-content: space-evenly;
+    justify-content: center;
+    /* justify-content: space-evenly; */
     /* border: 1px solid orange; */
 }
 
 .temperature {
     /* border: 1px solid red; */
-    text-align: end;
+    text-align: center;
 }
 
 .now {
@@ -37,6 +37,7 @@
 .icon {
     /* border: 1px solid blue; */
     color: #50A4E4;
+    margin-right: 0.5rem;
 }
 
 .icon svg {
