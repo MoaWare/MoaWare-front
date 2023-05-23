@@ -96,7 +96,7 @@ function Main() {
                         </NavLink>
                     </div>
                     <div>
-                        <NavLink to="/">
+                        <NavLink to="/boardPosts/boards/2">
                             <img src='/icon/icon2.png' alt='자유 게시판' />
                             <span>자유 게시판</span>
                         </NavLink>

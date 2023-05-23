@@ -35,9 +35,6 @@ import PaymentMain from "./pages/payment/PaymentMain";
 import MemberInfoLayout from "./layouts/MemberInfoLayout";
 import MemberInfo from "./pages/member/MemberInfo";
 import MemberInfoModify from "./pages/member/MemberInfoModify";
-// import Notice from "./pages/board/Notice";
-// import Free from "./pages/board/Free";
-// import DeptRank from "./pages/board/DeptRank";
 import CreateProject from "./pages/project/CreateProject";
 import DoneProject from "./pages/project/DoneProject";
 
