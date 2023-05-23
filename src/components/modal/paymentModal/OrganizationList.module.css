@@ -1,0 +1,159 @@
+.div{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.background{
+    background-color:  rgba(224, 233, 244, 0.5);
+    width: 25vw;
+    height: 80vh;
+    border-radius: 20px;
+    overflow-y: scroll;
+}
+.orgTitleName {
+    color: rgba(37, 79, 112, 1);
+    font-weight: bold;
+    text-align: left;
+    font-size: 1.4rem;
+    padding-left: 6%;
+    margin-bottom: 3%;
+}
+
+.div .inputBox{
+    margin-right: 20px;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 15px;
+    border : 0px solid gray;
+    width: 15vw;  
+    height: 40px;     
+}
+
+.div .button {
+    margin: 1;
+    background-color: #34709F ;
+    text-align: center;
+    font-size: 20px;
+    color: white;
+    border-radius: 15px;
+    border : 0.5px solid gray;
+    width: 100px;
+    height: 41px; 
+}
+
+.div .buttonDown {
+    margin: 1;
+    background-color: #254F70;
+    text-align: center;
+    font-size: 20px;
+    color: white;
+    border-radius: 15px;
+    border : 0.5px solid gray;
+    width: 100px;
+    height: 41px; 
+}
+
+.org{
+    
+    display: flex;
+    flex-direction: column;
+    padding-right: 8%;
+    padding-left: 8%;
+}
+
+.orgDeptBox{
+    margin-top: 2%;
+    display: flex;
+    border-radius: 15px;
+    height: 40px; 
+    background-color: white;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.orgRefDeptBox {
+    margin-top: 2%;
+    display: flex;
+    border-radius: 15px;
+    height: 40px;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.searchOrgRefDeptBox {
+    margin-top: 2%;
+    display: flex;
+    border-radius: 15px;
+    height: 40px;
+    background-color: white;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: right;
+    
+}
+
+.orgEmpBox {
+    margin-top: 2%;
+    display: flex;
+    border-radius: 15px;
+    height: 40px;  
+    background-color: white;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.orgEmpBoxFocus {
+    margin-top: 2%;
+    display: flex;
+    border-radius: 15px;
+    height: 40px;  
+    background-color: white;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.orgTitle{
+    padding-left: 10%;
+    border-radius: 15px;
+    color : #254F70;
+    font-weight: bold;
+}
+
+.orgText{
+    width: 10vw;
+    padding-left: 3%;
+    border-radius: 15px;
+    color : #254F70;
+    font-weight: bold;
+}
+
+.orgEmpText{
+    width: 10vw;
+    padding-right: 10%;
+    border-radius: 15px;
+    color : #254F70;
+    font-weight: bold;
+}
+
+.directionImg{
+    padding-left: 10%;
+    width: 24px;
+}
+
+.folderImg {
+    padding-left: 1%;
+    width: 24px;
+}
+
+.hr {
+    margin-top: 1%;
+    margin-left: 1%;
+    margin-right: auto;
+    background-color: #254F70;
+    
+}

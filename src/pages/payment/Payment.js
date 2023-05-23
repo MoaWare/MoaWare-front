@@ -3,6 +3,7 @@ import payCSS from './Payment.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { CallPaymentFormAPI, CallPaymentRegistAPI } from '../../apis/PaymentAPICalls';
 import { useNavigate } from 'react-router-dom';
+import PaymentModal from '../../components/modal/paymentModal/PaymentModal';
 
 
 
@@ -23,6 +24,7 @@ function Payment () {
   const [ conutInput, setCountInput ] = useState();
   const fileInput = useRef();
   const navigator = useNavigate();
+  const [ paymentModal, setPaymentModal ] = useState(false);
 
   console.log("payEmp : ", payEmp);
   console.log("payForm : ", payForm);
@@ -57,7 +59,7 @@ function Payment () {
     const onButtonHandler= () => {
       console.log("버튼 클릭", Object.keys(form).length, conutInput);
       
-      // if(Object.keys(form).length == conutInput){
+      // if(Object.keys(form).length === conutInput){
       // if(isButton){
       //   setIsButton(false);
       // } else {
@@ -72,6 +74,27 @@ function Payment () {
       } else {
         setIsButton(true)
       }
+
+      const formData = new FormData();
+      formData.append("draftDate", today());
+      formData.append("empCode", payEmp.empCode);
+      formData.append("draftTitle", form.draftTitle);
+      formData.append("draftContent",htmlString);
+      formData.append("form.formCode", select);
+      formData.append("payStatus", "임시")
+      formData.append("payFileCategory.fCategoryName", form.draftTitle)
+      formData.append("payFileCategory.fCategoryType", "payment")
+      if(file){
+        formData.append("payFileCategory.file.originalFileName", file.name)
+        formData.append("payFileCategory.file.fileInfo", file)
+      }
+
+      console.log("저장한다 : ", [...formData.entries()]);
+
+      dispatch(CallPaymentRegistAPI(formData));
+
+      alert("저장 되었습니다.");
+      // navigator("/pay");
       
     }
 
@@ -121,7 +144,7 @@ function Payment () {
         const htmlFromDB = payPath;
         if (payPath) {
         const filteredHTML = processHtmlString(htmlFromDB);
-        console.log( "filteredHTML : ", filteredHTML);
+        // console.log( "filteredHTML : ", filteredHTML);
         setHtmlString(filteredHTML);
         if(!form.total){setForm({})};
         }
@@ -162,7 +185,7 @@ function Payment () {
         const htmlFromDB = payPath;
         if (payPath) {
         const filteredHTML = processHtmlString(htmlFromDB);
-        console.log( "filteredHTML : ", filteredHTML);
+        // console.log( "filteredHTML : ", filteredHTML);
         setSaveHtml(filteredHTML);
         setForm({});
 
@@ -192,8 +215,8 @@ function Payment () {
       setCountInput(targetElement.length);
       console.log("htmlRef : ", htmlRef.current.getElementsByTagName('input'));
     }, [htmlString]);
-    console.log( "htmlString : ", htmlString);
-    console.log( "saved : ", saveHtml);
+    // console.log( "htmlString : ", htmlString);
+    // console.log( "saved : ", saveHtml);
 
 
     const onSavePayment = () => {
@@ -205,30 +228,42 @@ function Payment () {
       }
 
       const formData = new FormData();
-      formData.append("draftDate", today());
-      formData.append("empCode", payEmp.empCode);
-      formData.append("draftTitle", form.draftTitle);
-      formData.append("draftContent",htmlString);
-      formData.append("form.formCode", select);
-      formData.append("payStatus", "임시")
+
+      if(file){
+        formData.append("originalFileName", file.name)
+        formData.append("fileInfo", file)
+      }
       formData.append("payFileCategory.fCategoryName", form.draftTitle)
       formData.append("payFileCategory.fCategoryType", "payment")
-      if(file){
-        formData.append("payFileCategory.file.originalFileName", file.name)
-        formData.append("payFileCategory.file.fileInfo", file)
-      }
+      formData.append("payFileCategory.pay.draftDate", today());
+      formData.append("payFileCategory.pay.empCode", payEmp.empCode);
+      formData.append("payFileCategory.pay.draftTitle", form.draftTitle);
+      formData.append("payFileCategory.pay.draftContent",htmlString);
+      formData.append("payFileCategory.pay.form.formCode", select);
+      formData.append("payFileCategory.pay.payStatus", "임시")
+      
+     
 
-      console.log("저장한다 : ", [...formData.entries()]);
+      console.log("임시저장한다 : ", [...formData.entries()]);
 
       dispatch(CallPaymentRegistAPI(formData));
+
+      alert("임시 저장 되었습니다.");
+      // navigator("/pay");
+
+    }
+
+    const onOrgModalHandler = () => {
+       setPaymentModal(true);
     }
 
 
     return (
       <div className={payCSS.background}>
+        { paymentModal ? (<PaymentModal setPaymentModal={setPaymentModal} payEmp={payEmp}/>) : null }
         <div className={payCSS.titleDiv}>
           <div className={payCSS.title}>기안문 작성</div>
-          <button className={payCSS.button}>결재선</button>
+          <button className={payCSS.button} onClick={onOrgModalHandler}>결재선</button>
           <button className={payCSS.button} onClick={onButtonHandler}>결재요청</button>
           <button className={payCSS.button} onClick={onSavePayment}>임시저장</button>
           <button className={payCSS.buttonCancel}>취소</button>
