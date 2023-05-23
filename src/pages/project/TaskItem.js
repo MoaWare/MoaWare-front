@@ -1,19 +1,65 @@
+import { useEffect, useState } from "react";
 import taskCSS from "./TaskItem.module.css";
 
 
 function TaskItem({ task }) {
+
+    const taskType = task?.type;
+    const [ type , setType ] = useState('');
+    const [ color , setColor ] = useState('');
+    const [ time, setTime ] = useState('');
+
+    console.log("TaskItem task : ", task );
+
+    useEffect(() => {
+      if(task){
+        switch (taskType) {
+          case 'plan':
+            setType('기획');
+            setColor('#d7c9fe3c');
+            console.log("여기는 테스크의 콘솔이다 오바");
+            break;
+          case 'design':
+            setType('설계');
+            setColor('#fdd0d06e');
+            break;
+          case 'test':
+            setType('테스트');
+            setColor('#fce9a34c');
+            break;
+          case 'dev':
+            setType('개발');
+            setColor('#d9f58d2d');
+            break;
+          case 'pre':
+            setType('시연');
+            setColor('#cdeef99d');
+            break;
+          default:
+            setType('상태');
+            break;
+        }}
+    },[taskType]);
+
+
+    useEffect(()=>{
+        if(task){
+            setTime(task.startDate.substring(10,0));
+        }
+    },[taskType]);
+
 
     const onClickHandler = () => {
 
     }
 
 
-    return (
+    return task && (
         <div >
-            <div style={ { "backgroundColor" : "#cdeef99d" } } className={taskCSS.taskDiv}>
+            <div style={{ backgroundColor : color }} className={taskCSS.taskDiv}>
                 <div className={taskCSS.divTop}>
                     <div className={taskCSS.divLeft}>
-                        <span>피그마 완성</span>
+                        <span>{ task?.taskName }</span>
                     </div>
                     <div className={taskCSS.divRight}>
                         <button>···</button>
@@ -21,13 +67,13 @@ function TaskItem({ task }) {
                 </div>
                 <div className={taskCSS.divLow}>
                     <div className={taskCSS.lowLeft}>
-                        <span>2023.05.23</span>
+                        <span>{ time }</span>
                     </div>
                     <div className={taskCSS.lowMiddle}>
-                        <span>권댕</span>
+                        <span>{ task?.author?.empName }</span>
                     </div>
                     <div className={taskCSS.lowRight}>
-                        <span>기획</span>
+                        <span>{type}</span>
                     </div>
                 </div>
             </div>

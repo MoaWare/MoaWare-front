@@ -59,9 +59,9 @@ function ProjDetail() {
         <div className={ProjCSS.wrapper}>
             {tasks && <ProjDetailTitle project={project} progress={progress}/> }
             <div className={ProjCSS.lowDiv}>
-                <TaskList key="todo" task={tasks}/>
-                <TaskList key="ing" task={tasks}/>
-                <TaskList key="done" task={tasks}/> 
+                <TaskList task={tasksByStage.todo}/>
+                <TaskList task={tasksByStage.ing}/>
+                <TaskList task={tasksByStage.done}/> 
             </div>
         </div>
     ) 
