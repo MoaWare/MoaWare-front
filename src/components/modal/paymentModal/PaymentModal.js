@@ -22,7 +22,8 @@ function PaymentModal( {setPaymentModal, payEmp }) {
         isSearch : false
     });
 
-    const [ focusEmp, setFocusEmp ] = useState({});
+    const [ focusEmp, setFocusEmp ] = useState([]);
+    const [ isFocus, setIsFocus ] = useState([]);
     
     console.log("searchForm search 는 : ", searchForm.search);
     console.log("searchForm isSearch 는 : ", searchForm.isSearch);
@@ -35,7 +36,18 @@ function PaymentModal( {setPaymentModal, payEmp }) {
 
     console.log("모달 : " , focusEmp);
 
-    const {emp} = focusEmp;
+    const removePayment = (focus,index) => {
+
+      const updateFocusEmp = focusEmp.filter((_, i) => i !== index);
+      setFocusEmp(updateFocusEmp);
+
+      if(isFocus.includes(focus.emp.empCode)){
+        setIsFocus( isFocus.filter( empCode => empCode !== focus.emp.empCode));
+      }
+      console.log("변해라아아 : ", focus.emp.empCode);
+    };  
+
+    
 
     return(
 
@@ -44,7 +56,7 @@ function PaymentModal( {setPaymentModal, payEmp }) {
         <div className={PaymentModalCSS.modalContainer}>
           <DndProvider backend={HTML5Backend}>
           <div className={PaymentModalCSS.paymentOrgDiv} ref={modalContainerRef}>
-          <orgContext.Provider value={{searchForm, setSearchForm, setFocusEmp}}>
+          <orgContext.Provider value={{searchForm, setSearchForm, setFocusEmp, focusEmp, isFocus, setIsFocus}}>
           {searchForm.isSearch? <OrgSearchModal/> 
             : <OrgMainModal />}
           </orgContext.Provider>
@@ -70,14 +82,18 @@ function PaymentModal( {setPaymentModal, payEmp }) {
                 <div className={PaymentModalCSS.paymentPayItem}>
                   <div  className={PaymentModalCSS.paymentPayItemTitle}>기안</div>
                 {payEmp && payEmp.empName} {payEmp && payEmp.job.jobName} {payEmp && payEmp.dept.deptName} </div>
+                
+                { focusEmp.map( (focus, index) => (
+                  <div className={PaymentModalCSS.paymentPayItem} onClick={()=> removePayment(focus, index) }>
+                    <div  className={PaymentModalCSS.paymentPayItemTitle}>
+                      {index === focusEmp.length - 1 ? '최종 결재자' : '결재자'}</div>
+                    {focus.emp.empName} {focus.emp.job.jobName} {focus.sub.deptName}
+                  </div>
+                ))}
+                
               </div>
 
-                { emp && 
-                  <div className={PaymentModalCSS.paymentPayItem}>
-                  <div  className={PaymentModalCSS.paymentPayItemTitle}>결재자</div>
-                  {emp.empName} {emp.job.jobName} </div>
-                }
-                
+              
           </div>
           </DndProvider>
         </div>

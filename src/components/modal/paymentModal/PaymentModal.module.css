@@ -85,6 +85,7 @@
     align-items: center;
     justify-content: flex-start;
     margin-left: 1vw;
+    margin-bottom: 2vh;
 }
 .paymentPayItemTitle{
     width: 6vw;
