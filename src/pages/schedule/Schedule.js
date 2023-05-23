@@ -10,7 +10,6 @@ function Schedule() {
     return (
         <div className='wrapper'>
             <div className='wrap'>
-                <div className='schedule'>일정관리</div>
                 <FullCalendar
                     plugins={[dayGridPlugin, googleCalendarPlugin]}
                     googleCalendarApiKey={process.env.REACT_APP_GOOGLE_API_KEY}

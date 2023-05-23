@@ -118,7 +118,7 @@ const Weather = () => {
             <div className={WeatherCSS.maxmin}>▲ {(temp_max - 273.15).toFixed(0)}° ▼{(temp_min - 273.15).toFixed(0)}°</div>
           </div>
         </div>
-        <div className={WeatherCSS.comment}>현재의 날씨는 {desc}입니다☺</div>
+        <div className={WeatherCSS.comment}>현재 날씨는 {desc} ☺</div>
       </div>
     );
   }

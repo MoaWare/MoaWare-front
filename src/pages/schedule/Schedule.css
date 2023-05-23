@@ -19,19 +19,10 @@
     background-color: white;
 }
 
-.schedule {
-    color: #254F70;
-    font-weight: bold;
-    padding: 2vh 0 1.3vh 1vh;
-    margin: 0 2vw;
-    font-size: 1.7vh;
-    border-bottom: 1px solid rgba(182, 189, 198, 0.5);
-}
-
 .fc {
     /* border: 1px solid orange; */
-    padding: 2vh 2vw 4vh 2vw;
-    height: 82.3vh;
+    padding: 4vh 2vw;
+    height: 87vh;
     /* width: 70vw; */
     font-size: 0.85rem;
 }
