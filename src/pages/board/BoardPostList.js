@@ -23,11 +23,6 @@ function BoardPostList() {
 
 
 
-    useEffect(() => {
-        dispatch(callBoardPostListAPI(currentPage));
-    }, [currentPage]);
-
-
     useEffect(
         () => {
             if (boardCode) {
@@ -38,7 +33,7 @@ function BoardPostList() {
                 dispatch(callBoardPostListAPI({ currentPage }));
             }
         },
-        [currentPage, boardCode] //의존성 배열에 값도 확장됨
+        [boardCode, currentPage]
     );
 
 
