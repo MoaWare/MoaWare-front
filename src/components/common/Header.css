@@ -10,6 +10,10 @@
     color: white;
 }
 
+.menuList li{
+    font-weight: bolder;
+}
+
 .logo {
     background-color: transparent;
     border: none;
@@ -89,7 +93,7 @@
 .menuList li a {
     white-space: nowrap;
 }
-
+ 
 .logout {
     font-size: 10px;
 }
