@@ -55,7 +55,7 @@ const Header = () => {
         </ul>
       </div>
       <div className={HeaderCSS.userInfo}>
-          { name && <span> {name} 님</span> }
+          { name && <span> {name}님</span> }
         <button className={HeaderCSS.logout} onClick={onClickLogoutHandler}>로그아웃</button>
       </div>
     </div>

@@ -28,14 +28,13 @@ function SchNavbar() {
                     })}
                 />
             </div>
-            <div className={SchNavbarCSS.createSch}>
+            {/* <div className={SchNavbarCSS.createSch}>
                 <button>+ 일정 생성</button>
-            </div>
+            </div> */}
             <div className={SchNavbarCSS.share}>
                 <div className={SchNavbarCSS.type}>공유일정</div>
                 <div>회사 일정</div>
                 <div>프로젝트 일정</div>
-                <div>직급별 일정</div>
                 <div>직급별 일정</div>
                 <div>부서별 일정</div>
                 <div>팀별 일정</div>
