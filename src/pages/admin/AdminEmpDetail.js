@@ -17,20 +17,40 @@ function AdminEmpDetail() {
 
     return (
         <>
-            <div className={CSS.main}>
+            <div>
                 
-                    <table className={CSS.table}>
+                    <table className={CSS.main}>
                         <tbody>
-                            {detail &&
-                                <tr className={CSS.td}  key={detail.empCode}>
-                                    <td>{detail.empCode}</td>
-                                    <td>{detail.empName}</td>
-                                    <td>{detail.empID}</td>
-                                    
-                                </tr>}
+                            {detail &&(
+                            <>
+                            
+                            <tr key={detail.empCode}>   
+                                
+                                    <th className={ CSS.tablebox } >사번</th>
+                                    <td className={ CSS.table }>{detail.empCode}</td>
+                                </tr>
+                                <tr>
+                                    <th className={ CSS.table }>이름</th>
+                                    <td className={ CSS.table }>{detail.empName}</td>
+                                </tr>
+                                <tr>
+                                    <th className={ CSS.table } >ID</th>    
+                                    <td className={ CSS.table }>{detail.empID}</td>
+                                </tr>
+                                <tr>
+                                    <th className={ CSS.table }>직급</th>
+                                    <td className={ CSS.table }>{detail.job.jobName}</td>
+                                </tr>
+                                <tr>
+                                    <th className={ CSS.table }>부서</th>
+                                    <td className={ CSS.table }>{detail.dept.deptName}</td>
+                            </tr>
+                                </>
+                                )}
                         </tbody>
                     </table>
-                
+
+
             </div>
             {/* <div>
              {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}

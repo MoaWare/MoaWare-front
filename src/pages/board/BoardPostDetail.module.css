@@ -118,3 +118,12 @@
 .tablebox td:last-child {
     border-bottom: none;
 }
+
+
+/* 전체를 감싸는 큰 사각형 박스 */
+.viewerbox {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

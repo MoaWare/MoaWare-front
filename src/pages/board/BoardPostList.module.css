@@ -1,7 +1,9 @@
+
 @charset "UTF-8";
+
 .main {
-    margin-top : 10vh;
-    margin-left: 22%;
+    margin-top : 9vh;
+    margin-left: 20.5%;
     width: 77%;
     min-height: 88%;
     overflow-y: scroll;
@@ -13,38 +15,70 @@
     align-items: center; */
 }
 
-.body {
-    padding-top: 50px;
-}
 
-.content {
-    position: relative;
-    max-width: 1100px;
-    margin: auto;
-    top: 120px;
-}
-
-.viewer-box {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.row {
-    display: flex;
-    align-items: center;
-}
-
-.info-box {
+/* content1 (제목, 검색바) */
+.content1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 80px;
+}
+
+.menu-title {
+    color: #4B5766;
+    font-size: 24px;
     padding: 10px;
-    background-color: #f8f9fa;
+}
+
+.sort {
     border-radius: 5px;
-    width: 100%;
-    max-width: 1100px;
+    width: 80px;
+    height: 30px;
+    font-size: 14px;
+    color: #424242;
+}
+
+.searchbar {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 320px;
+    height: 100px;
+
+}
+
+.searchContent {
+    width: 220px;
+    height: 33px;
+    border: 1px solid #424242;
+    border-radius: 8px;
+}
+
+.search-button {
+    position: absolute;
+    left: 278px;
+    top: 33.5px;
+    width: 33px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 2px solid #50A4E4;
+    border-radius: 8px;
+    background-color: #50A4E4;
+}
+
+.bi {
+    position: absolute;
+    font-size: 18px;
+    top: 7px;
+    left: 7px;
+    color: #ffffff;
+}
+
+
+/* content2 (테이블) */
+.content2 {
+    display: inline-block;
+    align-items: center;
     height: 600px;
     /* 나중에 조정*/
     color: #424242;
@@ -52,69 +86,82 @@
 }
 
 .table {
-    width: 1100px;
+    margin-left: 20px;
     border-collapse: collapse;
-    text-align: center;
-    line-height: 2.5;
-    height: 100px;
-    padding: 0 10px;
-    box-shadow: 0px 2px 1px 0px #C9C9C9;
-}
-
-.table-header {
-    background-color: #f8f8f8;
-    height: 35px;
-    border-top: 2px solid #c9c9c9;
-    border-bottom: 2px solid #c9c9c9;
-
-}
-
-#content1 {
-    width: 100%;
-    max-width: 1100px;
-}
-
-.menu-title {
+    width: 97%;
+    border-spacing: 2px;
+    border: #B6BDC6 solid 1px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    margin-bottom: 30px;
     color: #254F70;
-    font-size: 24px;
+
 }
 
-.content2 {
+.th {
+    padding: 20px 0px;
+    line-height: 3rem;
+}
+
+.td {
+    font-size: 15px;
+    border: 1px solid;
+    text-align: center;
+    border-right: none;
+    border-left: none;
+    line-height: 3rem;
+}
+
+.table-content {
+    height: 50px;
+    border-bottom: 2px solid #c9c9c9;
+}
+
+.employee-detail {
+    border: 0px;
+    border-radius: 5px;
+    width: 60px;
+    height: 25px;
+    background-color: #BDDBFF;
+    cursor: pointer;
+}
+
+/* content3- 버튼*/
+.content3 {
     display: flex;
     flex-direction: row-reverse;
     height: 30px;
     padding: 0 10px;
+
 }
 
-.content2 button {
+
+.content3 button {
     border: 0px;
     border-radius: 8px;
-    min-width: 70px;
-    width: auto;
+    width: 70px;
     height: 30px;
-    background-color: #c7e78e;
+    background-color: #BDDBFF;
+    color: #424242;
     margin-left: 10px;
+    cursor: pointer;
 }
 
-
-/* 테이블 박스 */
-.tablebox {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 10px;
-    background-color: #f2f2f2;
+.content3 button:hover {
+    background-color: #50A4E4;
 }
 
-.tablebox table {
-    width: 100%;
-    border-collapse: collapse;
+/* content4 (페이징 바)*/
+
+.content4 {
+    text-align: center;
+    border: 0px;
 }
 
-.tablebox td {
-    padding: 8px;
-    border-bottom: 1px solid #ccc;
-}
-
-.tablebox td:last-child {
-    border-bottom: none;
+.paging {
+    font-size: 20px;
+    margin-right: 20px;
+    border: 0px;
+    background-color: #ffffff;
 }
