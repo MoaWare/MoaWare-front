@@ -18,7 +18,7 @@ function PaymentModal( {setPaymentModal, payEmp }) {
         setPayMember(focusEmp.map(focus => focus.emp));
       };
 
-      const onClickCancleHandler = () => {
+    const onClickCancleHandler = () => {
         setPaymentModal(false);
         
       };
@@ -94,7 +94,7 @@ function PaymentModal( {setPaymentModal, payEmp }) {
               >
                 취 소 
               </button>     
-            </div>
+          </div>
           
         </div>
       </div>
