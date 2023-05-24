@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { TiWeatherSunny, TiWeatherStormy, TiWeatherShower, TiWeatherDownpour, TiWeatherSnow, TiWeatherCloudy } from 'react-icons/ti';
-import { BsCloudFog } from 'react-icons/bs';
+import { WiDaySunny, WiThunderstorm, WiRainMix, WiRain, WiSnowWind, WiFog, WiCloudy } from 'react-icons/wi';
 import WeatherCSS from './Weather.module.css';
 
 const Weather = () => {
   const [temp, setTemp] = useState(0);
   const [temp_max, setTempMax] = useState(0);
   const [temp_min, setTempMin] = useState(0);
-  const [humidity, setHumidity] = useState(0);
   const [desc, setDesc] = useState('');
   const [icon, setIcon] = useState('');
   const [loading, setLoading] = useState(true);
@@ -57,7 +55,6 @@ const Weather = () => {
           setTemp(data.main.temp);
           setTempMax(data.main.temp_max);
           setTempMin(data.main.temp_min);
-          setHumidity(data.main.humidity);
           setDesc(data.weather[0].description);
           setIcon(data.weather[0].icon);
           setLoading(false);
@@ -85,23 +82,23 @@ const Weather = () => {
   }, [location]);
 
   const selectIcon = () => {
-    let iconId = parseInt(icon);
+    let iconId = setIcon === 800 ? 0 : (parseInt(icon) / 100).toFixed(0);
 
     switch (iconId) {
-      case 800:
-        return <TiWeatherSunny />;
-      case 2:
-        return <TiWeatherStormy />;
-      case 3:
-        return <TiWeatherShower />;
-      case 5:
-        return <TiWeatherDownpour />;
-      case 6:
-        return <TiWeatherSnow />;
-      case 7:
-        return <BsCloudFog />;
-      default:
-        return <TiWeatherCloudy />;
+      case "0":
+        return <WiDaySunny />;
+      case "2":
+        return <WiThunderstorm />;
+      case "3":
+        return <WiRainMix />;
+      case "5":
+        return <WiRain />;
+      case "6":
+        return <WiSnowWind />;
+      case "7":
+        return <WiFog />;
+      case "8":
+        return <WiCloudy />;
     }
   };
 
@@ -111,19 +108,18 @@ const Weather = () => {
     return <div className={WeatherCSS.loading}>Loading . . .</div>;
   } else {
     return (
-      <>
+      <div className={WeatherCSS.wrapper}>
         <div className={WeatherCSS.today}>{getFormattedDate()}</div>
         <div className={WeatherCSS.addr}>{address}</div>
         <div className={WeatherCSS.myWeather}>
           <div className={WeatherCSS.icon}>{selectIcon()}</div>
           <div className={WeatherCSS.temperature}>
             <div className={WeatherCSS.now}>{(temp - 273.15).toFixed(0)}°</div>
-            {/* <div>▴{(temp_max - 273.15).toFixed(0)}°▾{(temp_min - 273.15).toFixed(0)}°</div> */}
+            <div className={WeatherCSS.maxmin}>▲ {(temp_max - 273.15).toFixed(0)}° ▼{(temp_min - 273.15).toFixed(0)}°</div>
           </div>
         </div>
-        {/* <div>습도 : {humidity}</div> */}
-        <div className={WeatherCSS.comment}>현재 날씨는... {desc}</div>
-      </>
+        <div className={WeatherCSS.comment}>현재 날씨는 {desc} ☺</div>
+      </div>
     );
   }
 };
