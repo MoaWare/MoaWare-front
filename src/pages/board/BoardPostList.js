@@ -4,13 +4,11 @@ import { callBoardpostBoardsListAPI, callBoardPostListAPI } from '../../apis/Boa
 import PagingBar from "../../components/common/PagingBar";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import CSS from "./BoardPostList.module.css";
-import Work from "../users/works/Work.module.css";
-import BoardPostDetail from './BoardPostDetail'
 
 function BoardPostList() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const boardPost = useSelector(state => state.boardPostReducer);
+    const boardPosts = useSelector(state => state.boardPostReducer);
 
     //    const pageInfo = boardPost.pageInfo;
 
@@ -52,30 +50,31 @@ function BoardPostList() {
         <>
 
         
-            <div className={`${Work.main} content2`}>
-                <div className={CSS.content2}>
+            <div className={CSS.main}>
+                
 
-                    <table>
+                <table className={CSS.table }>
+
+                    <thead>
+                        <tr className={ CSS.th }> 
+                        <th className="table-header"><input type="checkbox" id="checkAll" /></th>
+
+                            <th>No</th>
+                            <th>분류</th>
+                            <th>제목</th>
+                            <th>작성일</th>
+                            <th>수정일</th>
+                            <th>조회수</th>
+                            <th>상세정보</th>
+                        </tr>
+                    </thead>
                         <tbody>
-                            <tr>
-                                <th className="table-header"><input type="checkbox" id="checkAll" /></th>
-                                <th className="table-header">No</th>
-                                <th className="table-header">분류</th>
-                                <th className="table-header">제목</th>
-                                <th className="table-header">작성일</th>
-                                <th className="table-header">수정일</th>
-                                <th className="table-header">조회수</th>
-                                <th className="table-header">
-                                    상세정보
-
-                                </th>
-
-                            </tr>
-                            {boardPost.data &&
-                                boardPost.data.map((post) => (
+                    
+                            {boardPosts.data &&
+                                boardPosts.data.map((post) => (
 
                                     <tr
-                                        className="table-content"
+                                        className={CSS.td}
                                         key={post.postCode}
                                         onClick={() => onClickTableTr(post.postCode)}
                                     >   <td></td>
@@ -92,7 +91,7 @@ function BoardPostList() {
                                 ))}
                         </tbody>
                     </table>
-                </div>
+            
             </div>
             <div>
                 {/* {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />} */}

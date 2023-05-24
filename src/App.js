@@ -27,6 +27,9 @@ import Schedule from "./pages/schedule/Schedule";
 import ScheduleLayout from "./layouts/ScheduleLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import Admin from "./pages/admin/Admin";
+import AdminEmployees from "./pages/admin/AdminEmployees";
+
+
 import PaymentList from "./pages/payment/PaymentList";
 import BoardLayout from "./layouts/BoardLayout";
 import BoardPostList from "./pages/board/BoardPostList";
@@ -37,6 +40,7 @@ import MemberInfo from "./pages/member/MemberInfo";
 import MemberInfoModify from "./pages/member/MemberInfoModify";
 import CreateProject from "./pages/project/CreateProject";
 import DoneProject from "./pages/project/DoneProject";
+import AdminEmpDetail from "./pages/admin/AdminEmpDetail";
 
 
 
@@ -65,17 +69,7 @@ function App() {
             <Route path="restReqList" element={<WorkRestReqList />} />
             <Route path="restList" element={<WorkRestList />} />
           </Route>
-          {/* 게시판 */}
-          <Route path="boardPosts" element={<BoardLayout />}>
-            <Route index element={<BoardPostList />} />
-            <Route path=":postCode" element={<BoardPostDetail />} />
-            <Route path="boards/:boardCode" element={<BoardPostList />} />
-
-
-          
-            
-
-          </Route>
+  
           {/* 프로젝트 */}
           <Route path="project" element={
             <ProtectedRoute projectCheck={true}>
@@ -101,6 +95,13 @@ function App() {
             <Route index e lement={<Payment />} />
             <Route path="draft" element={<Payment />} />
           </Route>
+          {/* 게시판 */}
+            <Route path="boardPosts" element={<BoardLayout />}>
+            <Route index element={<BoardPostList />} />
+            <Route path=":postCode" element={<BoardPostDetail />} />
+            <Route path="boards/:boardCode" element={<BoardPostList />} />
+
+          </Route>
           {/* 관리자 */}
           <Route path="admin" element={
             <ProtectedRoute authCheck={true}>
@@ -108,6 +109,9 @@ function App() {
             </ProtectedRoute> 
             }>
             <Route index element={<Admin />} />
+            <Route path="emp/list" element={<AdminEmployees />} />
+            <Route path="emp/list/:empCode" element={<AdminEmpDetail />} />
+
           </Route>
         </Route>
 

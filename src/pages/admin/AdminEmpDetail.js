@@ -1,36 +1,36 @@
 import { useEffect, } from "react";
 import { useDispatch, useSelector, } from "react-redux";
-import { callBoardPostDetailAPI } from '../../apis/BoardPostAPICalls';
-import CSS from "./BoardPostList.module.css";
+import { callAdminEmpDetailAPI } from '../../apis/AdminAPICalls';
+import CSS from "./AdminEmpDetail.module.css";
 import { useParams } from "react-router-dom";
 
-function BoardPostDetail() {
+function AdminEmpDetail() {
     const dispatch = useDispatch();
-    const { detail } = useSelector(state => state.boardPostReducer);
-    const { postCode } = useParams();
+    const { detail } = useSelector(state => state.employeeReducer);
+    const { empCode } = useParams();
 
-
+    console.log('detail:', detail )
 
     useEffect(() => {
-        dispatch(callBoardPostDetailAPI({ postCode }));
+        dispatch(callAdminEmpDetailAPI({ empCode }));
     }, []);
 
     return (
         <>
             <div className={CSS.main}>
-            
+                
                     <table className={CSS.table}>
                         <tbody>
                             {detail &&
-                                <tr className={CSS.td} key={detail.postCode}>
-                                    <td>{detail.postCategory}</td>
-                                    <td>{detail.postTitle}</td>
-                                    <td>{detail.createDate}</td>
-                                    <td>{detail.postContent}</td>
+                                <tr className={CSS.td}  key={detail.empCode}>
+                                    <td>{detail.empCode}</td>
+                                    <td>{detail.empName}</td>
+                                    <td>{detail.empID}</td>
+                                    
                                 </tr>}
                         </tbody>
                     </table>
-            
+                
             </div>
             {/* <div>
              {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
@@ -40,7 +40,7 @@ function BoardPostDetail() {
     );
 }
 
-export default BoardPostDetail;
+export default AdminEmpDetail;
 
 // useDispatch: 리덕스 스토어와 상호작용하기 위해 dispatch 함수를 가져옵니다.
 // useSelector: 리덕스 스토어의 상태를 선택하기 위해 useSelector 함수를 사용합니다.
