@@ -13,8 +13,11 @@ const GET_TASK_ING = 'project/GET_TASK_ING';
 const GET_TASK_DONE = 'project/GET_TASK_DONE';
 const GET_PROGRESS = 'project/GET_PROGRESS';
 const GET_DONE = 'project/GET_DONE';
+const GET_DEPTLIST = 'project/GET_DEPTLIST';
+const GET_DEPTEMPLIST = 'project/GET_DEPTEMPLIST';
+const POST_PROJECT = 'project/POST_PROJECT';
 
-export const { project : { getProject, getTasks, getTaskDone, getTaskIng, getTaskTodo , getProgress ,getDone }} = createActions({
+export const { project : { getProject, getTasks, getTaskDone, getTaskIng, getTaskTodo , getProgress ,getDone, getDeptlist, getDeptemplist, postProject }} = createActions({
     [GET_PROJECT] : res => res.data,
     [GET_TASKS] : res => res.data,
     [GET_TASK_TODO] : res => res.data,
@@ -22,6 +25,9 @@ export const { project : { getProject, getTasks, getTaskDone, getTaskIng, getTas
     [GET_TASK_DONE] : res => res.data,
     [GET_PROGRESS] : res => res,
     [GET_DONE] : res => res,
+    [GET_DEPTLIST] : res => res.data,
+    [GET_DEPTEMPLIST] : res => res.data,
+    [POST_PROJECT] : res => res,
 }); 
 
 
@@ -35,7 +41,9 @@ const projectReducer = handleActions(
         [GET_TASK_TODO] : (state, {payload}) => ({ todo : payload }),
         [GET_TASK_ING] : (state, {payload}) => ({ ing : payload }),
         [GET_TASK_DONE] : (state, {payload}) => ({ done : payload }),
-
+        [GET_DEPTLIST] : (state, {payload}) => ({ depts : payload }),
+        [GET_DEPTEMPLIST] : (state, { payload }) => ({ emps : payload}),
+        [POST_PROJECT] : (state, { payload }) => ({ regist : payload })
     }
 , initialState);
 
