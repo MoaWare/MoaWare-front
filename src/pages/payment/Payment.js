@@ -74,30 +74,22 @@ function Payment () {
 
 
     const onChangeSelect= (e) => {
-      console.log("셀렉트 값 : ", e.target.value)
+     
       setSelect(e.target.value)
     
     }
 
     const [ isButton, setIsButton ] = useState(false);
     const onButtonHandler= () => {
-      console.log("버튼 클릭", Object.keys(form).length, conutInput);
+      console.log("input 숫자 ", conutInput)
+      console.log("input 숫자 비교값 폼에 쓴거 ", Object.keys(form).length)
+      if(Object.keys(form).length === conutInput){
+        if(isButton){
+          setIsButton(false);
+        } else {
+          setIsButton(true)
+        }
       
-      // if(Object.keys(form).length === conutInput){
-      // if(isButton){
-      //   setIsButton(false);
-      // } else {
-      //   setIsButton(true)
-      // }}
-      // else{
-      //   alert("양식을 전체 채우세요");
-      // }
-
-       if(isButton){
-        setIsButton(false);
-      } else {
-        setIsButton(true)
-      }
 
       const formData = new FormData();
       if(file){
@@ -129,7 +121,11 @@ function Payment () {
       dispatch(CallPaymentRegistAPI(formData));
 
       alert("저장 되었습니다.");
-      // navigator("/pay");
+        navigator("/pay");
+
+      } else{
+        alert("양식을 전체 채우세요");
+      }
       
     }
 
@@ -179,7 +175,6 @@ function Payment () {
         const htmlFromDB = payPath;
         if (payPath) {
         const filteredHTML = processHtmlString(htmlFromDB);
-        // console.log( "filteredHTML : ", filteredHTML);
         setHtmlString(filteredHTML);
         if(!form.total){setForm({})};
         }
@@ -220,12 +215,11 @@ function Payment () {
         const htmlFromDB = payPath;
         if (payPath) {
         const filteredHTML = processHtmlString(htmlFromDB);
-        // console.log( "filteredHTML : ", filteredHTML);
         setSaveHtml(filteredHTML);
         setForm({});
 
         if(isButton){
-       // navigator("/pay");
+          navigator("/pay");
         }
         }
         
@@ -298,6 +292,10 @@ function Payment () {
       setRefPaymentModal(true);
    }
 
+   const onCancelHandler = () => {
+      navigator('/pay');
+   }
+
    console.log("모달 : " , focusEmp);
    console.log("모달완료?! : " , payMember);
    console.log("모달참조완료?! : " , refPayMember);
@@ -313,7 +311,7 @@ function Payment () {
           <button className={payCSS.button} onClick={onOrgModalHandler}>결재선</button>
           <button className={payCSS.button} onClick={onButtonHandler}>결재요청</button>
           <button className={payCSS.button} onClick={onSavePayment}>임시저장</button>
-          <button className={payCSS.buttonCancel}>취소</button>
+          <button className={payCSS.buttonCancel} onClick={onCancelHandler}>취소</button>
         </div>
         <div className={payCSS.payApproval}>
 

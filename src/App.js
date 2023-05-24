@@ -41,6 +41,7 @@ import MemberInfoModify from "./pages/member/MemberInfoModify";
 import CreateProject from "./pages/project/CreateProject";
 import DoneProject from "./pages/project/DoneProject";
 import AdminEmpDetail from "./pages/admin/AdminEmpDetail";
+import PaymentBoard from "./pages/payment/PaymentBoard";
 
 
 
@@ -83,6 +84,7 @@ function App() {
           <Route path="pay" element={<PayLayout />}>
             <Route index element={<PaymentMain />} />
             <Route path="draft" element={<Payment />} />
+            <Route path="wait" element={<PaymentBoard />} />
             <Route path="paying" element={<PaymentList />} />
           </Route>
 
