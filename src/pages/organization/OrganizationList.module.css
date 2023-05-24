@@ -6,40 +6,53 @@
 .background{
     margin-top : 10vh;
     margin-left: 20vw;
+    display: flex;
+    justify-content: center;
+    
+
+}
+
+.orgBack {
+    background-color : white;
+    width: 77vw;
+    height: 86vh;
+    border-radius: 20px;
+    overflow-y: scroll;
 }
 
 .inputBox{
     margin-right: 20px;
     text-align: center;
-    font-size: 20px;
+    font-size: 14px;
     border-radius: 15px;
     border : 0px solid gray;
-    width: 40vw;  
-    height: 40px;     
+    width: 15vw;  
+    height: 40px;
+    background-color: rgba(224, 233, 244, 0.5);     
 }
 
 .button {
     margin: 1;
     background-color: #34709F;
     text-align: center;
-    font-size: 20px;
+    font-size: 16px;
     color: white;
     border-radius: 15px;
     border : 0.5px solid gray;
-    width: 100px;
-    height: 41px; 
+    width: 4vw;
+    height: 40px; 
 }
 
 .buttonDown {
     margin: 1;
     background-color: #254F70;
     text-align: center;
-    font-size: 20px;
+    font-size: 16px;
     color: white;
     border-radius: 15px;
     border : 0.5px solid gray;
-    width: 100px;
-    height: 41px; 
+    width: 4vw;
+    height: 40px; 
 }
 
 .org{
@@ -55,8 +68,8 @@
     display: flex;
     border-radius: 15px;
     height: 40px;
-    width: 40vw;  
-    background-color: white;
+    width: 30vw;  
+    background-color: rgba(224, 233, 244, 0.5);
     align-items: center;
     justify-content: flex-start;
 }
@@ -65,8 +78,8 @@
     display: flex;
     border-radius: 15px;
     height: 40px;
-    width: 40vw;  
-    background-color: white;
+    width: 30vw;  
+    background-color:rgba(224, 233, 244, 0.5);
     align-items: center;
     justify-content: center;
 }
@@ -76,8 +89,8 @@
     display: flex;
     border-radius: 15px;
     height: 40px;
-    width: 40vw;  
-    background-color: white;
+    width: 30vw;
+    background-color: rgba(224, 233, 244, 0.5);
     align-items: center;
     justify-content: flex-end;
 }
@@ -113,12 +126,4 @@
 .folderImg {
     padding-left: 1%;
     width: 24px;
-}
-
-.hr {
-    margin-top: 1%;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #254F70;
-    width: 50vw;
 }

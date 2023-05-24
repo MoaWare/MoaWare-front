@@ -88,6 +88,7 @@ function OrganizationList({org, isSearch}) {
        
     return (
         <div className={ orgCSS.background}>
+            <div className={ orgCSS.orgBack}>
             <div className={ orgCSS.div}>
                 <input type="text" className={ orgCSS.inputBox} 
                 placeholder='이름 / 팀 / 직급' onChange={searchChangeHandler} name="search"
@@ -100,7 +101,7 @@ function OrganizationList({org, isSearch}) {
                 >
                     검색</button>
             </div>
-            <hr className={ orgCSS.hr} />
+           
             <div className={ orgCSS.org}>
                 <div className={ orgCSS.orgDeptBox} onClick={ homeClickHandler }>
                     <div className={ orgCSS.orgTitle} > Moa 그룹</div>
@@ -163,6 +164,7 @@ function OrganizationList({org, isSearch}) {
                 )}
                 
 
+            </div>
             </div>
         </div>
         
