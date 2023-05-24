@@ -242,8 +242,8 @@ export const callDeptListAPI = () => {
 }
 
 
-export const callDeptEmpListAPI = ({ deptName }) => {
-    const requestURL = `${PRE_URL}/emp/${ deptName }`
+export const callDeptEmpListAPI = ({ deptCode }) => {
+    const requestURL = `${PRE_URL}/emp/${ deptCode }`
     return async (dispatch, getState) => {
 
         const result = await fetch(requestURL, {
@@ -260,12 +260,39 @@ export const callDeptEmpListAPI = ({ deptName }) => {
     }
 }
 
+// export const callProjectRegistAPI = (formData, selectedEmpList) => {
+//     const requestURL = `${PRE_URL}/createProj`;
+//     return async (dispatch, getState) => {
+//       const projMemberArray = selectedEmpList.map((emp, index) => ({
+//         name: emp.name,
+//         email: emp.email,
+//       }));
+  
+//       const formDataJson = {
+//         ...Object.fromEntries(formData.entries()),
+//         projMember: projMemberArray,
+//       };
+  
+//       const result = await fetch(requestURL, {
+//         method: 'POST',
+//         headers: {
+//           'Content-type': 'application/json',
+//           Authorization: 'Bearer ' + window.localStorage.getItem('accessToken'),
+//         },
+//         body: JSON.stringify(formDataJson),
+//       }).then((res) => res.json());
+  
+//       if (result.status === 200) {
+//         console.log('[ProjectAPICalls] callDeptListAPI result: ', result);
+//         dispatch(postProject(result));
+//       }
+//     };
+//   };
 export const callProjectRegistAPI = (formData, selectedEmpList) => {
     const requestURL = `${PRE_URL}/createProj`;
     return async (dispatch, getState) => {
       const projMemberArray = selectedEmpList.map((emp, index) => ({
-        name: emp.name,
-        email: emp.email,
+        projMember: { projMember: emp.code },
       }));
   
       const formDataJson = {
@@ -288,5 +315,4 @@ export const callProjectRegistAPI = (formData, selectedEmpList) => {
       }
     };
   };
-
 // callProjectRegistAPI
