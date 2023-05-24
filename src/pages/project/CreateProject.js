@@ -35,7 +35,7 @@ function CreateProject() {
     useEffect(
         () => {        
             if (selectedDept) {
-                dispatch(callDeptEmpListAPI({ deptName: selectedDept }));
+                dispatch(callDeptEmpListAPI({ deptCode: selectedDept }));
             } 
             // else if(change) {
             //     dispatch(callDeptListAPI())
@@ -45,13 +45,14 @@ function CreateProject() {
     //초기 직원 상태
     useEffect(() => {
         if (emps && emps.length > 0) {
-          setSelectedEmp(`${emps[0].empName} ${emps[0].email}`);
+          setSelectedEmp(`${emps[0].empCode} ${emps[0].empName} ${emps[0].email}`);
         }
       }, [emps]);
 
     const onCangeDeptHandler = (e) => {
             const selectedValue = e.target.value;
             setSelectedDept(selectedValue)
+            console.log(selectedValue);
     }
         
     const onChangeEmpHandler = e => {
@@ -71,8 +72,9 @@ function CreateProject() {
             //     setSelectedEmpList((prevEmpList) => [...prevEmpList, newEmp]);
             const newEmp = {
                 id: selectedEmpList.length + 1,
-                name: selectedEmp.split(' ')[0],
-                email: selectedEmp.split(' ')[1]
+                code:selectedEmp.split(' ')[0],
+                name: selectedEmp.split(' ')[1],
+                email: selectedEmp.split(' ')[2]
               };
               setSelectedEmpList((prevEmpList) => [...prevEmpList, newEmp]);
               setSelectedEmp('');
@@ -98,7 +100,7 @@ function CreateProject() {
         formData.append("projContent", form.projContent);
         formData.append("projStartDate", moment(selectedStartDate).format('YYYY-MM-DD'));
         formData.append("projEndDate", moment(selectedEndDate).format('YYYY-MM-DD'));
-        formData.append("projMember", selectedEmpList.map(emp => emp.id));
+        formData.append("projMember", selectedEmpList.map(emp => emp.code));
         
 
         console.log(moment(selectedEndDate).format('YYYY-MM-DD'))
@@ -167,7 +169,7 @@ function CreateProject() {
                                 depts
                                 .filter((dept) => dept.deptCode >= 6) // 5번까지의 값만 필터링
                                 .map((dept) => (
-                                    <option key={dept.deptCode} value={dept.deptName}>
+                                    <option key={dept.deptCode} value={dept.deptCode}>
                                     {dept.deptName}
                                     </option>
                                 ))}
@@ -194,7 +196,7 @@ function CreateProject() {
                         <select onChange={onChangeEmpHandler} value={selectedEmp} className={CreteProjCSS.span2}>
                             {emps && 
                                 emps.map((emp) => (
-                                    <option key={emp.empCode} value={`${emp.empName} ${emp.email}`}>
+                                    <option key={emp.empCode} value={`${emp.empCode} ${emp.empName} ${emp.email}`}>
                                         {emp.empName}
                                     </option>
                                 ))}
@@ -207,7 +209,7 @@ function CreateProject() {
                     <div className={CreteProjCSS.container}>
                         <span className={CreteProjCSS.span1}>프로젝트 팀원</span>
                         {selectedEmpList.map((member, index) => (
-                            <span key={index}>{member.name} {member.email} <button onClick={ () => removeEmp(index)}>삭제하기</button></span>
+                            <span key={index}>{member.code} {member.name} {member.email} <button onClick={ () => removeEmp(index)}>삭제하기</button></span>
                             
                         ))}
                     </div>
