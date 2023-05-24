@@ -18,16 +18,29 @@ function BoardPostDetail() {
     return (
         <>
             <div className={CSS.main}>
-            
-                    <table className={CSS.table}>
+                    <table className={CSS.viewerbox}>
                         <tbody>
-                            {detail &&
-                                <tr className={CSS.td} key={detail.postCode}>
+                        {detail &&(
+                            <>
+                                <tr className={CSS.viewerbox} key={detail.postCode}>
+                                
+                                    <th>분류</th>
                                     <td>{detail.postCategory}</td>
+                                </tr>
+                                <tr>
+                                    <th>제목</th>
                                     <td>{detail.postTitle}</td>
+                                </tr>
+                                <tr>
+                                    <th>작성일</th>    
                                     <td>{detail.createDate}</td>
+                                </tr>
+                                <tr>
+                                    <th>내용</th>
                                     <td>{detail.postContent}</td>
-                                </tr>}
+                                </tr>
+                                </>
+                                )}
                         </tbody>
                     </table>
             
