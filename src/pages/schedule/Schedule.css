@@ -47,7 +47,7 @@
     --fc-button-active-border-color: transparent;
 
     /* 캘린더 일정 색상 */
-    --fc-event-bg-color: rgba(215, 201, 254, 0.5);
+    /* --fc-event-bg-color: rgba(215, 201, 254, 0.5); */
     /* 캘린더 일정 보더 */
     --fc-event-border-color: transparent;
     /* 캘린더 글자 색상 */
@@ -56,7 +56,7 @@
     --fc-event-selected-color: rgba(215, 201, 254, 0.5);
 
     /* 오늘 날짜 배경 */
-    --fc-today-bg-color: rgba(189, 219, 255, 0.2);
+    --fc-today-bg-color: rgba(224, 233, 244, 0.3);
 }
 
 button.fc-today-button.fc-button.fc-button-primary {
