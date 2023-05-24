@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
-import orgCSS from './OrganizationList.module.css';
-import {orgContext} from './PaymentModal';
+import orgCSS from './OrgListModal.module.css';
+import { orgContext } from '../../../pages/payment/Payment';
 import { useDrag, useDrop } from 'react-dnd';
 
 

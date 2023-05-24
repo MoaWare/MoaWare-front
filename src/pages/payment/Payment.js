@@ -1,15 +1,17 @@
-import { useEffect,useRef,useState } from 'react';
+import { createContext, useEffect,useRef,useState } from 'react';
 import payCSS from './Payment.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { CallPaymentFormAPI, CallPaymentRegistAPI } from '../../apis/PaymentAPICalls';
 import { useNavigate } from 'react-router-dom';
 import PaymentModal from '../../components/modal/paymentModal/PaymentModal';
+import { BsPersonFillAdd } from "react-icons/bs";
+import RefPaymentModal from '../../components/modal/paymentModal/RefPaymentModal';
 
 
 
 
 
-
+export const orgContext = createContext();
 
 function Payment () {
 
@@ -25,6 +27,28 @@ function Payment () {
   const fileInput = useRef();
   const navigator = useNavigate();
   const [ paymentModal, setPaymentModal ] = useState(false);
+  const [ refpaymentModal, setRefPaymentModal ] = useState(false);
+  const [searchForm, setSearchForm] = useState({
+    search : '',
+    isSearch : false
+  });
+
+  const [ focusEmp, setFocusEmp ] = useState([]);
+  const [ isFocus, setIsFocus ] = useState([]);
+  const [ payMember , setPayMember ] = useState([]);
+  const [ refPayMember , setRefPayMember ] = useState([]);
+
+
+  const contextValue =  () => {
+
+      setSearchForm({
+        search : '',
+        isSearch : false
+      }); 
+      setFocusEmp([]);
+      setIsFocus([]);
+   
+  }
 
   console.log("payEmp : ", payEmp);
   console.log("payForm : ", payForm);
@@ -76,18 +100,29 @@ function Payment () {
       }
 
       const formData = new FormData();
-      formData.append("draftDate", today());
-      formData.append("empCode", payEmp.empCode);
-      formData.append("draftTitle", form.draftTitle);
-      formData.append("draftContent",htmlString);
-      formData.append("form.formCode", select);
-      formData.append("payStatus", "임시")
+      if(file){
+        formData.append("originalFileName", file.name)
+        formData.append("fileInfo", file)
+      }
       formData.append("payFileCategory.fCategoryName", form.draftTitle)
       formData.append("payFileCategory.fCategoryType", "payment")
-      if(file){
-        formData.append("payFileCategory.file.originalFileName", file.name)
-        formData.append("payFileCategory.file.fileInfo", file)
-      }
+      formData.append("payFileCategory.pay.draftDate", today());
+      formData.append("payFileCategory.pay.draftTitle", form.draftTitle);
+      formData.append("payFileCategory.pay.draftContent",htmlString);
+      formData.append("payFileCategory.pay.form.formCode", select);
+      formData.append("payFileCategory.pay.payStatus", "진행중")
+      payMember && payMember.forEach( (member, index) => { 
+        formData.append(`payFileCategory.pay.PaymentMember[${index}].PaymentMemberPk.payCode`, 0)
+        formData.append(`payFileCategory.pay.PaymentMember[${index}].PaymentMemberPk.empCode`, member.empCode)
+        formData.append(`payFileCategory.pay.PaymentMember[${index}].payRank`, index+1)
+        index=== member.length-1 ? formData.append(`payFileCategory.pay.PaymentMember[${index}].payFinalYn`, 'Y')
+        : formData.append(`payFileCategory.pay.PaymentMember[${index}].payFinalYn`, 'N')
+      } );
+
+      refPayMember && refPayMember.forEach( (member, index) => { 
+        formData.append(`payFileCategory.pay.refenceMember[${index}].refenceMemberPk.payCode`, 0)
+        formData.append(`payFileCategory.pay.refenceMember[${index}].refenceMemberPk.empCode`, member.empCode)
+      } );
 
       console.log("저장한다 : ", [...formData.entries()]);
 
@@ -254,13 +289,25 @@ function Payment () {
     }
 
     const onOrgModalHandler = () => {
+      contextValue();
        setPaymentModal(true);
     }
 
+    const onRefModalHandler = () => {
+      contextValue();
+      setRefPaymentModal(true);
+   }
+
+   console.log("모달 : " , focusEmp);
+   console.log("모달완료?! : " , payMember);
+   console.log("모달참조완료?! : " , refPayMember);
 
     return (
       <div className={payCSS.background}>
+        <orgContext.Provider value={{searchForm, setSearchForm, setFocusEmp, focusEmp, isFocus, setIsFocus, setPayMember, setRefPayMember}}>
         { paymentModal ? (<PaymentModal setPaymentModal={setPaymentModal} payEmp={payEmp}/>) : null }
+        { refpaymentModal ? (<RefPaymentModal setRefPaymentModal={setRefPaymentModal} payEmp={payEmp}/>) : null }
+        </orgContext.Provider>
         <div className={payCSS.titleDiv}>
           <div className={payCSS.title}>기안문 작성</div>
           <button className={payCSS.button} onClick={onOrgModalHandler}>결재선</button>
@@ -269,11 +316,25 @@ function Payment () {
           <button className={payCSS.buttonCancel}>취소</button>
         </div>
         <div className={payCSS.payApproval}>
+
           <div className={payCSS.payDiv}>
             <div className={payCSS.payTitle}>기안자</div>
             <div className={payCSS.payName}>{payEmp && payEmp.empName}</div>
             <div className={payCSS.paySign}><img src="/icon/sign.png" className={payCSS.signImg}/></div>
           </div>
+          
+          {
+            payMember && payMember.map( (pay, index) => (
+              <div className={payCSS.payDiv}>
+              <div className={payCSS.payTitle}>
+                {index === payMember.length -1 ? '최종 결재자' : '결재자'}
+              </div>
+              <div className={payCSS.payName}>{pay.empName}</div>
+              <div className={payCSS.paySign}></div>
+            </div>
+            ))
+          }
+
         </div>
         <div className={payCSS.tableDiv}>
           <table className={payCSS.tbody}>
@@ -294,7 +355,8 @@ function Payment () {
                 <th>참조자</th>
                 <td colSpan='3' >
                   <div className={[payCSS.refMemebertd]}>
-                <img src='/icon/refenceMember.png' className={payCSS.refMemeber} alt="문서"/>
+                    <div> {refPayMember && refPayMember.map( ref =><> {ref.empName} </>)}</div>
+                <BsPersonFillAdd className={payCSS.refMemeber} onClick={onRefModalHandler}/>
                 </div>
                 </td>
               </tr>

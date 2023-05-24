@@ -1,4 +1,4 @@
-import { getPayment, getPaymentform } from "../modules/PayMentModule";
+import { getPayment, getPaymentform, postPayment } from "../modules/PayMentModule";
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${ process.env.REACT_APP_RESTAPI_SERVER_PORT}`
@@ -70,7 +70,7 @@ export const CallPaymentRegistAPI = (formData) => {
         console.log( result);
         if ( result.status === 200 ) {
             console.log ("[PaymentAPICalls] CallPaymentRegistAPI  result : ", result);
-            //dispatch(getPaymentform(result));
+            dispatch(postPayment(result));
         }
     };
 

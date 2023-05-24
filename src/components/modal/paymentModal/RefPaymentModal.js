@@ -4,29 +4,33 @@ import { createContext, useContext, useRef, useState } from 'react';
 import OrgSearchModal from './OrgSearchModal';
 import { TbSquareRoundedChevronLeft, TbSquareRoundedChevronRight } from 'react-icons/tb';
 
+import { orgContext } from '../../../pages/payment/Payment';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { orgContext } from '../../../pages/payment/Payment';
 
 
-function PaymentModal( {setPaymentModal, payEmp }) {
 
-    const{searchForm, setSearchForm, setFocusEmp, focusEmp, isFocus , setIsFocus, setPayMember} = useContext(orgContext);
+function RefPaymentModal( {setRefPaymentModal, payEmp }) {
+
+  const{searchForm, setSearchForm, setFocusEmp, focusEmp, isFocus , setIsFocus, setRefPayMember} = useContext(orgContext);
 
     const onClickHandler = () => {
-        setPaymentModal(false);
-        setPayMember(focusEmp.map(focus => focus.emp));
+      setRefPaymentModal(false);
+      setRefPayMember(focusEmp.map(focus => focus.emp));
       };
+
+    
     
     console.log("searchForm search 는 : ", searchForm.search);
     console.log("searchForm isSearch 는 : ", searchForm.isSearch);
 
-    // const modalContainerRef = useRef(''); // 드래그 할 영역 네모 박스 Ref
-    // const dragComponentRef = useRef<HTMLDivElement>(null); // // 움직일 드래그 박스 Ref
-    // const [originPos, setOriginPos] = useState({ x: 0, y: 0 }); // 드래그 전 포지션값 (e.target.offset의 상대 위치)
-    // const [clientPos, setClientPos] = useState({ x: 0, y: 0 }); // 실시간 커서위치인 e.client를 갱신하는값
-    // const [pos, setPos] = useState({ left: 0, top: 0 }); // 실제 drag할 요소가 위치하는 포지션값
+    const modalContainerRef = useRef(''); // 드래그 할 영역 네모 박스 Ref
+    const dragComponentRef = useRef<HTMLDivElement>(null); // // 움직일 드래그 박스 Ref
+    const [originPos, setOriginPos] = useState({ x: 0, y: 0 }); // 드래그 전 포지션값 (e.target.offset의 상대 위치)
+    const [clientPos, setClientPos] = useState({ x: 0, y: 0 }); // 실시간 커서위치인 e.client를 갱신하는값
+    const [pos, setPos] = useState({ left: 0, top: 0 }); // 실제 drag할 요소가 위치하는 포지션값
 
+    console.log("모달 : " , focusEmp);
 
     const removePayment = (focus,index) => {
 
@@ -36,9 +40,9 @@ function PaymentModal( {setPaymentModal, payEmp }) {
       if(isFocus.includes(focus.emp.empCode)){
         setIsFocus( isFocus.filter( empCode => empCode !== focus.emp.empCode));
       }
+      console.log("변해라아아 : ", focus.emp.empCode);
     };  
-   
-    console.log("변해라아아 : ", focusEmp);
+
     
 
     return(
@@ -46,8 +50,8 @@ function PaymentModal( {setPaymentModal, payEmp }) {
 
         <div className={PaymentModalCSS.modal}>
         <div className={PaymentModalCSS.modalContainer}>
-
-          <div className={PaymentModalCSS.paymentOrgDiv}>
+          {/* <DndProvider backend={HTML5Backend}> */}
+          <div className={PaymentModalCSS.paymentOrgDiv} ref={modalContainerRef}>
           {searchForm.isSearch? <OrgSearchModal/> 
             : <OrgMainModal />}
             <button
@@ -68,15 +72,13 @@ function PaymentModal( {setPaymentModal, payEmp }) {
           </div>
           <div className={PaymentModalCSS.paymentPayDiv}>
               <div className={PaymentModalCSS.paymentPayarea}>
-                <idv className={PaymentModalCSS.payTitleName}>결재선 정보</idv>
-                <div className={PaymentModalCSS.paymentPayItem}>
-                  <div  className={PaymentModalCSS.paymentPayItemTitle}>기안</div>
-                {payEmp && payEmp.empName} {payEmp && payEmp.job.jobName} {payEmp && payEmp.dept.deptName} </div>
+                <idv className={PaymentModalCSS.payTitleName}>참조자 정보</idv>
+                
                 
                 { focusEmp.map( (focus, index) => (
                   <div className={PaymentModalCSS.paymentPayItem} onClick={()=> removePayment(focus, index) }>
                     <div  className={PaymentModalCSS.paymentPayItemTitle}>
-                      {index === focusEmp.length - 1 ? '최종 결재자' : '결재자'}</div>
+                      참조자</div>
                     {focus.emp.empName} {focus.emp.job.jobName} {focus.sub.deptName}
                   </div>
                 ))}
@@ -85,11 +87,11 @@ function PaymentModal( {setPaymentModal, payEmp }) {
 
               
           </div>
-          
+          {/* </DndProvider> */}
         </div>
       </div>
   
     );
 }
 
-export default PaymentModal;
+export default RefPaymentModal;
