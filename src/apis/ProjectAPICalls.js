@@ -1,4 +1,4 @@
-import { getProject, getTaskDone, getTaskIng, getTaskTodo, getTasks, getDone, getProgress } from "../modules/ProjectModule";
+import { getProject, getTaskDone, getTaskIng, getTaskTodo, getTasks, getDone, getProgress, getDeptlist, getDeptemplist, postProject } from "../modules/ProjectModule";
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -222,3 +222,71 @@ export const callTaskDoneAPI = ({ projCode }) => {
     }
 }
 
+
+export const callDeptListAPI = () => {
+    const requestURL = `${PRE_URL}/dept`
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : 'GET',
+            headers : {
+                "Content-Type" : "application/json",
+            }
+        }).then(res => res.json());
+
+        if(result.status === 200){
+            console.log("[ProjectAPICalls] callDeptListAPI result : ", result);
+            dispatch(getDeptlist(result));
+        }
+    }
+}
+
+
+export const callDeptEmpListAPI = ({ deptName }) => {
+    const requestURL = `${PRE_URL}/emp/${ deptName }`
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : 'GET',
+            headers : {
+                "Content-Type" : "application/json",
+            }
+        }).then(res => res.json());
+
+        if(result.status === 200){
+            console.log("[ProjectAPICalls] callDeptListAPI result : ", result);
+            dispatch(getDeptemplist(result));
+        }
+    }
+}
+
+export const callProjectRegistAPI = (formData, selectedEmpList) => {
+    const requestURL = `${PRE_URL}/createProj`;
+    return async (dispatch, getState) => {
+      const projMemberArray = selectedEmpList.map((emp, index) => ({
+        name: emp.name,
+        email: emp.email,
+      }));
+  
+      const formDataJson = {
+        ...Object.fromEntries(formData.entries()),
+        projMember: projMemberArray,
+      };
+  
+      const result = await fetch(requestURL, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: 'Bearer ' + window.localStorage.getItem('accessToken'),
+        },
+        body: JSON.stringify(formDataJson),
+      }).then((res) => res.json());
+  
+      if (result.status === 200) {
+        console.log('[ProjectAPICalls] callDeptListAPI result: ', result);
+        dispatch(postProject(result));
+      }
+    };
+  };
+
+// callProjectRegistAPI

@@ -43,8 +43,6 @@
 
 .paymentPayarea{
     /* background-color:  rgba(46, 123, 216, 0.5); */
-    overflow-y: scroll;
-
     background-color: rgba(224, 233, 244, 0.5);
     width: 25vw;
     height: 80vh;
@@ -85,6 +83,7 @@
     align-items: center;
     justify-content: flex-start;
     margin-left: 1vw;
+    margin-bottom: 2vh;
 }
 .paymentPayItemTitle{
     width: 6vw;

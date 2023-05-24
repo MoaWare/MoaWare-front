@@ -27,6 +27,9 @@ import Schedule from "./pages/schedule/Schedule";
 import ScheduleLayout from "./layouts/ScheduleLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import Admin from "./pages/admin/Admin";
+import AdminEmployees from "./pages/admin/AdminEmployees";
+
+
 import PaymentList from "./pages/payment/PaymentList";
 import BoardLayout from "./layouts/BoardLayout";
 import BoardPostList from "./pages/board/BoardPostList";
@@ -37,6 +40,7 @@ import MemberInfo from "./pages/member/MemberInfo";
 import MemberInfoModify from "./pages/member/MemberInfoModify";
 import CreateProject from "./pages/project/CreateProject";
 import DoneProject from "./pages/project/DoneProject";
+import AdminEmpDetail from "./pages/admin/AdminEmpDetail";
 
 
 
@@ -65,25 +69,15 @@ function App() {
             <Route path="restReqList" element={<WorkRestReqList />} />
             <Route path="restList" element={<WorkRestList />} />
           </Route>
-          {/* 게시판 */}
-          <Route path="boardPosts" element={<BoardLayout />}>
-            <Route index element={<BoardPostList />} />
-            <Route path=":postCode" element={<BoardPostDetail />} />
-            <Route path="boards/:boardCode" element={<BoardPostList />} />
-
-
-          
-            
-
-          </Route>
+  
           {/* 프로젝트 */}
-          <Route path="project" element={
-            <ProtectedRoute projectCheck={true}>
-              <ProjectLayout />
-            </ProtectedRoute>}>
-            <Route index element={<Project />} />
+          <Route path="project" element={<ProjectLayout />}>
+            <Route index element={<ProtectedRoute projectCheck={true}><Project /></ProtectedRoute>} />
             <Route path="createProject" element={<CreateProject />} />
             <Route path="done" element={<DoneProject />} />
+            {/* <Route path="proj" element={<ProjDetailLayout />}>
+              <Route path="detail/:projCode" element={<ProjDetail />} />
+            </Route> */}
           </Route>
           {/* 전자 결재 */}
           <Route path="pay" element={<PayLayout />}>
@@ -98,6 +92,13 @@ function App() {
             <Route index e lement={<Payment />} />
             <Route path="draft" element={<Payment />} />
           </Route>
+          {/* 게시판 */}
+            <Route path="boardPosts" element={<BoardLayout />}>
+            <Route index element={<BoardPostList />} />
+            <Route path=":postCode" element={<BoardPostDetail />} />
+            <Route path="boards/:boardCode" element={<BoardPostList />} />
+
+          </Route>
           {/* 관리자 */}
           <Route path="admin" element={
             <ProtectedRoute authCheck={true}>
@@ -105,6 +106,9 @@ function App() {
             </ProtectedRoute> 
             }>
             <Route index element={<Admin />} />
+            <Route path="emp/list" element={<AdminEmployees />} />
+            <Route path="emp/list/:empCode" element={<AdminEmpDetail />} />
+
           </Route>
         </Route>
 
@@ -129,14 +133,20 @@ function App() {
             </ProtectedRoute>
           } />
         {/* 프로젝트 */}
+        {/* <Route path="project/proj" element={<ProjDetailLayout />}>
+        <Route 
+          path="proj" 
+          element={
         <Route path="proj/detail/:projCode" 
           element={              
             <ProtectedRoute projectCheck={true}>
               <ProjDetailLayout />
             </ProtectedRoute>
           }>
+            <Route path="detail/:projCode" element={<ProjDetail />} />
           <Route index element={<ProjDetail />} />
         </Route>
+        </Route> */}
         {/* 회원 정보 */}
         <Route 
           path="member"

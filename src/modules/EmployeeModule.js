@@ -10,14 +10,22 @@ const POST_FIND_PWD = 'emp/POST_FIND_PWD';
 const POST_FIND_ID = 'emp/POST_FIND_ID';
 const GET_HEADER_NAME = 'emp/GET_HEADER_NAME';
 
+const GET_EMPLOYEES = 'emp/GET_EMPLOYEES';
+const GET_EMPLOYEE = 'emp/GET_EMPLOYEE';
 
 
-export const { emp : { postLogin,resetEmp, postFindPwd, postFindId, getHeaderName}} = createActions({
+
+
+export const { emp : { postLogin,resetEmp, postFindPwd, postFindId, getHeaderName, getEmployees, getEmployee  }} = createActions({
     [POST_LOGIN] : res => res,
     [RESET_EMP] : () => {},
     [POST_FIND_PWD] : res => res,
     [POST_FIND_ID] : res => res,
     [GET_HEADER_NAME] : res => res.data,
+    
+    [GET_EMPLOYEES] : res => res.data,
+    [GET_EMPLOYEE] : res => res.data
+
 })
 
 /* 리듀서 */
@@ -26,7 +34,12 @@ const employeeReducer = handleActions({
     [RESET_EMP] : (state, action) => initialState,
     [POST_FIND_PWD] : (state, { payload }) => ({ password : payload}),
     [POST_FIND_ID] : (state, { payload }) => ({ id : payload }),
-    [GET_HEADER_NAME] : (state, { payload }) => ({ name : payload }),
+    [GET_HEADER_NAME] : (state, { payload }) => ({...state, name : payload }),
+
+    [GET_EMPLOYEES] : (state, { payload }) => payload ,
+    [GET_EMPLOYEE] : (state, { payload }) => ({...state, detail : payload }),
+
+
     
 }, initialState)
 

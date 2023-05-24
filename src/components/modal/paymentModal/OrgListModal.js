@@ -1,13 +1,13 @@
 import { useContext, useState } from 'react';
-import orgCSS from './OrganizationList.module.css';
-import {orgContext} from './PaymentModal';
+import orgCSS from './OrgListModal.module.css';
+import { orgContext } from '../../../pages/payment/Payment';
 import { useDrag, useDrop } from 'react-dnd';
 
 
 
 function OrgListModal({org}) {
 
-    const{searchForm, setSearchForm, setFocusEmp} = useContext(orgContext);
+    const{searchForm, setSearchForm, setFocusEmp, focusEmp, isFocus , setIsFocus} = useContext(orgContext);
 
     console.log("org : ", org);
     const [ isOpen, setIsOpen ] = useState({});
@@ -93,14 +93,25 @@ function OrgListModal({org}) {
         } 
     }
 
-    const onClickEmp = (e, emp) => {
+    const onClickEmp = (e, emp, sub) => {
         console.log("클릭 emp " , emp)
-        console.log("클릭 e " , e)
+        console.log("클릭 e " , e.target)
+        console.log("클릭 sub " , sub)
         
-        setFocusEmp({
-            [emp] : emp
+       const isDuplicatteFocusEmp = focusEmp.some(
+            (focus) => focus.emp.empName === emp.empName 
+        )
+
+        if(!isDuplicatteFocusEmp){
+        setFocusEmp([
+            ...focusEmp,
+            {
+            'emp' : emp,
+            'sub' : sub
+        }]
+        )
         }
-    )
+        setIsFocus([...isFocus, emp.empCode]);
     }
 
     console.log("searchForm :" ,searchForm);
@@ -144,7 +155,7 @@ function OrgListModal({org}) {
                             {searchForm.isSearch? 
                             isOpen[org.deptCode]  && isOpen[org.deptCode] ? 
                             (org.orgEmp.map(emp => 
-                                <div className={ orgCSS.searchOrgRefDeptBox} key={emp.empCode} > 
+                                <div  className={ isFocus.includes(emp.empCode) ? orgCSS.orgEmpBoxFocus : orgCSS.orgEmpBox} onClick={(e) => onClickEmp(e,emp, org)} > 
                                     <div className={ orgCSS.orgEmpText} > {emp.empName} {emp.job.jobName}</div>
                                 </div>)
                             )  : '' 
@@ -161,11 +172,11 @@ function OrgListModal({org}) {
                                         (<><img src="/icon/Up.png" className={ orgCSS.directionImg} alt='Up' name={sub.deptCode}/>
                                         <img src="/icon/CloseFolder.png" className={ orgCSS.folderImg} alt='folder' name={sub.deptCode}/></> )
                                     }
-                                        <div className={ orgCSS.orgText} name={sub.deptCode}> {sub.deptName} </div>
+                                        <div className={ orgCSS.orgText} name={sub.deptCode} > {sub.deptName} </div>
                                     </div> 
                                     {isOpen[sub.deptCode]  && isOpen[sub.deptCode] ? 
                                         (sub.orgEmp.map(emp => 
-                                            <div className={ orgCSS.orgEmpBox} key={emp.empCode} onClick={(e) => onClickEmp(e,emp)} > 
+                                            <div className={ isFocus.includes(emp.empCode) ? orgCSS.orgEmpBoxFocus : orgCSS.orgEmpBox} key={emp.empCode} onClick={(e) => onClickEmp(e,emp, sub)} > 
                                                 <div className={ orgCSS.orgEmpText}> {emp.empName} {emp.job.jobName}</div>
                                             </div>)
                                     )  : '' }   

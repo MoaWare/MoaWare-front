@@ -2,7 +2,8 @@ import { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CallOrganizationSearchAPI } from '../../../apis/OrganizationAPICalls';
 import OrgListModal from './OrgListModal';
-import { orgContext } from './PaymentModal';
+import { orgContext } from '../../../pages/payment/Payment';
+
 
 function OrgSearchModal (){
 

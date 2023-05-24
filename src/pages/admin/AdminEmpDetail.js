@@ -1,49 +1,56 @@
 import { useEffect, } from "react";
 import { useDispatch, useSelector, } from "react-redux";
-import { callBoardPostDetailAPI } from '../../apis/BoardPostAPICalls';
-import CSS from "./BoardPostList.module.css";
+import { callAdminEmpDetailAPI } from '../../apis/AdminAPICalls';
+import CSS from "./AdminEmpDetail.module.css";
 import { useParams } from "react-router-dom";
 
-function BoardPostDetail() {
+function AdminEmpDetail() {
     const dispatch = useDispatch();
-    const { detail } = useSelector(state => state.boardPostReducer);
-    const { postCode } = useParams();
+    const { detail } = useSelector(state => state.employeeReducer);
+    const { empCode } = useParams();
 
-
+    console.log('detail:', detail )
 
     useEffect(() => {
-        dispatch(callBoardPostDetailAPI({ postCode }));
+        dispatch(callAdminEmpDetailAPI({ empCode }));
     }, []);
 
     return (
         <>
-            <div className={CSS.main}>
-                    <table className={CSS.viewerbox}>
+            <div>
+                
+                    <table className={CSS.main}>
                         <tbody>
-                        {detail &&(
+                            {detail &&(
                             <>
-                                <tr className={CSS.viewerbox} key={detail.postCode}>
+                            
+                            <tr key={detail.empCode}>   
                                 
-                                    <th>분류</th>
-                                    <td>{detail.postCategory}</td>
+                                    <th className={ CSS.tablebox } >사번</th>
+                                    <td className={ CSS.table }>{detail.empCode}</td>
                                 </tr>
                                 <tr>
-                                    <th>제목</th>
-                                    <td>{detail.postTitle}</td>
+                                    <th className={ CSS.table }>이름</th>
+                                    <td className={ CSS.table }>{detail.empName}</td>
                                 </tr>
                                 <tr>
-                                    <th>작성일</th>    
-                                    <td>{detail.createDate}</td>
+                                    <th className={ CSS.table } >ID</th>    
+                                    <td className={ CSS.table }>{detail.empID}</td>
                                 </tr>
                                 <tr>
-                                    <th>내용</th>
-                                    <td>{detail.postContent}</td>
+                                    <th className={ CSS.table }>직급</th>
+                                    <td className={ CSS.table }>{detail.job.jobName}</td>
                                 </tr>
+                                <tr>
+                                    <th className={ CSS.table }>부서</th>
+                                    <td className={ CSS.table }>{detail.dept.deptName}</td>
+                            </tr>
                                 </>
                                 )}
                         </tbody>
                     </table>
-            
+
+
             </div>
             {/* <div>
              {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
@@ -53,7 +60,7 @@ function BoardPostDetail() {
     );
 }
 
-export default BoardPostDetail;
+export default AdminEmpDetail;
 
 // useDispatch: 리덕스 스토어와 상호작용하기 위해 dispatch 함수를 가져옵니다.
 // useSelector: 리덕스 스토어의 상태를 선택하기 위해 useSelector 함수를 사용합니다.
