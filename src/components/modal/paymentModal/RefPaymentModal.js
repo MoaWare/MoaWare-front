@@ -72,7 +72,7 @@ function RefPaymentModal( {setRefPaymentModal, payEmp }) {
           </div>
           <div className={PaymentModalCSS.paymentPayDiv}>
               <div className={PaymentModalCSS.paymentPayarea}>
-                <idv className={PaymentModalCSS.payTitleName}>참조자 정보</idv>
+                <div className={PaymentModalCSS.payTitleName}>참조자 정보</div>
                 
                 
                 { focusEmp.map( (focus, index) => (
