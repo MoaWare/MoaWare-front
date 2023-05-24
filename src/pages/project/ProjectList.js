@@ -21,7 +21,7 @@ function ProjectList( {projectList} ) {
                 >
                     <td>{p.projCode}</td>
                     <td>{p.projName}</td>
-                    <td>{p.startDate.substring(0, 10)}~{p.endDate.substring(0, 10)}</td>
+                    <td>{p.projStartDate.substring(0, 10)}~{p.projEndDate.substring(0, 10)}</td>
                     <td>{p.projStatus}</td>
                     <td>{p.employee.empName}</td>
                     <td>
