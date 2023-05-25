@@ -59,6 +59,8 @@ export const callMemberInfoAPI = () => {
     }
 }
 
+
+/* 회원 정보 수정 */
 export const callMemberModifyAPI = (formData) => {
 
     const requestURL = `${PRE_URL}/auth/modify`;

@@ -71,6 +71,17 @@ function MemberInfoModify(){
     }, [image]);
 
 
+    const { modify } = useSelector(state => state.memberReducer);
+    
+    useEffect(() => {
+        if(modify?.status === 200) {
+            alert(modify?.message);
+            navigate('/');
+        }
+    }, [modify]);
+
+
+
     const onChangeHandler = (e) => {
 
         setForm({
@@ -122,8 +133,9 @@ function MemberInfoModify(){
         console.log("formData", formData);
 
         dispatch(callMemberModifyAPI(formData));
-        
     }
+
+
 
 
     return info && (
