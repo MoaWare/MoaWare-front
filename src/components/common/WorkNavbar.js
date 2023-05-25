@@ -39,23 +39,23 @@ function WorkNavbar() {
     dispatch(callTimeQuitAPI({ quitTime }));
   }
 
-  useEffect(
-    () => {
-      if (insert?.status === 200) {
-        alert('출근 등록 되었습니다.')
-        navigate("/work");
-      } else if (insert?.state === 400) {
-        alert(insert.message);
-      }
+  // useEffect(
+  //   () => {
+  //     if (insert?.status === 200) {
+  //       alert('출근 등록 되었습니다.')
+  //       navigate("/work");
+  //     } else if (insert?.state === 400) {
+  //       alert(insert.message);
+  //     }
 
-      if (quit?.status === 200) {
-        alert('퇴근 등록 되었습니다.')
-        navigate("/work")
-      } else if (quit?.state === 400) {
-        alert(quit.message);
-      }
-    }, [insert, quit]
-  )
+  //     if (quit?.status === 200) {
+  //       alert('퇴근 등록 되었습니다.')
+  //       navigate("/work")
+  //     } else if (quit?.state === 400) {
+  //       alert(quit.message);
+  //     }
+  //   }, [insert, quit]
+  // )
 
   console.log('insert : ', insert);
   console.log('btn : ', btn);

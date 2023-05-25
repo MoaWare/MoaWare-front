@@ -49,6 +49,10 @@ function CreateProject() {
         }
       }, [emps]);
 
+    useEffect(() => {
+         dateCheck();
+    }, [selectedStartDate, selectedEndDate]);
+
     const onCangeDeptHandler = (e) => {
             const selectedValue = e.target.value;
             setSelectedDept(selectedValue)
@@ -62,7 +66,7 @@ function CreateProject() {
 
     const onStartDateHandler = startDate => {
         setSelectedStartDate(startDate);
-        // dateCheck();
+        dateCheck();
     }
 
     const onEndeDateHandler = (endDate) => {
@@ -71,23 +75,24 @@ function CreateProject() {
     }
 
     const dateCheck = () => {
-        console.log('날짜ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ')
-        if (selectedStartDate && selectedEndDate && selectedStartDate.getTime() < selectedEndDate.getTime()) {
-            console.log('이프무니ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ')
 
+        console.log('selectedStartDate:', selectedStartDate);
+        console.log('selectedEndDate:', selectedEndDate);
+        console.log('날짜 체크');
+        if (
+          selectedStartDate &&
+          selectedEndDate &&
+          selectedStartDate.getTime() > selectedEndDate.getTime()
+        ) {
+          console.log('selectedStartDate가 selectedEndDate보다 이후입니다.');
+        } else {
+          console.log('조건 미충족');
         }
-    }; 
+      };
         
     const onClickHandler = () => {
         setChange(true)
         if (selectedEmp) {
-            // const newEmp = {
-            //     id: 1, // 고유 식별자 생성
-            //     // id: selectedEmpList.length + 1
-            //     name: selectedEmp.split(' ')[0],
-            //     email: selectedEmp.split(' ')[1]
-            //     };
-            //     setSelectedEmpList((prevEmpList) => [...prevEmpList, newEmp]);
             const newEmp = {
                 id: selectedEmpList.length + 1,
                 code:selectedEmp.split(' ')[0],
@@ -115,6 +120,9 @@ function CreateProject() {
 
         if(!form.projName || !form.projContent) {
             alert('정보를 모두 입력해주세요');
+            return;
+        } else if(selectedStartDate > selectedEndDate) {
+            alert('종료일이 시작일 보다 빠릅니다.');
             return;
         }
         /* 서버로 전달할 FormData 형태의 객체 설정 */
@@ -201,7 +209,7 @@ function CreateProject() {
                     <div className={CreteProjCSS.container}>
                         <span className={CreteProjCSS.span1}>프로젝트 팀원</span>
                         {selectedEmpList.map((member, index) => (
-                            <span key={index}>{member.code} {member.name} {member.email} <button onClick={ () => removeEmp(index)}>삭제하기</button></span>
+                            <span key={index}>{member.name} {member.email} <button onClick={ () => removeEmp(index)}> x </button></span>
                             
                         ))}
                     </div>
