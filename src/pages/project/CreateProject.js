@@ -59,6 +59,24 @@ function CreateProject() {
             const selectedValue = e.target.value;
             setSelectedEmp(selectedValue);
     }
+
+    const onStartDateHandler = startDate => {
+        setSelectedStartDate(startDate);
+        // dateCheck();
+    }
+
+    const onEndeDateHandler = (endDate) => {
+        setSelectedEndDate(endDate)
+        dateCheck();
+    }
+
+    const dateCheck = () => {
+        console.log('날짜ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ')
+        if (selectedStartDate && selectedEndDate && selectedStartDate.getTime() < selectedEndDate.getTime()) {
+            console.log('이프무니ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ')
+
+        }
+    }; 
         
     const onClickHandler = () => {
         setChange(true)
@@ -94,13 +112,21 @@ function CreateProject() {
     console.log(form);
 
     const onClickCreate = () => {
+
+        if(!form.projName || !form.projContent) {
+            alert('정보를 모두 입력해주세요');
+            return;
+        }
         /* 서버로 전달할 FormData 형태의 객체 설정 */
         const formData = new FormData();
         formData.append("projName", form.projName);
         formData.append("projContent", form.projContent);
         formData.append("projStartDate", moment(selectedStartDate).format('YYYY-MM-DD'));
         formData.append("projEndDate", moment(selectedEndDate).format('YYYY-MM-DD'));
-        formData.append("projMember", selectedEmpList.map(emp => emp.code));
+        formData.append("projMember", selectedEmpList.map((emp, index) => ({
+                projCode: 0,
+                projMember: emp.code,
+        })));
         
 
         console.log(moment(selectedEndDate).format('YYYY-MM-DD'))
@@ -108,10 +134,6 @@ function CreateProject() {
         console.log(form.projContent)
         console.log(form.projName)
         console.log(selectedEmpList);
-        // selectedEmpList.forEach((emp, index) => {
-        //     formData.append(`projMember[${index}].name`, emp.name);
-        //     formData.append(`projMember[${index}].email`, emp.email);
-        //   });
 
         for (const entry of formData.entries()) {
             console.log('f폼이다', entry);
@@ -121,12 +143,9 @@ function CreateProject() {
         dispatch(callProjectRegistAPI(formData, selectedEmpList))
     }    
 
-
-    // console.log(deptList);
     console.log(depts);
     console.log(emps);
-    // console.log(form);
-    //.toISOString()
+
     return (
         <>
             <div className={CreteProjCSS.main}>
@@ -152,16 +171,6 @@ function CreateProject() {
                     </div>
                     <div className={CreteProjCSS.container}>
                         <span className={CreteProjCSS.span1}>팀원 선택</span>
-                        {/* <select name="dept" id="deptCode" className={CreteProjCSS.span2}
-                                
-                                onChange={ onCangeDeptHandler }
-                        > 
-                            {depts && depts.map((dept) => (
-                                <option key={dept.deptCode} value={dept.deptCode}>
-                                    {dept.deptName}
-                                </option>
-                            ))}
-                        </select> */}
                         {depts && depts.length > 0 && (
                         <select 
                                 name="dept" id="deptCode" className={CreteProjCSS.span2} onChange={onCangeDeptHandler} value={selectedDept}> 
@@ -175,23 +184,6 @@ function CreateProject() {
                                 ))}
                         </select>
                         )}
-                        {/* <select value={selectedDept} name="dept" onChange={onCangeDeptHandler} className={CreteProjCSS.span2}>
-                            <option value="재무1팀">재무 1팀</option>
-                            <option value="재무2팀">재무 2팀</option>
-                            <option value="영업1팀">영업 1팀</option>
-                            <option value="영업2팀">영업 2팀</option>
-                            <option value="마케팅1팀">마케팅 1팀</option>
-                            <option value="마케팅2팀">마케팅 2팀</option>
-                            <option value="전산1팀">전산 1팀</option>
-                            <option value="전산2팀">전산 2팀</option>
-                        </select> */}
-
-                            {/* {emps && 
-                                emps.map((emp) => (
-                                    <option key={emp.empCode} value={emp.dept.deptName}>
-                                        {emp.dept.deptName}
-                                    </option>
-                                ))} */}
                         {emps && emps.length > 0 && (
                         <select onChange={onChangeEmpHandler} value={selectedEmp} className={CreteProjCSS.span2}>
                             {emps && 
@@ -218,15 +210,18 @@ function CreateProject() {
                         <div className={CreteProjCSS.date}>
                             <DatePicker className={CreteProjCSS.datepicker}
                                 selected={selectedStartDate}
-                                onChange={(startDate) => setSelectedStartDate(startDate)}
+                                // onChange={(startDate) => setSelectedStartDate(startDate)}
+                                onChange={ onStartDateHandler }
                                 dateFormat='yyyy-MM-dd'
+                                minDate={today}
                             />
                         </div>
                         <span className={CreteProjCSS.span1}>프로젝트 종료일</span>
                         <div className={CreteProjCSS.date}>
                             <DatePicker className={CreteProjCSS.datepicker}
                                 selected={selectedEndDate}
-                                onChange={(endDate) => setSelectedEndDate(endDate)}
+                                // onChange={(endDate) => setSelectedEndDate(endDate)}
+                                onChange={ onEndeDateHandler }
                                 dateFormat='yyyy-MM-dd'
                             />
                         </div>

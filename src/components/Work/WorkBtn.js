@@ -33,21 +33,21 @@ function WorkBtn() { // 컴포넌트 이름을 대문자로 시작하도록 수�
     dispatch(callTimeQuitAPI({ quitTime }));
   };
 
-  useEffect(() => {
-    if (insert?.status === 200) {
-      alert('출근 등록 되었습니다.');
-      navigate("/work");
-    } else if (insert?.state === 400) {
-      alert(insert.message);
-    }
+  // useEffect(() => {
+  //   if (insert?.status === 200) {
+  //     alert('출근 등록 되었습니다.');
+  //     navigate("/work");
+  //   } else if (insert?.state === 400) {
+  //     alert(insert.message);
+  //   }
 
-    if (quit?.status === 200) {
-      alert('퇴근 등록 되었습니다.');
-      navigate("/work");
-    } else if (quit?.state === 400) {
-      alert(quit.message);
-    }
-  }, [insert, quit, navigate]);
+  //   if (quit?.status === 200) {
+  //     alert('퇴근 등록 되었습니다.');
+  //     navigate("/work");
+  //   } else if (quit?.state === 400) {
+  //     alert(quit.message);
+  //   }
+  // }, [insert, quit, navigate]);
 
   console.log('insert: ', insert);
   console.log('btn: ', btn);
@@ -67,7 +67,7 @@ function WorkBtn() { // 컴포넌트 이름을 대문자로 시작하도록 수�
             </div>
             {myWork.data && myWork.data.length > 0 ? (
               <div className={WorkBtnCSS.p2} key={myWork.data[0].workPk.workTime}>
-                <p className={WorkBtnCSS.ptime2}>출근 시간 {myWork.data[0].workTime.substring(11, 19)}</p>
+                <p className={WorkBtnCSS.ptime2}>출근 시간 {myWork.data[0].workTime ? myWork.data[0].workTime.substring(11, 19) : ""}</p>
                 <p className={WorkBtnCSS.ptime2}>퇴근 시간 {myWork.data[0].quitTime ? myWork.data[0].quitTime.substring(11, 19) : ""}</p>
               </div>
             ) : 

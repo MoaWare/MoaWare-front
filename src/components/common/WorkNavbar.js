@@ -103,7 +103,7 @@ function WorkNavbar() {
             {/* data 객체가 있다면 */}
             {myWork.data && myWork.data.length > 0 ? (
               <div className={WorkNavbarCSS.p2} key={myWork.data[0].workPk.workTime}>
-                <p className={WorkNavbarCSS.ptime2}>출근 시간 {myWork.data[0].workTime.substring(11, 19)}</p>
+                <p className={WorkNavbarCSS.ptime2}>출근 시간 {myWork.data[0].workTime ? myWork.data[0].workTime.substring(11, 19) : ""}</p>
                 <p className={WorkNavbarCSS.ptime2}>퇴근 시간 {myWork.data[0].quitTime ? myWork.data[0].quitTime.substring(11, 19) : ""}</p>
               </div>
             ) : 
