@@ -98,3 +98,12 @@ button.fc-today-button.fc-button.fc-button-primary {
     flex-direction: row;
     padding: 0.5rem;
 }
+
+/* 주말 색상 변경 */
+/* .fc-day-sat a {
+    color: rgba(80, 164, 228, 1)
+}
+
+.fc-day-sun a {
+    color: rgba(80, 164, 228, 1)
+} */
