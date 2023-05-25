@@ -7,8 +7,7 @@ import boardPostReducer from "./BoardPostModule";
 import paymentReducer from "./PayMentModule";
 import projectReducer from "./ProjectModule";
 import memberReducer from "./MemberModule";
-import scheduleReducer from "./ScheduleMoule";
-
+import scheduleReducer from "./ScheduleModule";
 import boardReducer from "./BoardPostModule"
 
 const rootReducer = combineReducers({
@@ -23,7 +22,6 @@ const rootReducer = combineReducers({
     paymentReducer, 
     memberReducer,
     scheduleReducer
-
 });
 
 export default rootReducer
