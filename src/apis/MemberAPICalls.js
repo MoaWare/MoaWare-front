@@ -1,4 +1,4 @@
-import { postMemberInfo, getMemberInfo } from "../modules/MemberModule";
+import { postMemberInfo, getMemberInfo, postMemberModify } from "../modules/MemberModule";
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${ process.env.REACT_APP_RESTAPI_SERVER_PORT}`
@@ -23,7 +23,7 @@ export const callMemberInfoLoginAPI = (form) => {
         })
         .then(response => response.json());
 
-        console.log('[callLoginAPI] result : ', result);
+        console.log('[MemberAPICalls] callMemberInfoLoginAPI result : ', result);
 
         if(result.status === 200) {
             dispatch(postMemberInfo(result));
@@ -51,10 +51,33 @@ export const callMemberInfoAPI = () => {
         })
         .then(response => response.json());
 
-        console.log('[callLoginAPI] result : ', result);
+        console.log('[MemberAPICalls] callMemberInfoAPI result : ', result);
 
         if(result.status === 200) {
             dispatch(getMemberInfo(result));
         }
     }
+}
+
+export const callMemberModifyAPI = (formData) => {
+
+    const requestURL = `${PRE_URL}/auth/modify`;
+
+    return async( dispatch, getState ) => {
+        
+        const result = await fetch( requestURL, {
+            method: 'POST',
+            headers: {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            },
+            body : formData
+        }).then( res => res.json());
+
+        console.log(result);
+        if ( result.status === 200 ) {
+            console.log ("[MemberAPICalls] callMemberModifyAPI result : ", result);
+            dispatch(postMemberModify(result));
+        }
+    };
+
 }
