@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import NavbarCSS from './BoardNavbar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { callBoardPostRegistAPI } from '../../apis/BoardPostAPICalls';
-
+//s
 function BoardNavbar() {
 
     const [modalOpen, setModalOpen] = useState(false);
