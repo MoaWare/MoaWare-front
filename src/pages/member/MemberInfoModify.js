@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MemCSS from './Member.module.css';
-import { callMemberInfoAPI } from "../../apis/MemberAPICalls";
+import { callMemberInfoAPI, callMemberModifyAPI } from "../../apis/MemberAPICalls";
 
 function MemberInfoModify(){
 
@@ -20,34 +20,29 @@ function MemberInfoModify(){
     const [imageUrl, setImageUrl] = useState('');
     const [ isCheck , setIsCheck ] = useState(false);
 
-
-    const onChangeHandler = (e) => {
-
-        setForm({
-            ...form,
-            [e.target.name] : e.target.value
-        });
-    };
     
+    /* 회원 정보 조회 */
     useEffect(()=>{
+
         dispatch(callMemberInfoAPI());
+
     },[]);
 
-    useEffect(() => {
-        if(image) {
-            const fileReader = new FileReader();
-            fileReader.onload = (e) => {
-                const { result } = e.target;
-                if(result) {
-                    setImageUrl(result);
-                }
-            }
-            fileReader.readAsDataURL(image);
-        }
-    }, 
-    [image]
-    );
 
+    /* 기본값 설정 */
+    useEffect(()=>{
+
+        if(info){
+
+            const { email, phone, extensionNum } = info;
+        
+            setForm({ empPwd: '', email, phone, extensionNum });
+        }
+
+    },[info]);
+
+
+    /* 비밀번호 유효성 검사 */
     useEffect(()=>{
 
         const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{10,18}$/;
@@ -60,6 +55,42 @@ function MemberInfoModify(){
 
     },[form])
 
+
+    /* 이미지 업로드 */
+    useEffect(() => {
+        if(image) {
+            const fileReader = new FileReader();
+            fileReader.onload = (e) => {
+                const { result } = e.target;
+                if(result) {
+                    setImageUrl(result);
+                }
+            }
+            fileReader.readAsDataURL(image);
+        }
+    }, [image]);
+
+
+    const { modify } = useSelector(state => state.memberReducer);
+    
+    useEffect(() => {
+        if(modify?.status === 200) {
+            alert(modify?.message);
+            navigate('/');
+        }
+    }, [modify]);
+
+
+
+    const onChangeHandler = (e) => {
+
+        setForm({
+            ...form,
+            [e.target.name] : e.target.value
+        });
+        console.log(e.target.value);
+    };
+
     const onChangeImageUpload = (e) => {
         const image = e.target.files[0];
         setImage(image);
@@ -69,17 +100,43 @@ function MemberInfoModify(){
         imageInput.current.click();
     }    
 
+    /* 수정 버튼 클릭 이벤트 */
     const onClickHandler = () => {
+
+        if( !form.empPwd ||
+            !form.email ||
+            !form.phone ||
+            !form.extensionNum 
+            ){
+                alert("정보를 모두 입력해주세요");
+                return;
+        }
+        
+        if(!isCheck){
+            alert("비밀번호 양식 오류  \n영문, 숫자를 포함한 10~14자 이내로 작성해주세요.");
+        }
+        
+
         console.log("callLoginAPI",form);
-        // dispatch(callMemberInfoLoginAPI(form));
+
+        const formData = new FormData();
+
+        formData.append("fileCategory.emp.empPwd", form?.empPwd);
+        formData.append("fileCategory.emp.email", form?.email);
+        formData.append("fileCategory.emp.phone", form?.phone);
+        formData.append("fileCategory.emp.extensionNum", form?.extensionNum);
+
+        if(image){
+            formData.append("fileInfo", image);
+        }
+
+        console.log("formData", formData);
+
+        dispatch(callMemberModifyAPI(formData));
     }
 
-    const onEnterKeyHandler = (e) => {
-        if(e.key === 'Enter' ) {
-            console.log("callLoginAPI",form);
-            // dispatch(callMemberInfoLoginAPI(form));
-        }
-    }
+
+
 
     return info && (
         <div className={MemCSS.wrapper}>
@@ -139,9 +196,8 @@ function MemberInfoModify(){
                         <input 
                             type="email" 
                             name="email"
-                            placeholder={ info?.email }
                             onChange={ onChangeHandler }
-                            value={form.email}
+                            value={ form?.email }
                             />
                     </label>
                     <label className={MemCSS.midForm}>
@@ -149,9 +205,8 @@ function MemberInfoModify(){
                         <input 
                             type="text" 
                             name="phone"
-                            placeholder={ info?.phone }
                             onChange={ onChangeHandler }
-                            value={form.phone}
+                            value={ form?.phone }
                             />
                     </label>
                     <label className={MemCSS.midForm}>
@@ -159,9 +214,8 @@ function MemberInfoModify(){
                         <input 
                             type="text" 
                             name="extensionNum"
-                            placeholder={ info?.extensionNum }
                             onChange={ onChangeHandler }
-                            value={form.extensionNum}
+                            value={  form?.extensionNum  }
                             />
                     </label>
                 </div>

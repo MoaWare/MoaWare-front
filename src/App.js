@@ -76,9 +76,6 @@ function App() {
             <Route index element={<ProtectedRoute projectCheck={true}><Project /></ProtectedRoute>} />
             <Route path="createProject" element={<CreateProject />} />
             <Route path="done" element={<DoneProject />} />
-            {/* <Route path="proj" element={<ProjDetailLayout />}>
-              <Route path="detail/:projCode" element={<ProjDetail />} />
-            </Route> */}
           </Route>
           {/* 전자 결재 */}
           <Route path="pay" element={<PayLayout />}>
@@ -134,21 +131,15 @@ function App() {
               <LoginPwdFind />
             </ProtectedRoute>
           } />
-        {/* 프로젝트 */}
-        {/* <Route path="project/proj" element={<ProjDetailLayout />}>
-        <Route 
-          path="proj" 
-          element={
-        <Route path="proj/detail/:projCode" 
+         {/* 프로젝트 */}
+         <Route path="proj/detail/:projCode" 
           element={              
             <ProtectedRoute projectCheck={true}>
               <ProjDetailLayout />
             </ProtectedRoute>
           }>
-            <Route path="detail/:projCode" element={<ProjDetail />} />
           <Route index element={<ProjDetail />} />
         </Route>
-        </Route> */}
         {/* 회원 정보 */}
         <Route 
           path="member"
