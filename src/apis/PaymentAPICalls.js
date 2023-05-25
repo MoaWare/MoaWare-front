@@ -1,14 +1,14 @@
-import { getPayment, getPaymentform, postPayment } from "../modules/PayMentModule";
+import { getPayment, getPaymentComplete, getPaymentRefuse, getPaymentStorage, getPaymentall, getPaymentform, getPaymenting, getPaymentwait, postPayment } from "../modules/PayMentModule";
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${ process.env.REACT_APP_RESTAPI_SERVER_PORT}`
 const PRE_URL = `http://${RESTAPI_SERVER_IP}:${RESTAPI_SERVER_PORT}`
 
 
-/* 결재문서 전체  검색 */
-export const CallPaymentListAPI = () => {
+/* 결재 문서 전체  조회 */
+export const CallPaymentAllListAPI = () => {
 
-    const requestURL = `${PRE_URL}/pay/list`;
+    const requestURL = `${PRE_URL}/pay/main`;
 
     return async( dispatch, getState ) => {
         
@@ -21,7 +21,7 @@ export const CallPaymentListAPI = () => {
 
         console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[PaymentAPICalls] CallPaymentListAPI result : ", result);
+            console.log ("[PaymentAPICalls] CallPaymentAllListAPI result : ", result);
             dispatch(getPayment(result));
         }
     };
@@ -45,7 +45,7 @@ export const CallPaymentFormAPI = () => {
 
         console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[PaymentAPICalls] CallPaymentListAPI result : ", result);
+            console.log ("[PaymentAPICalls] CallPaymentFormAPI result : ", result);
             dispatch(getPaymentform(result));
         }
     };
@@ -71,6 +71,121 @@ export const CallPaymentRegistAPI = (formData) => {
         if ( result.status === 200 ) {
             console.log ("[PaymentAPICalls] CallPaymentRegistAPI  result : ", result);
             dispatch(postPayment(result));
+        }
+    };
+
+}
+
+/* 결재 대기  문서 전체 조회 */
+export const CallPaymentWaitListAPI = (currentPage = 1) => {
+
+    const requestURL = `${PRE_URL}/pay/memberList?page=${currentPage}`;
+
+    return async( dispatch, getState ) => {
+        
+        const result = await fetch( requestURL, {
+            method: 'GET',
+            headers: {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then( res => res.json());
+
+        console.log( result);
+        if ( result.status === 200 ) {
+            console.log ("[PaymentAPICalls] CallPaymentWaitListAPI result : ", result);
+            dispatch(getPaymentwait(result));
+        }
+    };
+
+}
+
+/* 결재 진행  문서 전체  조회 */
+export const CallPaymentingListAPI = (currentPage = 1) => {
+
+    const requestURL = `${PRE_URL}/pay/list?page=${currentPage}`;
+
+    return async( dispatch, getState ) => {
+        
+        const result = await fetch( requestURL, {
+            method: 'GET',
+            headers: {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then( res => res.json());
+
+        console.log( result);
+        if ( result.status === 200 ) {
+            console.log ("[PaymentAPICalls] CallPaymentingListAPI result : ", result);
+            dispatch(getPaymenting(result));
+        }
+    };
+
+}
+
+/* 결재 완료  문서 전체  조회 */
+export const CallPaymentCompleteListAPI = (currentPage = 1) => {
+
+    const requestURL = `${PRE_URL}/pay/complete?page=${currentPage}`;
+
+    return async( dispatch, getState ) => {
+        
+        const result = await fetch( requestURL, {
+            method: 'GET',
+            headers: {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then( res => res.json());
+
+        console.log( result);
+        if ( result.status === 200 ) {
+            console.log ("[PaymentAPICalls] CallPaymentCompleteListAPI result : ", result);
+            dispatch(getPaymentComplete(result));
+        }
+    };
+
+}
+
+/* 결재 반려  문서 전체  조회 */
+export const CallPaymentRefuseListAPI = (currentPage = 1) => {
+
+    const requestURL = `${PRE_URL}/pay/refuse?page=${currentPage}`;
+
+    return async( dispatch, getState ) => {
+        
+        const result = await fetch( requestURL, {
+            method: 'GET',
+            headers: {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then( res => res.json());
+
+        console.log( result);
+        if ( result.status === 200 ) {
+            console.log ("[PaymentAPICalls] CallPaymentRefuseListAPI result : ", result);
+            dispatch(getPaymentRefuse(result));
+        }
+    };
+
+}
+
+/* 결재 임시 저장 문서 전체  조회 */
+export const CallPaymentStorageListAPI = (currentPage = 1) => {
+
+    const requestURL = `${PRE_URL}/pay/storage?page=${currentPage}`;
+
+    return async( dispatch, getState ) => {
+        
+        const result = await fetch( requestURL, {
+            method: 'GET',
+            headers: {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then( res => res.json());
+
+        console.log( result);
+        if ( result.status === 200 ) {
+            console.log ("[PaymentAPICalls] CallPaymentStorageListAPI result : ", result);
+            dispatch(getPaymentStorage(result));
         }
     };
 

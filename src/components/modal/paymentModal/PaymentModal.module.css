@@ -15,19 +15,17 @@
 .modalContainer{
     position: absolute;
     width: 70vw;
-    height: 90vh;
+    height: 91vh;
     padding: 10px;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);    
     z-index: 1000;
-    display: flex;
-    justify-content: space-around;
 }
 
 .paymentOrgDiv{    
     width: 28vw;
-    height: 90vh;
+    height: 86vh;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column; /*수평 정렬*/
@@ -36,8 +34,44 @@
     margin: 0;
     padding: 0;
     background-color: white;
-    /* border: solid 1px black; */
     border-radius: 25px;    
+}
+
+.paymemtDiv{
+    display: flex;
+    height: 86vh;
+    justify-content: space-around;
+}
+
+.paymentButtonDiv{
+    text-align: right;
+    
+}
+
+.paymentButton{
+    color: white;
+    background-color: #34709F;
+    margin-right: 2vw;
+    font-size: 0.8rem;
+    border-radius: 20px;
+    width: 5vw;
+    height: 4vh;
+    border: none;
+    font-weight: bold;
+
+}
+
+.paymentButtonCancle{
+
+    color: #34709F;
+    background-color: white;
+    margin-right: 2vw;
+    font-size: 0.8rem;
+    border-radius: 20px;
+    width: 5vw;
+    height: 4vh;
+    border: 1px solid #34709F;
+    font-weight: bold;
 }
 
 
@@ -61,7 +95,7 @@
 
 .paymentPayDiv{
     width: 28vw;
-    height: 90vh;
+    height: 86vh;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -95,32 +129,6 @@
     margin-right: 2.8vw;
 }
 
-/* .paymentDraftDiv input {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    height: 30px;
-    width: 90%;
-    border-radius: 25px;
-    text-indent: 1.2em;
-}
-
-.paymentDraftDiv textarea {
-    width: 90%;
-    height: 250px;
-    resize: none;
-    border-radius: 20px;
-    text-indent: 1em;
-} */
-
-/* .productReviewModalDiv button {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    height: 30px;
-    width: 250px;
-    border-radius: 25px;
-    background-color: white;
-    font-weight: bold;
-} */
 
 .directionImg{
     margin: 0 auto;

@@ -47,10 +47,10 @@ function WorkBtn() { // 컴포넌트 이름을 대문자로 시작하도록 수�
     } else if (quit?.state === 400) {
       alert(quit.message);
     }
-  }, [insert, quit, navigate]);
+  }, [insert, quit, ]);
 
-  console.log('insert: ', insert);
-  console.log('btn: ', btn);
+  // console.log('insert: ', insert);
+  // console.log('btn: ', btn);
 
   return (
     <nav className={WorkBtnCSS.navbar}>
@@ -67,7 +67,7 @@ function WorkBtn() { // 컴포넌트 이름을 대문자로 시작하도록 수�
             </div>
             {myWork.data && myWork.data.length > 0 ? (
               <div className={WorkBtnCSS.p2} key={myWork.data[0].workPk.workTime}>
-                <p className={WorkBtnCSS.ptime2}>출근 시간 {myWork.data[0].workTime.substring(11, 19)}</p>
+                <p className={WorkBtnCSS.ptime2}>출근 시간 {myWork.data[0].workTime ? myWork.data[0].workTime.substring(11, 19) : ""}</p>
                 <p className={WorkBtnCSS.ptime2}>퇴근 시간 {myWork.data[0].quitTime ? myWork.data[0].quitTime.substring(11, 19) : ""}</p>
               </div>
             ) : 
@@ -82,7 +82,18 @@ function WorkBtn() { // 컴포넌트 이름을 대문자로 시작하도록 수�
         // mywork 가없다면
         (
           <div>
-            <p></p>
+            {/* <p className={WorkBtnCSS.p}>근태 관리</p>
+            <div className={WorkBtnCSS.ptime}></div>
+            <div className={WorkBtnCSS.workBtn}>
+              <WorkTime
+                onClickStartHandler={onClickStartTime}
+                onClickEndHandler={onClickEndTime}
+              />
+            </div>
+            <div className={WorkBtnCSS.p2}>
+                <p className={WorkBtnCSS.ptime2}>출근 시간 </p>
+                <p className={WorkBtnCSS.ptime2}>퇴근 시간 </p>
+              </div> */}
           </div>
         )}
       </div>

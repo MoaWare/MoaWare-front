@@ -39,23 +39,23 @@ function WorkNavbar() {
     dispatch(callTimeQuitAPI({ quitTime }));
   }
 
-  useEffect(
-    () => {
-      if (insert?.status === 200) {
-        alert('출근 등록 되었습니다.')
-        navigate("/work");
-      } else if (insert?.state === 400) {
-        alert(insert.message);
-      }
+  // useEffect(
+  //   () => {
+  //     if (insert?.status === 200) {
+  //       alert('출근 등록 되었습니다.')
+  //       navigate("/work");
+  //     } else if (insert?.state === 400) {
+  //       alert(insert.message);
+  //     }
 
-      if (quit?.status === 200) {
-        alert('퇴근 등록 되었습니다.')
-        navigate("/work")
-      } else if (quit?.state === 400) {
-        alert(quit.message);
-      }
-    }, [insert, quit]
-  )
+  //     if (quit?.status === 200) {
+  //       alert('퇴근 등록 되었습니다.')
+  //       navigate("/work")
+  //     } else if (quit?.state === 400) {
+  //       alert(quit.message);
+  //     }
+  //   }, [insert, quit]
+  // )
 
   console.log('insert : ', insert);
   console.log('btn : ', btn);
@@ -103,7 +103,7 @@ function WorkNavbar() {
             {/* data 객체가 있다면 */}
             {myWork.data && myWork.data.length > 0 ? (
               <div className={WorkNavbarCSS.p2} key={myWork.data[0].workPk.workTime}>
-                <p className={WorkNavbarCSS.ptime2}>출근 시간 {myWork.data[0].workTime.substring(11, 19)}</p>
+                <p className={WorkNavbarCSS.ptime2}>출근 시간 {myWork.data[0].workTime ? myWork.data[0].workTime.substring(11, 19) : ""}</p>
                 <p className={WorkNavbarCSS.ptime2}>퇴근 시간 {myWork.data[0].quitTime ? myWork.data[0].quitTime.substring(11, 19) : ""}</p>
               </div>
             ) : 

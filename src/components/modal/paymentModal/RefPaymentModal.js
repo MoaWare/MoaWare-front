@@ -1,6 +1,6 @@
 import PaymentModalCSS from './PaymentModal.module.css';
 import OrgMainModal from './OrgMainModal';
-import { createContext, useContext, useRef, useState } from 'react';
+import {  useContext, useRef, useState } from 'react';
 import OrgSearchModal from './OrgSearchModal';
 import { TbSquareRoundedChevronLeft, TbSquareRoundedChevronRight } from 'react-icons/tb';
 
@@ -14,10 +14,15 @@ function RefPaymentModal( {setRefPaymentModal, payEmp }) {
 
   const{searchForm, setSearchForm, setFocusEmp, focusEmp, isFocus , setIsFocus, setRefPayMember} = useContext(orgContext);
 
-    const onClickHandler = () => {
+    const onClickSavedHandler = () => {
       setRefPaymentModal(false);
       setRefPayMember(focusEmp.map(focus => focus.emp));
-      };
+    };
+
+    const onClickCancleHandler = () => {
+      setRefPaymentModal(false);
+
+    }
 
     
     
@@ -50,21 +55,11 @@ function RefPaymentModal( {setRefPaymentModal, payEmp }) {
 
         <div className={PaymentModalCSS.modal}>
         <div className={PaymentModalCSS.modalContainer}>
+        <div className={PaymentModalCSS.paymemtDiv}>
           {/* <DndProvider backend={HTML5Backend}> */}
           <div className={PaymentModalCSS.paymentOrgDiv} ref={modalContainerRef}>
           {searchForm.isSearch? <OrgSearchModal/> 
             : <OrgMainModal />}
-            <button
-              style={{
-                border: "none",
-                margin: 0,
-                fontSize: "15px",
-                height: "10px",
-              }}
-              onClick={ onClickHandler }
-            >
-              돌아가기
-            </button>
           </div>
           <div className={ PaymentModalCSS.imgDiv} >
             <TbSquareRoundedChevronRight className={ PaymentModalCSS.directionImg} />
@@ -72,7 +67,7 @@ function RefPaymentModal( {setRefPaymentModal, payEmp }) {
           </div>
           <div className={PaymentModalCSS.paymentPayDiv}>
               <div className={PaymentModalCSS.paymentPayarea}>
-                <idv className={PaymentModalCSS.payTitleName}>참조자 정보</idv>
+                <div className={PaymentModalCSS.payTitleName}>참조자 정보</div>
                 
                 
                 { focusEmp.map( (focus, index) => (
@@ -85,9 +80,26 @@ function RefPaymentModal( {setRefPaymentModal, payEmp }) {
                 
               </div>
 
-              
           </div>
+          
           {/* </DndProvider> */}
+        </div>
+        <div className={PaymentModalCSS.paymentButtonDiv}>
+            <button
+               className={PaymentModalCSS.paymentButton}
+                onClick={ onClickSavedHandler }
+              >
+                저 장
+              </button>
+              <button
+                className={PaymentModalCSS.paymentButtonCancle}
+                onClick={ onClickCancleHandler }
+              >
+                취 소 
+              </button>     
+          </div>
+
+
         </div>
       </div>
   
