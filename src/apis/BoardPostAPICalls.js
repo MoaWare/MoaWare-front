@@ -54,6 +54,51 @@ export const callBoardPostDetailAPI = ({ postCode }) => {
      }
  }
 
+
+// 게시글 등록
+ export const callBoardPostRegistAPI = (formData) => {
+
+    const requestURL = `${PRE_URL}/boardPosts`;
+   
+    return async (dispatch, getState) => {
+   
+    const result = await fetch(requestURL, {
+                method: 'POST',
+               headers: {
+                   "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+               },
+               body: formData
+           }).then(response => response.json());
+   
+           if (result.status === 200) {
+               console.log('[BoardPostAPICalls] : callBoardPostRegistAPI result : ', result);
+            //    dispatch(postBoardPost(result));
+            }
+       }
+    }
+ 
+// export const callBoardPostUpdateAPI = (formData) => {
+
+//     const requestURL = `${PRE_URL}/boardPosts`;
+
+//     return async (dispatch, getState) => {
+
+//         const result = await fetch(requestURL, {
+//             method: 'PUT',
+//             headers: {
+//                 "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+//             },
+//             body: formData
+//         }).then(response => response.json());
+
+//         if (result.status === 200) {
+//             console.log('[BoardPostAPICalls] callBoardPostUpdateAPI result :', result);
+//             dispatch(putBoardPost(result));
+//         }
+//     }
+
+// }
+
 // export const callBoardpostSearchListAPI = ({ search, currentPage = 1 }) => {
 
 //     const requestURL = `${PRE_URL}/boardposts/search?search=${search}&page=${currentPage}`;
@@ -92,26 +137,7 @@ export const callBoardPostDetailAPI = ({ postCode }) => {
 //     }
 // }
 
-// export const callBoardPostRegistAPI = (formData) => {
 
-//     const requestURL = `${PRE_URL}/boardPosts`;
-
-//     return async (dispatch, getState) => {
-
-//         const result = await fetch(requestURL, {
-//             method: 'POST',
-//             headers: {
-//                 "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
-//             },
-//             body: formData
-//         }).then(response => response.json());
-
-//         if (result.status === 200) {
-//             console.log('[BoardPostAPICalls] : callBoardPostRegistAPI result : ', result);
-//             dispatch(postBoardPost(result));
-//         }
-//     }
-// }
 
 // export const callBoardPostDetailForAdminAPI = ({ postCode }) => {
 
@@ -133,25 +159,4 @@ export const callBoardPostDetailAPI = ({ postCode }) => {
 //     }
 // }
 
-// export const callBoardPostUpdateAPI = (formData) => {
-
-//     const requestURL = `${PRE_URL}/boardPosts`;
-
-//     return async (dispatch, getState) => {
-
-//         const result = await fetch(requestURL, {
-//             method: 'PUT',
-//             headers: {
-//                 "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
-//             },
-//             body: formData
-//         }).then(response => response.json());
-
-//         if (result.status === 200) {
-//             console.log('[BoardPostAPICalls] callBoardPostUpdateAPI result :', result);
-//             dispatch(putBoardPost(result));
-//         }
-//     }
-
-// }
 

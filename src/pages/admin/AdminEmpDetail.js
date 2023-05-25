@@ -17,38 +17,47 @@ function AdminEmpDetail() {
 
     return (
         <>
-            <div>
-                
-                    <table className={CSS.main}>
+            <div className={CSS.main}>
+
+            <div class={CSS.menutitle}> 계정 관리 {">"} 상세 정보 </div>
+
+                <table className={CSS.container} >
                         <tbody>
                             {detail &&(
                             <>
                             
                             <tr key={detail.empCode}>   
                                 
-                                    <th className={ CSS.tablebox } >사번</th>
-                                    <td className={ CSS.table }>{detail.empCode}</td>
+                                    <th className={ CSS.th } >사번</th>
+                                    <td className={ CSS.td }>{detail.empCode}</td>
                                 </tr>
                                 <tr>
-                                    <th className={ CSS.table }>이름</th>
-                                    <td className={ CSS.table }>{detail.empName}</td>
+                                    <th className={ CSS.th }>이름</th>
+                                    <td className={ CSS.td }>{detail.empName}</td>
                                 </tr>
                                 <tr>
-                                    <th className={ CSS.table } >ID</th>    
-                                    <td className={ CSS.table }>{detail.empID}</td>
+                                    <th className={ CSS.th } >ID</th>    
+                                    <td className={ CSS.td }>{detail.empID}</td>
                                 </tr>
                                 <tr>
-                                    <th className={ CSS.table }>직급</th>
-                                    <td className={ CSS.table }>{detail.job.jobName}</td>
+                                    <th className={ CSS.th }>직급</th>
+                                    <td className={ CSS.td }>{detail.job.jobName}</td>
                                 </tr>
                                 <tr>
-                                    <th className={ CSS.table }>부서</th>
-                                    <td className={ CSS.table }>{detail.dept.deptName}</td>
+                                    <th className={ CSS.th }>부서</th>
+                                    <td className={ CSS.td }>{detail.dept.deptName}</td>
                             </tr>
+
+                            
                                 </>
                                 )}
+                                
                         </tbody>
-                    </table>
+                </table>
+                <div className={CSS.content}>
+                                    <button className={CSS.boardcancel}>취소</button>
+                                    <button className={CSS.modifypost}>수정</button>
+                                    </div>
 
 
             </div>

@@ -97,6 +97,7 @@ function App() {
             <Route index element={<BoardPostList />} />
             <Route path=":postCode" element={<BoardPostDetail />} />
             <Route path="boards/:boardCode" element={<BoardPostList />} />
+            {/* <Route path="product-registration" element={<BoardPostRegistration />}/> */}
 
           </Route>
           {/* 관리자 */}
