@@ -112,7 +112,7 @@ function Payment () {
                 </td>
               </tr>
               
-              <tr></tr>
+
               <tr className={payCSS.attach}>
                 <th>첨부파일</th>
                 <td colSpan="5"><input type='file' className={payCSS.input}/></td>

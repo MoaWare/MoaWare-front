@@ -11,7 +11,6 @@ import WorkRestReqList from './pages/users/works/WorkRestReqList';
 import WorkRestList from './pages/users/works/WorkRestList';
 import LoginIdFind from "./pages/member/LoginIdFind";
 import ProtectedRoute from "./components/router/ProtectedRoute";
-import OrganizaionSearch from "./pages/organization/OrganizationSearch";
 import OrganizationSearch from "./pages/organization/OrganizationSearch";
 import OrganizationMain from "./pages/organization/OrganizationMain";
 import LoginPwdFind from "./pages/member/LoginPwdFind";

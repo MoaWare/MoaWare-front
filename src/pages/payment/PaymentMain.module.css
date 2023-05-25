@@ -59,15 +59,17 @@
 }
 
 .payListTitle{
-    padding-top: 2rem;
+    padding-top: 0.8rem;
     padding-left: 2rem;
+    margin-bottom: 0.5rem;
     font-weight: bold;
     color: rgba(37, 79, 112, 1);
+    height: 3vh;
+    line-height: 3vh;
 }
 
 .payListTable{
     border-collapse: collapse;
-    margin: 1rem;
     width: 96%;
     color: rgba(37, 79, 112, 1);
 }

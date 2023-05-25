@@ -1,9 +1,30 @@
+import { useDispatch, useSelector } from 'react-redux';
 import PagingBar from '../../components/common/PagingBar';
-import payBoardCSS from './PaymentBoard.module.css';
 import payCSS from './PaymentMain.module.css';
 import { ImAttachment } from 'react-icons/im';
+import { useEffect, useState } from 'react';
+import { CallPaymentWaitListAPI } from '../../apis/PaymentAPICalls';
 
-function PaymentBoardContext ({pay, pageInfo, setCurrentPage}) {
+function PaymentMainBoard ({setPayWait}) {
+
+    const disPatch = useDispatch();
+    const  payment  = useSelector( state => state.paymentReducer);
+    const pay = payment.data&&payment.data.content;
+    const pageInfo = payment.pageInfo;
+    const [ currentPage, setCurrentPage ] = useState(1);
+
+    console.log("PaymentMainBoard의 pay는 : ", payment);
+
+    useEffect( ()=>{
+        disPatch(CallPaymentWaitListAPI(currentPage));
+    },[currentPage]
+        
+    );
+
+    useEffect( ()=>{
+        setPayWait(payment.data&& payment.data.totalElements); 
+    },[pay])
+    
 
     return (
         <div className={payCSS.payList}>
@@ -39,4 +60,4 @@ function PaymentBoardContext ({pay, pageInfo, setCurrentPage}) {
     )
 }
 
-export default PaymentBoardContext;
+export default PaymentMainBoard;
