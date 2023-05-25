@@ -42,6 +42,7 @@ import PaymentCompleteBoard from "./pages/payment/PaymentCompleteBoard";
 import PaymentingBoard from"./pages/payment/PaymentingBoard";
 import PaymentRefuseBoard from "./pages/payment/PaymentRefuseBoard";
 import PaymentStorageBoard from "./pages/payment/PaymentStorageBoard";
+import PaymentSign from "./pages/payment/PaymentSign";
 
 
 
@@ -88,7 +89,7 @@ function App() {
             <Route path="completed" element={<PaymentCompleteBoard />} />
             <Route path="refuse" element={<PaymentRefuseBoard />} />
             <Route path="storage" element={<PaymentStorageBoard />} />
-            <Route path="sign" element={<PaymentMain />} />
+            <Route path="sign" element={<PaymentSign />} />
           </Route>
 
           {/* 일정 관리 */}
