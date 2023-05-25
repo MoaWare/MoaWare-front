@@ -1,4 +1,4 @@
-import { getSchedule } from "../modules/ScheduleMoule";
+import { getSchedules, getSchedule } from "../modules/ScheduleModule";
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${ process.env.REACT_APP_RESTAPI_SERVER_PORT}`
@@ -21,8 +21,33 @@ export const callScheduleListAPI = () => {
 
         if(result.status === 200){
             console.log("[ScheduleAPICalls] callScheduleListAPI result : ", result);
+            dispatch(getSchedules(result));
+        }
+
+    }
+
+}
+
+/* 상세 캘린더 조회 */
+export const callScheduleDetailAPI = ({ schCode }) => {
+
+    const requestURL = `${PRE_URL}/calendar/${schCode}`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method: 'GET',
+            headers : {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(res => res.json());
+
+        if(result.status === 200){
+            console.log("[ScheduleAPICalls] callScheduleDetailAPI result : ", result);
             dispatch(getSchedule(result));
         }
+
     }
 
 }

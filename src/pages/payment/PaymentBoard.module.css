@@ -1,0 +1,37 @@
+
+.background{
+    margin-top : 10vh;
+    margin-left: 20vw;
+    width: 78vw;
+    height: 86vh;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.titleDiv{
+    width: 74vw;
+    margin: 0 auto;
+}
+
+.title{
+    color: rgba(37, 79, 112, 1);
+    font-size: 20px;
+    font-weight: bold;
+    height: 6vh;
+    line-height: 6vh;
+}
+
+.payListTable{
+    border-collapse: collapse;
+    margin: 1rem;
+    width: 96%;
+    color: rgba(37, 79, 112, 1);
+}
+.payListTable th {
+    width: 60vw;
+    padding: 2vh;
+    border-top: 1px solid rgba(182, 189, 198, 0.5);
+    border-bottom: 1px solid rgba(182, 189, 198, 0.5);
+    height: 5vh;
+    font-weight: 700;
+}

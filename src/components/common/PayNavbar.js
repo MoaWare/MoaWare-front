@@ -8,7 +8,9 @@ function PayNavbar() {
   return (
     <nav className={NavbarCSS.navbar}>
       <div className={NavbarCSS.wrap}>
-        <div className={NavbarCSS.title}>전자 결재</div>
+        <NavLink to="/pay" activeclassname={NavbarCSS.active} exact="ture">
+          <div className={NavbarCSS.title}>전자 결재</div>
+        </NavLink>
         <ul className={NavbarCSS.submenu}>
 
           <li className={location.pathname === '/pay/draft' ? NavbarCSS.active : {}}>
@@ -17,7 +19,7 @@ function PayNavbar() {
             </NavLink>
           </li>
           <li className={location.pathname === '/pay/wait' ? NavbarCSS.active : {}}>
-            <NavLink to="/payWait" activeclassname={NavbarCSS.active}>
+            <NavLink to="/pay/wait" activeclassname={NavbarCSS.active}>
                 결재 대기함
             </NavLink>
           </li>

@@ -6,28 +6,23 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import googleCalendarPlugin from '@fullcalendar/google-calendar';
 import interactionPlugin from '@fullcalendar/interaction';
 import '../schedule/Schedule.css';
-import { callScheduleListAPI } from '../../apis/ScheduleAPICalls';
+import { callScheduleListAPI, callScheduleDetailAPI } from '../../apis/ScheduleAPICalls';
 import ScheduleModal from '../../components/modal/scheduleModal/ScheduleModal';
 
 function Schedule() {
-    
-  const handleEventDrop = (info) => {
-    console.log('이벤트를 옮길래! :', info.event);
-  };
-
-  const handleEventClick = (info) => {
-    console.log('이벤트 클릭~ :', info.event);
-  };
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { schedule } = useSelector(state => state.scheduleReducer);
+  const { schedules, schedule } = useSelector(state => state.scheduleReducer);
+  const [scheduleModal, setScheduleModal] = useState(false);
 
   useEffect(() => {
     dispatch(callScheduleListAPI());
   }, [dispatch]);
 
-  console.log("일정 나와라! : ", schedule);
+  const handleEventDrop = (info) => {
+    console.log('일정을 옮길래! :', info.event);
+  };
 
   const getEventColor = (categoryCode) => {
     switch (categoryCode) {
@@ -48,43 +43,60 @@ function Schedule() {
     }
   };
 
-  const formattedEvents = schedule?.map(event => ({
+  /* 전체 일정 */
+  const formattedEvents = schedules?.map(event => ({
     title: event.schType.schCategoryName,
     start: event.schDate,
     end: event.schEndDate,
     allDay: true,
-    backgroundColor: getEventColor(event.schType.schCategoryCode)
+    backgroundColor: getEventColor(event.schType.schCategoryCode),
+    id: event.schCode // Add id property to identify the event
   })) || [];
 
+  /* 상세 일정 */
+  const handleEventClick = (info) => {
+    const schCode = info.event.id; // Get the event id
+    dispatch(callScheduleDetailAPI({ schCode }));
+  };
+
+  /* 모달창! */
+  useEffect(() => {
+    if (schedule) {
+      console.log('일정 누르기!: ', schedule);
+      setScheduleModal(true);
+    }
+  }, [schedule]);
+
   return (
-    <div className='wrapper'>
-      <div className='wrap'>
-        <FullCalendar
-          plugins={[dayGridPlugin, googleCalendarPlugin, interactionPlugin]}
-          googleCalendarApiKey={process.env.REACT_APP_GOOGLE_API_KEY}
-          // events={{
-            // googleCalendarId: 'moawarew@gmail.com';
-          // }}
-          events={ formattedEvents }
-          headerToolbar={{
-            left: 'prev,today,next',
-            center: 'title',
-            right: 'dayGridYear,dayGridMonth,dayGridWeek,dayGridDay',
-          }}
-          buttonText={{
-            year: '연간',
-            month: '월간',
-            week: '주간',
-            day: '일간',
-            today: '오늘'
-          }}
-          locale='ko'
-          editable={true}
-          eventDrop={handleEventDrop}
-          eventClick={handleEventClick}
-        />
+    <>
+      {/* { scheduleModal ? <ScheduleModal/> : null } */}
+      { scheduleModal ? <ScheduleModal setScheduleModal={setScheduleModal} /> : null }
+      <div className="wrapper">
+        <div className="wrap">
+          <FullCalendar
+            plugins={[dayGridPlugin, googleCalendarPlugin, interactionPlugin]}
+            googleCalendarApiKey={process.env.REACT_APP_GOOGLE_API_KEY}
+            events={formattedEvents}
+            headerToolbar={{
+              left: 'prev,today,next',
+              center: 'title',
+              right: 'dayGridYear,dayGridMonth,dayGridWeek,dayGridDay',
+            }}
+            buttonText={{
+              year: '연간',
+              month: '월간',
+              week: '주간',
+              day: '일간',
+              today: '오늘',
+            }}
+            locale="ko"
+            editable={true}
+            eventDrop={handleEventDrop}
+            eventClick={handleEventClick}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

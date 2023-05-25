@@ -1,29 +1,24 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { callScheduleListAPI } from "../../../apis/ScheduleAPICalls";
 import SchModalCSS from './ScheduleModal.module.css';
 
-function ScheduleModal() {
+function ScheduleModal({ setSchedule,setScheduleModal }) {
 
-    const { sch } = useSelector( (state) => state.scheduleReducer);
-    const dispatch = useDispatch();
-
-    useEffect (
-        () => {
-            dispatch(callScheduleListAPI());
-        },
-        []
-    );
+    /* 돌아가기 버튼 */
+    const handleCancleEventClick = () => {
+        setScheduleModal(false); // 모달을 닫음
+    }
 
     return (
-        <div className={SchModalCSS.wrapper}>
-            <div>모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당</div>
-            <div>모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당</div>
-            <div>모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당</div>
-            <div>모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당</div>
-            <div>모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당</div>
-            <div>모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당</div>
-            <div>모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당</div>
+        <div className={SchModalCSS.modal}>
+            <div className={SchModalCSS.modalContainer}>
+                <div className={SchModalCSS.wrapper}>
+                    <div>모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당모달입니당</div>
+                    <button
+                        onClick={ handleCancleEventClick }
+                    >
+                    취소하기
+                    </button>
+                </div>
+            </div>
         </div>
     );
 

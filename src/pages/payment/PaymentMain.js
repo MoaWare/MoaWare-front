@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import payCSS from './PaymentMain.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { CallPaymentListAPI } from '../../apis/PaymentAPICalls';
+import { ImAttachment } from 'react-icons/im';
 
 
 function PaymentMain () {
@@ -35,7 +36,7 @@ function PaymentMain () {
                 <div className={payCSS.paySummaryItem}>
                     <div className={payCSS.itemTitle}>결재 완료</div>
                     <hr className={payCSS.itemHr}/>
-                   <div className={payCSS.itemText}>{pay && pay.filter(pay => pay.payStatus === '결재 완료').length}건</div>
+                   <div className={payCSS.itemText}>{pay && pay.filter(pay => pay.payStatus === '결재완료').length}건</div>
                 </div>
                 <div className={payCSS.paySummaryItem}>
                     <div className={payCSS.itemTitle}>반려 문서</div>
@@ -62,9 +63,9 @@ function PaymentMain () {
                             <td>{pay.form.formTitle}</td> 
                             <td>{pay.draftDate.substring(0, 10)}</td> 
                             <td>{pay.draftTitle}</td> 
-                            <td>첨부</td> 
+                            <td>{pay.payFileCategory ? <ImAttachment/> : ''}</td> 
                             <td>{pay.payStatus}</td> 
-                            <td>기안자</td> 
+                            <td>{pay.emp.empName}</td> 
                         </tr>
                         :  ''
                     )}   
