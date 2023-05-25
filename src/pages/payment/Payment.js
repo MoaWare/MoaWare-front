@@ -81,9 +81,7 @@ function Payment () {
 
     const [ isButton, setIsButton ] = useState(false);
     const onButtonHandler= () => {
-      console.log("input 숫자 ", conutInput)
-      console.log("input 숫자 비교값 폼에 쓴거 ", Object.keys(form).length)
-      if(Object.keys(form).length === conutInput){
+
         if(isButton){
           setIsButton(false);
         } else {
@@ -123,9 +121,7 @@ function Payment () {
       alert("저장 되었습니다.");
         navigator("/pay");
 
-      } else{
-        alert("양식을 전체 채우세요");
-      }
+      
       
     }
 
@@ -386,7 +382,7 @@ function Payment () {
                 </td>
               </tr>
               
-              <tr></tr>
+            
               <tr className={payCSS.attach}>
                 <th>첨부파일</th>
                 <td colSpan="5"><input type='file' name="payFile" ref={fileInput} className={payCSS.input}

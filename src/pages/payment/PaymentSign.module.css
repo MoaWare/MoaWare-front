@@ -1,0 +1,111 @@
+.background{
+    margin-top : 10vh;
+    margin-left: 20vw;
+    width: 78vw;
+    height: 86vh;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.titleDiv{
+    width: 74vw;
+    margin: 0 auto;
+}
+
+.title{
+    color: rgba(37, 79, 112, 1);
+    font-size: 20px;
+    font-weight: bold;
+    height: 6vh;
+    line-height: 6vh;
+
+}
+
+.imgDiv{
+    
+    width: 95%;
+    height: 80vh;
+    margin: 0 auto;
+    padding-left: 1vw; 
+    display: flex;
+    justify-content: flex-start;
+}
+
+.imgTitleDiv{
+    border-top: 1px solid gray;
+    color: rgba(37, 79, 112, 1);
+    font-size: 20px;
+    font-weight: bold;
+    height: 2vh;
+    width: 95%;
+    margin: 0 auto;
+}
+
+
+.imgTitle{
+    color: rgba(37, 79, 112, 1);
+    font-size: 20px;
+    font-weight: bold;
+    height: 6vh;
+    line-height: 6vh;
+    width: 30%;
+    margin-left: 5vw;
+    margin-bottom: 2vh;
+}
+
+.imgBox{
+    background-color: skyblue;
+    width: 35%;
+    height: 45%;
+    margin-left: 3vw;
+}
+.imgTextBox{
+    width: 30vw;
+}
+.imgNameBox{
+
+    margin-left: 10vw
+}
+
+.imgNameTilte{
+    width: 20vw;
+    height: 30vh;
+    font-size: 14px;
+    text-align: center;
+    background-color: rgba(37, 79, 112, 1);
+    color: white;
+}
+
+.imgName{
+    border: 1px solid rgba(37, 79, 112, 1);
+}
+
+
+
+
+
+
+.buttonDiv{
+    display: flex;
+    justify-content: space-around;
+    width: 20vw;
+    height: 10vh;
+}
+
+.saveButton{
+    background-color: rgba(37, 79, 112, 1);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    width: 8vw;
+    height: 4vh;
+}
+
+.cancleButton{
+    background-color: white;
+    color: rgba(37, 79, 112, 1);
+    border: 1px solid rgba(37, 79, 112, 1);
+    border-radius: 10px;
+    width: 8vw;
+    height: 4vh;
+}
