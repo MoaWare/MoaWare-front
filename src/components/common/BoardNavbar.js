@@ -1,7 +1,25 @@
+import { useEffect, useState } from 'react';
+import BoardPostModal from '../modal/boardPostModal/BoardPostModal';
+
+import { useNavigate  } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import NavbarCSS from './BoardNavbar.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { callBoardPostRegistAPI } from '../../apis/BoardPostAPICalls';
 
 function BoardNavbar() {
+
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const openModal = () => {
+        setModalOpen(true);
+      };
+    
+      const closeModal = () => {
+        setModalOpen(false);
+      };
+
+
     return (
         <nav className={NavbarCSS.navbar}>
             <div className={NavbarCSS.wrap}>
@@ -22,9 +40,19 @@ function BoardNavbar() {
                             부서&직급 게시판
                         </NavLink>
                     </li>
-
                 
                 </ul>
+            
+                                    <div className={NavbarCSS.boardPostButtonDiv}>
+                    <button>
+                        <NavLink to="/board-post-modal">
+                        글 작성
+                        </NavLink>
+                    </button>
+                    </div>
+
+                
+              
             </div>
         </nav>
     );
