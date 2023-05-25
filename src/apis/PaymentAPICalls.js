@@ -1,4 +1,4 @@
-import { getPayment, getPaymentall, getPaymentform, getPaymenting, getPaymentwait, postPayment } from "../modules/PayMentModule";
+import { getPayment, getPaymentComplete, getPaymentRefuse, getPaymentall, getPaymentform, getPaymenting, getPaymentwait, postPayment } from "../modules/PayMentModule";
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${ process.env.REACT_APP_RESTAPI_SERVER_PORT}`
@@ -100,7 +100,7 @@ export const CallPaymentWaitListAPI = (currentPage = 1) => {
 }
 
 /* 결재 진행  문서 전체  조회 */
-export const CallPaymentListAPI = (currentPage = 1) => {
+export const CallPaymentingListAPI = (currentPage = 1) => {
 
     const requestURL = `${PRE_URL}/pay/list?page=${currentPage}`;
 
@@ -117,6 +117,52 @@ export const CallPaymentListAPI = (currentPage = 1) => {
         if ( result.status === 200 ) {
             console.log ("[PaymentAPICalls] CallPaymentListAPI result : ", result);
             dispatch(getPaymenting(result));
+        }
+    };
+
+}
+
+/* 결재 완료  문서 전체  조회 */
+export const CallPaymentCompleteListAPI = (currentPage = 1) => {
+
+    const requestURL = `${PRE_URL}/pay/complete?page=${currentPage}`;
+
+    return async( dispatch, getState ) => {
+        
+        const result = await fetch( requestURL, {
+            method: 'GET',
+            headers: {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then( res => res.json());
+
+        console.log( result);
+        if ( result.status === 200 ) {
+            console.log ("[PaymentAPICalls] CallPaymentListAPI result : ", result);
+            dispatch(getPaymentComplete(result));
+        }
+    };
+
+}
+
+/* 결재 반려  문서 전체  조회 */
+export const CallPaymentRefuseListAPI = (currentPage = 1) => {
+
+    const requestURL = `${PRE_URL}/pay/refuse?page=${currentPage}`;
+
+    return async( dispatch, getState ) => {
+        
+        const result = await fetch( requestURL, {
+            method: 'GET',
+            headers: {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then( res => res.json());
+
+        console.log( result);
+        if ( result.status === 200 ) {
+            console.log ("[PaymentAPICalls] CallPaymentListAPI result : ", result);
+            dispatch(getPaymentRefuse(result));
         }
     };
 

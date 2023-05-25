@@ -39,7 +39,7 @@ function PaymentMainBoard ({setPayWait}) {
                 <th>상태</th>
                 <th>결재 요청자</th>
             </tr>
-            { pay && pay.map( pay => pay.payStatus === '진행중' ?
+            { pay && pay.map( pay => 
                 <tr key={pay.payCode}>
                     <td>{pay.payCode}</td> 
                     <td>{pay.form.formTitle}</td> 
@@ -49,7 +49,6 @@ function PaymentMainBoard ({setPayWait}) {
                     <td>{pay.payStatus}</td> 
                     <td>{pay.emp.empName}</td> 
                 </tr>
-                :  ''
             )}   
         </tbody>
     </table>

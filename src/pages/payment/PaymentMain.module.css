@@ -70,7 +70,6 @@
 
 .payListTable{
     border-collapse: collapse;
-    width: 96%;
     color: rgba(37, 79, 112, 1);
 }
 .payListTable th {

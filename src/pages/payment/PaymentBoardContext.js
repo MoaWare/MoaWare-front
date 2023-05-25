@@ -1,13 +1,13 @@
 import PagingBar from '../../components/common/PagingBar';
 import payBoardCSS from './PaymentBoard.module.css';
-import payCSS from './PaymentMain.module.css';
 import { ImAttachment } from 'react-icons/im';
 
 function PaymentBoardContext ({pay, pageInfo, setCurrentPage}) {
 
+    console.log("PaymentBoardContext의 pay는 ? : " , pay);
     return (
-        <div className={payCSS.payList}>
-        <table className={payCSS.payListTable}>
+        <div className={payBoardCSS.payList}>
+        <table className={payBoardCSS.payListTable}>
         <tbody>
             <tr>
                 <th>문서 번호</th>
@@ -18,7 +18,7 @@ function PaymentBoardContext ({pay, pageInfo, setCurrentPage}) {
                 <th>상태</th>
                 <th>결재 요청자</th>
             </tr>
-            { pay && pay.map( pay => pay.payStatus === '진행중' ?
+            { pay && pay.map( pay =>
                 <tr key={pay.payCode}>
                     <td>{pay.payCode}</td> 
                     <td>{pay.form.formTitle}</td> 
@@ -28,7 +28,6 @@ function PaymentBoardContext ({pay, pageInfo, setCurrentPage}) {
                     <td>{pay.payStatus}</td> 
                     <td>{pay.emp.empName}</td> 
                 </tr>
-                :  ''
             )}   
         </tbody>
     </table>

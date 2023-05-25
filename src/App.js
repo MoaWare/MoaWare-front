@@ -27,9 +27,6 @@ import ScheduleLayout from "./layouts/ScheduleLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import Admin from "./pages/admin/Admin";
 import AdminEmployees from "./pages/admin/AdminEmployees";
-
-
-import PaymentList from "./pages/payment/PaymentList";
 import BoardLayout from "./layouts/BoardLayout";
 import BoardPostList from "./pages/board/BoardPostList";
 import BoardPostDetail from "./pages/board/BoardPostDetail";
@@ -40,8 +37,10 @@ import MemberInfoModify from "./pages/member/MemberInfoModify";
 import CreateProject from "./pages/project/CreateProject";
 import DoneProject from "./pages/project/DoneProject";
 import AdminEmpDetail from "./pages/admin/AdminEmpDetail";
-import PaymentBoard from "./pages/payment/PaymentBoard";
-
+import PaymentWaitBoard from "./pages/payment/PaymentWaitBoard";
+import PaymentCompleteBoard from "./pages/payment/PaymentCompleteBoard";
+import PaymentingBoard from"./pages/payment/PaymentingBoard";
+import PaymentRefuseBoard from "./pages/payment/PaymentRefuseBoard";
 
 
 
@@ -83,8 +82,12 @@ function App() {
           <Route path="pay" element={<PayLayout />}>
             <Route index element={<PaymentMain />} />
             <Route path="draft" element={<Payment />} />
-            <Route path="wait" element={<PaymentBoard />} />
-            <Route path="paying" element={<PaymentList />} />
+            <Route path="wait" element={<PaymentWaitBoard />} />
+            <Route path="paying" element={<PaymentingBoard />} />
+            <Route path="completed" element={<PaymentCompleteBoard />} />
+            <Route path="refuse" element={<PaymentRefuseBoard />} />
+            <Route path="storage" element={<PaymentMain />} />
+            <Route path="sign" element={<PaymentMain />} />
           </Route>
 
           {/* 일정 관리 */}
