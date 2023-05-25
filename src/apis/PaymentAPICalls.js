@@ -1,4 +1,4 @@
-import { getPayment, getPaymentComplete, getPaymentRefuse, getPaymentall, getPaymentform, getPaymenting, getPaymentwait, postPayment } from "../modules/PayMentModule";
+import { getPayment, getPaymentComplete, getPaymentRefuse, getPaymentStorage, getPaymentall, getPaymentform, getPaymenting, getPaymentwait, postPayment } from "../modules/PayMentModule";
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${ process.env.REACT_APP_RESTAPI_SERVER_PORT}`
@@ -45,7 +45,7 @@ export const CallPaymentFormAPI = () => {
 
         console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[PaymentAPICalls] CallPaymentListAPI result : ", result);
+            console.log ("[PaymentAPICalls] CallPaymentFormAPI result : ", result);
             dispatch(getPaymentform(result));
         }
     };
@@ -92,7 +92,7 @@ export const CallPaymentWaitListAPI = (currentPage = 1) => {
 
         console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[PaymentAPICalls] CallPaymentListAPI result : ", result);
+            console.log ("[PaymentAPICalls] CallPaymentWaitListAPI result : ", result);
             dispatch(getPaymentwait(result));
         }
     };
@@ -115,7 +115,7 @@ export const CallPaymentingListAPI = (currentPage = 1) => {
 
         console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[PaymentAPICalls] CallPaymentListAPI result : ", result);
+            console.log ("[PaymentAPICalls] CallPaymentingListAPI result : ", result);
             dispatch(getPaymenting(result));
         }
     };
@@ -138,7 +138,7 @@ export const CallPaymentCompleteListAPI = (currentPage = 1) => {
 
         console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[PaymentAPICalls] CallPaymentListAPI result : ", result);
+            console.log ("[PaymentAPICalls] CallPaymentCompleteListAPI result : ", result);
             dispatch(getPaymentComplete(result));
         }
     };
@@ -161,8 +161,31 @@ export const CallPaymentRefuseListAPI = (currentPage = 1) => {
 
         console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[PaymentAPICalls] CallPaymentListAPI result : ", result);
+            console.log ("[PaymentAPICalls] CallPaymentRefuseListAPI result : ", result);
             dispatch(getPaymentRefuse(result));
+        }
+    };
+
+}
+
+/* 결재 임시 저장 문서 전체  조회 */
+export const CallPaymentStorageListAPI = (currentPage = 1) => {
+
+    const requestURL = `${PRE_URL}/pay/storage?page=${currentPage}`;
+
+    return async( dispatch, getState ) => {
+        
+        const result = await fetch( requestURL, {
+            method: 'GET',
+            headers: {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then( res => res.json());
+
+        console.log( result);
+        if ( result.status === 200 ) {
+            console.log ("[PaymentAPICalls] CallPaymentStorageListAPI result : ", result);
+            dispatch(getPaymentStorage(result));
         }
     };
 

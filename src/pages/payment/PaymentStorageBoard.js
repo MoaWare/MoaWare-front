@@ -2,10 +2,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import payBoardCSS from './PaymentBoard.module.css';
 import PaymentBoardContext from './PaymentBoardContext';
 import { useEffect, useState } from 'react';
-import { CallPaymentWaitListAPI } from '../../apis/PaymentAPICalls';
+import { CallPaymentRefuseListAPI, CallPaymentStorageListAPI, CallPaymentWaitListAPI } from '../../apis/PaymentAPICalls';
 
 
-function PaymentWaitBoard() {
+function PaymentStorageBoard () {
+
 
     const disPatch = useDispatch();
     const  payment  = useSelector( state => state.paymentReducer);
@@ -13,10 +14,10 @@ function PaymentWaitBoard() {
     const pageInfo = payment.pageInfo;
     const [ currentPage, setCurrentPage ] = useState(1);
 
-    console.log("PaymentWaitBoard의 pay는 : ", payment);
+    console.log("PaymentStorageBoard의 pay는 : ", payment);
 
     useEffect( ()=>{
-        disPatch(CallPaymentWaitListAPI(currentPage));
+        disPatch(CallPaymentStorageListAPI(currentPage));
     },[currentPage]
         
     );
@@ -25,7 +26,7 @@ function PaymentWaitBoard() {
         <div className={payBoardCSS.background}>
 
             <div className={payBoardCSS.titleDiv}>
-            <div className={payBoardCSS.title}>결재 대기 문서</div>
+            <div className={payBoardCSS.title}>임시 저장 문서</div>
 
             </div>
 
@@ -33,6 +34,7 @@ function PaymentWaitBoard() {
 
         </div>
     );
+    
 }
 
-export default PaymentWaitBoard;
+export default PaymentStorageBoard;

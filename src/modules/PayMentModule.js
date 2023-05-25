@@ -2,7 +2,6 @@ import { createActions, handleActions } from "redux-actions";
 
 /* 초기값 */
 const initialState = {
-    subOrg: []
 };
 
 /* 액션 */
@@ -13,9 +12,10 @@ const GET_PAYMENTWAIT = ' pay/GET_PAYMENTWAIT';
 const GET_PAYMENTING = ' pay/GET_PAYMENTING';
 const GET_PAYMENT_COMPLETE = ' pay/GET_PAYMENT_COMPLETE';
 const GET_PAYMENT_REFUSE = ' pay/GET_PAYMENT_REFUSE';
+const GET_PAYMENT_STORAGE = ' pay/GET_PAYMENT_STORAGE';
 
 export const { pay : { getPayment, getPaymentform, postPayment, getPaymentwait, getPaymenting 
-                , getPaymentComplete, getPaymentRefuse}} = createActions({
+                , getPaymentComplete, getPaymentRefuse, getPaymentStorage}} = createActions({
     [GET_PAYMENT] : res => res.data,
     [GET_PAYMENTFORM] : res => res.data,
     [POST_PAYMENT] : res => res,
@@ -23,6 +23,7 @@ export const { pay : { getPayment, getPaymentform, postPayment, getPaymentwait, 
     [GET_PAYMENTING] : res => res.data,
     [GET_PAYMENT_COMPLETE] : res => res.data,
     [GET_PAYMENT_REFUSE] : res => res.data,
+    [GET_PAYMENT_STORAGE] : res => res.data,
 
 })
 
@@ -31,13 +32,14 @@ const paymentReducer = handleActions({
     [GET_PAYMENT] : (state, { payload } ) => ({...state, pay : payload}),
     [GET_PAYMENTFORM] : (state, { payload } ) => (payload),
     [POST_PAYMENT] : ( state, { payload }) => payload,
+
     [GET_PAYMENTWAIT] : (state, { payload } ) => ({...state, ...payload}),
    
+
     [GET_PAYMENTING] :  (state, { payload } ) => payload,
-   
-   
     [GET_PAYMENT_COMPLETE] : ( state, { payload }) => payload,
     [GET_PAYMENT_REFUSE] : ( state, { payload }) => payload,
+    [GET_PAYMENT_STORAGE] : ( state, { payload }) => payload,
 
 }, initialState)
 

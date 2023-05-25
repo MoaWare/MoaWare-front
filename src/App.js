@@ -41,6 +41,7 @@ import PaymentWaitBoard from "./pages/payment/PaymentWaitBoard";
 import PaymentCompleteBoard from "./pages/payment/PaymentCompleteBoard";
 import PaymentingBoard from"./pages/payment/PaymentingBoard";
 import PaymentRefuseBoard from "./pages/payment/PaymentRefuseBoard";
+import PaymentStorageBoard from "./pages/payment/PaymentStorageBoard";
 
 
 
@@ -86,7 +87,7 @@ function App() {
             <Route path="paying" element={<PaymentingBoard />} />
             <Route path="completed" element={<PaymentCompleteBoard />} />
             <Route path="refuse" element={<PaymentRefuseBoard />} />
-            <Route path="storage" element={<PaymentMain />} />
+            <Route path="storage" element={<PaymentStorageBoard />} />
             <Route path="sign" element={<PaymentMain />} />
           </Route>
 
