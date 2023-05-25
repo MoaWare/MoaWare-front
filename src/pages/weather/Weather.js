@@ -27,7 +27,7 @@ const Weather = () => {
       (position) => {
         let lat = position.coords.latitude;
         let lon = position.coords.longitude;
-        console.log("Current location", lat, lon);
+        // console.log("Current location", lat, lon);
         setLocation({ lat, lon });
       },
       (error) => {
