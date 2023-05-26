@@ -1,4 +1,4 @@
-import { getBoardposts, getBoardpost } from "../modules/BoardPostModule";
+import { getBoardposts, getBoardpost, postBoardpost } from "../modules/BoardPostModule";
 
 /* React App에서 .env를 사용할 때는 REACT_APP 접두어가 필요^^;; */
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -67,12 +67,14 @@ export const callBoardPostDetailAPI = ({ postCode }) => {
                headers: {
                    "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
                },
-               body: formData
-           }).then(response => response.json());
+                body: formData
+             }).then(response => response.json()); 
+        //      body : JSON.stringify(formData)
+        //   }) .then(response => response.json());
    
            if (result.status === 200) {
                console.log('[BoardPostAPICalls] : callBoardPostRegistAPI result : ', result);
-            //    dispatch(postBoardPost(result));
+            dispatch(postBoardpost(result));
             }
        }
     }

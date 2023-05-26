@@ -9,7 +9,7 @@ const GET_BOARDPOST = 'boardPost/GET_BOARDPOST'
 const POST_BOARDPOST = 'boardPost/POST_BOARDPOST';
 //const PUT_BOARDPOST = 'boardPost/PUT_BOARDPOST';
 
-export const { boardPost: { getBoardposts, getBoardpost } } = createActions({
+export const { boardPost: { getBoardposts, getBoardpost, postBoardpost } } = createActions({
     [GET_BOARDPOSTS]: res => res.data,
     [GET_BOARDPOST]: res => res.data,
     [POST_BOARDPOST]: res => res,

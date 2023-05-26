@@ -67,7 +67,6 @@ function BoardPostList() {
                             <th>작성일</th>
                             <th>수정일</th>
                             <th>조회수</th>
-                            <th>상세정보</th>
                         </tr>
                     </thead>
                         <tbody>

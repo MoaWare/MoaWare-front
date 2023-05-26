@@ -43,9 +43,9 @@ function BoardNavbar() {
                 
                 </ul>
             
-                                    <div className={NavbarCSS.boardPostButtonDiv}>
+                    <div className={NavbarCSS.boardPostButtonDiv}>
                     <button>
-                        <NavLink to="/board-post-modal">
+                        <NavLink to="/boardPosts/regist">
                         글 작성
                         </NavLink>
                     </button>

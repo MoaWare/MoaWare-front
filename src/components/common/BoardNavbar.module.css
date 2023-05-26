@@ -16,6 +16,10 @@
 
 }
 
+.boardPostButtonDiv button:hover {
+    background-color: #4B5766;
+}
+
 .navbar {
     /* border: 1px solid red;s */
     height: 95vh;
