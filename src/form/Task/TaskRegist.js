@@ -2,19 +2,69 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TaskCSS from './Task.module.css';import { callTaskDetailAPI } from "../../apis/ProjectAPICalls";
 import { useParams } from "react-router-dom";
+import { getMemberId } from "../../utils/TokenUtils";
 
 
 function TaskRegist() {
 
     const dispatch = useDispatch();
+    const { taskCode } = useParams();
     const { task } = useSelector((state) => state.projectReducer);
+    const [ stage, setStage ] = useState('');
+    const [ type, setType ] = useState('');
 
 
-    
-    useEffect(()=>{
-        
-    },[]
+    useEffect(
+        ()=>{
+            dispatch(callTaskDetailAPI(taskCode));
+        },[]
     );
+
+    useEffect(() => {
+        if(task){
+          switch (task.stage) {
+            case 'todo':
+              setStage(<span>해야할 일</span>);
+              break;
+            case 'ing':
+              setStage(<span>진행 중</span>);
+              break;
+            case 'done':
+              setStage(<span>완료됨</span>);
+              break;
+            default:
+              setStage(<span>상태 없음</span>);
+              break;
+          }}
+      },[task]);
+
+      useEffect(() => {
+        if(task){
+          switch (task.type) {
+            case 'plan':
+              setType(<span>기획</span>);
+              break;
+            case 'design':
+              setType(<span>설계</span>);
+              break;
+            case 'test':
+              setType(<span>테스트</span>);
+              break;
+            case 'dev':
+              setType(<span>개발</span>);
+              break;
+            case 'pre':
+              setType(<span>시연</span>);
+              break;
+            default:
+              setType(<span>상태 없음</span>);
+              break;
+          }}
+      },[task]);
+
+      const onChangeHandler = (e) => {
+
+      }
 
 
     return (
@@ -27,46 +77,92 @@ function TaskRegist() {
                     <div className={TaskCSS.leftDiv}>
                         <div className={TaskCSS.leftTitle}>
                             <p className={TaskCSS.projTitlebold}>프로젝트 명</p>
-                            <span className={TaskCSS.projTitle}>projectName</span>
+                            <span className={TaskCSS.projTitle}>{ task?.project?.projName }</span>
                         </div>  
                         <div className={TaskCSS.leftContent}>
-                            <table className={TaskCSS.leftTable}>
-                                <tbody>
-                                    <tr>
-                                        <td className={TaskCSS.tableTitle}>업무명</td>
-                                        <td className={TaskCSS.tableBlank}></td>
-                                        <td className={TaskCSS.tableBorder}>a</td>
-                                    </tr>
-                                    <tr>
-                                        <td className={TaskCSS.tableTitle}>업무시작</td>
-                                        <td className={TaskCSS.tableBlank}></td>
-                                        <td className={TaskCSS.tableBorder}>a</td>
-                                    </tr>
-                                    <tr>
-                                        <td className={TaskCSS.tableTitle}>업무종료</td>
-                                        <td className={TaskCSS.tableBlank}></td>
-                                        <td className={TaskCSS.tableBorder}>a</td>
-                                    </tr>
-                                    <tr>
-                                        <td className={TaskCSS.tableTitle}>진행단계</td>
-                                        <td className={TaskCSS.tableBlank}></td>
-                                        <td className={TaskCSS.tableBorder}><select></select></td>
-                                    </tr>
-                                    <tr>
-                                        <td className={TaskCSS.tableTitle}>업무단계</td>
-                                        <td className={TaskCSS.tableBlank}></td>
-                                        <td className={TaskCSS.tableBorder}><select></select></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <button>등록</button>
+                            <div className={TaskCSS.tableDiv}>
+                                <table className={TaskCSS.leftTable}>
+                                    <tbody className={TaskCSS.tableTbody}>
+                                        <tr className={TaskCSS.tableTaskName}>
+                                            <td className={TaskCSS.tableTitle}>업무명</td>
+                                            <td className={TaskCSS.tableBorder}>
+                                                <input 
+                                                    className={TaskCSS.inputbox}
+                                                    type="text" 
+                                                    name="empId"
+                                                    onChange={onChangeHandler}
+                                                />
+                                            </td>
+                                        </tr>
+                                        <tr className={TaskCSS.tableTaskStartDate}>
+                                            <td className={TaskCSS.tableTitle}>업무시작</td>
+                                            <td className={TaskCSS.tableBorder}>
+                                            <input 
+                                                className={TaskCSS.inputbox}
+                                                type="date" 
+                                                name="empId"
+                                                onChange={onChangeHandler}
+                                            />
+                                            </td>
+                                        </tr>
+                                        <tr className={TaskCSS.tableTaskEndDate}>
+                                            <td className={TaskCSS.tableTitle}>업무종료</td>
+                                            <td className={TaskCSS.tableBorder}>
+                                                <input 
+                                                    className={TaskCSS.inputbox}
+                                                    type="date" 
+                                                    name="empId"
+                                                    onChange={onChangeHandler}
+                                                />
+                                            </td>
+                                        </tr>
+                                        <tr className={TaskCSS.tableTaskStage}>
+                                            <td className={TaskCSS.tableTitle}>진행단계</td>
+                                            <td className={TaskCSS.tableBorder}>
+                                                <select>
+                                                    <option value="todo">해야할 일</option>
+                                                    <option value="ing">진행중</option>
+                                                    <option value="done">완료</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className={TaskCSS.tableType}>업무단계</td>
+                                            <td className={TaskCSS.tableBorder}>
+                                                <select>
+                                                    <option value="plan">기획</option>
+                                                    <option value="design">설계</option>
+                                                    <option value="test">테스트</option>
+                                                    <option value="dev">개발</option>
+                                                    <option value="pre">시연</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr className={TaskCSS.tableTaskNotice}>
+                                            <td className={TaskCSS.tableTitle}>공지사항</td>
+                                            <td className={TaskCSS.tableBorder}>
+                                                <input 
+                                                    className={TaskCSS.inputbox}
+                                                    type="text" 
+                                                    name="empId"
+                                                    onChange={onChangeHandler}
+                                                />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div className={TaskCSS.btnMargin}>
+                                <button>등록</button>
+                            </div>
                         </div>
                     </div>
-                    <div className={TaskCSS.RightDiv}>RightDiv</div>
-                </div>
+                <div className={TaskCSS.RightDiv}></div>
             </div>
         </div>
+    </div>
     );
 }
+
 
 export default TaskRegist;

@@ -103,16 +103,14 @@ function TaskDetail() {
                                         </tr>
                                         <tr className={TaskCSS.tableTaskNotice}>
                                             <td className={TaskCSS.tableTitle}>공지사항</td>
-                                            <td className={TaskCSS.tableBorder}>
-                                                <input type="textArea" className={TaskCSS.notice}/></td>
-                                            {/* <td className={TaskCSS.tableBorder}>{ task?.taskNotice }</td> */}
+                                            <td className={TaskCSS.tableBorder}>{ task?.taskNotice }</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div className={TaskCSS.btn}>
-                                { getMemberId() === task?.author?.empID && (<button>삭제</button>) }
                                 { getMemberId() === task?.author?.empID && (<button>수정</button>) }
+                                { getMemberId() === task?.author?.empID && (<button>삭제</button>) }
                             </div>
                         </div>
                     </div>

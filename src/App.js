@@ -11,7 +11,6 @@ import WorkRestReqList from './pages/users/works/WorkRestReqList';
 import WorkRestList from './pages/users/works/WorkRestList';
 import LoginIdFind from "./pages/member/LoginIdFind";
 import ProtectedRoute from "./components/router/ProtectedRoute";
-import OrganizaionSearch from "./pages/organization/OrganizationSearch";
 import OrganizationSearch from "./pages/organization/OrganizationSearch";
 import OrganizationMain from "./pages/organization/OrganizationMain";
 import LoginPwdFind from "./pages/member/LoginPwdFind";
@@ -28,9 +27,6 @@ import ScheduleLayout from "./layouts/ScheduleLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import Admin from "./pages/admin/Admin";
 import AdminEmployees from "./pages/admin/AdminEmployees";
-
-
-import PaymentList from "./pages/payment/PaymentList";
 import BoardLayout from "./layouts/BoardLayout";
 import BoardPostList from "./pages/board/BoardPostList";
 import BoardPostDetail from "./pages/board/BoardPostDetail";
@@ -41,10 +37,15 @@ import MemberInfoModify from "./pages/member/MemberInfoModify";
 import CreateProject from "./pages/project/CreateProject";
 import DoneProject from "./pages/project/DoneProject";
 import AdminEmpDetail from "./pages/admin/AdminEmpDetail";
-import PaymentBoard from "./pages/payment/PaymentBoard";
-import TaskRegist from "./form/Task/TaskRegist";
-import TaskDetail from "./form/Task/TaskDetail";
+import PaymentWaitBoard from "./pages/payment/PaymentWaitBoard";
+import PaymentCompleteBoard from "./pages/payment/PaymentCompleteBoard";
+import PaymentingBoard from"./pages/payment/PaymentingBoard";
+import PaymentRefuseBoard from "./pages/payment/PaymentRefuseBoard";
+import PaymentStorageBoard from "./pages/payment/PaymentStorageBoard";
+import PaymentSign from "./pages/payment/PaymentSign";
 import TaskUpdate from "./form/Task/TaskUpdate";
+import TaskDetail from "./form/Task/TaskDetail";
+import TaskRegist from "./form/Task/TaskRegist";
 
 
 
@@ -84,8 +85,12 @@ function App() {
           <Route path="pay" element={<PayLayout />}>
             <Route index element={<PaymentMain />} />
             <Route path="draft" element={<Payment />} />
-            <Route path="wait" element={<PaymentBoard />} />
-            <Route path="paying" element={<PaymentList />} />
+            <Route path="wait" element={<PaymentWaitBoard />} />
+            <Route path="paying" element={<PaymentingBoard />} />
+            <Route path="completed" element={<PaymentCompleteBoard />} />
+            <Route path="refuse" element={<PaymentRefuseBoard />} />
+            <Route path="storage" element={<PaymentStorageBoard />} />
+            <Route path="sign" element={<PaymentSign />} />
           </Route>
 
           {/* 일정 관리 */}

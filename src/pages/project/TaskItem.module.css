@@ -31,7 +31,11 @@
 .divRight button{
     border: none;
     background-color: transparent;
-    font-weight: bold;
+}
+
+.divRight svg{
+    font-size: 2vh;
+    color: #505050;
 }
 
 .cursorPointer{

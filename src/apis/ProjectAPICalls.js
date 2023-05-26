@@ -277,40 +277,18 @@ export const callDeptEmpListAPI = ({ deptCode }) => {
     }
 }
 
-// export const callProjectRegistAPI = (formData, selectedEmpList) => {
-//     const requestURL = `${PRE_URL}/createProj`;
-//     return async (dispatch, getState) => {
-//       const projMemberArray = selectedEmpList.map((emp, index) => ({
-//         name: emp.name,
-//         email: emp.email,
-//       }));
-  
-//       const formDataJson = {
-//         ...Object.fromEntries(formData.entries()),
-//         projMember: projMemberArray,
-//       };
-  
-//       const result = await fetch(requestURL, {
-//         method: 'POST',
-//         headers: {
-//           'Content-type': 'application/json',
-//           Authorization: 'Bearer ' + window.localStorage.getItem('accessToken'),
-//         },
-//         body: JSON.stringify(formDataJson),
-//       }).then((res) => res.json());
-  
-//       if (result.status === 200) {
-//         console.log('[ProjectAPICalls] callDeptListAPI result: ', result);
-//         dispatch(postProject(result));
-//       }
-//     };
-//   };
+
 export const callProjectRegistAPI = (formData, selectedEmpList) => {
     const requestURL = `${PRE_URL}/createProj`;
     return async (dispatch, getState) => {
       const projMemberArray = selectedEmpList.map((emp, index) => ({
-        projMember: { projMember: emp.code },
-      }));
+        projMember: {
+            projCode: index, 
+            projMember: emp.code,
+          },
+          emp: null,
+        }));
+    
   
       const formDataJson = {
         ...Object.fromEntries(formData.entries()),
@@ -332,4 +310,3 @@ export const callProjectRegistAPI = (formData, selectedEmpList) => {
       }
     };
   };
-// callProjectRegistAPI

@@ -20,11 +20,18 @@
     height: 6vh;
     line-height: 6vh;
 }
+.payListTitle{
+    padding-top: 0.8rem;
+    padding-left: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: rgba(37, 79, 112, 1);
+    height: 3vh;
+    line-height: 3vh;
+}
 
 .payListTable{
     border-collapse: collapse;
-    margin: 1rem;
-    width: 96%;
     color: rgba(37, 79, 112, 1);
 }
 .payListTable th {
@@ -34,4 +41,9 @@
     border-bottom: 1px solid rgba(182, 189, 198, 0.5);
     height: 5vh;
     font-weight: 700;
+}
+
+.payListTable td {
+    text-align: center;
+    height: 5vh;
 }

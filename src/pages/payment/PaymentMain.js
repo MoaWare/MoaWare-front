@@ -1,22 +1,24 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import payCSS from './PaymentMain.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { CallPaymentListAPI } from '../../apis/PaymentAPICalls';
+import { CallPaymentAllListAPI, CallPaymentListAPI } from '../../apis/PaymentAPICalls';
 import { ImAttachment } from 'react-icons/im';
+import PagingBar from '../../components/common/PagingBar';
+import PaymentBoardContext from './PaymentBoardContext';
+import PaymentMainBoard from './PaymentMainBoard';
 
 
 function PaymentMain () {
-;
+
     const disPatch = useDispatch();
-    const { pay } = useSelector( state => state.paymentReducer);
-
-    console.log("pay : ", pay);
-
-    useEffect( ()=>{
-
-        disPatch(CallPaymentListAPI());
-    },[]
-        
+    const  { pay }  = useSelector( state => state.paymentReducer);
+    const [ payWait, setPayWait] = useState(1);
+   
+    console.log("payMain 는 : ", pay);
+    useEffect(
+        () => {
+            disPatch(CallPaymentAllListAPI());
+        },[]
     );
 
 
@@ -26,7 +28,7 @@ function PaymentMain () {
                 <div className={payCSS.paySummaryItem}>
                     <div className={payCSS.itemTitle}>결재 대기</div>
                     <hr className={payCSS.itemHr}/>
-                    <div className={payCSS.itemText}>4건</div>
+                    <div className={payCSS.itemText}>{payWait&&payWait}건</div>
                 </div>
                 <div className={payCSS.paySummaryItem}>
                     <div className={payCSS.itemTitle}>결재 진행</div>
@@ -46,31 +48,7 @@ function PaymentMain () {
             </div>
             <div className={payCSS.payList}>    
                 <div className={payCSS.payListTitle}>결재 대기 문서</div>
-            <table className={payCSS.payListTable}>
-                <tbody>
-                    <tr>
-                        <th>문서 번호</th>
-                        <th>사용 양식</th>
-                        <th>기한 날짜</th>
-                        <th>기안서 제목</th>
-                        <th>첨부</th>
-                        <th>상태</th>
-                        <th>결재 요청자</th>
-                    </tr>
-                    { pay && pay.map( pay => pay.payStatus === '진행중' ?
-                        <tr key={pay.payCode}>
-                            <td>{pay.payCode}</td> 
-                            <td>{pay.form.formTitle}</td> 
-                            <td>{pay.draftDate.substring(0, 10)}</td> 
-                            <td>{pay.draftTitle}</td> 
-                            <td>{pay.payFileCategory ? <ImAttachment/> : ''}</td> 
-                            <td>{pay.payStatus}</td> 
-                            <td>{pay.emp.empName}</td> 
-                        </tr>
-                        :  ''
-                    )}   
-                </tbody>
-            </table>
+                    <PaymentMainBoard setPayWait={setPayWait}/>
             </div>
         </div>
     ) 

@@ -190,14 +190,14 @@ function Work() {
                     {myWork && myWork.data && myWork.data.map((work) => (
                             <tr className={WorkCSS.td} key={work.workPk.workDate}>
                             <td>{work.workPk.workDate.substring(0, 10)}</td>
-                            <td>{work.workTime.substring(11, 19)}</td>
+                            <td>{work.workTime ? work.workTime.substring(11, 19) : ""}</td>
                             <td>{work.quitTime ? work.quitTime.substring(11, 19) : ""}
                             </td>
                             <td>
-                                {work.quitTime ? formatDuration3(formatDuration2(work.workTime, work.quitTime)) : ""}
+                                {work.workTime && work.quitTime ? formatDuration3(formatDuration2(work.workTime, work.quitTime)) : ""}
                             </td>
                             <td>
-                            {work.quitTime
+                            {work.workTime && work.quitTime
                                 ? formatDuration2(work.workTime, work.quitTime) > timeInMs
                                 ? formatDuration3(formatDuration2(work.workTime, work.quitTime) - timeInMs)
                                 : ""

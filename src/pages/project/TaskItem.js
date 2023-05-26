@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import taskCSS from "./TaskItem.module.css";
 import { getMemberId } from "../../utils/TokenUtils";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 
 
 function TaskItem({ task }) {
@@ -47,7 +48,7 @@ function TaskItem({ task }) {
 
 
   useEffect(()=>{
-    
+
       if(task){
           setTime(task.startDate.substring(10,0));
       }
@@ -61,11 +62,6 @@ function TaskItem({ task }) {
     navigate(`/task/${task?.project?.projCode}/detail/${task?.taskCode}`);
   }
 
-  const onUpdateClick = () => {
-    
-    navigate(`/task/${task?.project?.projCode}/update/${task?.taskCode}`);
-  }
-
 
   return task && (
       <div onClick={ onTaskClick } className={taskCSS.cursorPointer}>
@@ -74,8 +70,8 @@ function TaskItem({ task }) {
                   <div className={taskCSS.divLeft}>
                       <span>{ task?.taskName }</span>
                   </div>
-                  <div className={taskCSS.divRight}>
-                      { task?.author?.empID === getMemberId() ? (<button onClick={onUpdateClick}>···</button>) : null}
+                  <div className={taskCSS.divRight} >
+                      { task?.author?.empID === getMemberId() ? (<AiOutlineCheckCircle />) : null}
                   </div>
               </div>
               <div className={taskCSS.divLow}>

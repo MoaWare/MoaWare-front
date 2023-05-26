@@ -1,13 +1,34 @@
+import { useDispatch, useSelector } from 'react-redux';
 import PagingBar from '../../components/common/PagingBar';
-import payBoardCSS from './PaymentBoard.module.css';
+import payCSS from './PaymentMain.module.css';
 import { ImAttachment } from 'react-icons/im';
+import { useEffect, useState } from 'react';
+import { CallPaymentWaitListAPI } from '../../apis/PaymentAPICalls';
 
-function PaymentBoardContext ({pay, pageInfo, setCurrentPage}) {
+function PaymentMainBoard ({setPayWait}) {
 
-    console.log("PaymentBoardContext의 pay는 ? : " , pay);
+    const disPatch = useDispatch();
+    const  payment  = useSelector( state => state.paymentReducer);
+    const pay = payment.data&&payment.data.content;
+    const pageInfo = payment.pageInfo;
+    const [ currentPage, setCurrentPage ] = useState(1);
+
+    console.log("PaymentMainBoard의 pay는 : ", payment);
+
+    useEffect( ()=>{
+        disPatch(CallPaymentWaitListAPI(currentPage));
+    },[currentPage]
+        
+    );
+
+    useEffect( ()=>{
+        setPayWait(payment.data&& payment.data.totalElements); 
+    },[pay])
+    
+
     return (
-        <div className={payBoardCSS.payList}>
-        <table className={payBoardCSS.payListTable}>
+        <div className={payCSS.payList}>
+        <table className={payCSS.payListTable}>
         <tbody>
             <tr>
                 <th>문서 번호</th>
@@ -18,7 +39,7 @@ function PaymentBoardContext ({pay, pageInfo, setCurrentPage}) {
                 <th>상태</th>
                 <th>결재 요청자</th>
             </tr>
-            { pay && pay.map( pay =>
+            { pay && pay.map( pay => 
                 <tr key={pay.payCode}>
                     <td>{pay.payCode}</td> 
                     <td>{pay.form.formTitle}</td> 
@@ -38,4 +59,4 @@ function PaymentBoardContext ({pay, pageInfo, setCurrentPage}) {
     )
 }
 
-export default PaymentBoardContext;
+export default PaymentMainBoard;
