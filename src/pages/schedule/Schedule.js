@@ -18,7 +18,7 @@ function Schedule() {
 
   useEffect(() => {
     dispatch(callScheduleListAPI());
-  }, [dispatch]);
+  }, []);
 
   const handleEventDrop = (info) => {
     console.log('일정을 옮길래! :', info.event);
@@ -50,7 +50,7 @@ function Schedule() {
     end: event.schEndDate,
     allDay: true,
     backgroundColor: getEventColor(event.schType.schCategoryCode),
-    id: event.schCode // Add id property to identify the event
+    id: event.schCode
   })) || [];
 
   /* 상세 일정 */
@@ -67,10 +67,12 @@ function Schedule() {
     }
   }, [schedule]);
 
+
+
   return (
     <>
       {/* { scheduleModal ? <ScheduleModal/> : null } */}
-      { scheduleModal ? <ScheduleModal setScheduleModal={setScheduleModal} /> : null }
+      { scheduleModal ? <ScheduleModal setScheduleModal={setScheduleModal} shcedule={schedule} /> : null }
       <div className="wrapper">
         <div className="wrap">
           <FullCalendar

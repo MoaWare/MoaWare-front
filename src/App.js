@@ -2,7 +2,6 @@ import Layout from "./layouts/Layout";
 import Main from "./pages/users/Main";
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import './App.css';
-
 import Login from "./pages/member/Login";
 import Work from "./pages/users/works/Work";
 import WorkLayout from './layouts/WorkLayout';
@@ -49,9 +48,6 @@ import TaskDetail from "./form/Task/TaskDetail";
 import TaskRegist from "./form/Task/TaskRegist";
 
 
-
-
-
 function App() {
   return (
     <BrowserRouter>
@@ -61,12 +57,14 @@ function App() {
             <Layout />
           </ProtectedRoute>}>
           <Route index element={<Main />} />
+
           {/* 조직도 */}
           <Route path="org" element={<OrgLayout />}>
             <Route index element={<OrganizationMain />} />
             <Route path="search" element={<OrganizationSearch />} />
             <Route path="detail/:empCode" element={<OrganizationDetail />} />
           </Route>
+
           {/* 근태관리 */}
           {/* <Route path="work"> */}
           <Route path="work" element={<WorkLayout />}>
@@ -82,6 +80,7 @@ function App() {
             <Route path="createProject" element={<CreateProject />} />
             <Route path="done" element={<DoneProject />} />
           </Route>
+
           {/* 전자 결재 */}
           <Route path="pay" element={<PayLayout />}>
             <Route index element={<PaymentMain />} />
@@ -100,6 +99,7 @@ function App() {
             <Route index e lement={<Payment />} />
             <Route path="draft" element={<Payment />} />
           </Route>
+
           {/* 게시판 */}
             <Route path="boardPosts" element={<BoardLayout />}>
             <Route index element={<BoardPostList />} />
@@ -141,12 +141,14 @@ function App() {
               <LoginPwdFind />
             </ProtectedRoute>
           } />
+
          {/* 프로젝트 */}
          <Route path="task/:projCode" 
           element={              
             <ProtectedRoute projectCheck={true}>
               <ProjDetailLayout />
             </ProtectedRoute>
+          }>
             }>
             <Route index element={<ProjDetail />} />
             <Route path="update/:taskCode" element={<TaskUpdate />}/>
