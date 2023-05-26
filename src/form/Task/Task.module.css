@@ -1,0 +1,200 @@
+.wrapper{
+    height: 95vh;
+    width: 100vw;
+    position: fixed;
+    top: 5vh;
+}
+
+.wrap{    
+    display: flex;
+    margin: 7vh 4.8vw;
+    height: 86vh;
+    width: 90vw;
+    background-color: white;
+    border-radius: 20px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mainTitle{
+    height: 5vh;
+    width: 82vw;
+    border-bottom: 1px solid lightgray;
+    margin-top: 7vh;
+    font-size: 4vh;
+    font-weight: bold;
+    color: #254F70;
+    padding-bottom: 2vh;
+}
+
+.mainContent{
+    margin-top: 2vh;
+    height: 64vh;
+    width: 82vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.leftDiv{
+    height: 64vh;
+    width: 32vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.leftTitle{
+    margin-left: 1vh;
+    height: 12vh;
+    width: 30vw;
+}
+
+.projTitlebold{
+    color: #254F70;
+    font-weight: bold;
+    font-size: 2.4vh;
+    margin-bottom: 1vh;
+}
+
+.projTitle{
+    font-weight: bold;
+}
+
+.leftContent{
+    height: 49vh;
+    width: 28vw;
+    border: lightgray 1px solid;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.RightDiv{
+    height: 63vh;
+    width: 46vw;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+}
+
+/* ========================= 테이블 =========================== */
+
+
+.tableDiv{
+    display: flex;
+    flex-direction: column;
+    /* overflow: auto; */
+    /* max-height: 41vh; */
+    width: 24vw;
+}
+
+.tableTbody {
+    height: 38vh;
+    width: 20vw;
+}
+
+
+.tableTbody tr td:first-child{
+    font-weight: bold;
+}
+
+
+.tableTbody td:first-child {
+    height: 2vh;
+    width: 3vw;
+    padding: 0 1rem;
+    border-radius: 10px;
+    text-align: center;
+}
+  
+
+.tableTbody td:last-child {
+    height: 2vh;
+    width: 15vw;
+    padding: 0 0.6rem;
+}
+  
+
+.leftTable{
+    height: 38vh;
+    align-items: center;
+    table-layout: fixed;
+    width: 100%;
+}
+
+
+.leftTable  td{
+    border: 1px solid lightgray;
+}
+
+.notice{
+    height: 8vh;
+    width: 17vw;
+    margin: -2vh 0vw;
+    white-space: pre-wrap;
+    overflow: auto;
+    border: none;
+}
+
+.btn {
+    margin: 1vh 0vw;
+}
+
+
+.btn button{
+    height: 3vh;
+    width: 5vw;
+    border: #254F70 solid 2px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn button:first-child{
+    background-color:#254F70;
+    margin-right: 0.5vw;
+    color: white;
+}
+
+
+.btn button:last-child{
+    background-color: white;
+    color: #254F70;
+}
+
+.inputbox{
+    border: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 6vw;
+}
+
+.tableTaskName .inputbox{
+    width: 9vw;
+    height: 2vh;
+    border: #d6d6d6 solid 1px;
+}
+
+.tableTbody td{
+    text-align: center;
+    border: none;
+}
+
+.tableTbody select{
+    width: 9vw;
+    height: 2vh;
+    border: #d6d6d6 solid 1px;
+}
+
+.btnMargin button{
+    margin-left: 10vw;
+    height: 3vh;
+    width: 5vw;
+    border: #254F70 solid 2px;
+    border-radius: 5px;
+    font-weight: bold;
+    background-color: #254F70;
+    color: white;
+}

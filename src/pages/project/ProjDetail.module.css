@@ -116,6 +116,7 @@
 .beforeBtn{
     background: none;
     border: none;
+    cursor: pointer;
 }
 
 .titleTopLeft span{

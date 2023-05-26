@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import LoginCSS from '../pages/member/Loginfind.module.css';
+import LoginCSS from '../../pages/member/Loginfind.module.css';
 import { useNavigate } from "react-router-dom";
 
 
