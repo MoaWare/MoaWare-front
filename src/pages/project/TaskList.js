@@ -9,7 +9,6 @@ function TaskList({ task }) {
     const taskStage = task[0]?.stage;
     const [ stage , setStage ] = useState('');
     console.log("TaskList task : ", task );
-    console.log("TaskList taskstage : ",task[0]?.stage)
 
     useEffect(() => {
       if(task){
@@ -29,28 +28,30 @@ function TaskList({ task }) {
         }}
     },[task]);
 
-    // { 
-    //     task && (taskStage === 'todo' ? <span>해야할 일</span> 
-    //     : taskStage === 'ing' ? <span>진행중</span> 
-    //     : taskStage === 'done' ? <span>완료</span> 
-    //     : alert('로딩중'))
-    // } 
+    
+    const onRegistClick = () => {
+      
+      if(task){
+        navigate(`/task/${task[0]?.project?.projCode}/regist`);
+      }
+    }
+
         
     return task && (
         <>
-            <div className={ProjCSS.todoBox}>
-                <div className={ProjCSS.taskTop}>
-                    { stage }
-                    <button><img src="/icon/plus.png" alt="plus"/></button>
-                </div>
-                <hr/>
-                <div className={ProjCSS.taskLow}>
-                {
-                    Array.isArray(task)
-                    && task.map(task => <TaskItem key={ task?.taskCode } task={task} />)
-                }
-                </div>
-            </div>
+          <div className={ProjCSS.todoBox}>
+              <div className={ProjCSS.taskTop}>
+                  { stage }
+                  <button onClick={onRegistClick}><img src="/icon/plus.png" alt="plus"/></button>
+              </div>
+              <hr/>
+              <div className={ProjCSS.taskLow}>
+              {
+                  Array.isArray(task)
+                  && task.map(task => <TaskItem key={ task.taskCode } task={task} />)
+              }
+              </div>
+          </div>
         </>
     )
 }

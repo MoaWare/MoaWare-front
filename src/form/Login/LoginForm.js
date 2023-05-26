@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { callLoginAPI } from "../apis/EmployeeAPICalls";
+import { callLoginAPI } from "../../apis/EmployeeAPICalls";
 import { useState } from "react";
 import LoginCSS from "./Login.module.css"
 import { useNavigate } from "react-router-dom";

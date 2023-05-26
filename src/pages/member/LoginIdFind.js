@@ -3,7 +3,7 @@ import LoginCSS from './Loginfind.module.css';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { callFindAccountAPI } from "../../apis/EmployeeAPICalls";
-import LoginIdFindResult from "../../form/LoginIdFindResult";
+import LoginIdFindResult from "../../form/Login/LoginIdFindResult";
 
 function LoginIdFind(){
 

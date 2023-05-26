@@ -1,13 +1,34 @@
-import { getProject, getTaskDone, getTaskIng, getTaskTodo, getTasks, getDone, getProgress, getDeptlist, getDeptemplist, postProject } from "../modules/ProjectModule";
+import { getProject, getTaskDone, getTaskIng, getTaskTodo, getTasks, getDone, getProgress, getDeptlist, getDeptemplist, postProject, getTask } from "../modules/ProjectModule";
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
 const PRE_URL = `http://${SERVER_IP}:${SERVER_PORT}/proj`;
 
 
+// /* 프로젝트 업무 리스트 조회 */
+// export const callProjectAPI = ({projCode}) => {
+//     const requestURL = `${PRE_URL}/detail/${projCode}`
+//     return async (dispatch, getState) => {
+
+//         const result = await fetch(requestURL, {
+//             method : 'GET',
+//             headers : {
+//                 "Content-Type" : "application/json",
+//                 "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+//             }
+//         }).then(res => res.json());
+
+//         if(result.status === 200){
+//             console.log(result);
+//             dispatch(getProject(result));
+//         }
+//     }
+// }
+
+
 /* 프로젝트 업무 리스트 조회 */
-export const callProjectAPI = ({projCode}) => {
-    const requestURL = `${PRE_URL}/detail/${projCode}`
+export const callTaskListAPI = ({ projCode }) => {
+    const requestURL = `${PRE_URL}/tasks/${projCode}`;
     return async (dispatch, getState) => {
 
         const result = await fetch(requestURL, {
@@ -20,11 +41,26 @@ export const callProjectAPI = ({projCode}) => {
 
         if(result.status === 200){
             console.log(result);
-            dispatch(getProject(result));
+            dispatch(getTasks(result));
         }
     }
 }
 
+
+
+/* 업무 상세 조회 */
+export const callTaskDetailAPI = (taskCode) => {
+    const requestURL = `${PRE_URL}/task/${taskCode}`
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL).then(res => res.json());
+
+        if(result.status === 200){
+            console.log(result);
+            dispatch(getTask(result));
+        }
+    }
+}
 
 
 
@@ -140,25 +176,6 @@ export const callProjectProgressListAPI = ({ currentPage = 1 }) => {
     };
   };
   
-/* 프로젝트 업무 리스트 조회 */
-export const callTaskListAPI = ({ projCode }) => {
-    const requestURL = `${PRE_URL}/tasks/${projCode}`;
-    return async (dispatch, getState) => {
-
-        const result = await fetch(requestURL, {
-            method : 'GET',
-            headers : {
-                "Content-Type" : "application/json",
-                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
-            }
-        }).then(res => res.json());
-
-        if(result.status === 200){
-            console.log(result);
-            dispatch(getTasks(result));
-        }
-    }
-}
 
 /* 업무 진행단계별 업무 리스트 조회 */
 export const callTaskTodoAPI = ({ projCode }) => {
