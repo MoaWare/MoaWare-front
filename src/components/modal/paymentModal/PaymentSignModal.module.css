@@ -1,0 +1,139 @@
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+
+.modalContainer{
+    position: absolute;
+    width: 27vw;
+    height: 61vh;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);    
+    z-index: 1000;
+}
+
+.modalMain{
+    width: 90%;
+    margin: 1vh auto;
+
+}
+
+
+.paySignTitleDiv{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid gray;
+    color: rgba(37, 79, 112, 1);
+    font-weight: bold;
+    font-size: 1.2rem;
+    height: 5vh;
+    line-height: 4vh;
+    align-items: center;
+}
+
+.paySignBodyDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 50vh;
+}
+
+.paySignInput{
+    background-color: rgba(182, 189, 198, 0.5);
+    height: 4vh;
+    border: none;
+    padding-left: 1rem;
+}
+
+.paySignFile{
+    height: 4vh;
+    line-height : 4vh;
+    display: flex;
+   
+
+}
+
+.paySignFileTitle{
+    text-align: center;
+    color: white;
+    background-color: rgba(37, 79, 112, 1);
+    height: 4vh;
+    line-height: 4vh;
+    width: 6vw;
+    font-size: 0.8rem;
+}
+.paySignFileInputLabel{
+    background-color: rgba(182, 189, 198, 0.5);
+    height: 4vh;
+    line-height : 4vh;
+    border: none;
+    font-size: 0.8rem;
+    width: 18vw;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-left: 1rem;
+}
+.paySignFileInput{
+   display: none;
+}
+
+.paySignPreviewDiv{
+
+}
+
+.paySignPreviewTitle{
+    color: white;
+    background-color: rgba(37, 79, 112, 1);
+    font-size: 0.8rem;
+    text-align: center;
+    height: 4vh;
+    line-height: 4vh;
+    
+}
+
+.paySignPreviewContent{
+    background-color: rgba(182, 189, 198, 0.5);
+    height: 25vh;
+    line-height: 25vh;
+    text-align: center;
+    color:rgba(182, 189, 198, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.paySignImage{
+    height: 20vh;
+    width: 20vw;
+    
+}
+
+.paySignButtonDiv{
+    text-align: right;
+}
+
+.paySignButton{
+    color: rgba(37, 79, 112, 1);
+    background-color: white;
+    border-radius: 15px;
+    border : 1px solid rgba(37, 79, 112, 1);
+    font-size: 0.8rem;
+    text-align: center;
+    height: 4vh;
+    line-height: 4vh;
+    width: 5vw;
+    
+}

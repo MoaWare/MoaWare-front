@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 function ProjDetailTitle({ project, progress }){
 
-    // const project = tasks.project;
     const navigate = useNavigate();
     const startDate =  project.startDate.substring(10, 0).replace('-','.');
     const endDate = project.endDate.substring(10, 0).replace('-','.');

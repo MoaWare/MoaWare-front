@@ -13,6 +13,7 @@
 }
 
 .btnContainer {
+    margin-top: 40px;
     text-align: center;
     display: flex; 
     justify-content :center;
@@ -74,6 +75,7 @@
 
 .hr{
     background-color: #B6BDC6;
+    margin-top: 10px;
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -109,4 +111,33 @@
     border-right: none;
     border-left: none;
     line-height: 3rem;
+}
+
+.box {
+    width: 80px; /* 너비 설정 */
+    height: 60px; /* 높이 설정 */
+    background-color: #f00; /* 배경색 설정 */
+    border: 1px solid;
+    float: left; /* 왼쪽으로 정렬 */
+  }
+
+.space {
+    margin-top: 10px;
+    margin-right: 5%;
+    margin-left: auto;
+    border : 1px solid black;
+    border-collapse : collapse;
+}
+.td2 {
+    border : 1px solid black;
+    border-collapse : collapse;
+    width: 100px;
+}
+
+.th2 {
+    border : 1px solid black;
+    border-collapse : collapse;
+    background-color: #254F70;
+    color: white;
+    width: 100px;
 }

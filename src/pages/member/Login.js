@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import LoginForm from "../../form/LoginForm";
+import LoginForm from "../../form/Login/LoginForm";
 import LoginCSS from './Login.module.css';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";

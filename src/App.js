@@ -42,6 +42,10 @@ import PaymentingBoard from"./pages/payment/PaymentingBoard";
 import PaymentRefuseBoard from "./pages/payment/PaymentRefuseBoard";
 import PaymentStorageBoard from "./pages/payment/PaymentStorageBoard";
 import PaymentSign from "./pages/payment/PaymentSign";
+import TaskUpdate from "./form/Task/TaskUpdate";
+import TaskDetail from "./form/Task/TaskDetail";
+import TaskRegist from "./form/Task/TaskRegist";
+
 
 function App() {
   return (
@@ -137,15 +141,18 @@ function App() {
           } />
 
          {/* 프로젝트 */}
-         <Route path="proj/detail/:projCode" 
+         <Route path="task/:projCode" 
           element={              
             <ProtectedRoute projectCheck={true}>
               <ProjDetailLayout />
             </ProtectedRoute>
           }>
-          <Route index element={<ProjDetail />} />
-        </Route>
-        
+            }>
+            <Route index element={<ProjDetail />} />
+            <Route path="update/:taskCode" element={<TaskUpdate />}/>
+            <Route path="detail/:taskCode" element={<TaskDetail />}/>
+            <Route path="regist" element={<TaskRegist />}/>
+         </Route>
         {/* 회원 정보 */}
         <Route 
           path="member"
@@ -154,12 +161,12 @@ function App() {
               <MemberInfoLayout />
             </ProtectedRoute>
           }>
-            <Route index element={<MemberInfo />}/>
-            <Route path="modify" element={<MemberInfoModify />} />
-          </Route>
+          <Route index element={<MemberInfo />}/>
+          <Route path="modify" element={<MemberInfoModify />} />
+        </Route>
       </Routes>
     </BrowserRouter >
   );
 }
-//s
+
 export default App;

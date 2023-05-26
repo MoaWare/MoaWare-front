@@ -118,7 +118,19 @@ function WorkNavbar() {
         // mywork 가없다면
         (
           <div>
-            <p></p>
+            {/* <p className={WorkNavbarCSS.p}>근태 관리</p>
+            <div className={WorkNavbarCSS.ptime}></div>
+            <div className={WorkNavbarCSS.workBtn}>
+              <WorkTime
+                onClickStartHandler={onClickStartTime}
+                onClickEndHandler={onClickEndTime}
+              // btn={btn}
+              />
+            </div>
+              <div className={WorkNavbarCSS.p2}>
+                <p className={WorkNavbarCSS.ptime2}>출근 시간</p>
+                <p className={WorkNavbarCSS.ptime2}>퇴근 시간</p>
+              </div> */}
           </div>
         )}
       </div>
