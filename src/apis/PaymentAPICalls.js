@@ -1,4 +1,4 @@
-import { getPayment, getPaymentComplete, getPaymentRefuse, getPaymentStorage, getPaymentall, getPaymentform, getPaymenting, getPaymentwait, postPayment } from "../modules/PayMentModule";
+import { getPayment, getPaymentComplete, getPaymentRefuse, getPaymentSign, getPaymentStorage, getPaymentall, getPaymentform, getPaymenting, getPaymentwait, postPayment, postPaymentSign } from "../modules/PayMentModule";
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${ process.env.REACT_APP_RESTAPI_SERVER_PORT}`
@@ -186,6 +186,55 @@ export const CallPaymentStorageListAPI = (currentPage = 1) => {
         if ( result.status === 200 ) {
             console.log ("[PaymentAPICalls] CallPaymentStorageListAPI result : ", result);
             dispatch(getPaymentStorage(result));
+        }
+    };
+
+}
+
+
+/* 사인 조회 */
+export const CallPaymentSigntAPI = () => {
+
+    const requestURL = `${PRE_URL}/pay/sign`;
+
+    return async( dispatch, getState ) => {
+        
+        const result = await fetch( requestURL, {
+            method: 'GET',
+            headers: {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then( res => res.json());
+
+        console.log( result);
+        if ( result.status === 200 ) {
+            console.log ("[PaymentAPICalls] CallPaymentStorageListAPI result : ", result);
+            dispatch(getPaymentSign(result));
+        }
+    };
+
+}
+
+
+/* 싸인 저장 */
+export const CallPaymentSignRegistAPI = (formData) => {
+
+    const requestURL = `${PRE_URL}/pay/sign`;
+
+    return async( dispatch, getState ) => {
+        
+        const result = await fetch( requestURL, {
+            method: 'POST',
+            headers: {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            },
+            body : formData
+        }).then( res => res.json());
+
+        console.log( result);
+        if ( result.status === 200 ) {
+            console.log ("[PaymentAPICalls] CallPaymentRegistAPI  result : ", result);
+            dispatch(postPaymentSign(result));
         }
     };
 
