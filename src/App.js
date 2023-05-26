@@ -43,6 +43,7 @@ import PaymentingBoard from"./pages/payment/PaymentingBoard";
 import PaymentRefuseBoard from "./pages/payment/PaymentRefuseBoard";
 import PaymentStorageBoard from "./pages/payment/PaymentStorageBoard";
 import PaymentSign from "./pages/payment/PaymentSign";
+import BoardPostRegist from "./pages/board/BoardPostRegist";
 import TaskUpdate from "./form/Task/TaskUpdate";
 import TaskDetail from "./form/Task/TaskDetail";
 import TaskRegist from "./form/Task/TaskRegist";
@@ -104,6 +105,7 @@ function App() {
             <Route index element={<BoardPostList />} />
             <Route path=":postCode" element={<BoardPostDetail />} />
             <Route path="boards/:boardCode" element={<BoardPostList />} />
+            <Route path="regist" element={<BoardPostRegist />}/> 
 
           </Route>
           {/* 관리자 */}

@@ -14,8 +14,15 @@ export const callAdminEmpListAPI = ({ currentPage = 1 }) => {
 
     return async (dispatch, getState) => {
 
-        const result = await fetch(requestURL).then(response => response.json());
 
+
+        const result = await fetch(requestURL, {
+            method : 'GET',
+            headers : {
+                'Content-Type' : 'application/json',
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            },
+        }).then(res => res.json());
         if (result.status === 200) {
             console.log('[AdminAPICalls] : callAdminEmpListAPI result : ', result);
             dispatch(getEmployees(result));

@@ -3,7 +3,7 @@
     display: grid;
     grid-gap: 128px;
     padding: 100px;
-    min-height: 66%;
+    min-height:67.2%;
     grid-template-columns: repeat(4, 1fr);
     margin-top : 9vh;
     margin-left: 20.5%;
