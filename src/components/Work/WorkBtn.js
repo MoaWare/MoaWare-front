@@ -47,7 +47,7 @@ function WorkBtn() { // 컴포넌트 이름을 대문자로 시작하도록 수�
     } else if (quit?.state === 400) {
       alert(quit.message);
     }
-  }, [insert, quit, ]);
+  }, [insert, quit]);
 
   // console.log('insert: ', insert);
   // console.log('btn: ', btn);

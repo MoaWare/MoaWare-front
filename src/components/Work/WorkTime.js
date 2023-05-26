@@ -41,9 +41,9 @@ function WorkTime({ onClickStartHandler, onClickEndHandler }) {
     const handleStartClick = () => {
         //리듀서로 관리하는 btn을 가져오는 건데 안 써도 됨
         // dispatch(setBtnState(!btn));
-        onClickStartHandler();
         localStorage.setItem('clickTime', today);
         localStorage.setItem('workbtn', true);
+        onClickStartHandler();
     }
 
     const handleEndClick = () => {
