@@ -18,7 +18,7 @@ function Schedule() {
 
   useEffect(() => {
     dispatch(callScheduleListAPI());
-  }, [dispatch]);
+  }, []);
 
   const handleEventDrop = (info) => {
     console.log('일정을 옮길래! :', info.event);
@@ -70,7 +70,7 @@ function Schedule() {
   return (
     <>
       {/* { scheduleModal ? <ScheduleModal/> : null } */}
-      { scheduleModal ? <ScheduleModal setScheduleModal={setScheduleModal} /> : null }
+      { scheduleModal ? <ScheduleModal setScheduleModal={setScheduleModal} shcedule={schedule} /> : null }
       <div className="wrapper">
         <div className="wrap">
           <FullCalendar

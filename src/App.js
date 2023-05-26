@@ -2,7 +2,6 @@ import Layout from "./layouts/Layout";
 import Main from "./pages/users/Main";
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import './App.css';
-
 import Login from "./pages/member/Login";
 import Work from "./pages/users/works/Work";
 import WorkLayout from './layouts/WorkLayout';
@@ -44,9 +43,6 @@ import PaymentRefuseBoard from "./pages/payment/PaymentRefuseBoard";
 import PaymentStorageBoard from "./pages/payment/PaymentStorageBoard";
 import PaymentSign from "./pages/payment/PaymentSign";
 
-
-
-
 function App() {
   return (
     <BrowserRouter>
@@ -56,12 +52,14 @@ function App() {
             <Layout />
           </ProtectedRoute>}>
           <Route index element={<Main />} />
+
           {/* 조직도 */}
           <Route path="org" element={<OrgLayout />}>
             <Route index element={<OrganizationMain />} />
             <Route path="search" element={<OrganizationSearch />} />
             <Route path="detail/:empCode" element={<OrganizationDetail />} />
           </Route>
+
           {/* 근태관리 */}
           {/* <Route path="work"> */}
           <Route path="work" element={<WorkLayout />}>
@@ -77,6 +75,7 @@ function App() {
             <Route path="createProject" element={<CreateProject />} />
             <Route path="done" element={<DoneProject />} />
           </Route>
+
           {/* 전자 결재 */}
           <Route path="pay" element={<PayLayout />}>
             <Route index element={<PaymentMain />} />
@@ -95,6 +94,7 @@ function App() {
             <Route index e lement={<Payment />} />
             <Route path="draft" element={<Payment />} />
           </Route>
+
           {/* 게시판 */}
             <Route path="boardPosts" element={<BoardLayout />}>
             <Route index element={<BoardPostList />} />
@@ -135,6 +135,7 @@ function App() {
               <LoginPwdFind />
             </ProtectedRoute>
           } />
+
          {/* 프로젝트 */}
          <Route path="proj/detail/:projCode" 
           element={              
@@ -144,6 +145,7 @@ function App() {
           }>
           <Route index element={<ProjDetail />} />
         </Route>
+        
         {/* 회원 정보 */}
         <Route 
           path="member"
