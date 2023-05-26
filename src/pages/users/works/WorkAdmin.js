@@ -4,6 +4,7 @@ import DateSelect from '../../../components/Work/DateSelect';
 import PagingBar from "../../../components/common/PagingBar";
 import { useDispatch, useSelector } from 'react-redux';
 import { callWorkMyListAPI } from '../../../apis/WorkAPICalls';
+import { callAdminWorkListAPI } from '../../../apis/AdminWorkAPICalls';
 
 function WorkAdmin() {
 
@@ -15,15 +16,16 @@ function WorkAdmin() {
     const [currentPage, setCurrentPage] = useState(1);
     const [year2, setYear2] = useState(new Date().getFullYear());
     const [month2, setMonth2 ] = useState(new Date().getMonth() + 1);
+    const [form, setForm] = useState({});
     //nabvar 에서의 변경값이 있을 떄 변경 해주기 위한 설정 
-    const { insert } = useSelector(state => state.workReducer);
-    const { quit } = useSelector(state => state.workReducer);
+    const { admin } = useSelector(state => state.adminWorkReducer);
+    const { work } = useSelector(state => state.workReducer);
     // const [isFirstRender, setFirstRender] = useState(true);
     // const pageInfo = myWork.pageInfo;
-    const pageInfo = myWork && myWork ? myWork.pageInfo : null;
+    const pageInfo = admin && admin ? admin.pageInfo : null;
     // 나중에 수정
     
-    console.log('myWork :', myWork );
+    console.log('admin :', admin ? admin.data : "");
     
     const today = new Date();
     
@@ -34,10 +36,28 @@ function WorkAdmin() {
         const year = date.getFullYear();
         //월은 더하기 1 .padStart는 ???
         const month = String(date.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1을 해줌
-    
-        return `${year}-${month}`;
+        const day = String(date.getDate()).padStart(2, "0");    
+
+        return `${year}-${month}-${day}`;
     }
-    // 근무시간을 계산하고 바로 문자열로 반환 하기 위한 함수
+
+    const onChangeDateHandler = (e) => {
+        const date = e.target.value;
+        setSelectedDate(date);
+        console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', e.target.name, e.target.value);
+        console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', date);
+        // dispatch(callAdminWorkListAPI({ date, currentPage }))
+    }
+
+        const baicTime = '09:00:00';
+
+        
+        const dateObj = new Date(`1970-01-01T${baicTime}.000Z`);
+        // const dateObj2 = new Date(`1970-01-01T${quitTIme}.000Z`);
+    
+        // getTime() 메서드로 밀리초 단위 시간으로 변환
+        const timeInMs = dateObj.getTime();
+
     function formatDuration(startTime, endTime) {
         //new Date() 에 2002-02같은 유효한단위로 넣지 않으면 밀리초 단위로 시간 계산이 된다. 밑에 구문에서 밀리초 단위를 계산하여 문자열로 반환한다.
         const start = new Date(startTime);
@@ -67,62 +87,13 @@ function WorkAdmin() {
         return `${hours}:${minutes}:${seconds}`;
     }
 
-    // 연장 시간을 계산하기 위한 기본 근무 시간 
-    const baicTime = '09:00:00';
-    // const quitTIme = '18:00:00';
-    //퇴근 시간 이후에 퇴근 했;는지 알기위한 퇴근 고정시간
-    // const fiexdQuit = new Date("18:00:00");
-    // const fiexdQuit = new Date(formatQuit)
-      // Date 객체 생성
-    
-    const dateObj = new Date(`1970-01-01T${baicTime}.000Z`);
-    // const dateObj2 = new Date(`1970-01-01T${quitTIme}.000Z`);
-
-    // getTime() 메서드로 밀리초 단위 시간으로 변환
-    const timeInMs = dateObj.getTime();
-
-    // 점심 시간을 계산하기 위한 변수 설정
-    // const lunchTime = '01:00:00';
-
-    // const lunchObj = new Date(`1970-01-01T${lunchTime}.000Z`);
-
-    // const timeInMs2 = lunchObj.getTime();
-
-    // // 다시 Date 객체로 변환
-    // const timeObj = new Date(timeInMs);
-    
-    // 주석된 formattedDate와 같이 사용
-    // useEffect(
-    //     () => {
-    //         const formattedDate = formatDate(today);
-    //         setFormattedDate(formattedDate);
-    //     }, []);
-
-    
-    const handleYearChange = (bYear, year) => {
-        setYear2(year);
-        console.log('bYear : ', bYear);
-        console.log('year : ', year);
-        setCurrentPage(1);
-    };
-    
-    const handleMonthChange = (bMonth, month) => {
-        setMonth2(month);
-        console.log('bMonth : ', bMonth);
-        console.log('month : ', month);
-        setCurrentPage(1);
-    }
-
     useEffect(() => {
-        if (formattedDate) {
-            console.log('formattedDate : ', formattedDate)
-            dispatch(callWorkMyListAPI({ workDate: formattedDate, currentPage }));
-            // setFirstRender(false);
-            } 
-            else {
-            dispatch(callWorkMyListAPI({ workDate: formattedDate, currentPage }));
-            }
-    }, [formattedDate, insert, quit ]);
+        if(selectedDate){
+            dispatch(callAdminWorkListAPI({ date : selectedDate, currentPage }))
+        } else if(formattedDate) {
+            dispatch(callAdminWorkListAPI({ date : formattedDate, currentPage }))
+        }
+    },[selectedDate, formattedDate])
 
     useEffect(() => {
         console.log('year2 : ', year2);
@@ -141,7 +112,7 @@ function WorkAdmin() {
             }
         }
 
-    },[year2, month2, currentPage]);
+    },[currentPage]);
 
     console.log('currentPage : ', currentPage);
 
@@ -161,8 +132,7 @@ function WorkAdmin() {
                 <hr className={ WorkCSS.hr }></hr>
                 <div className={ WorkCSS.btnContainer2 }>
                     <div className={ WorkCSS.dateSelect }>
-                        <DateSelect 
-
+                        {/* <DateSelect 
                         year2={year2}
                         month2={month2}
                         
@@ -170,7 +140,11 @@ function WorkAdmin() {
                         
                         // onChageHandler={ onChageHandler }
                         
-                        />
+                        /> */}
+                        <input type="date"
+                               name="date"
+                               onChange={ onChangeDateHandler }
+                        ></input>
                         <input className={ WorkCSS.inputBox }></input>
                     </div>
                 </div>
@@ -183,27 +157,28 @@ function WorkAdmin() {
                             <th>퇴근 시간</th>
                             <th>근무 시간</th>
                             <th>연장 시간</th>
-                            <th>상태</th>
+                            <th>지각</th>
+                            <th>결근</th>
+                            <th>사용 연차일</th>
                         </tr>
                     </thead>
                     <tbody>
-                    {myWork && myWork.data && myWork.data.map((work) => (
-                            <tr className={WorkCSS.td} key={work.workPk.workDate}>
-                            <td>{work.workPk.workDate.substring(0, 10)}</td>
-                            <td>{work.workTime ? work.workTime.substring(11, 19) : ""}</td>
-                            <td>{work.quitTime ? work.quitTime.substring(11, 19) : ""}
-                            </td>
-                            <td>
-                                {work.workTime && work.quitTime ? formatDuration3(formatDuration2(work.workTime, work.quitTime)) : ""}
-                            </td>
-                            <td>
-                            {work.workTime && work.quitTime
-                                ? formatDuration2(work.workTime, work.quitTime) > timeInMs
-                                ? formatDuration3(formatDuration2(work.workTime, work.quitTime) - timeInMs)
-                                : ""
-                            : ""}  
-                            </td>
-                            <td>{work.workStatus}</td>
+                    {admin && admin.data && admin.data.map((admin) => (
+                            <tr className={WorkCSS.td} key={admin.emp.empCode}>
+                                <td>{admin.workPk.workDate.substring(0, 10)}</td>
+                                <td>{admin.workTime ? admin.workTime.substring(11, 19) : ""}</td>
+                                <td>{admin.quitTime ? admin.quitTime.substring(11, 19) : ""}</td>
+                                <td>{admin.workTime && admin.quitTime ? formatDuration3(formatDuration2(admin.workTime, admin.quitTime)) : ""}</td>
+                                <td>
+                                    {admin.workTime && admin.quitTime
+                                    ? formatDuration2(admin.workTime, admin.quitTime) > timeInMs
+                                    ? formatDuration3(formatDuration2(admin.workTime, admin.quitTime) - timeInMs)
+                                    : ""
+                                : ""}
+                                </td>
+                                <td>
+                                {admin.workStatus}
+                                </td>
                             </tr>
                             
                         ))}
