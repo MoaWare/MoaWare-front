@@ -50,7 +50,7 @@ function Schedule() {
     end: event.schEndDate,
     allDay: true,
     backgroundColor: getEventColor(event.schType.schCategoryCode),
-    id: event.schCode // Add id property to identify the event
+    id: event.schCode
   })) || [];
 
   /* 상세 일정 */
@@ -66,6 +66,8 @@ function Schedule() {
       setScheduleModal(true);
     }
   }, [schedule]);
+
+
 
   return (
     <>
