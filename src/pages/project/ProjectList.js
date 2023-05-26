@@ -7,7 +7,7 @@ function ProjectList( {projectList} ) {
 
 
     const onClickTableTr = (projCode) => {
-        navigate(`/proj/detail/${projCode}`);
+        navigate(`/task/${projCode}`);
     }
 
 

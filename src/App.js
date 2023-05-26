@@ -42,6 +42,9 @@ import CreateProject from "./pages/project/CreateProject";
 import DoneProject from "./pages/project/DoneProject";
 import AdminEmpDetail from "./pages/admin/AdminEmpDetail";
 import PaymentBoard from "./pages/payment/PaymentBoard";
+import TaskRegist from "./form/Task/TaskRegist";
+import TaskDetail from "./form/Task/TaskDetail";
+import TaskUpdate from "./form/Task/TaskUpdate";
 
 
 
@@ -132,14 +135,17 @@ function App() {
             </ProtectedRoute>
           } />
          {/* 프로젝트 */}
-         <Route path="proj/detail/:projCode" 
+         <Route path="task/:projCode" 
           element={              
             <ProtectedRoute projectCheck={true}>
               <ProjDetailLayout />
             </ProtectedRoute>
-          }>
-          <Route index element={<ProjDetail />} />
-        </Route>
+            }>
+            <Route index element={<ProjDetail />} />
+            <Route path="update/:taskCode" element={<TaskUpdate />}/>
+            <Route path="detail/:taskCode" element={<TaskDetail />}/>
+            <Route path="regist" element={<TaskRegist />}/>
+         </Route>
         {/* 회원 정보 */}
         <Route 
           path="member"
@@ -148,12 +154,12 @@ function App() {
               <MemberInfoLayout />
             </ProtectedRoute>
           }>
-            <Route index element={<MemberInfo />}/>
-            <Route path="modify" element={<MemberInfoModify />} />
-          </Route>
+          <Route index element={<MemberInfo />}/>
+          <Route path="modify" element={<MemberInfoModify />} />
+        </Route>
       </Routes>
     </BrowserRouter >
   );
 }
-//s
+
 export default App;
