@@ -3,11 +3,17 @@ import { useDispatch, useSelector, } from "react-redux";
 import { callAdminEmpDetailAPI } from '../../apis/AdminAPICalls';
 import CSS from "./AdminEmpDetail.module.css";
 import { useParams } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
+
+
 
 function AdminEmpDetail() {
     const dispatch = useDispatch();
     const { detail } = useSelector(state => state.employeeReducer);
     const { empCode } = useParams();
+    const navigate = useNavigate();
+
 
     console.log('detail:', detail )
 
@@ -15,40 +21,55 @@ function AdminEmpDetail() {
         dispatch(callAdminEmpDetailAPI({ empCode }));
     }, []);
 
+
+    const onClickBackHandler = () => {
+        navigate('/admin/emp/list');
+    }
+
+
     return (
         <>
-            <div>
-                
-                    <table className={CSS.main}>
+            <div className={CSS.main}>
+
+            <div class={CSS.menutitle}> 계정 관리 {">"} 상세 정보 </div>
+
+                <table className={CSS.container} >
                         <tbody>
                             {detail &&(
                             <>
                             
                             <tr key={detail.empCode}>   
                                 
-                                    <th className={ CSS.tablebox } >사번</th>
-                                    <td className={ CSS.table }>{detail.empCode}</td>
+                                    <th className={ CSS.th } >사번</th>
+                                    <td className={ CSS.td }>{detail.empCode}</td>
                                 </tr>
                                 <tr>
-                                    <th className={ CSS.table }>이름</th>
-                                    <td className={ CSS.table }>{detail.empName}</td>
+                                    <th className={ CSS.th }>이름</th>
+                                    <td className={ CSS.td }>{detail.empName}</td>
                                 </tr>
                                 <tr>
-                                    <th className={ CSS.table } >ID</th>    
-                                    <td className={ CSS.table }>{detail.empID}</td>
+                                    <th className={ CSS.th } >ID</th>    
+                                    <td className={ CSS.td }>{detail.empID}</td>
                                 </tr>
                                 <tr>
-                                    <th className={ CSS.table }>직급</th>
-                                    <td className={ CSS.table }>{detail.job.jobName}</td>
+                                    <th className={ CSS.th }>직급</th>
+                                    <td className={ CSS.td }>{detail.job.jobName}</td>
                                 </tr>
                                 <tr>
-                                    <th className={ CSS.table }>부서</th>
-                                    <td className={ CSS.table }>{detail.dept.deptName}</td>
+                                    <th className={ CSS.th }>부서</th>
+                                    <td className={ CSS.td }>{detail.dept.deptName}</td>
                             </tr>
+
+                            
                                 </>
                                 )}
+                                
                         </tbody>
-                    </table>
+                </table>
+                <div className={CSS.content}>
+                                    <button className={CSS.boardcancel} onClick = { onClickBackHandler } >이전</button>
+                                    <button className={CSS.modifypost}>수정</button>
+                                    </div>
 
 
             </div>

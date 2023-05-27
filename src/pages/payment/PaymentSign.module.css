@@ -54,22 +54,33 @@
 }
 
 .imgBox{
-    background-color: skyblue;
-    width: 35%;
-    height: 45%;
+    background-color:rgba(182, 189, 198, 0.5);
+    width: 24vw;
+    height: 30vh;
     margin-left: 3vw;
+    font-size: 2rem;
+    color:rgba(182, 189, 198, 0.68);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .imgTextBox{
     width: 30vw;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 3vh;
 }
 .imgNameBox{
 
-    margin-left: 10vw
+    margin-left: 10vw;
+    margin-top: 10vh;
 }
 
 .imgNameTilte{
-    width: 20vw;
-    height: 30vh;
+    border: 1px solid rgba(37, 79, 112, 1);
+    width: 7vw;
+    height: 4vh;
+    line-height: 4vh;
     font-size: 14px;
     text-align: center;
     background-color: rgba(37, 79, 112, 1);
@@ -77,11 +88,21 @@
 }
 
 .imgName{
+    width: 15vw;
     border: 1px solid rgba(37, 79, 112, 1);
+    text-align: center;
+    height: 4vh;
+    line-height: 4vh;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-left: 1rem;
 }
 
-
-
+.paySignImage{
+    height: 25vh;
+    width: 20vw;
+}
 
 
 
@@ -90,6 +111,7 @@
     justify-content: space-around;
     width: 20vw;
     height: 10vh;
+    margin-left: 1vw;
 }
 
 .saveButton{

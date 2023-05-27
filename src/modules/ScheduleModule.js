@@ -16,7 +16,7 @@ export const { schedule: { getSchedules, getSchedule } } = createActions({
 const scheduleReducer = handleActions(
     {
         [GET_SCHEDULES] : (state, { payload }) => ({ schedules : payload }),
-        [GET_SCHEDULE] : (state, { payload }) => ({ schedule : payload })
+        [GET_SCHEDULE] : (state, { payload }) => ({ ...state, schedule : payload })
     }
 , initialState);
 

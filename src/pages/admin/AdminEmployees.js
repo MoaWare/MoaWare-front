@@ -40,7 +40,8 @@ function AdminEmployees() {
             <div className={CSS.main}>
                 
 
-                <table className={CSS.table }>
+            <table className={CSS.table}>
+
 
                     <thead>
                         <tr className={ CSS.th }> 

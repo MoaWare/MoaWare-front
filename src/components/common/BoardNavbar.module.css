@@ -1,3 +1,25 @@
+
+.boardPostButtonDiv{
+    display: flex;
+    justify-content: center;
+}
+.boardPostButtonDiv button{
+    margin: 5px;    
+    margin-top: 15px;
+    margin-bottom: 15px;
+    height: 40px;
+    width: 150px;
+    border-radius: 25px;
+    color: rgba(239, 239, 239, 1);
+    background-color: #254F70;
+    font-weight: bold;
+
+}
+
+.boardPostButtonDiv button:hover {
+    background-color: #4B5766;
+}
+
 .navbar {
     /* border: 1px solid red;s */
     height: 95vh;
@@ -49,7 +71,7 @@
     background-color: white;
     border-radius: 30px;
     margin: 4vh 2vw;
-    height: 87vh;
+    height:87vh;
 }
 
 .profile {

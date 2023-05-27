@@ -1,7 +1,6 @@
-@charset "UTF-8";
 .main {
-    margin-top : 10vh;
-    margin-left: 22%;
+    margin-top : 9vh;
+    margin-left: 20.5%;
     width: 77%;
     min-height: 88%;
     overflow-y: scroll;
@@ -13,45 +12,8 @@
     align-items: center; */
 }
 
-.body {
-    padding-top: 50px;
-}
 
-.content {
-    position: relative;
-    max-width: 1100px;
-    margin: auto;
-    top: 120px;
-}
-
-.viewer-box {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.row {
-    display: flex;
-    align-items: center;
-}
-
-.info-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #f8f9fa;
-    border-radius: 5px;
-    width: 100%;
-    max-width: 1100px;
-    height: 600px;
-    /* 나중에 조정*/
-    color: #424242;
-
-}
-
-.table {
+/* .table {
     width: 1100px;
     border-collapse: collapse;
     text-align: center;
@@ -98,7 +60,7 @@
 
 
 /* 테이블 박스 */
-.tablebox {
+/* .tablebox {
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 10px;
@@ -117,4 +79,76 @@
 
 .tablebox td:last-child {
     border-bottom: none;
+}
+
+
+/* 전체를 감싸는 큰 사각형 박스 */
+/* .viewerbox {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}  */
+.menutitle {
+    padding: 2.5vh;
+    margin-left: 1vw;
+    font-size: 30px;
+    margin-top: 3vh;
+}
+
+.container {
+    padding: 3vh;
+}
+
+
+.th {
+    
+    
+    border-radius: 1px;
+    padding: 10px;
+    background-color: #E0E9F4;
+    height: 50px;
+    border: 1px solid #c9c9c9;
+    width: 10vw;
+    box-shadow: 2px 2px 2px 2px #E0E9F4;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.td {
+    
+    border-radius: 6px;
+    font-size: 20px;
+    background-color: #ffffff;
+    padding-left: 4.5vw;
+    border: 1px solid #c9c9c9;
+    width: 60vw;
+
+}
+
+.content {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 30px;
+    padding: 10px;
+    margin-right: 3vw;
+}
+
+
+.content button {
+    border: 10px;
+    border-radius: 8px;
+    width: 70px;
+    height: 30px;
+    
+    background-color: #254F70;
+    color: #ffffff;
+    margin-left: 10px;
+    cursor: pointer;
+    box-shadow: 3px 3px 1px 2px #E0E9F4;
+
+}
+
+.content button:hover {
+    background-color: #87909B;
 }

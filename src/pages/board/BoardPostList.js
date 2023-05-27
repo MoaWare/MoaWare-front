@@ -13,14 +13,15 @@ function BoardPostList() {
     //    const pageInfo = boardPost.pageInfo;
 
 
-    const [currentPage, setCurrentPage] = useState(1);
+    
+
 /* 게시판 코드별 요청시 사용할 값 */
     const { boardCode } = useParams();
     console.log("boardCode : ", boardCode);
 
 
 
-
+    const [currentPage, setCurrentPage] = useState(1);
     useEffect(
         () => {
             if (boardCode) {
@@ -51,6 +52,7 @@ function BoardPostList() {
 
         
             <div className={CSS.main}>
+            <div class={CSS.menutitle}> 게시판 </div>
                 
 
                 <table className={CSS.table }>
@@ -65,25 +67,28 @@ function BoardPostList() {
                             <th>작성일</th>
                             <th>수정일</th>
                             <th>조회수</th>
-                            <th>상세정보</th>
                         </tr>
                     </thead>
                         <tbody>
                     
                             {boardPosts.data &&
                                 boardPosts.data.map((post) => (
-
+                                    
                                     <tr
-                                        className={CSS.td}
-                                        key={post.postCode}
-                                        onClick={() => onClickTableTr(post.postCode)}
-                                    >   <td></td>
-                                        <td>{post.postCode}</td>
-                                        <td>{post.postCategory}</td>
-                                        <td>{post.postTitle}</td>
-                                        <td>{post.createDate}</td>
-                                        <td>{post.modifyDate}</td>
-                                        <td>{post.views}</td>
+                                    className={CSS.td}
+                                    key={post.postCode}
+                                    onClick={() => onClickTableTr(post.postCode)}
+                                >
+                                    <td>
+                                        <input type="checkbox" id="checkAll" onClick={(e) => e.stopPropagation()} />
+                                    </td>
+                                    <td>{post.postCode}</td>
+                                    <td>{post.postCategory}</td>
+                                    <td>{post.postTitle}</td>
+                                    <td>{post.createDate}</td>
+                                    <td>{post.modifyDate}</td>
+                                    <td>{post.views}</td>
+                                
                                         {/* <td>    <button className="view-post-button" onClick={onClickProductInsert}>
                                         게시물 조회
                                     </button></td> */}
@@ -91,8 +96,12 @@ function BoardPostList() {
                                 ))}
                         </tbody>
                     </table>
-            
+                    <div className={CSS.content}>
+                                    <button className={CSS.deletepost}>삭제</button>
+                                    </div>
+
             </div>
+            
             <div>
                 {/* {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />} */}
             </div>

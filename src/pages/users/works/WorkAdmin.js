@@ -5,7 +5,7 @@ import PagingBar from "../../../components/common/PagingBar";
 import { useDispatch, useSelector } from 'react-redux';
 import { callWorkMyListAPI } from '../../../apis/WorkAPICalls';
 
-function Work() {
+function WorkAdmin() {
 
     const dispatch = useDispatch();
     const { myWork } = useSelector(state => state.workReducer);
@@ -217,4 +217,4 @@ function Work() {
     );
 }
 
-export default Work;
+export default WorkAdmin;
