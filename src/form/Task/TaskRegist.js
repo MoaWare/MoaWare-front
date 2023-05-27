@@ -140,9 +140,8 @@ function TaskRegist() {
                                         <tr className={TaskCSS.tableTaskNotice}>
                                             <td className={TaskCSS.tableTitle}>공지사항</td>
                                             <td className={TaskCSS.tableBorder}>
-                                                <input 
+                                                <textarea 
                                                     className={TaskCSS.inputbox}
-                                                    type="text" 
                                                     name="taskNotice"
                                                     onChange={onChangeHandler}
                                                 />

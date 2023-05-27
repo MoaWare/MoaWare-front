@@ -18,6 +18,7 @@ function MemberInfoModify(){
         extensionNum : ""
      });
     const [imageUrl, setImageUrl] = useState('');
+    const [ file, setFile ] = useState({ });
     const [ isCheck , setIsCheck ] = useState(false);
 
     
@@ -135,8 +136,23 @@ function MemberInfoModify(){
         dispatch(callMemberModifyAPI(formData));
     }
 
+    useEffect(()=>{
+        
+        if(info){
+    
+            info.fileCategory.forEach((file) => {
+    
+                if(file.fcategoryType === 'emp'){
 
-
+                    setFile(file);
+                    
+                    return;
+                }
+            });
+        }
+    },[info]);
+    
+    console.log("file",file?.file?.filePath);
 
     return info && (
         <div className={MemCSS.wrapper}>
@@ -147,7 +163,7 @@ function MemberInfoModify(){
             <div className={MemCSS.divMiddle}>
                 <div className={MemCSS.midFrist}>
                     <div className={ MemCSS.memberImageDiv }>
-                    <img src={ !imageUrl ? info.fileCategory.file.filePath : imageUrl} className={ MemCSS.memberImage } alt="preview"/>
+                    <img src={ !imageUrl ? file?.file?.filePath : imageUrl } className={ MemCSS.memberImage } alt="preview"/>
                         <input                
                             style={{ display: 'none' }}
                             type="file"

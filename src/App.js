@@ -149,7 +149,6 @@ function App() {
               <ProjDetailLayout />
             </ProtectedRoute>
           }>
-            }>
             <Route index element={<ProjDetail />} />
             <Route path="update/:taskCode" element={<TaskUpdate />}/>
             <Route path="detail/:taskCode" element={<TaskDetail />}/>

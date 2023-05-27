@@ -11,8 +11,9 @@ function TaskList({ task }) {
     console.log("TaskList task : ", task );
 
     useEffect(() => {
+      
       if(task){
-        switch (taskStage) {
+        switch (taskStage) { 
           case 'todo':
             setStage(<span>해야할 일</span>);
             break;
@@ -26,6 +27,7 @@ function TaskList({ task }) {
             setStage(<span>상태 없음</span>);
             break;
         }}
+
     },[task]);
 
     

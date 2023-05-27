@@ -81,13 +81,41 @@ export const callTaskRegistAPI = ( form ) => {
 
       if(result?.status === 200){
           console.log(result);
+
           dispatch(postTask(result));
+
       } else if(result?.status === 400){
         alert(result.message);
       }
   }
 }
 
+
+/* 업무 등록 */
+export const callTaskDeleteAPI = ( taskCode ) => {
+
+  const requestURL = `${PRE_URL}/task/regist`;
+
+  return async (dispatch, getState) => {
+
+      const result = await fetch(requestURL, {
+        method : "POST",
+        headers : {
+            "Content-Type" : "application/json",
+            "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+        },
+      }).then(res => res.json());
+
+      if(result?.status === 200){
+          console.log(result);
+
+          dispatch(postTask(result));
+
+      } else if(result?.status === 400){
+        alert(result.message);
+      }
+  }
+}
 
 
 
