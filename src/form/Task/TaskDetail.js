@@ -12,9 +12,10 @@ function TaskDetail() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { taskCode } = useParams();
-    const { task } = useSelector((state) => state.projectReducer);
+    const { task , del } = useSelector(state => state.projectReducer);
     const [ stage, setStage ] = useState('');
     const [ type, setType ] = useState('');
+    let projCode = '';
 
 
     useEffect(
@@ -23,7 +24,8 @@ function TaskDetail() {
         },[]
     );
 
-    useEffect(() => {
+    useEffect(() => {   
+      
         if(task){
           switch (task.stage) {
             case 'todo':
@@ -39,32 +41,39 @@ function TaskDetail() {
               setStage(<span>상태 없음</span>);
               break;
           }}
+
+          if(task){
+            switch (task.type) {
+              case 'plan':
+                setType(<span>기획</span>);
+                break;
+              case 'design':
+                setType(<span>설계</span>);
+                break;
+              case 'test':
+                setType(<span>테스트</span>);
+                break;
+              case 'dev':
+                setType(<span>개발</span>);
+                break;
+              case 'pre':
+                setType(<span>시연</span>);
+                break;
+              default:
+                setType(<span>상태 없음</span>);
+                break;
+            }}
+
       },[task]);
 
-      useEffect(() => {
 
-        if(task){
-          switch (task.type) {
-            case 'plan':
-              setType(<span>기획</span>);
-              break;
-            case 'design':
-              setType(<span>설계</span>);
-              break;
-            case 'test':
-              setType(<span>테스트</span>);
-              break;
-            case 'dev':
-              setType(<span>개발</span>);
-              break;
-            case 'pre':
-              setType(<span>시연</span>);
-              break;
-            default:
-              setType(<span>상태 없음</span>);
-              break;
-          }}
-      },[task]);
+
+      useEffect(()=>{
+        if(del?.status === 200){
+          alert(del.message);
+          // navigate(`/task/${form.project.projCode}`);
+        }
+      },[del]);
 
 
       const deleteBtn = () => {

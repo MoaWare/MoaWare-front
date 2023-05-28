@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TaskCSS from './Task.module.css';
-import { callTaskDetailAPI } from "../../apis/ProjectAPICalls";
-import { useParams } from "react-router-dom";
+import { callTaskDetailAPI, callTaskUpdateAPI } from "../../apis/ProjectAPICalls";
+import { useNavigate, useParams } from "react-router-dom";
 import { getMemberId } from "../../utils/TokenUtils";
 
 
 function TaskUpdate() {
 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const { taskCode } = useParams();
-    const { task } = useSelector((state) => state.projectReducer);
+    const { task, put } = useSelector((state) => state.projectReducer);
     const [ form, setForm ] = useState({
+        taskCode : "",
         taskName : "",
         taskNotice : "",
         startDate : "",
@@ -20,45 +22,50 @@ function TaskUpdate() {
         stage : "",
         project : {},
     })
-
     let endDate = '';
 
             
 
-    useEffect(
-        ()=>{
+    useEffect(()=>{
+        
             dispatch(callTaskDetailAPI(taskCode));
-
-            console.log("task------------------------",task)
-        },[]
+            console.log("task------------------------",task);
+      },[]
     );
-
-    useEffect(()=>{
-
-        if(task){
-            
-            setForm({ project : task.project });
-            
-            const { taskName, taskNotice, startDate, endDate, type, stage } = task;
-        
-            setForm({ taskName, taskNotice, startDate, endDate, type, stage });
-        }
-        console.log("from==============================",form);
-    },[task]);
+ 
 
 
     useEffect(()=>{
         
-        
         if(task){
 
-            endDate = task.endDate.substring(10,0);
+          endDate = task.project.endDate.substring(10,0);
+          console.log("endDate ------------------------------",endDate);
 
-            setForm({ endDate });
-        }
-        console.log("form.endDate", form?.endDate);
 
-    },[task]);
+          setForm((init) => ({
+              ...init,
+              project: task.project,
+              taskCode: task.taskCode,
+              taskName: task.taskName,
+              taskNotice: task.taskNotice,
+              startDate: task.startDate.substring(10,0),
+              endDate: task.endDate.substring(10,0),
+              type: task.type,
+              stage: task.stage,
+            }));
+          }
+        console.log("form ------------------------------",form);
+
+    },[  ,task]);
+
+
+    useEffect(() => {
+        if(put?.status === 200){
+            alert(put.message);
+            navigate(`/task/${form?.project?.projCode}`);
+        }   
+    },[put]);
 
 
 
@@ -75,6 +82,12 @@ function TaskUpdate() {
 
     const onClickHandler = () => {
 
+        if(getMemberId() === task.author.empID){
+            dispatch(callTaskUpdateAPI( form ));
+        } else {
+            alert('최초 작성자만 수정이 가능합니다.');
+            navigate(-1);
+        }
     };
 
 
@@ -114,6 +127,7 @@ function TaskUpdate() {
                                                 type="date" 
                                                 name="startDate"
                                                 max={endDate}
+                                                value={form?.startDate}
                                                 onChange={onChangeHandler}
                                             />
                                             </td>
@@ -127,6 +141,7 @@ function TaskUpdate() {
                                                     name="endDate"
                                                     min={form?.startDate}
                                                     max={endDate}
+                                                    value={form?.endDate}
                                                     onChange={onChangeHandler}
                                                 />
                                             </td>
@@ -168,7 +183,7 @@ function TaskUpdate() {
                                 </table>
                             </div>
                             <div className={TaskCSS.btnMargin}>
-                                <button onClick={onClickHandler}>등록</button>
+                                <button onClick={onClickHandler}>변 경</button>
                             </div>
                         </div>
                     </div>

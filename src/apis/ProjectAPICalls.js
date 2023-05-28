@@ -1,4 +1,4 @@
-import { getProject, getTasks, getDone, getProgress, getDeptlist, getDeptemplist, postProject, getTask, postTask } from "../modules/ProjectModule";
+import { getProject, getTasks, getDone, getProgress, getDeptlist, getDeptemplist, postProject, getTask, postTask, putTask, deleteTask } from "../modules/ProjectModule";
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -90,27 +90,48 @@ export const callTaskRegistAPI = ( form ) => {
   }
 }
 
+/* 업무 수정 */
+export const callTaskUpdateAPI = ( form ) => {
 
-/* 업무 등록 */
-export const callTaskDeleteAPI = ( taskCode ) => {
-
-  const requestURL = `${PRE_URL}/task/regist`;
+  const requestURL = `${PRE_URL}/task/update`;
 
   return async (dispatch, getState) => {
 
       const result = await fetch(requestURL, {
-        method : "POST",
+        method : "PUT",
         headers : {
             "Content-Type" : "application/json",
-            "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+        },
+        body: JSON.stringify(form)
+      }).then(res => res.json());
+
+      if(result?.status === 200){
+          console.log(result);
+          dispatch(putTask(result));
+      } else if(result?.status === 400){
+        alert(result.message);
+      }
+  }
+}
+
+
+/* 업무 삭제 */
+export const callTaskDeleteAPI = ( taskCode ) => {
+
+  const requestURL = `${PRE_URL}/task/delete/${taskCode}`;
+
+  return async (dispatch, getState) => {
+
+      const result = await fetch(requestURL, {
+        method : "PUT",
+        headers : {
+            "Content-Type" : "application/json",
         },
       }).then(res => res.json());
 
       if(result?.status === 200){
           console.log(result);
-
-          dispatch(postTask(result));
-
+          dispatch(deleteTask(result));
       } else if(result?.status === 400){
         alert(result.message);
       }

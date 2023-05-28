@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TaskCSS from './Task.module.css';import { callProjectAPI, callTaskDetailAPI, callTaskRegistAPI } from "../../apis/ProjectAPICalls";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getMemberId } from "../../utils/TokenUtils";
 
 
 function TaskRegist() {
 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { project } = useSelector(state => state.projectReducer);
+    const { project, post } = useSelector(state => state.projectReducer);
     const { projCode } = useParams();
     const [ stage, setStage ] = useState('');
     const [ type, setType ] = useState('');
@@ -35,14 +36,22 @@ function TaskRegist() {
 
     useEffect(()=>{
 
-        setForm({ project : project });
-
         if(project){
             endDate = project.endDate.substring(10,0);
         }
+
+        setForm({ project : project });
+        
         console.log(endDate);
 
     },[project]);
+
+    useEffect(() => {
+        if(post?.status === 200){
+            alert(post.message);
+            navigate(`/task/${form.project.projCode}`);
+        }
+    },[post]);
 
 
 
