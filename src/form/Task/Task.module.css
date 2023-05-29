@@ -175,9 +175,12 @@
     height: 2.3vh;
     border: #d6d6d6 solid 1px;
     border-radius: 3px;
+
 }
 
-.tableTextbox{
+
+
+.tableTextbox, .tableTaskNotice .inputbox{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     width: 12vw;
     height: 6vh;

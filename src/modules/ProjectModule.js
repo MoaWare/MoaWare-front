@@ -29,7 +29,7 @@ export const { project :
     [GET_DEPTEMPLIST] : res => res.data,
     [POST_PROJECT] : res => res,
     [GET_TASK] : res => res.data,
-    [POST_TASK] : res => res.data,
+    [POST_TASK] : res => res,
     [PUT_TASK] : res => res,
     [DELETE_TASK] : res => res,
 }); 

@@ -12,10 +12,10 @@ function TaskDetail() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { taskCode } = useParams();
+    const { projCode } = useParams();
     const { task , del } = useSelector(state => state.projectReducer);
     const [ stage, setStage ] = useState('');
     const [ type, setType ] = useState('');
-    let projCode = '';
 
 
     useEffect(
@@ -71,7 +71,7 @@ function TaskDetail() {
       useEffect(()=>{
         if(del?.status === 200){
           alert(del.message);
-          // navigate(`/task/${form.project.projCode}`);
+          navigate(`/task/${projCode}`);
         }
       },[del]);
 
