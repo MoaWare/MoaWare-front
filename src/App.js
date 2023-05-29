@@ -47,6 +47,7 @@ import TaskUpdate from "./form/Task/TaskUpdate";
 import TaskDetail from "./form/Task/TaskDetail";
 import TaskRegist from "./form/Task/TaskRegist";
 import WorkAdmin from "./pages/users/works/WorkAdmin";
+import WorkAdminMonth from "./pages/users/works/WorkAdminMonth";
 
 
 function App() {
@@ -71,6 +72,7 @@ function App() {
           <Route path="work" element={<WorkLayout />}>
             <Route index element={<Work />} />
             <Route path="admin" element={<WorkAdmin />} />
+            <Route path="admin/month" element={<WorkAdminMonth />} />
             <Route path="restReq" element={<WorkRestReq />} />
             <Route path="restReqList" element={<WorkRestReqList />} />
             <Route path="restList" element={<WorkRestList />} />

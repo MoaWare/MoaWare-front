@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import organizationReducer from "./OrganizationModule";
 import employeeReducer from "./EmployeeModule";
 import workReducer from "./WorkModule";
+import workStatusReducer from "./WorkStatusModule";
 import workTimeReducer from "./WorkTimeModule";
 import boardPostReducer from "./BoardPostModule";
 import paymentReducer from "./PayMentModule";
@@ -26,7 +27,8 @@ const rootReducer = combineReducers({
     scheduleReducer,
     leaveReducer,
     leavePayReducer,
-    adminWorkReducer
+    adminWorkReducer,
+    workStatusReducer
 });
 
 export default rootReducer

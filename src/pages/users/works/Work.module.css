@@ -110,3 +110,48 @@
     border-left: none;
     line-height: 3rem;
 }
+
+/* .workBtn1{
+    margin-top: 4%;
+    margin-left: 70%;
+    background-color: rgba(37, 79, 112, 1);
+    color: white;
+    border-radius: 10px;
+    width: 6vw;
+    height: 4vh;
+    font-weight: bold;
+} */
+
+.input {
+    font-size: 15px;
+    border: 1px solid;
+    text-align: center;
+    border: none;
+    color: #254F70;
+
+}
+
+.workBtn1{
+    /* margin-top: 30%; */
+    margin-top: 100px;
+    margin-left: 70%;
+    background-color: rgba(37, 79, 112, 1);
+    color: white;
+    border-radius: 10px;
+    width: 6vw;
+    height: 4vh;
+    font-weight: bold;
+    /* flex-direction: column */
+}
+
+.workBtn2{
+    color: rgba(37, 79, 112, 1);
+    background-color: white;
+    width: 6vw;
+    height: 4vh;
+    border: 2px solid rgba(37, 79, 112, 1);;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 10px;
+}

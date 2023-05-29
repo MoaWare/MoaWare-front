@@ -7,19 +7,19 @@ const initalState = [];
 const GET_WORKLIST = 'work/GET_WORKLIST';
 const POST_INSERTSTART = 'work/POST_INSERTSTART';
 const PUT_QUITTIME = 'work/PUT_QUITTIME';
+const GET_WORKSTATUS = 'work/GET_WORKSTATUS';
 
 export const { work : { getWorklist, postInsertstart, putQuittime }} = createActions({
     [GET_WORKLIST] : (res) => res.data,
     [POST_INSERTSTART] : res => res,
-    [PUT_QUITTIME] : res => res
+    [PUT_QUITTIME] : res => res,
 });
 
 const workReducer = handleActions(
     {
         [GET_WORKLIST] : (state, { payload }) => ({ myWork : payload }),
         [POST_INSERTSTART] : (state, { payload }) => ({ insert : payload}),
-        [PUT_QUITTIME] : (state, { payload }) => ({ quit : payload })
-
+        [PUT_QUITTIME] : (state, { payload }) => ({ quit : payload }),
     }
 , initalState)
 

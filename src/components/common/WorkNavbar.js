@@ -72,7 +72,12 @@ function WorkNavbar() {
           </li>
           <li>
             <NavLink to="/work/admin" activeclassname="active">
-              직원 근태 현황
+              직원 일일 근태 현황
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/work/admin/month" activeclassname="active">
+              직원 월 근태 현황
             </NavLink>
           </li>
           <li>
