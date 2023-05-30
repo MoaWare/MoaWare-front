@@ -11,6 +11,12 @@
     z-index: 100;
 }
 
+.modal input {
+    border: none;
+    background-color: rgba(224, 233, 244, 0.5);
+    color: #254F70;
+}
+
 .wrapper {
     position: absolute;
     width: 20vw;
@@ -26,7 +32,7 @@
     display: flex;
     justify-content: space-between;
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(32, 82, 147, 0.5);
+    border-bottom: 1px solid rgba(182, 189, 198, 0.5);
 }
 
 .check {
@@ -42,79 +48,95 @@
 }
 
 .schTitle {
-    display: flex;
     padding-top: 1rem;
     color: #254F70;
     font-size: 14px;
     font-weight: bold;
 }
 
-.box {
-    height: 1rem;
-    width: 1rem;
-    background-color: rgba(182, 189, 198, 0.3);
-    margin-right: 0.5rem;
+.schTitle input {
+    padding: 0.4rem 0;
+    width: 100%;
+}
+
+.schTitle input::placeholder {
+    padding-left: 5px;
+    color: #B6BDC6;
+    font-size: 10px;
+    font-weight: bold;
 }
 
 .schDay {
     display: flex;
-    font-size: 12px;
+    justify-content: space-around;
     color: #254F70;
     margin-top: 1rem;
+}
+
+.schDay input {
+    background-color: transparent;
+    color: #254F70;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .hyphen {
     margin: 0 5px;
     font-size: 12px;
-    color: #254F70;
-}
-
-.schPrar {
-    font-size: 12px;
-    color: #254F70;
-    margin-top: 1rem;
     font-weight: bold;
+    color: #254F70;
 }
 
-.schPrarList {
+.schList {
     display: flex;
-    margin-top: 0.5rem;
-    font-size: 12px;
-}
-
-.aut {
-    padding: 0.4rem;
-    border-radius: 20px;
-    background-color: rgba(224, 233, 244, 0.5);
-    color: #87909B;
-    margin-right: 0.5rem;
-    font-size: 10px;
-}
-
-.prar {
-    padding: 0.4rem;
-    border-radius: 20px;
-    background-color: rgba(224, 233, 244, 0.5);
-    color: #87909B;
-    font-size: 10px;
-}
-
-.schDetail {
+    justify-content: space-between;
     margin-top: 1rem;
-    font-size: 12px;
+}
+
+.schList select {
+    padding: 0.4rem 0;
+    width: 48%;
+    background-color: rgba(224, 233, 244, 0.5);
+    border: none;
     color: #254F70;
-    margin-top: 1rem;
+    font-size: 10px;
     font-weight: bold;
+}
+
+.schList select option[value="none"][disabled] {
+	display: none;
+}
+
+.schList input {
+    padding: 0.4rem 0;
+    width: 48%;
+}
+
+.schList input::placeholder {
+    color: #254F70;
+    font-size: 10px;
+    font-weight: bold;
+    padding-left: 5px;
 }
 
 .schCont {
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
-    padding-left: 0.5rem;
+    margin-top: 1rem;
+}
+
+.schCont input {
     height: 20vh;
+    width: 100%;
+    /* padding-left: 0.5rem; */
+    background-color: rgba(224, 233, 244, 0.5);
     font-size: 12px;
     color: #254F70;
-    background-color: rgba(224, 233, 244, 0.5);
+}
+
+.schCont input::placeholder {
+    padding-left: 5px;
+    color: #B6BDC6;
+    font-size: 10px;
+    font-weight: bold;
 }
 
 .schDel {
@@ -144,5 +166,4 @@
 
 .schBtn {
     text-align: end;
-    /* border: 1px solid red; */
 }

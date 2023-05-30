@@ -8,7 +8,6 @@ import interactionPlugin from '@fullcalendar/interaction';
 import '../schedule/Schedule.css';
 import { callScheduleListAPI, callScheduleDetailAPI } from '../../apis/ScheduleAPICalls';
 import ScheduleModal from '../../components/modal/scheduleModal/ScheduleModal';
-import SchInsertModal from '../../components/modal/scheduleModal/SchInsertModal';
 
 function Schedule() {
 
@@ -16,7 +15,6 @@ function Schedule() {
   const navigate = useNavigate();
   const { schedules, schedule } = useSelector(state => state.scheduleReducer);
   const [scheduleModal, setScheduleModal] = useState(false);
-  const [schInsertModal, setSchInsertModal] = useState(false);
 
   useEffect(() => {
     dispatch(callScheduleListAPI());
@@ -59,46 +57,29 @@ function Schedule() {
   /* 상세 일정 */
   const handleEventClick = (info) => {
     const schCode = info.event.id; // Get the event id
-    // setSchInsertModal(false); // schInsertModal 닫기
-    dispatch(callScheduleDetailAPI({ schCode }));
-  };
-
-  /* 모달창! */
-  useEffect(() => {
-    if (schedule) {
-      console.log('일정 누르기!: ', schedule);
+      dispatch(callScheduleDetailAPI({ schCode }));
       setScheduleModal(true);
-    }
-  }, [schedule]);
-
-  /* 일정 등록 */
-  const EventInsertClick = () => {
-    console.log('일정 등록할래ㅠ0ㅠ: ');
-    setSchInsertModal(true); // schInsertModal 열기
-    console.log('모달창 클릭티비:', schInsertModal);
+      console.log('handleEventClick', scheduleModal);
   };
 
   /* 모달창! */
+  // useEffect(() => {
+  //   if (schedule) {
+  //     console.log('일정 누르기!: ', schedule);
+  //     setScheduleModal(true);
+  //   }
+  // }, [schedule]);
 
   return (
     <>
       { scheduleModal ? <ScheduleModal setScheduleModal={setScheduleModal} schedule={schedule} /> : null }
-      {/* { schInsertModal ? <SchInsertModal setSchInsertModal={setSchInsertModal} shcedule={schedule} /> : null } */}
-      { schInsertModal ? ( <SchInsertModal setSchInsertModal={setSchInsertModal} schedule={schedule} />) : null}
       <div className="wrapper">
         <div className="wrap">
           <FullCalendar
             plugins={[dayGridPlugin, googleCalendarPlugin, interactionPlugin]}
             // googleCalendarApiKey={process.env.REACT_APP_GOOGLE_API_KEY}
-            events={formattedEvents}
-            customButtons={{
-              myCustomButton: {
-                text: '일정 생성',
-                click: EventInsertClick
-              },
-            }}
             headerToolbar={{
-              left: 'prev,today,next,myCustomButton',
+              left: 'prev,today,next',
               center: 'title',
               right: 'dayGridYear,dayGridMonth,dayGridWeek,dayGridDay',
             }}
@@ -111,6 +92,7 @@ function Schedule() {
             }}
             locale="ko"
             editable={true}
+            events={formattedEvents}
             eventDrop={handleEventDrop}
             eventClick={handleEventClick}
           />
