@@ -71,6 +71,11 @@ function WorkNavbar() {
             </NavLink>
           </li>
           <li>
+            <NavLink to="/work/admin" activeclassname="active">
+              직원 일일 근태 현황
+            </NavLink>
+          </li>
+          <li>
             <NavLink to="/work/restReq" activeclassname="active">
               연차 신청
             </NavLink>
