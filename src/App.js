@@ -47,9 +47,11 @@ import TaskUpdate from "./form/Task/TaskUpdate";
 import TaskDetail from "./form/Task/TaskDetail";
 import TaskRegist from "./form/Task/TaskRegist";
 import AdminEmpRegist from "./pages/admin/AdminEmpRegist";
-
 import AdminBoardRegist from "./pages/admin/AdminBoardRegist";
 import AdminBoardList from "./pages/admin/AdminBoardList";
+import WorkAdmin from "./pages/users/works/WorkAdmin";
+import PaymentDetail from "./pages/payment/PaymentDetail";
+
 
 
 function App() {
@@ -73,6 +75,7 @@ function App() {
           {/* <Route path="work"> */}
           <Route path="work" element={<WorkLayout />}>
             <Route index element={<Work />} />
+            <Route path="admin" element={<WorkAdmin />} />
             <Route path="restReq" element={<WorkRestReq />} />
             <Route path="restReqList" element={<WorkRestReqList />} />
             <Route path="restList" element={<WorkRestList />} />
@@ -95,6 +98,7 @@ function App() {
             <Route path="refuse" element={<PaymentRefuseBoard />} />
             <Route path="storage" element={<PaymentStorageBoard />} />
             <Route path="sign" element={<PaymentSign />} />
+            <Route path="payDetail/:payCode" element={ <PaymentDetail/> }/>
           </Route>
 
           {/* 일정 관리 */}
@@ -161,7 +165,6 @@ function App() {
               <ProjDetailLayout />
             </ProtectedRoute>
           }>
-          
             <Route index element={<ProjDetail />} />
             <Route path="update/:taskCode" element={<TaskUpdate />}/>
             <Route path="detail/:taskCode" element={<TaskDetail />}/>

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TaskCSS from './Task.module.css';
-import { callTaskDetailAPI } from "../../apis/ProjectAPICalls";
-import { useParams } from "react-router-dom";
+import { callTaskDeleteAPI, callTaskDetailAPI } from "../../apis/ProjectAPICalls";
+import { Link, NavLink, Navigate, useNavigate, useParams } from "react-router-dom";
 import { getMemberId } from "../../utils/TokenUtils";
 
 
@@ -10,8 +10,10 @@ function TaskDetail() {
 
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { taskCode } = useParams();
-    const { task } = useSelector((state) => state.projectReducer);
+    const { projCode } = useParams();
+    const { task , del } = useSelector(state => state.projectReducer);
     const [ stage, setStage ] = useState('');
     const [ type, setType ] = useState('');
 
@@ -22,7 +24,8 @@ function TaskDetail() {
         },[]
     );
 
-    useEffect(() => {
+    useEffect(() => {   
+      
         if(task){
           switch (task.stage) {
             case 'todo':
@@ -38,32 +41,52 @@ function TaskDetail() {
               setStage(<span>상태 없음</span>);
               break;
           }}
+
+          if(task){
+            switch (task.type) {
+              case 'plan':
+                setType(<span>기획</span>);
+                break;
+              case 'design':
+                setType(<span>설계</span>);
+                break;
+              case 'test':
+                setType(<span>테스트</span>);
+                break;
+              case 'dev':
+                setType(<span>개발</span>);
+                break;
+              case 'pre':
+                setType(<span>시연</span>);
+                break;
+              default:
+                setType(<span>상태 없음</span>);
+                break;
+            }}
+
       },[task]);
 
-      useEffect(() => {
-        if(task){
-          switch (task.type) {
-            case 'plan':
-              setType(<span>기획</span>);
-              break;
-            case 'design':
-              setType(<span>설계</span>);
-              break;
-            case 'test':
-              setType(<span>테스트</span>);
-              break;
-            case 'dev':
-              setType(<span>개발</span>);
-              break;
-            case 'pre':
-              setType(<span>시연</span>);
-              break;
-            default:
-              setType(<span>상태 없음</span>);
-              break;
-          }}
-      },[task]);
 
+
+      useEffect(()=>{
+        if(del?.status === 200){
+          alert(del.message);
+          navigate(`/task/${projCode}`);
+        }
+      },[del]);
+
+
+      const deleteBtn = () => {
+
+        if(window.confirm(`'${task?.taskName}' 업무를 삭제하시겠습니까?`)) {
+          dispatch(callTaskDeleteAPI(task?.taskCode));
+        }
+      };
+
+      const updateClick = () => {
+        navigate(`/task/${task.project.projCode}/update/${task.taskCode}`);
+      }
+      
 
     return task && (
         <div className={TaskCSS.wrapper}>
@@ -109,12 +132,151 @@ function TaskDetail() {
                                 </table>
                             </div>
                             <div className={TaskCSS.btn}>
-                                { getMemberId() === task?.author?.empID && (<button>수정</button>) }
-                                { getMemberId() === task?.author?.empID && (<button>삭제</button>) }
+                                { getMemberId() === task?.author?.empID && (<button onClick={ updateClick }>수정</button>) }
+                                { getMemberId() === task?.author?.empID && (<button onClick={ deleteBtn }>삭제</button>) }
                             </div>
                         </div>
                     </div>
-                <div className={TaskCSS.RightDiv}>RightDiv</div>
+                <div className={TaskCSS.RightDiv}>
+                  <div className={TaskCSS.reviewList}>
+                    <div className={TaskCSS.reviewItem}>
+                      <div className={TaskCSS.reviewLeft}>
+
+                      </div>
+                      <div className={TaskCSS.reviewRight}>
+                        <div className={TaskCSS.listTop}>
+                          <div className={TaskCSS.listName}>
+        
+                          </div>
+                          <div className={TaskCSS.listDate}>
+        
+                          </div>
+                          <div className={TaskCSS.listBtn}>
+                            <button>수정</button>
+                            <button>삭제</button>
+                          </div>
+                        </div>
+                        <div className={TaskCSS.listLow}>
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <div className={TaskCSS.reviewItem}>
+                      <div className={TaskCSS.reviewLeft}>
+
+                      </div>
+                      <div className={TaskCSS.reviewRight}>
+                        <div className={TaskCSS.listTop}>
+                          <div className={TaskCSS.listName}>
+        
+                          </div>
+                          <div className={TaskCSS.listDate}>
+        
+                          </div>
+                          <div className={TaskCSS.listBtn}>
+                            <button>수정</button>
+                            <button>삭제</button>
+                          </div>
+                        </div>
+                        <div className={TaskCSS.listLow}>
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <div className={TaskCSS.reviewItem}>
+                      <div className={TaskCSS.reviewLeft}>
+
+                      </div>
+                      <div className={TaskCSS.reviewRight}>
+                        <div className={TaskCSS.listTop}>
+                          <div className={TaskCSS.listName}>
+        
+                          </div>
+                          <div className={TaskCSS.listDate}>
+        
+                          </div>
+                          <div className={TaskCSS.listBtn}>
+                            <button>수정</button>
+                            <button>삭제</button>
+                          </div>
+                        </div>
+                        <div className={TaskCSS.listLow}>
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <div className={TaskCSS.reviewItem}>
+                      <div className={TaskCSS.reviewLeft}>
+
+                      </div>
+                      <div className={TaskCSS.reviewRight}>
+                        <div className={TaskCSS.listTop}>
+                          <div className={TaskCSS.listName}>
+        
+                          </div>
+                          <div className={TaskCSS.listDate}>
+        
+                          </div>
+                          <div className={TaskCSS.listBtn}>
+                            <button>수정</button>
+                            <button>삭제</button>
+                          </div>
+                        </div>
+                        <div className={TaskCSS.listLow}>
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <div className={TaskCSS.reviewItem}>
+                      <div className={TaskCSS.reviewLeft}>
+
+                      </div>
+                      <div className={TaskCSS.reviewRight}>
+                        <div className={TaskCSS.listTop}>
+                          <div className={TaskCSS.listName}>
+        
+                          </div>
+                          <div className={TaskCSS.listDate}>
+        
+                          </div>
+                          <div className={TaskCSS.listBtn}>
+                            <button>수정</button>
+                            <button>삭제</button>
+                          </div>
+                        </div>
+                        <div className={TaskCSS.listLow}>
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <div className={TaskCSS.reviewItem}>
+                      <div className={TaskCSS.reviewLeft}>
+
+                      </div>
+                      <div className={TaskCSS.reviewRight}>
+                        <div className={TaskCSS.listTop}>
+                          <div className={TaskCSS.listName}>
+        
+                          </div>
+                          <div className={TaskCSS.listDate}>
+        
+                          </div>
+                          <div className={TaskCSS.listBtn}>
+                            <button>수정</button>
+                            <button>삭제</button>
+                          </div>
+                        </div>
+                        <div className={TaskCSS.listLow}>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={TaskCSS.reviewWrite}>
+                    <textarea className={TaskCSS.textbox}/>
+                    <button className={TaskCSS.writeBtn}>등록</button>
+                  </div>
+                </div>
             </div>
         </div>
     </div>

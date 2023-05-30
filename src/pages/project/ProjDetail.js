@@ -40,6 +40,7 @@ function ProjDetail() {
     console.log("ProjDetail project : ", project);
 
 
+    /* task의 stage에 따라 분류 */
     if(tasks){
 
         tasks.forEach((task) => {

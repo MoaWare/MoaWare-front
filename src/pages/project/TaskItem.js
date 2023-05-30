@@ -57,7 +57,7 @@ function TaskItem({ task }) {
 
 
 
-  const onTaskClick = () => {
+  const onTaskClick = () => { 
 
     navigate(`/task/${task?.project?.projCode}/detail/${task?.taskCode}`);
   }

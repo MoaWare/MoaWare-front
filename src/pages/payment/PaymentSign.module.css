@@ -114,6 +114,16 @@
     margin-left: 1vw;
 }
 
+.modifyButton{
+    background-color: rgba(37, 79, 112, 1);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    width: 8vw;
+    height: 4vh;
+    margin-left: 4vw;
+}
+
 .saveButton{
     background-color: rgba(37, 79, 112, 1);
     color: white;
