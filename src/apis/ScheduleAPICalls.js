@@ -1,4 +1,4 @@
-import { getSchedules, getSchedule } from "../modules/ScheduleModule";
+import { getSchedules, getSchedule, postSchedule } from "../modules/ScheduleModule";
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${ process.env.REACT_APP_RESTAPI_SERVER_PORT}`
@@ -24,7 +24,7 @@ export const callScheduleListAPI = () => {
             dispatch(getSchedules(result));
         }
 
-    }
+    };
 
 }
 
@@ -48,6 +48,32 @@ export const callScheduleDetailAPI = ({ schCode }) => {
             dispatch(getSchedule(result));
         }
 
-    }
+    };
+
+}
+
+/* 일정 등록 */
+export const callScheduleInsertAPI = (formData) => {
+
+    const requestURL = `${PRE_URL}/calendar`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method: 'POST',
+            headers : {
+                // "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            },
+            body : formData
+        }).then(res => res.json());
+
+        console.log(result);
+        if(result.status === 200){
+            console.log("[ScheduleAPICalls] callScheduleInsertAPI result : ", result);
+            dispatch(postSchedule(result));
+        }
+
+    };
 
 }

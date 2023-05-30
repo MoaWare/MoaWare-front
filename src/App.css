@@ -20,6 +20,11 @@ body {
     background-color: transparent;
 }
 
+input, select {
+    font-family: 'Nanum Gothic', sans-serif;
+    letter-spacing: 1px;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

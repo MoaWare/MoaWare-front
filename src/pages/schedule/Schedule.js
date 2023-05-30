@@ -45,7 +45,8 @@ function Schedule() {
 
   /* 전체 일정 */
   const formattedEvents = schedules?.map(event => ({
-    title: event.schType.schCategoryName,
+    // title: event.schType.schCategoryName,
+    title: event.schName,
     start: event.schDate,
     end: event.schEndDate,
     allDay: true,
@@ -56,29 +57,27 @@ function Schedule() {
   /* 상세 일정 */
   const handleEventClick = (info) => {
     const schCode = info.event.id; // Get the event id
-    dispatch(callScheduleDetailAPI({ schCode }));
+      dispatch(callScheduleDetailAPI({ schCode }));
+      setScheduleModal(true);
+      console.log('handleEventClick', scheduleModal);
   };
 
   /* 모달창! */
-  useEffect(() => {
-    if (schedule) {
-      console.log('일정 누르기!: ', schedule);
-      setScheduleModal(true);
-    }
-  }, [schedule]);
-
-
+  // useEffect(() => {
+  //   if (schedule) {
+  //     console.log('일정 누르기!: ', schedule);
+  //     setScheduleModal(true);
+  //   }
+  // }, [schedule]);
 
   return (
     <>
-      {/* { scheduleModal ? <ScheduleModal/> : null } */}
-      { scheduleModal ? <ScheduleModal setScheduleModal={setScheduleModal} shcedule={schedule} /> : null }
+      { scheduleModal ? <ScheduleModal setScheduleModal={setScheduleModal} schedule={schedule} /> : null }
       <div className="wrapper">
         <div className="wrap">
           <FullCalendar
             plugins={[dayGridPlugin, googleCalendarPlugin, interactionPlugin]}
-            googleCalendarApiKey={process.env.REACT_APP_GOOGLE_API_KEY}
-            events={formattedEvents}
+            // googleCalendarApiKey={process.env.REACT_APP_GOOGLE_API_KEY}
             headerToolbar={{
               left: 'prev,today,next',
               center: 'title',
@@ -93,6 +92,7 @@ function Schedule() {
             }}
             locale="ko"
             editable={true}
+            events={formattedEvents}
             eventDrop={handleEventDrop}
             eventClick={handleEventClick}
           />
