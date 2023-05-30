@@ -1,0 +1,38 @@
+.today {
+    margin-bottom: 1rem;
+}
+
+.myWeather {
+    display: flex;
+    justify-content: center;
+    /* justify-content: space-evenly; */
+    /* border: 1px solid orange; */
+}
+
+.temperature {
+    /* border: 1px solid red; */
+    text-align: center;
+}
+
+.now {
+    margin: 1.2rem 0;
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 5px;
+}
+
+.maxmin {
+    font-size: 12px;
+    letter-spacing: 3px;
+}
+
+.icon {
+    /* border: 1px solid blue; */
+    color: #50A4E4;
+    margin-right: 0.5rem;
+}
+
+.icon svg {
+    height: 100%;
+    width: 6vw;
+}

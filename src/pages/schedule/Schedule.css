@@ -1,0 +1,110 @@
+.wrapper {
+    /* border: 1px solid red; */
+    height: 95vh;
+    width: 100vw;
+    position: fixed;
+    top: 5vh;
+    left: 20vw;
+    right: 0;
+    /* background-color: rgba(239, 239, 239, 1); */
+    /* background-color: white; */
+}
+
+.wrap {
+    /* border: 1px solid blue; */
+    border-radius: 40px;
+    margin: 4vh 2vw 4vh 0;
+    height: 87vh;
+    width: 78vw;
+    background-color: white;
+}
+
+.fc {
+    /* border: 1px solid orange; */
+    padding: 4vh 2vw;
+    height: 87vh;
+    /* width: 70vw; */
+    font-size: 0.85rem;
+}
+
+:root {
+    /* 달력 선 색상 */
+    --fc-border-color: rgba(182, 189, 198, 0.5);
+    /* 버튼 글씨 */
+    --fc-button-text-color: #254F70;
+    /* 버튼 배경 */
+    --fc-button-bg-color: transparent;
+    /* 버튼 보더 */
+    --fc-button-border-color: transparent;
+
+    /* 버튼 호버 시 배경 색상 */
+    --fc-button-hover-bg-color: transparent;
+    /* 버튼 호버 시 선 색상 */
+    --fc-button-hover-border-color: transparent;
+
+    /* 버튼 눌렀을 때 배경 색상 */
+    --fc-button-active-bg-color: transparent;
+    /* 버튼 눌렀을 때 선 색상 */
+    --fc-button-active-border-color: transparent;
+
+    /* 캘린더 일정 색상 */
+    /* --fc-event-bg-color: rgba(215, 201, 254, 0.5); */
+    /* 캘린더 일정 보더 */
+    --fc-event-border-color: transparent;
+    /* 캘린더 글자 색상 */
+    --fc-event-text-color: #87909B;
+    /* 캘린더 일정 선택했을 때 색상 */
+    --fc-event-selected-color: rgba(215, 201, 254, 0.5);
+
+    /* 오늘 날짜 배경 */
+    --fc-today-bg-color: rgba(224, 233, 244, 0.3);
+}
+
+button.fc-today-button.fc-button.fc-button-primary {
+    color: #254F70;
+    font-weight: bold;
+}
+
+/* 타이틀 색상 */
+.fc-toolbar-title {
+    color: #254F70;
+}
+
+/* 요일 글자 색상 */
+.fc-scrollgrid-sync-inner {
+    color: rgba(75, 87, 102, 0.8);
+}
+
+/* 일 글자 색상 */
+.fc-daygrid-day-number {
+    color: rgba(75, 87, 102, 0.7);
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.fc-daygrid-day-top {
+    text-align: center;
+}
+
+/* 일정 하이라이트 */
+.fc-event-title-container {
+    /* border: 1px solid red; */
+    padding: 0.2rem;
+    /* font-size: 10px; */
+}
+
+/* 날짜 왼쪽 정렬 */
+.fc .fc-daygrid-day-top {
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem;
+}
+
+/* 주말 색상 변경 */
+/* .fc-day-sat a {
+    color: rgba(80, 164, 228, 1)
+}
+
+.fc-day-sun a {
+    color: rgba(80, 164, 228, 1)
+} */

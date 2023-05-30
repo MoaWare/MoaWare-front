@@ -1,0 +1,56 @@
+
+
+/* background-color: 
+       #d7c9fe3c; 기획
+       #fdd0d06e; 설계
+       #fce9a34c; 테스트
+       #d9f58d2d; 개발
+       #cdeef99d; 시연
+*/
+
+.taskDiv{
+    margin-top: 1vh;
+    width: 25vw;
+    height: 8.5vh;
+    margin: 1.4vh 1.2vw;
+    border-radius: 5px;
+    display: flex;
+    color: #505050;
+    flex-direction: column;
+    font-weight: bold;
+    font-size: 1.83vh;
+}
+
+.divTop{
+    display: flex;
+    justify-content: space-between;
+    margin: 0vh 1vw;
+    margin-top: 1.38vh;
+}
+
+.divRight button{
+    border: none;
+    background-color: transparent;
+}
+
+.divRight svg{
+    font-size: 2vh;
+    color: #505050;
+}
+
+.cursorPointer{
+    cursor: pointer;
+}
+
+.divLow{
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 1vw;
+    margin-top: 1.2vh;
+}
+
+
+.lowMiddle{
+    margin-right: 11vw;
+}
+

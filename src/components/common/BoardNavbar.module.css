@@ -1,0 +1,84 @@
+
+.boardPostButtonDiv{
+    display: flex;
+    justify-content: center;
+}
+.boardPostButtonDiv button{
+    margin: 5px;    
+    margin-top: 15px;
+    margin-bottom: 15px;
+    height: 40px;
+    width: 150px;
+    border-radius: 25px;
+    color: rgba(239, 239, 239, 1);
+    background-color: #254F70;
+    font-weight: bold;
+
+}
+
+.boardPostButtonDiv button:hover {
+    background-color: #4B5766;
+}
+
+.navbar {
+    /* border: 1px solid red;s */
+    height: 95vh;
+    position: fixed;
+    top: 5vh;
+    left: 0;
+    right: 0;
+    width: 20vw;
+    background-color: rgba(239, 239, 239, 1);
+}
+
+.submenu {
+    /* border: 1px solid blue;s */
+    text-align: center;
+    list-style: none;
+}
+
+.submenu li {
+    margin: 20px 0;
+    padding: 20px;
+}
+
+.submenu li:hover {
+    background-color: rgba(80, 164, 228, 0.5);
+}
+
+.submenu a {
+    text-decoration-line: none;
+    color: rgba(37, 79, 112, 1);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.title {
+    background-color: rgba(37, 79, 112, 1);
+    color: white;
+    text-align: center;
+    /* padding: 2vh; */
+    border-radius: 40px;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 2vw;
+    padding: 1.5vh;
+}
+
+.wrap {
+    /* margin: 30px; */
+    border: white 1px solid;
+    background-color: white;
+    border-radius: 30px;
+    margin: 4vh 2vw;
+    height:87vh;
+}
+
+.profile {
+    border-bottom: 2px solid rgba(182, 189, 198, 0.5);
+    margin: 1rem;
+    padding-bottom: 0.5rem;
+    color: rgba(37, 79, 112, 1);
+    font-size: 14px;
+    font-weight: 600;
+}
