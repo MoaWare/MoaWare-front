@@ -1,10 +1,13 @@
-
+import TaskCSS from "../../../form/Task/Task.module.css";
 
 function ReviewList(){
 
 
     return (
-        <div></div>
+        <div className={TaskCSS.reviewList}>
+            
+        
+        </div>
     );
 
 }

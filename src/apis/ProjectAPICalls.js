@@ -206,8 +206,6 @@ export const callTaskDeleteAPI = ( taskCode ) => {
 
 
 
-
-
 export const callProjectProgressListAPI = ({ currentPage = 1 }) => {
     const requestURL = `${PRE_URL}/progressProj?page=${currentPage}`;
   

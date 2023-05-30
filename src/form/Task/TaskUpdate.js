@@ -4,6 +4,8 @@ import TaskCSS from './Task.module.css';
 import { callTaskDetailAPI, callTaskUpdateAPI } from "../../apis/ProjectAPICalls";
 import { useNavigate, useParams } from "react-router-dom";
 import { getMemberId } from "../../utils/TokenUtils";
+import ReviewItem from "../../pages/review/project/ReviewItem";
+import { callReviewsAPI } from "../../apis/ReviewAPICalls";
 
 
 function TaskUpdate() {
@@ -11,7 +13,7 @@ function TaskUpdate() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { taskCode } = useParams();
-    const { task, put } = useSelector((state) => state.projectReducer);
+    const { task, put, reviews } = useSelector((state) => state.projectReducer);
     const [ form, setForm ] = useState({
         taskCode : "",
         taskName : "",
@@ -28,10 +30,17 @@ function TaskUpdate() {
 
     useEffect(()=>{
         
-            dispatch(callTaskDetailAPI(taskCode));
-            console.log("task------------------------",task);
-      },[]
-    );
+      dispatch(callTaskDetailAPI(taskCode));
+      console.log("task------------------------",task);
+    
+    },[]);
+
+    
+    useEffect(()=>{
+
+      dispatch(callReviewsAPI(taskCode));
+
+    },[]);
  
 
 
@@ -71,10 +80,10 @@ function TaskUpdate() {
 
     const onChangeHandler = (e) => {
 
-        setForm({
-            ...form,
+        setForm((prevForm) => ({
+            ...prevForm,
             [e.target.name] : e.target.value,
-        });
+        }));
 
         console.log(form);
     }
@@ -189,138 +198,8 @@ function TaskUpdate() {
                     </div>
                     <div className={TaskCSS.RightDiv}>
                   <div className={TaskCSS.reviewList}>
-                    <div className={TaskCSS.reviewItem}>
-                      <div className={TaskCSS.reviewLeft}>
-
-                      </div>
-                      <div className={TaskCSS.reviewRight}>
-                        <div className={TaskCSS.listTop}>
-                          <div className={TaskCSS.listName}>
-        
-                          </div>
-                          <div className={TaskCSS.listDate}>
-        
-                          </div>
-                          <div className={TaskCSS.listBtn}>
-                            <button>수정</button>
-                            <button>삭제</button>
-                          </div>
-                        </div>
-                        <div className={TaskCSS.listLow}>
-                          
-                        </div>
-                      </div>
-                    </div>
-                    <div className={TaskCSS.reviewItem}>
-                      <div className={TaskCSS.reviewLeft}>
-
-                      </div>
-                      <div className={TaskCSS.reviewRight}>
-                        <div className={TaskCSS.listTop}>
-                          <div className={TaskCSS.listName}>
-        
-                          </div>
-                          <div className={TaskCSS.listDate}>
-        
-                          </div>
-                          <div className={TaskCSS.listBtn}>
-                            <button>수정</button>
-                            <button>삭제</button>
-                          </div>
-                        </div>
-                        <div className={TaskCSS.listLow}>
-                          
-                        </div>
-                      </div>
-                    </div>
-                    <div className={TaskCSS.reviewItem}>
-                      <div className={TaskCSS.reviewLeft}>
-
-                      </div>
-                      <div className={TaskCSS.reviewRight}>
-                        <div className={TaskCSS.listTop}>
-                          <div className={TaskCSS.listName}>
-        
-                          </div>
-                          <div className={TaskCSS.listDate}>
-        
-                          </div>
-                          <div className={TaskCSS.listBtn}>
-                            <button>수정</button>
-                            <button>삭제</button>
-                          </div>
-                        </div>
-                        <div className={TaskCSS.listLow}>
-                          
-                        </div>
-                      </div>
-                    </div>
-                    <div className={TaskCSS.reviewItem}>
-                      <div className={TaskCSS.reviewLeft}>
-
-                      </div>
-                      <div className={TaskCSS.reviewRight}>
-                        <div className={TaskCSS.listTop}>
-                          <div className={TaskCSS.listName}>
-        
-                          </div>
-                          <div className={TaskCSS.listDate}>
-        
-                          </div>
-                          <div className={TaskCSS.listBtn}>
-                            <button>수정</button>
-                            <button>삭제</button>
-                          </div>
-                        </div>
-                        <div className={TaskCSS.listLow}>
-                          
-                        </div>
-                      </div>
-                    </div>
-                    <div className={TaskCSS.reviewItem}>
-                      <div className={TaskCSS.reviewLeft}>
-
-                      </div>
-                      <div className={TaskCSS.reviewRight}>
-                        <div className={TaskCSS.listTop}>
-                          <div className={TaskCSS.listName}>
-        
-                          </div>
-                          <div className={TaskCSS.listDate}>
-        
-                          </div>
-                          <div className={TaskCSS.listBtn}>
-                            <button>수정</button>
-                            <button>삭제</button>
-                          </div>
-                        </div>
-                        <div className={TaskCSS.listLow}>
-                          
-                        </div>
-                      </div>
-                    </div>
-                    <div className={TaskCSS.reviewItem}>
-                      <div className={TaskCSS.reviewLeft}>
-
-                      </div>
-                      <div className={TaskCSS.reviewRight}>
-                        <div className={TaskCSS.listTop}>
-                          <div className={TaskCSS.listName}>
-        
-                          </div>
-                          <div className={TaskCSS.listDate}>
-        
-                          </div>
-                          <div className={TaskCSS.listBtn}>
-                            <button>수정</button>
-                            <button>삭제</button>
-                          </div>
-                        </div>
-                        <div className={TaskCSS.listLow}>
-                          
-                        </div>
-                      </div>
-                    </div>
+                    <ReviewItem />
+                    
                   </div>
                   <div className={TaskCSS.reviewWrite}>
                     <textarea className={TaskCSS.textbox}/>
