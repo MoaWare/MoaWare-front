@@ -29,7 +29,12 @@ function OrganizationDetail () {
                         <td colSpan="5" className={ orgDetailCSS.tableMargin}></td>
                     </tr>
                     <tr>
-                        <td rowSpan="3"><img src={emp.fileCategory.file.filePath} className={ orgDetailCSS.img}/></td>
+                        <td rowSpan="3">
+                           {emp.fileCategory[0].length || emp.fileCategory[0].fcategoryType === "emp" 
+                           ? <img src={emp.fileCategory[0].file.filePath} className={ orgDetailCSS.img}/>
+                            : <img src="/icon/user.jpg" className={ orgDetailCSS.img}/>
+                            }
+                        </td>
                         <td></td>
                         <th className={ orgDetailCSS.td}>부 서</th>
                         <td className={ orgDetailCSS.td}>{emp.dept.deptName}</td>
