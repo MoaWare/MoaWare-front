@@ -4,8 +4,10 @@ import { useEffect } from 'react';
 import SchModalCSS from './ScheduleModal.module.css';
 import { callScheduleDetailAPI } from '../../../apis/ScheduleAPICalls';
 import { FiX } from 'react-icons/fi';
+import moment from 'moment/moment';
 
 function ScheduleModal({ setScheduleModal }) {
+  
   const { schCode } = useParams(); // schCode 가져오기
 
   const { schedule } = useSelector((state) => state.scheduleReducer);
@@ -15,28 +17,34 @@ function ScheduleModal({ setScheduleModal }) {
   }, [schCode]);
 
   /* 모달창 나가기 */
-  const handleCancelEventClick = () => {
+  const CancelEventClick = () => {
     setScheduleModal(false);
   };
 
-  const participantNames = schedule.schPrarticipant.map(
+  const participantNames = schedule&&schedule.schPrarticipant.map(
     (item) => item.schMember.empName
   );
+
+  /* 날짜 시간제외 */
+  const formatDate = (dateString) => {
+    return moment(dateString).format('YYYY년 MM월 DD일');
+  };
   
   return schedule && (
     <div className={SchModalCSS.modal}>
       <div className={SchModalCSS.wrapper}>
         <div className={SchModalCSS.schCheck}>
           <div className={SchModalCSS.check}>일정 조회</div>
-          <FiX onClick={handleCancelEventClick} />
+          <FiX onClick={CancelEventClick} />
         </div>
         <div className={SchModalCSS.schTitle}>
           <div className={SchModalCSS.box}></div>
           <div>{schedule.schName}</div>
         </div>
         <div className={SchModalCSS.schDay}>
-            <div>{schedule.schDate}</div>
-            <div>{schedule.schEndDate}</div>
+          <div>{formatDate(schedule.schDate)}</div>
+          <div className={SchModalCSS.hyphen}>-</div>
+          <div>{formatDate(schedule.schEndDate)}</div>
         </div>
         <div className={SchModalCSS.schPrar}>일정 참여자</div>
         <div className={SchModalCSS.schPrarList}>

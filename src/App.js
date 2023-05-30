@@ -47,6 +47,8 @@ import TaskUpdate from "./form/Task/TaskUpdate";
 import TaskDetail from "./form/Task/TaskDetail";
 import TaskRegist from "./form/Task/TaskRegist";
 import WorkAdmin from "./pages/users/works/WorkAdmin";
+import PaymentDetail from "./pages/payment/PaymentDetail";
+
 
 
 function App() {
@@ -93,6 +95,7 @@ function App() {
             <Route path="refuse" element={<PaymentRefuseBoard />} />
             <Route path="storage" element={<PaymentStorageBoard />} />
             <Route path="sign" element={<PaymentSign />} />
+            <Route path="payDetail/:payCode" element={ <PaymentDetail/> }/>
           </Route>
 
           {/* 일정 관리 */}
