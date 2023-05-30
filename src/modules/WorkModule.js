@@ -7,7 +7,6 @@ const initalState = [];
 const GET_WORKLIST = 'work/GET_WORKLIST';
 const POST_INSERTSTART = 'work/POST_INSERTSTART';
 const PUT_QUITTIME = 'work/PUT_QUITTIME';
-const GET_WORKSTATUS = 'work/GET_WORKSTATUS';
 
 export const { work : { getWorklist, postInsertstart, putQuittime }} = createActions({
     [GET_WORKLIST] : (res) => res.data,

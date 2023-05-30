@@ -3,7 +3,7 @@ import WorkCSS from './Work.module.css';
 import PagingBar from "../../../components/common/PagingBar";
 import { useDispatch, useSelector } from 'react-redux';
 import { callWorkMyListAPI } from '../../../apis/WorkAPICalls';
-import { callAdminWorkListAPI, putWorkStatusModifyAPI } from '../../../apis/AdminWorkAPICalls';
+import { callAdminWorkListAPI, inputNameAPI, putWorkStatusModifyAPI } from '../../../apis/AdminWorkAPICalls';
 import { callWorkstatusAPI } from '../../../apis/WorkStatusAPICalls';
 import { useNavigate } from 'react-router-dom';
 import DateSelect from '../../../components/Work/DateSelect';
@@ -23,9 +23,11 @@ function WorkAdmin({ adminList }) {
     //nabvar 에서의 변경값이 있을 떄 변경 해주기 위한 설정 
     const { admin } = useSelector(state => state.adminWorkReducer);
     const { modify } = useSelector(state => state.adminWorkReducer);
+    const { name } = useSelector(state => state.adminWorkReducer);
     const { work } = useSelector(state => state.workReducer);
     const [ selectCheck, setSelectCheck ] = useState(null);
     const [ selectValue, setSelectValue ] = useState(undefined);
+    const [ insertName, setInsertName ] = useState(undefined);
     
     // const [isFirstRender, setFirstRender] = useState(true);
     // const pageInfo = myWork.pageInfo;
@@ -33,7 +35,8 @@ function WorkAdmin({ adminList }) {
     // 나중에 수정
 
     console.log('admin :', admin ? admin.data : "");
-    console.log('status :', status);
+    // console.log('status :', status);
+    console.log('name :', name);
 
     const today = new Date();
 
@@ -95,6 +98,17 @@ function WorkAdmin({ adminList }) {
         return `${hours}:${minutes}:${seconds}`;
     }
 
+    const handleInputChange = e => {
+        setInsertName(e.target.value);
+    }
+
+    function handleKeyPress(event) {
+        if (event.key === 'Enter') {
+            console.log('Entered value:', insertName);
+            dispatch(inputNameAPI({ name : insertName, currentPage}))
+        }
+      }
+
 
     const onChangeCheckBox = (empCode) => {
 
@@ -133,15 +147,18 @@ function WorkAdmin({ adminList }) {
     useEffect(() => {
         if (modify?.status === 200) {
             navigate("/work/admin")
-          }
-    }, [modify])
+        } else if(name?.status === 200) {
+            navigate("/work/admin")
+        } 
+        
+    }, [modify,name])
 
     useEffect(() => {
         if (selectedDate) {
             dispatch(callAdminWorkListAPI({ date: selectedDate, currentPage }))
         } else if (formattedDate) {
             dispatch(callAdminWorkListAPI({ date: formattedDate, currentPage }))
-        }
+        } 
     }, [selectedDate, formattedDate, modify])
 
     useEffect(() => {
@@ -194,7 +211,11 @@ function WorkAdmin({ adminList }) {
                             name="date"
                             onChange={onChangeDateHandler}
                         ></input>
-                        <input className={WorkCSS.inputBox}></input>
+                        <input className={WorkCSS.inputBox}
+                                value={insertName}
+                                onChange={handleInputChange}
+                                onKeyDown={handleKeyPress}
+                        ></input>
                     </div>
                 </div>
                 <hr className={WorkCSS.hr}></hr>
@@ -215,7 +236,7 @@ function WorkAdmin({ adminList }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {admin && admin.data && admin.data.map((admin) => (
+                        {/* {admin && admin.data && admin.data.map((admin) => (
                             <tr className={WorkCSS.td} key={admin.emp.empCode}>
                                 <td>
                                     <input
@@ -254,7 +275,33 @@ function WorkAdmin({ adminList }) {
                                     </select>
                                 </td>
                             </tr> 
-                        ))}
+                        ))} */}
+                        {/* {name && name.data && name.data.map((name) => (
+                            <tr className={WorkCSS.td} key={name.empCode}>
+                                <td>
+                                    <input
+                                        type="checkbox"
+                                        checked={selectCheck == name.empCode}
+                                        onChange={() => onChangeCheckBox(name.empCode)}
+                                    />
+                                </td>
+                                <td>{selectedDate ? selectedDate : formattedDate}</td>
+                                <td>{name.dept.deptName}</td>
+                                <td>{name.job.jobName}</td>
+                                <td>{name.empName}</td>
+                                <td>
+                                    <select
+                                        value={selectValue}
+                                        onChange={onChangeSelect}
+                                        >
+                                        <option value=""></option>
+                                        <option value="지각">지각</option>
+                                        <option value="결근">결근</option>
+                                        <option value="연차">연차</option>
+                                    </select>
+                                </td>
+                            </tr> 
+                        ))} */}
                     </tbody>
                 </table>
                     <div>
