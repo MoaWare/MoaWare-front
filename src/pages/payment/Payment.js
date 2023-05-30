@@ -72,6 +72,7 @@ function Payment () {
       console.log( "폼의 값 : ", form);
     }
 
+    console.log('form', form);
 
     const onChangeSelect= (e) => {
      
@@ -82,12 +83,8 @@ function Payment () {
     const [ isButton, setIsButton ] = useState(false);
     const onButtonHandler= () => {
 
-        if(isButton){
-          setIsButton(false);
-        } else {
-          setIsButton(true)
-        }
-      
+      const HTML = savePayment();
+      console.log(`saveHTML`, HTML)
 
       const formData = new FormData();
       if(file){
@@ -98,7 +95,7 @@ function Payment () {
       formData.append("payFileCategory.fCategoryType", "payment")
       formData.append("payFileCategory.pay.draftDate", today());
       formData.append("payFileCategory.pay.draftTitle", form.draftTitle);
-      formData.append("payFileCategory.pay.draftContent",htmlString);
+      formData.append("payFileCategory.pay.draftContent",HTML);
       formData.append("payFileCategory.pay.form.formCode", select);
       formData.append("payFileCategory.pay.payStatus", "진행중")
       payMember && payMember.forEach( (member, index) => { 
@@ -172,6 +169,7 @@ function Payment () {
         if (payPath) {
         const filteredHTML = processHtmlString(htmlFromDB);
         setHtmlString(filteredHTML);
+        console.log("filteredHTML 이당!? : ", filteredHTML);
         if(!form.total){setForm({})};
         }
 
@@ -181,12 +179,9 @@ function Payment () {
     
     );
 
-    useEffect( 
+ const savePayment =  
       ()=> {
-        console.log("셀렉트 값은?!! : ", select)
-
-        dispatch(CallPaymentFormAPI());
-
+      
         const processHtmlString = (html) => {
 
           let modifiedHTML = html;
@@ -210,19 +205,46 @@ function Payment () {
         const payPath = select&& payForm&&payForm[select-1].formString
         const htmlFromDB = payPath;
         if (payPath) {
-        const filteredHTML = processHtmlString(htmlFromDB);
-        setSaveHtml(filteredHTML);
-        setForm({});
-
-        if(isButton){
-          navigator("/pay");
+          const filteredHTML = processHtmlString(htmlFromDB);
+          setForm({});
+          return filteredHTML;
         }
-        }
-        
+        return null;
        
-    },[isButton]
+    };
+
+    const storagePayment =  
+    ()=> {
     
-    );
+      const processHtmlString = (html) => {
+
+        let modifiedHTML = html;
+        Object.entries(form).forEach(([key, value]) => {
+          const regex = new RegExp(`{${key}}`, "g");
+
+          if (form[key] === undefined || form[key] === null) {
+            modifiedHTML = modifiedHTML.replace(regex, "");
+          } else {
+            modifiedHTML = modifiedHTML.replace(regex, `"${value}"`.trim() || " ");
+          }
+       
+        });  
+   
+        return modifiedHTML;
+      };
+      
+      console.log("form : ", form);
+      // DB에서 가져온 HTML 문자열
+      const payPath = select&& payForm&&payForm[select-1].formString
+      const htmlFromDB = payPath;
+      if (payPath) {
+        const filteredHTML = processHtmlString(htmlFromDB);
+        setForm({});
+        return filteredHTML;
+      }
+      return null;
+     
+  };
 
     useEffect(() => {
 
@@ -240,17 +262,13 @@ function Payment () {
       setCountInput(targetElement.length);
       console.log("htmlRef : ", htmlRef.current.getElementsByTagName('input'));
     }, [htmlString]);
-    // console.log( "htmlString : ", htmlString);
-    // console.log( "saved : ", saveHtml);
+
 
 
     const onSavePayment = () => {
 
-      if(isButton){
-        setIsButton(false);
-      } else {
-        setIsButton(true)
-      }
+      const HTML = storagePayment();
+      console.log(`saveHTML`, HTML)
 
       const formData = new FormData();
       if(file){
@@ -285,7 +303,7 @@ function Payment () {
       dispatch(CallPaymentRegistAPI(formData));
 
       alert("임시 저장 되었습니다.");
-      // navigator("/pay");
+        navigator("/pay");
 
     }
 
@@ -326,9 +344,12 @@ function Payment () {
             <div className={payCSS.payTitle}>기안자</div>
             <div className={payCSS.payName}>{payEmp && payEmp.empName}</div>
             <div className={payCSS.paySign}> 
-              {payEmp && payEmp.payFileCategory[0].file?.filePath ?
-              <img src={payEmp && payEmp.payFileCategory[0].file.filePath} className={payCSS.signImg}/> : <>{payEmp && payEmp.empName}</>
+              
+              {payEmp && payEmp.payFileCategory && payEmp.payFileCategory.filter( file => file.fcategoryType === "sign") ? 
+              <img src={payEmp.payFileCategory.filter( file => file.fcategoryType === "sign")[0].file.filePath} className={payCSS.signImg}/>: 
+              <>{payEmp && payEmp.empName}</>
               }
+
             </div>
           </div>
           
@@ -392,7 +413,7 @@ function Payment () {
               <tr>
                 <td colSpan='3' className={payCSS.docuMain}>
                   <div className={payCSS.docuText}>
-                  <div ref={htmlRef&&htmlRef} dangerouslySetInnerHTML={{ __html: saveHtml ? saveHtml :htmlString }} />
+                  <div ref={htmlRef&&htmlRef} dangerouslySetInnerHTML={{ __html :htmlString }} />
                   </div>
                 </td>
               </tr>
