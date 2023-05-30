@@ -46,6 +46,7 @@ import BoardPostRegist from "./pages/board/BoardPostRegist";
 import TaskUpdate from "./form/Task/TaskUpdate";
 import TaskDetail from "./form/Task/TaskDetail";
 import TaskRegist from "./form/Task/TaskRegist";
+import PaymentDetail from "./pages/payment/PaymentDetail";
 
 
 function App() {
@@ -91,6 +92,7 @@ function App() {
             <Route path="refuse" element={<PaymentRefuseBoard />} />
             <Route path="storage" element={<PaymentStorageBoard />} />
             <Route path="sign" element={<PaymentSign />} />
+            <Route path="payDetail/:payCode" element={ <PaymentDetail/> }/>
           </Route>
 
           {/* 일정 관리 */}
@@ -149,7 +151,6 @@ function App() {
               <ProjDetailLayout />
             </ProtectedRoute>
           }>
-            }>
             <Route index element={<ProjDetail />} />
             <Route path="update/:taskCode" element={<TaskUpdate />}/>
             <Route path="detail/:taskCode" element={<TaskDetail />}/>

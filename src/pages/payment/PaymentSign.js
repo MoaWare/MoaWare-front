@@ -16,6 +16,7 @@ function PaymentSign () {
     const { signSave } = useSelector( state => state.paymentReducer );
     const { signUpdate } = useSelector( state => state.paymentReducer );
     const navigate = useNavigate(); 
+    const [ isModify, setIsModify ] = useState(false);
 
     console.log( " sign은 ?! : ", sign );
     console.log( " signSave은 ?! : ", signSave );
@@ -24,8 +25,9 @@ function PaymentSign () {
     sign?.fileCategory.filter( fileCategory => fileCategory.fcategoryType==="sign")[0].file : "false");
 
     const onClickPaySignModal = () => {
-        
+        if(isModify){
         setPaymentSignModal(true);
+        }
 
     }
 
@@ -52,6 +54,16 @@ function PaymentSign () {
             dispatch(CallPaymentSignRegistAPI(formData));
         }
     }
+
+    const onClickModifyHandler = () => {
+
+        setIsModify(true)
+    }
+
+    const onClickPayCancleHandler = () => {
+        setIsModify(false)
+    }
+
 
     useEffect(
         () => {
@@ -129,9 +141,14 @@ function PaymentSign () {
                         }</div>
                     </div>
                     <div className={paySignCSS.buttonDiv}>
-                        <button className={paySignCSS.saveButton}
+                        { !isModify ?
+                        <button className={paySignCSS.modifyButton}
+                            onClick={ onClickModifyHandler }>수정</button> :
+                         <><button className={paySignCSS.saveButton}
                             onClick={ onClickPaySignSaved }>저장</button>
-                        <button className={paySignCSS.cancleButton}>취소</button>
+                        <button className={paySignCSS.cancleButton}
+                            onClick={ onClickPayCancleHandler }>취소</button></>
+                        }
                     </div>
                 </div>
             </div>

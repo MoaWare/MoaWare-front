@@ -9,7 +9,7 @@ function PaymentMainBoard ({setPayWait}) {
 
     const disPatch = useDispatch();
     const  payment  = useSelector( state => state.paymentReducer);
-    const pay = payment.data&&payment.data.content;
+    const pay = payment&& payment.data&&payment.data.content;
     const pageInfo = payment.pageInfo;
     const [ currentPage, setCurrentPage ] = useState(1);
 
