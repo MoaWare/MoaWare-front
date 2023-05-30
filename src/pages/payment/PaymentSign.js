@@ -100,7 +100,7 @@ function PaymentSign () {
 
     );
 
-    console.log(" 넘어온 값 : " , imageForm);
+    console.log(" 넘어온 값 : " , imageForm?.imageUrl);
 
     return(
 

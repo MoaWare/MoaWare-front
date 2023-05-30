@@ -1,29 +1,29 @@
-import { getProject, getTaskDone, getTaskIng, getTaskTodo, getTasks, getDone, getProgress, getDeptlist, getDeptemplist, postProject, getTask } from "../modules/ProjectModule";
+import { getProject, getTasks, getDone, getProgress, getDeptlist, getDeptemplist, postProject, getTask, postTask, putTask, deleteTask } from "../modules/ProjectModule";
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
 const PRE_URL = `http://${SERVER_IP}:${SERVER_PORT}/proj`;
 
 
-// /* 프로젝트 업무 리스트 조회 */
-// export const callProjectAPI = ({projCode}) => {
-//     const requestURL = `${PRE_URL}/detail/${projCode}`
-//     return async (dispatch, getState) => {
+/* 프로젝트 업무 리스트 조회 */
+export const callProjectAPI = (projCode) => {
+    const requestURL = `${PRE_URL}/detail/${projCode}`
+    return async (dispatch, getState) => {
 
-//         const result = await fetch(requestURL, {
-//             method : 'GET',
-//             headers : {
-//                 "Content-Type" : "application/json",
-//                 "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
-//             }
-//         }).then(res => res.json());
+        const result = await fetch(requestURL, {
+            method : 'GET',
+            headers : {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(res => res.json());
 
-//         if(result.status === 200){
-//             console.log(result);
-//             dispatch(getProject(result));
-//         }
-//     }
-// }
+        if(result.status === 200){
+            console.log(result);
+            dispatch(getProject(result));
+        }
+    }
+}
 
 
 /* 프로젝트 업무 리스트 조회 */
@@ -63,8 +63,80 @@ export const callTaskDetailAPI = (taskCode) => {
 }
 
 
+/* 업무 등록 */
+export const callTaskRegistAPI = ( form ) => {
+
+  const requestURL = `${PRE_URL}/task/regist`;
+
+  return async (dispatch, getState) => {
+
+      const result = await fetch(requestURL, {
+        method : "POST",
+        headers : {
+            "Content-Type" : "application/json",
+            "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+        },
+        body: JSON.stringify(form)
+      }).then(res => res.json());
+
+      if(result?.status === 200){
+          console.log(result);
+
+          dispatch(postTask(result));
+
+      } else if(result?.status === 400){
+        alert(result.message);
+      }
+  }
+}
+
+/* 업무 수정 */
+export const callTaskUpdateAPI = ( form ) => {
+
+  const requestURL = `${PRE_URL}/task/update`;
+
+  return async (dispatch, getState) => {
+
+      const result = await fetch(requestURL, {
+        method : "PUT",
+        headers : {
+            "Content-Type" : "application/json",
+        },
+        body: JSON.stringify(form)
+      }).then(res => res.json());
+
+      if(result?.status === 200){
+          console.log(result);
+          dispatch(putTask(result));
+      } else if(result?.status === 400){
+        alert(result.message);
+      }
+  }
+}
 
 
+/* 업무 삭제 */
+export const callTaskDeleteAPI = ( taskCode ) => {
+
+  const requestURL = `${PRE_URL}/task/delete/${taskCode}`;
+
+  return async (dispatch, getState) => {
+
+      const result = await fetch(requestURL, {
+        method : "PUT",
+        headers : {
+            "Content-Type" : "application/json",
+        },
+      }).then(res => res.json());
+
+      if(result?.status === 200){
+          console.log(result);
+          dispatch(deleteTask(result));
+      } else if(result?.status === 400){
+        alert(result.message);
+      }
+  }
+}
 
 
 
@@ -177,67 +249,7 @@ export const callProjectProgressListAPI = ({ currentPage = 1 }) => {
   };
   
 
-/* 업무 진행단계별 업무 리스트 조회 */
-export const callTaskTodoAPI = ({ projCode }) => {
-    const requestURL = `${PRE_URL}/task/stage/${projCode}/todo`
-    return async (dispatch, getState) => {
 
-        const result = await fetch(requestURL, {
-            method : 'GET',
-            headers : {
-                "Content-Type" : "application/json",
-                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
-            }
-        }).then(res => res.json());
-
-        if(result.status === 200){
-            console.log(result);
-            dispatch(getTaskTodo(result));
-        }
-    }
-}
-
-
-/* 업무 진행단계별 업무 리스트 조회 */
-export const callTaskIngAPI = ({ projCode }) => {
-    const requestURL = `${PRE_URL}/task/stage/${projCode}/ing`
-    return async (dispatch, getState) => {
-
-        const result = await fetch(requestURL, {
-            method : 'GET',
-            headers : {
-                "Content-Type" : "application/json",
-                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
-            }
-        }).then(res => res.json());
-
-        if(result.status === 200){
-            console.log(result);
-            dispatch(getTaskIng(result));
-        }
-    }
-}
-
-
-/* 업무 진행단계별 업무 리스트 조회 */
-export const callTaskDoneAPI = ({ projCode }) => {
-    const requestURL = `${PRE_URL}/task/stage/${projCode}/done`
-    return async (dispatch, getState) => {
-
-        const result = await fetch(requestURL, {
-            method : 'GET',
-            headers : {
-                "Content-Type" : "application/json",
-                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
-            }
-        }).then(res => res.json());
-
-        if(result.status === 200){
-            console.log(result);
-            dispatch(getTaskDone(result));
-        }
-    }
-}
 
 
 export const callDeptListAPI = () => {

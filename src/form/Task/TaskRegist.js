@@ -1,73 +1,78 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import TaskCSS from './Task.module.css';import { callTaskDetailAPI } from "../../apis/ProjectAPICalls";
-import { useParams } from "react-router-dom";
+import TaskCSS from './Task.module.css';import { callProjectAPI, callTaskDetailAPI, callTaskRegistAPI } from "../../apis/ProjectAPICalls";
+import { useNavigate, useParams } from "react-router-dom";
 import { getMemberId } from "../../utils/TokenUtils";
 
 
 function TaskRegist() {
 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { taskCode } = useParams();
-    const { task } = useSelector((state) => state.projectReducer);
+    const { project, post } = useSelector(state => state.projectReducer);
+    const { projCode } = useParams();
     const [ stage, setStage ] = useState('');
     const [ type, setType ] = useState('');
+    const [ form, setForm ] = useState({
+        taskName : "",
+        taskNotice : "",
+        startDate : "",
+        endDate : "",
+        type : "",
+        stage : "",
+        project : {},
+    })
+
+    let endDate = '';
+
+    
 
 
-    useEffect(
-        ()=>{
-            dispatch(callTaskDetailAPI(taskCode));
-        },[]
-    );
+    useEffect(()=>{
+        dispatch(callProjectAPI(projCode));
+    },[]);
+
+
+
+    useEffect(()=>{
+
+        if(project){
+            endDate = project.endDate.substring(10,0);
+        }
+
+        setForm({ project : project });
+        
+        console.log(endDate);
+
+    },[project]);
 
     useEffect(() => {
-        if(task){
-          switch (task.stage) {
-            case 'todo':
-              setStage(<span>해야할 일</span>);
-              break;
-            case 'ing':
-              setStage(<span>진행 중</span>);
-              break;
-            case 'done':
-              setStage(<span>완료됨</span>);
-              break;
-            default:
-              setStage(<span>상태 없음</span>);
-              break;
-          }}
-      },[task]);
-
-      useEffect(() => {
-        if(task){
-          switch (task.type) {
-            case 'plan':
-              setType(<span>기획</span>);
-              break;
-            case 'design':
-              setType(<span>설계</span>);
-              break;
-            case 'test':
-              setType(<span>테스트</span>);
-              break;
-            case 'dev':
-              setType(<span>개발</span>);
-              break;
-            case 'pre':
-              setType(<span>시연</span>);
-              break;
-            default:
-              setType(<span>상태 없음</span>);
-              break;
-          }}
-      },[task]);
-
-      const onChangeHandler = (e) => {
-
-      }
+        if(post?.status === 200){
+            alert(post.message);
+            navigate(`/task/${form.project.projCode}`);
+        }
+    },[post]);
 
 
-    return (
+
+    const onChangeHandler = (e) => {
+
+        setForm({
+            ...form,
+            [e.target.name] : e.target.value,
+        });
+
+        console.log(form);
+    }
+
+
+    const onClickHandler = () => {
+
+        dispatch(callTaskRegistAPI(form));
+    };
+
+
+    return project && (
         <div className={TaskCSS.wrapper}>
             <div className={TaskCSS.wrap}>
                 <div className={TaskCSS.mainTitle}>
@@ -77,7 +82,7 @@ function TaskRegist() {
                     <div className={TaskCSS.leftDiv}>
                         <div className={TaskCSS.leftTitle}>
                             <p className={TaskCSS.projTitlebold}>프로젝트 명</p>
-                            <span className={TaskCSS.projTitle}>{ task?.project?.projName }</span>
+                            <span className={TaskCSS.projTitle}>{ project?.projName }</span>
                         </div>  
                         <div className={TaskCSS.leftContent}>
                             <div className={TaskCSS.tableDiv}>
@@ -89,7 +94,7 @@ function TaskRegist() {
                                                 <input 
                                                     className={TaskCSS.inputbox}
                                                     type="text" 
-                                                    name="empId"
+                                                    name="taskName"
                                                     onChange={onChangeHandler}
                                                 />
                                             </td>
@@ -100,7 +105,8 @@ function TaskRegist() {
                                             <input 
                                                 className={TaskCSS.inputbox}
                                                 type="date" 
-                                                name="empId"
+                                                name="startDate"
+                                                max={endDate}
                                                 onChange={onChangeHandler}
                                             />
                                             </td>
@@ -111,7 +117,9 @@ function TaskRegist() {
                                                 <input 
                                                     className={TaskCSS.inputbox}
                                                     type="date" 
-                                                    name="empId"
+                                                    name="endDate"
+                                                    min={form?.startDate}
+                                                    max={endDate}
                                                     onChange={onChangeHandler}
                                                 />
                                             </td>
@@ -119,7 +127,7 @@ function TaskRegist() {
                                         <tr className={TaskCSS.tableTaskStage}>
                                             <td className={TaskCSS.tableTitle}>진행단계</td>
                                             <td className={TaskCSS.tableBorder}>
-                                                <select>
+                                                <select name="stage" onChange={onChangeHandler}>
                                                     <option value="todo">해야할 일</option>
                                                     <option value="ing">진행중</option>
                                                     <option value="done">완료</option>
@@ -129,7 +137,7 @@ function TaskRegist() {
                                         <tr>
                                             <td className={TaskCSS.tableType}>업무단계</td>
                                             <td className={TaskCSS.tableBorder}>
-                                                <select>
+                                                <select name="type" onChange={onChangeHandler}>
                                                     <option value="plan">기획</option>
                                                     <option value="design">설계</option>
                                                     <option value="test">테스트</option>
@@ -141,10 +149,9 @@ function TaskRegist() {
                                         <tr className={TaskCSS.tableTaskNotice}>
                                             <td className={TaskCSS.tableTitle}>공지사항</td>
                                             <td className={TaskCSS.tableBorder}>
-                                                <input 
+                                                <textarea 
                                                     className={TaskCSS.inputbox}
-                                                    type="text" 
-                                                    name="empId"
+                                                    name="taskNotice"
                                                     onChange={onChangeHandler}
                                                 />
                                             </td>
@@ -153,7 +160,7 @@ function TaskRegist() {
                                 </table>
                             </div>
                             <div className={TaskCSS.btnMargin}>
-                                <button>등록</button>
+                                <button onClick={onClickHandler}>등록</button>
                             </div>
                         </div>
                     </div>
