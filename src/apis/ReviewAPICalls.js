@@ -30,7 +30,7 @@ export const callReviewsAPI = (taskCode) => {
   }
   
 
-  /* 댓글 조회 */
+  /* 댓글 등록 */
 export const callReviewsRegistAPI = (form) => {
 
     const requestURL = `${PRE_URL}/regist/${form.task.taskCode}`;

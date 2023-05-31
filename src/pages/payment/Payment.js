@@ -253,7 +253,6 @@ function Payment () {
       }
 
       const formData = new FormData();
-
       if(file){
         formData.append("originalFileName", file.name)
         formData.append("fileInfo", file)
@@ -261,11 +260,23 @@ function Payment () {
       formData.append("payFileCategory.fCategoryName", form.draftTitle)
       formData.append("payFileCategory.fCategoryType", "payment")
       formData.append("payFileCategory.pay.draftDate", today());
-      formData.append("payFileCategory.pay.empCode", payEmp.empCode);
       formData.append("payFileCategory.pay.draftTitle", form.draftTitle);
       formData.append("payFileCategory.pay.draftContent",htmlString);
       formData.append("payFileCategory.pay.form.formCode", select);
       formData.append("payFileCategory.pay.payStatus", "임시")
+      
+      payMember && payMember.forEach( (member, index) => { 
+        formData.append(`payFileCategory.pay.PaymentMember[${index}].PaymentMemberPk.payCode`, 0)
+        formData.append(`payFileCategory.pay.PaymentMember[${index}].PaymentMemberPk.empCode`, member.empCode)
+        formData.append(`payFileCategory.pay.PaymentMember[${index}].payRank`, index+1)
+        index=== member.length-1 ? formData.append(`payFileCategory.pay.PaymentMember[${index}].payFinalYn`, 'Y')
+        : formData.append(`payFileCategory.pay.PaymentMember[${index}].payFinalYn`, 'N')
+      } );
+
+      refPayMember && refPayMember.forEach( (member, index) => { 
+        formData.append(`payFileCategory.pay.refenceMember[${index}].refenceMemberPk.payCode`, 0)
+        formData.append(`payFileCategory.pay.refenceMember[${index}].refenceMemberPk.empCode`, member.empCode)
+      } );
       
      
 
@@ -314,7 +325,11 @@ function Payment () {
           <div className={payCSS.payDiv}>
             <div className={payCSS.payTitle}>기안자</div>
             <div className={payCSS.payName}>{payEmp && payEmp.empName}</div>
-            <div className={payCSS.paySign}><img src="/icon/sign.png" className={payCSS.signImg}/></div>
+            <div className={payCSS.paySign}> 
+              {payEmp && payEmp.payFileCategory[0].file?.filePath ?
+              <img src={payEmp && payEmp.payFileCategory[0].file.filePath} className={payCSS.signImg}/> : <>{payEmp && payEmp.empName}</>
+              }
+            </div>
           </div>
           
           {

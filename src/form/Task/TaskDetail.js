@@ -5,7 +5,7 @@ import { callTaskDeleteAPI, callTaskDetailAPI } from "../../apis/ProjectAPICalls
 import { Link, NavLink, Navigate, useNavigate, useParams } from "react-router-dom";
 import { getMemberId } from "../../utils/TokenUtils";
 import ReviewList from "../../pages/review/project/ReviewList";
-import { callReviewsAPI } from "../../apis/ReviewAPICalls";
+import { callReviewsAPI, callReviewsRegistAPI } from "../../apis/ReviewAPICalls";
 
 
 function TaskDetail() {
@@ -32,7 +32,7 @@ function TaskDetail() {
     
     useEffect(()=>{
 
-      dispatch(callReviewsAPI(task.taskCode));
+      dispatch(callReviewsAPI(taskCode));
 
     },[]);
 

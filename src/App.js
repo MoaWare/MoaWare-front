@@ -1,6 +1,8 @@
 import Layout from "./layouts/Layout";
 import Main from "./pages/users/Main";
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import Login from "./pages/member/Login";
 import Work from "./pages/users/works/Work";
@@ -46,11 +48,18 @@ import BoardPostRegist from "./pages/board/BoardPostRegist";
 import TaskUpdate from "./form/Task/TaskUpdate";
 import TaskDetail from "./form/Task/TaskDetail";
 import TaskRegist from "./form/Task/TaskRegist";
+import AdminEmpRegist from "./pages/admin/AdminEmpRegist";
+import AdminBoardRegist from "./pages/admin/AdminBoardRegist";
+import AdminBoardList from "./pages/admin/AdminBoardList";
+import WorkAdmin from "./pages/users/works/WorkAdmin";
+import PaymentDetail from "./pages/payment/PaymentDetail";
+
 
 
 function App() {
   return (
     <BrowserRouter>
+    <ToastContainer />
       <Routes>
         <Route path="/" element={
           <ProtectedRoute loginCheck={true}>
@@ -69,6 +78,7 @@ function App() {
           {/* <Route path="work"> */}
           <Route path="work" element={<WorkLayout />}>
             <Route index element={<Work />} />
+            <Route path="admin" element={<WorkAdmin />} />
             <Route path="restReq" element={<WorkRestReq />} />
             <Route path="restReqList" element={<WorkRestReqList />} />
             <Route path="restList" element={<WorkRestList />} />
@@ -91,6 +101,7 @@ function App() {
             <Route path="refuse" element={<PaymentRefuseBoard />} />
             <Route path="storage" element={<PaymentStorageBoard />} />
             <Route path="sign" element={<PaymentSign />} />
+            <Route path="payDetail/:payCode" element={ <PaymentDetail/> }/>
           </Route>
 
           {/* 일정 관리 */}
@@ -117,6 +128,14 @@ function App() {
             <Route index element={<Admin />} />
             <Route path="emp/list" element={<AdminEmployees />} />
             <Route path="emp/list/:empCode" element={<AdminEmpDetail />} />
+            <Route path="emp/regist" element={<AdminEmpRegist />}/> 
+
+            <Route path="board/list" element={<AdminBoardList />} />
+            {/* <Route path="emp/list/:empCode" element={<AdminEmpDetail />} /> */}
+            <Route path="board/regist" element={<AdminBoardRegist />}/>
+
+
+
 
           </Route>
         </Route>

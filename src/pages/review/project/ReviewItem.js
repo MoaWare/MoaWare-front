@@ -30,10 +30,10 @@ function ReviewItem({review}){
                     </div>
                     { getMemberId() === review.emp.empID ? 
                         <div className={TaskCSS.listBtn}>
-                            <button>수정</button>
+                            <button >수정</button>
                             <button>삭제</button> 
                         </div>
-                    : null}
+                    : null }
                 </div>
                 <div className={TaskCSS.listLow}>
                     {review.content} 

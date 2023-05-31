@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { callReviewsAPI, callReviewsRegistAPI } from "../../../apis/ReviewAPICalls";
 import ReviewItem from "./ReviewItem";
+import { toast } from "react-toastify";
 
 function ReviewList({ task, reviews }){
 
@@ -29,9 +30,38 @@ function ReviewList({ task, reviews }){
     }   
 
     
-    const onRegistClick = () => {
+    /* 댓글 등록 후 새로고침 */
+    const handleSubmitContent = async (e) => {
+      
+      e.preventDefault();
+      
+      try{
+        
+        await dispatch(callReviewsRegistAPI(review));
+        
+        dispatch(callReviewsAPI(review?.task?.taskCode));
+        
+        setReview("");
+        
+        toast.success('댓글 등록 ', {
+          position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+          autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+          hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+        });
 
-        dispatch(callReviewsRegistAPI(review));
+      } catch (error) {
+        
+        toast.error('댓글 등록 오류 ', {
+          position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+          autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+          hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+          progressStyle: {
+            backgroundColor: '#ff000074', // 프로그레스 바 배경색
+            height: '5px', // 프로그레스 바 높이
+          },
+        });
+      }
+
     }
 
 
@@ -47,7 +77,7 @@ function ReviewList({ task, reviews }){
           </div> 
         <div className={TaskCSS.reviewWrite}>
           <textarea name="content" onChange={onReviewChangeHandler} className={TaskCSS.textbox}/>
-          <button className={TaskCSS.writeBtn} onClick={onRegistClick}>등록</button>
+          <button className={TaskCSS.writeBtn} onClick={handleSubmitContent}>등록</button>
         </div>
         
     </div>

@@ -1,3 +1,5 @@
+
+
 .wrapper{
     height: 95vh;
     width: 100vw;
@@ -120,7 +122,7 @@
 
 
 .leftTable  td{
-    border: 1px solid lightgray;
+    border: 1px solid rgb(211, 211, 211);
 }
 
 .notice{
