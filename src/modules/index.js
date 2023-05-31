@@ -31,8 +31,9 @@ const rootReducer = combineReducers({
     leavePayReducer,
     reviewReducer,
     boardReducer,
+    reviewModule,
     adminWorkReducer,
-    workStatusReducer
+    workStatusReducer,
 });
 
 export default rootReducer
