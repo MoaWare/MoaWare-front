@@ -29,6 +29,7 @@ const rootReducer = combineReducers({
     scheduleReducer,
     leaveReducer,
     leavePayReducer,
+    reviewModule,
     boardReducer
     reviewModule
     adminWorkReducer,
