@@ -52,6 +52,7 @@ function Project() {
                     <table className={ ProjectCSS.table }>
                     <thead>
                         <tr className={ ProjectCSS.th }>
+                            <th></th>
                             <th>프로젝트 번호</th>
                             <th>프로젝트 제목</th>
                             <th>프로젝트 기간</th>
