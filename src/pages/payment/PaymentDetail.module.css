@@ -30,7 +30,8 @@
     height: 4vh;
     border: none;
     border-radius: 8px;
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .buttonCancel {
@@ -40,7 +41,7 @@
     height: 4vh;
     border: 2px solid rgba(37, 79, 112, 1);;
     border-radius: 8px;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
 
 }
