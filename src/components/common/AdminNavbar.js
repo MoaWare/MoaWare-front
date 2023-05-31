@@ -23,7 +23,7 @@ function AdminNavbar() {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/" activeclassname={NavbarCSS.active}>
+                        <NavLink to="/admin/board/list" activeclassname={NavbarCSS.active}>
                             게시판 관리
                         </NavLink>
                     </li>

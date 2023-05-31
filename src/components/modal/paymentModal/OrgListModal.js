@@ -5,7 +5,7 @@ import { useDrag, useDrop } from 'react-dnd';
 
 
 
-function OrgListModal({org}) {
+function OrgListModal({org , empCode}) {
 
     const{searchForm, setSearchForm, setFocusEmp, focusEmp, isFocus , setIsFocus} = useContext(orgContext);
 
@@ -154,7 +154,7 @@ function OrgListModal({org}) {
                           
                             {searchForm.isSearch? 
                             isOpen[org.deptCode]  && isOpen[org.deptCode] ? 
-                            (org.orgEmp.map(emp => 
+                            (org.orgEmp.map(emp => emp.empCode === empCode ? "":
                                 <div  className={ isFocus.includes(emp.empCode) ? orgCSS.orgEmpBoxFocus : orgCSS.orgEmpBox} onClick={(e) => onClickEmp(e,emp, org)} > 
                                     <div className={ orgCSS.orgEmpText} > {emp.empName} {emp.job.jobName}</div>
                                 </div>)
@@ -175,7 +175,7 @@ function OrgListModal({org}) {
                                         <div className={ orgCSS.orgText} name={sub.deptCode} > {sub.deptName} </div>
                                     </div> 
                                     {isOpen[sub.deptCode]  && isOpen[sub.deptCode] ? 
-                                        (sub.orgEmp.map(emp => 
+                                        (sub.orgEmp.map(emp => emp.empCode === empCode ? "":
                                             <div className={ isFocus.includes(emp.empCode) ? orgCSS.orgEmpBoxFocus : orgCSS.orgEmpBox} key={emp.empCode} onClick={(e) => onClickEmp(e,emp, sub)} > 
                                                 <div className={ orgCSS.orgEmpText}> {emp.empName} {emp.job.jobName}</div>
                                             </div>)

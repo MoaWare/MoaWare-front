@@ -16,7 +16,40 @@
 }
 
 
+.menutitle {
+    color: #4B5766;
+    font-size: 24px;
+    border-bottom: 1px solid #4B5766;
 
+    padding: 15px;
+}
+
+.content {
+    float: right;
+    display: flex;
+    flex-direction: row-reverse;
+    height: 30px;
+    margin-right: 1vw;
+}
+
+.content button {
+    border: 10px;
+    border-radius: 8px;
+    width: 100px;
+    font-size: 16px;
+    height: 30px;
+    
+    background-color: #254F70;
+    color: #ffffff;
+    margin-left: 10px;
+    cursor: pointer;
+    box-shadow: 3px 3px 1px 2px #E0E9F4;
+
+}
+
+.content button:hover {
+    background-color: #87909B;
+}
 
 
 .table {
@@ -46,6 +79,7 @@
     border-left: none;
     line-height: 3rem;
 }
+
 
 
 /* content3- 버튼*/

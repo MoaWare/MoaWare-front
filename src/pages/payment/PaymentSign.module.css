@@ -131,6 +131,7 @@
     border-radius: 10px;
     width: 8vw;
     height: 4vh;
+    font-weight: bold;
 }
 
 .cancleButton{
@@ -140,4 +141,5 @@
     border-radius: 10px;
     width: 8vw;
     height: 4vh;
+    font-weight: bold;
 }

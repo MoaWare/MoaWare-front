@@ -1,14 +1,14 @@
-import { getPayment, getPaymentComplete, getPaymentRefuse, getPaymentSign, getPaymentStorage, getPaymentform, getPaymenting, getPaymentwait, postPayment, postPaymentSign, putPaymentSign } from "../modules/PayMentModule";
+import { getPayment, getPaymentComplete, getPaymentRefuse, getPaymentSign, getPaymentStorage, getPaymentdetail, getPaymentform, getPaymenting, getPaymentwait, postPayment, postPaymentSign, putPaymentSign } from "../modules/PayMentModule";
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${ process.env.REACT_APP_RESTAPI_SERVER_PORT}`
-const PRE_URL = `http://${RESTAPI_SERVER_IP}:${RESTAPI_SERVER_PORT}`
+const PRE_URL = `http://${RESTAPI_SERVER_IP}:${RESTAPI_SERVER_PORT}/pay`
 
 
 /* 결재 문서 전체  조회 */
 export const CallPaymentAllListAPI = () => {
 
-    const requestURL = `${PRE_URL}/pay/main`;
+    const requestURL = `${PRE_URL}/main`;
 
     return async( dispatch, getState ) => {
         
@@ -32,7 +32,7 @@ export const CallPaymentAllListAPI = () => {
 /* 양식 조회 검색 */
 export const CallPaymentFormAPI = () => {
 
-    const requestURL = `${PRE_URL}/pay/draft`;
+    const requestURL = `${PRE_URL}/draft`;
 
     return async( dispatch, getState ) => {
         
@@ -55,7 +55,7 @@ export const CallPaymentFormAPI = () => {
 /* 기안서 저장 */
 export const CallPaymentRegistAPI = (formData) => {
 
-    const requestURL = `${PRE_URL}/pay/draft`;
+    const requestURL = `${PRE_URL}/draft`;
 
     return async( dispatch, getState ) => {
         
@@ -79,7 +79,7 @@ export const CallPaymentRegistAPI = (formData) => {
 /* 결재 대기  문서 전체 조회 */
 export const CallPaymentWaitListAPI = (currentPage = 1) => {
 
-    const requestURL = `${PRE_URL}/pay/memberList?page=${currentPage}`;
+    const requestURL = `${PRE_URL}/memberList?page=${currentPage}`;
 
     return async( dispatch, getState ) => {
         
@@ -99,10 +99,33 @@ export const CallPaymentWaitListAPI = (currentPage = 1) => {
 
 }
 
+/* 결재 대기 문서 상세 조회 */
+export const CallPaymentingDetailAPI = ({payCode}) => {
+
+    const requestURL = `${PRE_URL}/payDetail/${payCode}`;
+
+    return async( dispatch, getState ) => {
+        
+        const result = await fetch( requestURL, {
+            method: 'GET',
+            headers: {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then( res => res.json());
+
+        console.log( result);
+        if ( result.status === 200 ) {
+            console.log ("[PaymentAPICalls] CallPaymentingDetailAPI result : ", result);
+            dispatch(getPaymentdetail(result));
+        }
+    };
+
+}
+
 /* 결재 진행  문서 전체  조회 */
 export const CallPaymentingListAPI = (currentPage = 1) => {
 
-    const requestURL = `${PRE_URL}/pay/list?page=${currentPage}`;
+    const requestURL = `${PRE_URL}/list?page=${currentPage}`;
 
     return async( dispatch, getState ) => {
         
@@ -122,10 +145,14 @@ export const CallPaymentingListAPI = (currentPage = 1) => {
 
 }
 
+
+
+
+
 /* 결재 완료  문서 전체  조회 */
 export const CallPaymentCompleteListAPI = (currentPage = 1) => {
 
-    const requestURL = `${PRE_URL}/pay/complete?page=${currentPage}`;
+    const requestURL = `${PRE_URL}/complete?page=${currentPage}`;
 
     return async( dispatch, getState ) => {
         
@@ -148,7 +175,7 @@ export const CallPaymentCompleteListAPI = (currentPage = 1) => {
 /* 결재 반려  문서 전체  조회 */
 export const CallPaymentRefuseListAPI = (currentPage = 1) => {
 
-    const requestURL = `${PRE_URL}/pay/refuse?page=${currentPage}`;
+    const requestURL = `${PRE_URL}/refuse?page=${currentPage}`;
 
     return async( dispatch, getState ) => {
         
@@ -171,7 +198,7 @@ export const CallPaymentRefuseListAPI = (currentPage = 1) => {
 /* 결재 임시 저장 문서 전체  조회 */
 export const CallPaymentStorageListAPI = (currentPage = 1) => {
 
-    const requestURL = `${PRE_URL}/pay/storage?page=${currentPage}`;
+    const requestURL = `${PRE_URL}/storage?page=${currentPage}`;
 
     return async( dispatch, getState ) => {
         
@@ -195,7 +222,7 @@ export const CallPaymentStorageListAPI = (currentPage = 1) => {
 /* 사인 조회 */
 export const CallPaymentSigntAPI = () => {
 
-    const requestURL = `${PRE_URL}/pay/sign`;
+    const requestURL = `${PRE_URL}/sign`;
 
     return async( dispatch, getState ) => {
         
@@ -219,7 +246,7 @@ export const CallPaymentSigntAPI = () => {
 /* 싸인 저장 */
 export const CallPaymentSignRegistAPI = (formData) => {
 
-    const requestURL = `${PRE_URL}/pay/sign`;
+    const requestURL = `${PRE_URL}/sign`;
 
     return async( dispatch, getState ) => {
         
@@ -244,7 +271,7 @@ export const CallPaymentSignRegistAPI = (formData) => {
 /* 싸인 수정 */
 export const CallPaymentSignUpdateAPI = (formData) => {
 
-    const requestURL = `${PRE_URL}/pay/sign`;
+    const requestURL = `${PRE_URL}/sign`;
 
     return async( dispatch, getState ) => {
         
