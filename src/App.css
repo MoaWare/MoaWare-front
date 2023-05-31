@@ -20,7 +20,7 @@ body {
     background-color: transparent;
 }
 
-input, select {
+input, select, textarea {
     font-family: 'Nanum Gothic', sans-serif;
     letter-spacing: 1px;
 }
