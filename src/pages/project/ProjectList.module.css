@@ -112,6 +112,40 @@
     line-height: 3rem;
 }
 
+.workBtn1{
+    /* margin-top: 30%; */
+    margin-top: 2%;
+    margin-left: 70%;
+    background-color: rgba(37, 79, 112, 1);
+    color: white;
+    border-radius: 10px;
+    width: 6vw;
+    height: 4vh;
+    font-weight: bold;
+    /* flex-direction: column */
+}
 
+.workBtn2{
+    color: rgba(37, 79, 112, 1);
+    background-color: white;
+    width: 6vw;
+    height: 4vh;
+    border: 2px solid rgba(37, 79, 112, 1);;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 10px;
+}
 
-
+.workBtn1{
+    /* margin-top: 30%; */
+    margin-top: 2%;
+    margin-left: 90%;
+    background-color: rgba(37, 79, 112, 1);
+    color: white;
+    border-radius: 10px;
+    width: 6vw;
+    height: 4vh;
+    font-weight: bold;
+    /* flex-direction: column */
+}

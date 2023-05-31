@@ -1,6 +1,8 @@
 import Layout from "./layouts/Layout";
 import Main from "./pages/users/Main";
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import Login from "./pages/member/Login";
 import Work from "./pages/users/works/Work";
@@ -58,6 +60,7 @@ import BoardPostModify from "./pages/board/BoardPostModify";
 function App() {
   return (
     <BrowserRouter>
+    <ToastContainer />
       <Routes>
         <Route path="/" element={
           <ProtectedRoute loginCheck={true}>

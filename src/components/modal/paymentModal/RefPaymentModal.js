@@ -14,6 +14,7 @@ function RefPaymentModal( {setRefPaymentModal, payEmp }) {
 
   const{searchForm, setSearchForm, setFocusEmp, focusEmp, isFocus , setIsFocus, setRefPayMember} = useContext(orgContext);
 
+    console.log( " 참조장  : payEmp : ", payEmp);
     const onClickSavedHandler = () => {
       setRefPaymentModal(false);
       setRefPayMember(focusEmp.map(focus => focus.emp));
@@ -58,8 +59,8 @@ function RefPaymentModal( {setRefPaymentModal, payEmp }) {
         <div className={PaymentModalCSS.paymemtDiv}>
           {/* <DndProvider backend={HTML5Backend}> */}
           <div className={PaymentModalCSS.paymentOrgDiv} ref={modalContainerRef}>
-          {searchForm.isSearch? <OrgSearchModal/> 
-            : <OrgMainModal />}
+          {searchForm.isSearch? <OrgSearchModal empCode={payEmp.empCode}/> 
+            : <OrgMainModal empCode={payEmp.empCode}/>}
           </div>
           <div className={ PaymentModalCSS.imgDiv} >
             <TbSquareRoundedChevronRight className={ PaymentModalCSS.directionImg} />

@@ -5,16 +5,19 @@ const initialState = [];
 
 /* 액션 */
 const GET_REVIEWS = 'review/GET_REVIEWS';
+const POST_REVIEW = 'review/POST_REVIEW';
 
-export const { review : { getReviews, }} = createActions({
+export const { review : { getReviews, postReview }} = createActions({
     [GET_REVIEWS]: res => res.data,
+    [POST_REVIEW]: res => res,
 });
 
 /* 리듀서 */
-const reviewModule = handleActions(
+const reviewReducer = handleActions(
     {
         [GET_REVIEWS] : (state, { payload }) => ({ reviews : payload }),
+        [POST_REVIEW] : (state, { payload }) => ({ regist : payload }),
     }
 , initialState);
 
-export default reviewModule;
+export default reviewReducer;

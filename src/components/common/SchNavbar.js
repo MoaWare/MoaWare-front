@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Calendar from 'react-calendar';
 import SchNavbarCSS from "./SchNavbar.module.css";
 import SchInsertModal from '../../components/modal/scheduleModal/SchInsertModal';
@@ -7,6 +8,12 @@ function SchNavbar() {
 
     const [date, setDate] = useState(new Date());
     const [schInsertModal, setSchInsertModal] = useState(false);
+    // const { schedules, schedule } = useSelector(state => state.scheduleReducer);
+
+    const handleDateChange = (selectedDate) => {
+        setDate(selectedDate);
+        // 선택된 날짜로 원하는 작업 수행하기
+    };
 
     /* 일정 등록 */
     const EventInsertClick = () => {
@@ -23,7 +30,7 @@ function SchNavbar() {
             <div className={SchNavbarCSS.wrap}>
                 <div className={SchNavbarCSS.title}>일정 관리</div>
                 <div className={SchNavbarCSS.myCal}>
-                    {/* <Calendar 
+                    <Calendar 
                         onChange={handleDateChange} 
                         value={date}
                         calendarType={"US"}
@@ -33,7 +40,7 @@ function SchNavbar() {
                         new Date(date).toLocaleDateString("en-us", {
                         day: "2-digit",
                         })}
-                    /> */}
+                    />
                 </div>
                 {/* <div className={SchNavbarCSS.createSch}>
                     <button>+ 일정 생성</button>
@@ -51,9 +58,10 @@ function SchNavbar() {
                     <div>개인 일정</div>
                 </div>
                 <button 
-                    className={SchNavbarCSS.insert}
+                    className={SchNavbarCSS.createSch}
                     onClick={EventInsertClick}
-                >+ 일정 생성
+                >
+                + 일정 생성
                 </button>
             </div>
         </nav>

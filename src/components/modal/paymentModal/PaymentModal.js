@@ -55,8 +55,8 @@ function PaymentModal( {setPaymentModal, payEmp }) {
         <div className={PaymentModalCSS.modalContainer}>
           <div className={PaymentModalCSS.paymemtDiv}>
             <div className={PaymentModalCSS.paymentOrgDiv}>
-            {searchForm.isSearch? <OrgSearchModal/> 
-              : <OrgMainModal />}
+            {searchForm.isSearch? <OrgSearchModal empCode={ payEmp.empCode}/> 
+              : <OrgMainModal empCode={ payEmp.empCode}/>}
             </div>
             <div className={ PaymentModalCSS.imgDiv} >
               <TbSquareRoundedChevronRight className={ PaymentModalCSS.directionImg} />
@@ -69,7 +69,7 @@ function PaymentModal( {setPaymentModal, payEmp }) {
                     <div  className={PaymentModalCSS.paymentPayItemTitle}>기안</div>
                   {payEmp && payEmp.empName} {payEmp && payEmp.job.jobName} {payEmp && payEmp.dept.deptName} </div>
                   
-                  { focusEmp.map( (focus, index) => (
+                  { focusEmp.map( (focus, index) => ( focus.emp.empCode ===  payEmp.empCode ? "" :
                     <div className={PaymentModalCSS.paymentPayItem} onClick={()=> removePayment(focus, index) }
                     key={focus.emp.empCode}>
                       <div  className={PaymentModalCSS.paymentPayItemTitle}>
