@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getMemberId } from "../../utils/TokenUtils";
 import ReviewItem from "../../pages/review/project/ReviewItem";
 import { callReviewsAPI } from "../../apis/ReviewAPICalls";
+import ReviewList from "../../pages/review/project/ReviewList";
 
 
 function TaskUpdate() {
@@ -13,17 +14,20 @@ function TaskUpdate() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { taskCode } = useParams();
-    const { task, put, reviews } = useSelector((state) => state.projectReducer);
+    const { reviews } = useSelector((state) => state.reviewReducer );
+    const { task, put } = useSelector((state) => state.projectReducer);
     const [ form, setForm ] = useState({
-        taskCode : "",
-        taskName : "",
-        taskNotice : "",
-        startDate : "",
-        endDate : "",
-        type : "",
-        stage : "",
-        project : {},
-    })
+      taskCode : "",
+      taskName : "",
+      taskNotice : "",
+      startDate : "",
+      endDate : "",
+      type : "",
+      stage : "",
+      project : {},
+    });
+
+
     let endDate = '';
 
             
@@ -35,13 +39,13 @@ function TaskUpdate() {
     
     },[]);
 
+
     
     useEffect(()=>{
 
-      dispatch(callReviewsAPI(taskCode));
+      dispatch(callReviewsAPI(task.taskCode));
 
     },[]);
- 
 
 
     useEffect(()=>{
@@ -49,8 +53,7 @@ function TaskUpdate() {
         if(task){
 
           endDate = task.project.endDate.substring(10,0);
-          console.log("endDate ------------------------------",endDate);
-
+          console.log("endDate ------------------------------", endDate);
 
           setForm((init) => ({
               ...init,
@@ -78,6 +81,9 @@ function TaskUpdate() {
 
 
 
+
+
+
     const onChangeHandler = (e) => {
 
         setForm((prevForm) => ({
@@ -100,7 +106,8 @@ function TaskUpdate() {
     };
 
 
-    return task && (
+
+    return  reviews && (
         <div className={TaskCSS.wrapper}>
             <div className={TaskCSS.wrap}>
                 <div className={TaskCSS.mainTitle}>
@@ -196,16 +203,7 @@ function TaskUpdate() {
                             </div>
                         </div>
                     </div>
-                    <div className={TaskCSS.RightDiv}>
-                  <div className={TaskCSS.reviewList}>
-                    <ReviewItem />
-                    
-                  </div>
-                  <div className={TaskCSS.reviewWrite}>
-                    <textarea className={TaskCSS.textbox}/>
-                    <button className={TaskCSS.writeBtn}>등록</button>
-                  </div>
-                </div>
+                <ReviewList task={task} reviews={reviews} /> 
             </div>
         </div>
     </div>
