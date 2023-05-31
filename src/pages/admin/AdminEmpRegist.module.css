@@ -1,0 +1,97 @@
+.backgroundDiv{
+    height: 60vh;
+    display: flex;
+    flex-direction: column; /*수평 정렬*/
+    align-items: center;
+    justify-content: center;
+    margin-left: 10vw;
+    padding: 0;
+}
+
+.registerDiv{    
+    height: 200vh;
+    width: 35vw;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column; /*수평 정렬*/
+    align-items: center;
+    justify-content: center;
+    margin-top: 30vh;
+    padding: 0;
+    background-color: white;
+    border-radius: 25px;    
+}
+
+.registerDiv input {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 4vh;
+    width: 30vw;
+    border-radius: 5px;
+    text-indent: 10px;
+}
+
+.registerDiv textarea {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 35vh;
+    width: 30vw;
+    border-radius: 5px;
+    text-indent: 10px;
+}
+
+.registerDiv button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 5vh;
+    width: 30vw;
+    border-radius: 25px;
+    background-color: white;
+    font-weight: bold;
+}
+
+/* .content {
+    border: 2px solid #black;
+    width: 250px;
+    height: 30vh;
+    border-radius: 10px;
+    margin-bottom: 1vw;
+
+    
+    padding: 5px;
+} */
+
+.content {
+    border: 2px solid #000000;
+    width: 40vh;
+    height: 30vw;
+    border-radius: 10px;
+    
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    }
+
+    .dateInputContainer {
+        position: relative;
+        display: inline-block;
+      }
+      
+      .datePlaceholder {
+        position: absolute;
+        top: 2.4em;
+        left: 19em;
+        font-weight: bold;
+        color: #000000;
+        pointer-events: none;
+        transition: all 0.2s;
+      }
+      
+      .dateInput:not(:focus) + .datePlaceholder,
+      .dateInput:valid + .datePlaceholder {
+        transform: translateY(-1.5em) scale(0.75);
+      }
+      
+      .dateInput:focus + .datePlaceholder {
+        color: #9ECDF1;
+      }

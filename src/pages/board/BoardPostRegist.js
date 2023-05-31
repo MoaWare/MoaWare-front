@@ -18,7 +18,7 @@ function BoardPostRegist() {
 
     
 
-    /* 상품 등록 후 regist 값이 확인 되면 상품 목록으로 이동 */
+    /* 게시글 등록 후 regist 값이 확인 되면 게시글 목록으로 이동 */
     useEffect(
         () => {
             if(regist?.status === 200) {

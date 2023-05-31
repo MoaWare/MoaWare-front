@@ -16,28 +16,26 @@
 }
 
 .menutitle {
-    padding: 2vh;
-    margin-left: 0.5vw;
+    color: #4B5766;
+    font-size: 24px;
     border-bottom: 1px solid #4B5766;
-    margin-bottom: 2vh;
-    font-size: 30px;
-
-    
+    margin-left: 0.3vw;
+    padding: 15px;
 }
 
 .content {
+    float: right;
     display: flex;
     flex-direction: row-reverse;
     height: 30px;
-    padding: 10px;
-    margin-right: 3vw;
+    margin-right: 1vw;
 }
-
 
 .content button {
     border: 10px;
     border-radius: 8px;
-    width: 70px;
+    width: 100px;
+    font-size: 16px;
     height: 30px;
     
     background-color: #254F70;
@@ -51,6 +49,7 @@
 .content button:hover {
     background-color: #87909B;
 }
+
 /* content1 (제목, 검색바) */
 .content1 {
     display: flex;

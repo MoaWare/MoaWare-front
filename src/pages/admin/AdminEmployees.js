@@ -4,6 +4,7 @@ import { callAdminEmpListAPI } from '../../apis/AdminAPICalls';
 import PagingBar from "../../components/common/PagingBar";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import CSS from "./AdminEmployees.module.css";
+import { NavLink } from 'react-router-dom';
 
 function AdminEmployees() {
     const dispatch = useDispatch();
@@ -39,7 +40,15 @@ function AdminEmployees() {
         
             <div className={CSS.main}>
                 
-
+            <div className={CSS.menutitle}> 계정 관리
+            <div className={CSS.content}>
+                    <button>
+                        <NavLink to="/admin/emp/regist">
+                        계정 생성
+                        </NavLink>
+                    </button>
+                    </div>  </div>  
+                    
             <table className={CSS.table}>
 
 
@@ -78,14 +87,18 @@ function AdminEmployees() {
                                         <td>{empList.retireYn}</td>
                                         <td></td>
                                         <td></td>
-                                        <td></td>
+                                    
 
                                     </tr>
                                 ))}
                         </tbody>
                     </table>
-            
+                    <div className={CSS.content}>
+                                    <button className={CSS.deletepost}>삭제</button>
+                                    </div>
+
             </div>
+            
             <div>
                 {/* {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />} */}
             </div>
