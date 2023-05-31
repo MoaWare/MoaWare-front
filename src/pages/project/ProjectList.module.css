@@ -137,4 +137,15 @@
     margin-left: 10px;
 }
 
-
+.workBtn1{
+    /* margin-top: 30%; */
+    margin-top: 2%;
+    margin-left: 90%;
+    background-color: rgba(37, 79, 112, 1);
+    color: white;
+    border-radius: 10px;
+    width: 6vw;
+    height: 4vh;
+    font-weight: bold;
+    /* flex-direction: column */
+}

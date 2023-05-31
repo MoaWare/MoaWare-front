@@ -1,4 +1,4 @@
-import { getProject, getTasks, getDone, getProgress, getDeptlist, getDeptemplist, postProject, getTask, postTask, putTask, deleteTask } from "../modules/ProjectModule";
+import { getProject, getTasks, getDone, getProgress, getDeptlist, getDeptemplist, postProject, getTask, postTask, putTask, deleteTask, putProjdelete } from "../modules/ProjectModule";
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -322,3 +322,25 @@ export const callProjectRegistAPI = (formData, selectedEmpList) => {
       }
     };
   };
+
+export const callPorjectDeleteAPI = ({projCode}) => {
+
+  const requestURL = `${PRE_URL}/delete/${projCode}`
+
+  console.log(projCode);
+
+  return async (dispatch, getState) => {
+
+    const result = await fetch(requestURL, {
+        method : 'PUT',
+        headers : {
+            "Content-Type" : "application/json",
+        }
+    }).then(res => res.json());
+
+    if(result.status === 200){
+        console.log("[ProjectAPICalls] callPorjectDeleteAPI result : ", result);
+        dispatch(putProjdelete(result));
+    }
+  }
+}

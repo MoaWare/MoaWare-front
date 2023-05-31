@@ -16,11 +16,12 @@ const GET_TASK = 'project/GET_TASK';
 const POST_TASK = 'project/POST_TASK';
 const PUT_TASK = 'project/PUT_TASK';
 const DELETE_TASK = 'project/DELETE_TASK';
+const PUT_PROJDELETE = 'project/PUT_PROJDELETE';
 
 
 
 export const { project : 
-    { getProject, getTasks, getProgress ,getDone, getDeptlist, getDeptemplist, postProject, getTask, postTask, putTask, deleteTask }} = createActions({
+    { getProject, getTasks, getProgress ,getDone, getDeptlist, getDeptemplist, postProject, getTask, postTask, putTask, deleteTask, putProjdelete }} = createActions({
     [GET_PROJECT] : res => res.data,
     [GET_TASKS] : res => res.data,
     [GET_PROGRESS] : res => res,
@@ -32,6 +33,7 @@ export const { project :
     [POST_TASK] : res => res,
     [PUT_TASK] : res => res,
     [DELETE_TASK] : res => res,
+    [PUT_PROJDELETE] : res => res,
 }); 
 
 
@@ -49,6 +51,7 @@ const projectReducer = handleActions(
         [POST_TASK] : (state, { payload }) => ({ post : payload }),
         [PUT_TASK] : (state, { payload }) => ({ put : payload }),
         [DELETE_TASK] : (state, { payload }) => ({ del : payload }),
+        [PUT_PROJDELETE] : (state, { payload }) => ({ delProj : payload }),
     }
 , initialState);
 

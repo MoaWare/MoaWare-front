@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import ProjectCSS from './ProjectList.module.css';
 import { useState } from 'react';
 
-function ProjectList( {projectList} ) {
+function ProjectList( {projectList, onProjectSelectHandler} ) {
 
     const navigate = useNavigate();
     const [selecteCheck, setSelecteCheck] = useState(null);
@@ -16,6 +16,7 @@ function ProjectList( {projectList} ) {
         // 이벤트 전파 방지
         event.stopPropagation(); 
         setSelecteCheck(projCode);
+        onProjectSelectHandler(projCode);
         if(selecteCheck == projCode) {
             setSelecteCheck(null);
         }
