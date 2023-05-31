@@ -46,6 +46,9 @@ import BoardPostRegist from "./pages/board/BoardPostRegist";
 import TaskUpdate from "./form/Task/TaskUpdate";
 import TaskDetail from "./form/Task/TaskDetail";
 import TaskRegist from "./form/Task/TaskRegist";
+import AdminEmpRegist from "./pages/admin/AdminEmpRegist";
+import AdminBoardRegist from "./pages/admin/AdminBoardRegist";
+import AdminBoardList from "./pages/admin/AdminBoardList";
 import WorkAdmin from "./pages/users/works/WorkAdmin";
 import PaymentDetail from "./pages/payment/PaymentDetail";
 
@@ -122,6 +125,14 @@ function App() {
             <Route index element={<Admin />} />
             <Route path="emp/list" element={<AdminEmployees />} />
             <Route path="emp/list/:empCode" element={<AdminEmpDetail />} />
+            <Route path="emp/regist" element={<AdminEmpRegist />}/> 
+
+            <Route path="board/list" element={<AdminBoardList />} />
+            {/* <Route path="emp/list/:empCode" element={<AdminEmpDetail />} /> */}
+            <Route path="board/regist" element={<AdminBoardRegist />}/>
+
+
+
 
           </Route>
         </Route>
