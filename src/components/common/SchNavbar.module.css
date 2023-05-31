@@ -80,17 +80,3 @@
 .unshare div {
     margin-bottom: 2.5vh;
 }
-
-.insert {
-    background-color: white;
-    color: rgba(37, 79, 112, 1);
-    border: 2px solid rgba(37, 79, 112, 1);
-    text-align: center;
-    /* padding: 2vh; */
-    border-radius: 40px;
-    font-size: 20px;
-    font-weight: 700;
-    margin: 2vw;
-    margin-bottom: 1vw;
-    padding: 1.5vh;
-}

@@ -51,9 +51,9 @@ export const putWorkStatusModifyAPI = (form) => {
     }
 }
 
-export const inputNameAPI = ({ name, currentPage = 1 }) => {
+export const inputNameAPI = ({ name, workDate, currentPage = 1 }) => {
 
-    const requestURL = `${PRE_URL}/emp/${name}?page=${currentPage}`
+    const requestURL = `${PRE_URL}/work/emp/name/${name}/${workDate}?page=${currentPage}`;
 
     return async (dispatch,getState) => {
 

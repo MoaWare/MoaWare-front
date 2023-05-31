@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { callDeptEmpListAPI, callDeptListAPI, callProjectRegistAPI } from '../../apis/ProjectAPICalls';
 import moment from "moment";
+import { Navigate, useNavigate } from 'react-router-dom';
 
 function CreateProject() {
 
@@ -15,12 +16,14 @@ function CreateProject() {
     const [selectedEmpList, setSelectedEmpList] = useState([]);
     // const { depts } = useSelector(state => state.projectReducer);
     const [change, setChange ] = useState(false);
-    const { depts, emps } = useSelector(state => state.projectReducer);
+    const { depts, emps, regist } = useSelector(state => state.projectReducer);
     const { name } = useSelector(state => state.employeeReducer);
     const [form, setForm] = useState({});
     // const deptList = dept.data;
     const today = new Date().toISOString().slice(0, 10);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
 
     console.log('프로젝트 생성에서의 내임 출력', name);
     // const [depties, setDepties] = useState([]);
@@ -52,6 +55,15 @@ function CreateProject() {
     useEffect(() => {
          dateCheck();
     }, [selectedStartDate, selectedEndDate]);
+
+    useEffect(() => {
+        if (regist?.status === 200) {
+          alert('생성 완료.');
+          navigate("/project");
+        } else if (regist?.state === 400) {
+          alert(regist.message);
+        }
+      }, [regist]);
 
     const onCangeDeptHandler = (e) => {
             const selectedValue = e.target.value;
