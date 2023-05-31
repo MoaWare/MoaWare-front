@@ -30,8 +30,8 @@ const rootReducer = combineReducers({
     leaveReducer,
     leavePayReducer,
     reviewModule,
-    boardReducer
-    reviewModule
+    boardReducer,
+    reviewModule,
     adminWorkReducer,
     workStatusReducer
 
