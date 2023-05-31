@@ -12,7 +12,8 @@ function AdminBoardList() {
     const navigate = useNavigate();
     const boards = useSelector(state => state.boardReducer);
 
-    //    const pageInfo = boardPost.pageInfo;
+
+    const pageInfo = boards.pageInfo;
 
 
 
@@ -23,7 +24,7 @@ function AdminBoardList() {
     
             dispatch(callAdminBoardListAPI({ currentPage }));
             },
-           []
+           [currentPage]
            );
 
 
@@ -46,8 +47,8 @@ function AdminBoardList() {
             <div class={CSS.menutitle}> 게시판
             <div className={CSS.content}>
                     <button>
-                        <NavLink to="/admin/emp/regist">
-                        계정 생성
+                        <NavLink to="/admin/board/regist">
+                        게시판 생성
                         </NavLink>
                     </button>
                     </div>  </div>  
@@ -89,12 +90,12 @@ function AdminBoardList() {
                     <div className={CSS.content}>
                                     <button className={CSS.deletepost}>삭제</button>
                                     </div>
-
+                                    <div>
+                {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
+            </div>
             </div>
             
-            <div>
-                {/* {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />} */}
-            </div>
+            
         </>
     );
 }

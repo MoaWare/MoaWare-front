@@ -10,6 +10,7 @@ function AdminEmployees() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const employees = useSelector(state => state.employeeReducer);
+    const pageInfo = employees.pageInfo;
 
     
    const [currentPage, setCurrentPage] = useState(1);
@@ -24,7 +25,7 @@ function AdminEmployees() {
     
         dispatch(callAdminEmpListAPI({ currentPage }));
         },
-       []
+       [currentPage]
        );
 
 
@@ -96,12 +97,12 @@ function AdminEmployees() {
                     <div className={CSS.content}>
                                     <button className={CSS.deletepost}>삭제</button>
                                     </div>
-
+                                    <div>
+                {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
+            </div>
             </div>
             
-            <div>
-                {/* {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />} */}
-            </div>
+        
         </>
     );
 }

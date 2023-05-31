@@ -51,6 +51,7 @@ import AdminBoardRegist from "./pages/admin/AdminBoardRegist";
 import AdminBoardList from "./pages/admin/AdminBoardList";
 import WorkAdmin from "./pages/users/works/WorkAdmin";
 import PaymentDetail from "./pages/payment/PaymentDetail";
+import BoardPostModify from "./pages/board/BoardPostModify";
 
 
 
@@ -114,6 +115,8 @@ function App() {
             <Route path=":postCode" element={<BoardPostDetail />} />
             <Route path="boards/:boardCode" element={<BoardPostList />} />
             <Route path="regist" element={<BoardPostRegist />}/> 
+            <Route path="modify" element={<BoardPostModify />}/>
+
 
           </Route>
           {/* 관리자 */}
