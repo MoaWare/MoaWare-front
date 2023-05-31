@@ -6,7 +6,7 @@
     overflow-y: scroll;
     border-radius: 20px;
     background-color: #fff;
-    position: fixed;
+    /* position: fixed; */
     /* display: flex; */
     /* flex-direction: column;
     align-items: center; */
@@ -133,7 +133,7 @@
 
 .workBtn1{
     /* margin-top: 30%; */
-    margin-top: 100px;
+    margin-top: 2%;
     margin-left: 70%;
     background-color: rgba(37, 79, 112, 1);
     color: white;

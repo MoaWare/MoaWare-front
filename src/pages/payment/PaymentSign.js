@@ -32,26 +32,31 @@ function PaymentSign () {
     }
 
     const onClickPaySignSaved = () => {
+        
+        console.log( "sign 이당:", imageForm===undefined);
+        if(imageForm===undefined) {
+            setIsModify(false)
+        } else { 
+            if(sign.fileCategory.filter( fileCategory => fileCategory.fcategoryType==="sign").length) {
+        
+                    const formData = new FormData();
 
-        if(sign.fileCategory.filter( fileCategory => fileCategory.fcategoryType==="sign").length) {
-     
+                    formData.append('fileCode', sign.fileCategory[0].file.fileCode);
+                    formData.append('originalFileName', imageForm.sign);
+                    formData.append('fileInfo', imageForm.image);
+
+                    dispatch(CallPaymentSignUpdateAPI(formData))
+
+            } else {
+
                 const formData = new FormData();
 
-                formData.append('fileCode', sign.fileCategory[0].file.fileCode);
                 formData.append('originalFileName', imageForm.sign);
                 formData.append('fileInfo', imageForm.image);
+                formData.append('payFileCategory.fCategoryType', 'sign');
 
-                dispatch(CallPaymentSignUpdateAPI(formData))
-
-        } else {
-
-            const formData = new FormData();
-
-            formData.append('originalFileName', imageForm.sign);
-            formData.append('fileInfo', imageForm.image);
-            formData.append('payFileCategory.fCategoryType', 'sign');
-
-            dispatch(CallPaymentSignRegistAPI(formData));
+                dispatch(CallPaymentSignRegistAPI(formData));
+            }
         }
     }
 
@@ -91,6 +96,7 @@ function PaymentSign () {
 
         () => {
           if(signUpdate?.status === 200){
+                setIsModify(false);
                 alert('서명 수정이 완료 되었습니다.');
                 navigate('/pay/sign', {replace : true });
             }

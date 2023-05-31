@@ -35,4 +35,4 @@ const rootReducer = combineReducers({
     workStatusReducer
 });
 
-export default rootReducer
+export default rootReducer;
