@@ -1,4 +1,4 @@
-import { getHeaderName, postFindId, postFindPwd, postLogin } from "../modules/EmployeeModule";
+import { getDeptlist, getHeaderName, postFindId, postFindPwd, postLogin } from "../modules/EmployeeModule";
 import { postMemberInfo, getMemberInfo } from "../modules/MemberModule";
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -100,3 +100,21 @@ export const callHeaderNameAPI = () => {
     }
 }
 
+export const callDeptListAPI = () => {
+    const requestURL = `${PRE_URL}/proj/dept`
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : 'GET',
+            headers : {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(res => res.json());
+
+        if(result.status === 200){
+            console.log("[ProjectAPICalls] callDeptListAPI result : ", result);
+            dispatch(getDeptlist(result));
+        }
+    }
+}
