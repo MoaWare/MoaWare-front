@@ -55,6 +55,33 @@ export const callBoardPostDetailAPI = ({ postCode }) => {
  }
 
 
+// 관리자(상세 조회) 
+export const callBoardPostDetailForAdminAPI = ({ postCode }) => {
+
+    const requestURL = `${PRE_URL}/boardPosts-management/${postCode}`;
+
+    return async (dispatch, getState) => {
+
+    
+        const result = await fetch(requestURL, {
+            method: 'GET',
+            headers: {
+                "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+            },
+        
+        }).then(response => response.json());
+        
+
+        if (result.status === 200) {
+            console.log("[BoardPostAPICalls] callBoardPostDetailForAdminAPI result : ", result);
+            dispatch(getBoardpost(result));
+        }
+    }
+}
+
+
+
+
 // 게시글 등록
  export const callBoardPostRegistAPI = (formData) => {
 
@@ -79,27 +106,27 @@ export const callBoardPostDetailAPI = ({ postCode }) => {
        }
     }
  
-// export const callBoardPostUpdateAPI = (formData) => {
+export const callBoardPostUpdateAPI = (formData) => {
 
-//     const requestURL = `${PRE_URL}/boardPosts`;
+    const requestURL = `${PRE_URL}/boardPosts`;
 
-//     return async (dispatch, getState) => {
+    return async (dispatch, getState) => {
 
-//         const result = await fetch(requestURL, {
-//             method: 'PUT',
-//             headers: {
-//                 "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
-//             },
-//             body: formData
-//         }).then(response => response.json());
+        const result = await fetch(requestURL, {
+            method: 'PUT',
+            headers: {
+                "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+            },
+            body: formData
+        }).then(response => response.json());
 
-//         if (result.status === 200) {
-//             console.log('[BoardPostAPICalls] callBoardPostUpdateAPI result :', result);
-//             dispatch(putBoardPost(result));
-//         }
-//     }
+        if (result.status === 200) {
+            console.log('[BoardPostAPICalls] callBoardPostUpdateAPI result :', result);
+            //dispatch(putBoardPost(result));
+        }
+    }
 
-// }
+}
 
 // export const callBoardpostSearchListAPI = ({ search, currentPage = 1 }) => {
 

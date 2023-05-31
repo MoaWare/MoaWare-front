@@ -9,8 +9,7 @@ function BoardPostList() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const boardPosts = useSelector(state => state.boardPostReducer);
-
-    //    const pageInfo = boardPost.pageInfo;
+    const pageInfo = boardPosts.pageInfo;
 
 
     
@@ -36,16 +35,11 @@ function BoardPostList() {
     );
 
 
-
+//테이블 클릭시 상세 및 수정 페이지로 라우팅
     const onClickTableTr = (postCode) => {
-
         navigate(`/boardPosts/${postCode}`);
 
     };
-
-    // const onClickProductInsert = () => {
-    //     navigate("/product-registration");
-    // };
 
     return (
         <>
@@ -89,9 +83,7 @@ function BoardPostList() {
                                     <td>{post.modifyDate}</td>
                                     <td>{post.views}</td>
                                 
-                                        {/* <td>    <button className="view-post-button" onClick={onClickProductInsert}>
-                                        게시물 조회
-                                    </button></td> */}
+                                    
                                     </tr>
                                 ))}
                         </tbody>
@@ -99,12 +91,12 @@ function BoardPostList() {
                     <div className={CSS.content}>
                                     <button className={CSS.deletepost}>삭제</button>
                                     </div>
-
+            <div>
+                {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
+            </div>
             </div>
             
-            <div>
-                {/* {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />} */}
-            </div>
+        
         </>
     );
 }

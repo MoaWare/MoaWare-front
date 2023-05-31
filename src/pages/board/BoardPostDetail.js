@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';import
 { useDispatch, useSelector, } from "react-redux";
 import { callBoardPostDetailAPI } from '../../apis/BoardPostAPICalls';
 import CSS from "./BoardPostDetail.module.css";
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 
 function BoardPostDetail() {
     const dispatch = useDispatch();
@@ -22,6 +22,9 @@ function BoardPostDetail() {
         navigate('/boardPosts');
     }
 
+    const onClickModifyHandler = (postCode) => {
+        navigate('/boardPosts/modify/${postCode}');
+    }
 
     return (
         <>
@@ -51,8 +54,8 @@ function BoardPostDetail() {
                 )}
                 <div className={CSS.content3}>
                                     <button className={CSS.boardcancel} onClick = { onClickBackHandler }>이전</button>
-                                    <button className={CSS.modifypost}>수정</button>
-                                    </div>
+                                    <button className={CSS.boardcancel} onClick = { onClickModifyHandler }>수정</button>
+                    </div>
             </div>
                                     
         
