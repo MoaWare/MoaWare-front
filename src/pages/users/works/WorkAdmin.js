@@ -32,9 +32,10 @@ function WorkAdmin({ adminList }) {
     // const [isFirstRender, setFirstRender] = useState(true);
     // const pageInfo = myWork.pageInfo;
     const pageInfo = admin && admin ? admin.pageInfo : null;
+    console.log("페이징 처리ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ",pageInfo);
     // 나중에 수정
 
-    console.log('admin :', admin ? admin.data : "");
+    // console.log('admin :', admin ? admin.data : "");
     // console.log('status :', status);
     console.log('name :', name);
 
@@ -105,7 +106,7 @@ function WorkAdmin({ adminList }) {
     function handleKeyPress(event) {
         if (event.key === 'Enter') {
             console.log('Entered value:', insertName);
-            dispatch(inputNameAPI({ name : insertName, currentPage}))
+            dispatch(inputNameAPI({ name : insertName, workDate : selectedDate ? selectedDate : formattedDate, currentPage}))
         }
       }
 
@@ -159,7 +160,7 @@ function WorkAdmin({ adminList }) {
         } else if (formattedDate) {
             dispatch(callAdminWorkListAPI({ date: formattedDate, currentPage }))
         } 
-    }, [selectedDate, formattedDate, modify])
+    }, [selectedDate, formattedDate, currentPage, modify])
 
     useEffect(() => {
         console.log('year2 : ', year2);
@@ -236,47 +237,7 @@ function WorkAdmin({ adminList }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* {admin && admin.data && admin.data.map((admin) => (
-                            <tr className={WorkCSS.td} key={admin.emp.empCode}>
-                                <td>
-                                    <input
-                                        type="checkbox"
-                                        checked={selectCheck == admin.emp.empCode}
-                                        onChange={() => onChangeCheckBox(admin.emp.empCode)}
-                                    />
-                                </td>
-                                <td>{admin.workPk.workDate.substring(0, 10)}</td>
-                                <td>{admin.emp.dept.deptName}</td>
-                                <td>{admin.emp.job.jobName}</td>
-                                <td>{admin.emp.empName}</td>
-                                <td>{admin.workTime ? admin.workTime.substring(11, 19) : ""}</td>
-                                <td>{admin.quitTime ? admin.quitTime.substring(11, 19) : ""}</td>
-                                <td>{admin.workTime && admin.quitTime ? formatDuration3(formatDuration2(admin.workTime, admin.quitTime)) : ""}</td>
-                                <td>
-                                    {admin.workTime && admin.quitTime
-                                    ? formatDuration2(admin.workTime, admin.quitTime) > timeInMs
-                                    ? formatDuration3(formatDuration2(admin.workTime, admin.quitTime) - timeInMs)
-                                    : ""
-                                    : ""}
-                                </td>
-                                <td>
-                                    {admin.workStatus}
-                                </td>
-                                <td>
-                                    <select disabled={admin.emp.empCode !== selectCheck}
-                                        value={selectValue}
-                                        onChange={onChangeSelect}
-                                        >
-                                        <option value=""></option>
-                                        <option value="지각">지각</option>
-                                        <option value="결근">결근</option>
-                                        <option value="연차">연차</option>
-                                        
-                                    </select>
-                                </td>
-                            </tr> 
-                        ))} */}
-                        {/* {name && name.data && name.data.map((name) => (
+                        {name && name.data && name.data.map((name) => (
                             <tr className={WorkCSS.td} key={name.empCode}>
                                 <td>
                                     <input
@@ -285,23 +246,76 @@ function WorkAdmin({ adminList }) {
                                         onChange={() => onChangeCheckBox(name.empCode)}
                                     />
                                 </td>
-                                <td>{selectedDate ? selectedDate : formattedDate}</td>
+                                {/* <td>{selectedDate ? selectedDate : formattedDate}</td> */}
+                                <td>{name.work && name.work.workPk.workDate ? name.work.workPk.workDate.substring(0,10) : selectedDate ? selectedDate : formattedDate ? formattedDate : "" }</td>
                                 <td>{name.dept.deptName}</td>
                                 <td>{name.job.jobName}</td>
                                 <td>{name.empName}</td>
+                                <td>{name.work && name.work.workTime ? name.work.workTime.substring(11, 19) : ""}</td>
+                                <td>{name.work && name.work.quitTime ? name.work.quitTime.substring(11, 19) : ""}</td>
+                                <td>{name.work && name.work.workTime && name.work.quitTime ? formatDuration3(formatDuration2(name.work.workTime, name.work.quitTime)) : ""}</td>
                                 <td>
-                                    <select
+                                    {name.work && name.work.workTime && name.work.quitTime
+                                    ? formatDuration2(name.work.workTime, name.work.quitTime) > timeInMs
+                                    ? formatDuration3(formatDuration2(name.work.workTime, name.work.quitTime) - timeInMs)
+                                    : ""
+                                    : ""}
+                                </td>
+                                <td>
+                                    {name.work && name.work.workStatus ? name.work.workStatus : " "}
+                                </td>
+                                <td>
+                                    <select disabled={name.empCode !== selectCheck}
                                         value={selectValue}
                                         onChange={onChangeSelect}
                                         >
                                         <option value=""></option>
                                         <option value="지각">지각</option>
                                         <option value="결근">결근</option>
-                                        <option value="연차">연차</option>
+                                        <option value="연차">연차</option>            
                                     </select>
                                 </td>
                             </tr> 
-                        ))} */}
+                        ))}
+                        {admin && admin.data && admin.data.map((admin) => (
+                            <tr className={WorkCSS.td} key={admin.empCode}>
+                                <td>
+                                    <input
+                                        type="checkbox"
+                                        checked={selectCheck == admin.empCode}
+                                        onChange={() => onChangeCheckBox(admin.empCode)}
+                                    />
+                                </td>
+                                <td>{selectedDate ? selectedDate : formattedDate}</td>
+                                <td>{admin.dept.deptName}</td>
+                                <td>{admin.job.jobName}</td>
+                                <td>{admin.empName}</td>
+                                <td>{admin.work && admin.work.workTime ? admin.work.workTime.substring(11, 19) : ""}</td>
+                                <td>{admin.work && admin.work.quitTime ? admin.work.quitTime.substring(11, 19) : ""}</td>
+                                <td>{admin.work && admin.work.workTime && admin.work.quitTime ? formatDuration3(formatDuration2(admin.work.workTime, admin.work.quitTime)) : ""}</td>
+                                <td>
+                                    {admin.work && admin.work.workTime && admin.work.quitTime
+                                    ? formatDuration2(admin.work.workTime, admin.work.quitTime) > timeInMs
+                                    ? formatDuration3(formatDuration2(admin.work.workTime, admin.work.quitTime) - timeInMs)
+                                    : ""
+                                    : ""}
+                                </td>
+                                <td>
+                                    {admin.work && admin.work.workStatus ? admin.work.workStatus : " "}
+                                </td>
+                                <td>
+                                    <select disabled={admin.empCode !== selectCheck}
+                                        value={selectValue}
+                                        onChange={onChangeSelect}
+                                        >
+                                        <option value=""></option>
+                                        <option value="지각">지각</option>
+                                        <option value="결근">결근</option>
+                                        <option value="연차">연차</option>            
+                                    </select>
+                                </td>
+                            </tr> 
+                        ))}
                     </tbody>
                 </table>
                     <div>
