@@ -6,9 +6,11 @@ import { callReviewsAPI, callReviewsRegistAPI } from "../../../apis/ReviewAPICal
 import ReviewItem from "./ReviewItem";
 import { toast } from "react-toastify";
 
+
+
 function ReviewList({ task, reviews }){
 
-
+  
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { regist } = useSelector((state) => state.reviewReducer);
@@ -27,21 +29,16 @@ function ReviewList({ task, reviews }){
             }
         ));
         console.log(review);
-    }   
+    }
 
     
-    /* 댓글 등록 후 새로고침 */
+    /* 댓글 등록 및 재조회 */
     const handleSubmitContent = async (e) => {
-      
-      e.preventDefault();
-      
+            
       try{
         
         await dispatch(callReviewsRegistAPI(review));
-        
         dispatch(callReviewsAPI(review?.task?.taskCode));
-        
-        setReview("");
         
         toast.success('댓글 등록 ', {
           position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
@@ -57,7 +54,7 @@ function ReviewList({ task, reviews }){
           hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
           progressStyle: {
             backgroundColor: '#ff000074', // 프로그레스 바 배경색
-            height: '5px', // 프로그레스 바 높이
+            height: '5px', // 프로그레스 바 
           },
         });
       }
