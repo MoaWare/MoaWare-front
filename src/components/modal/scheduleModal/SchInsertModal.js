@@ -1,24 +1,62 @@
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import SchIModalCSS from './SchInsertModal.module.css';
 import { callScheduleInsertAPI } from '../../../apis/ScheduleAPICalls';
 import { FiX } from 'react-icons/fi';
 
 function SchInsertModal({ setSchInsertModal }) {
+  
+  const dispatch = useDispatch();
+  const { insert } = useSelector((state) => state.scheduleReducer);
+  // const { schCode } = useParams();
+  const [form, setForm] = useState({
+    // schCode: schCode,
+    schName: "",
+    schContent: "",
+    schDate: "",
+    schEndDate: "",
+    schType: {
+      schCategoryCode: ""
+    }
+  })
 
-  const { schedule } = useSelector((state) => state.scheduleReducer);
+  const onChangeHandler = (e) => {
+    console.log("스케쥴 타입 : ", e.target.name === 'schCategoryCode');
 
-  useEffect(() => {
-    callScheduleInsertAPI();
-  }, []);
+    if(e.target.name === 'schCategoryCode') {
+      setForm({
+        ...form,
+        schType : {
+          [e.target.name] : e.target.value
+        }
+      
+      });
 
+    } else {
+
+    setForm({
+        ...form,
+        [e.target.name] : e.target.value
+      
+      });
+
+    }
+
+  }
+    
+    const SchInsertClick = () => {
+      dispatch(callScheduleInsertAPI(form));
+      console.log('인서트대라얍~', insert)
+    };
+    console.log('form', form);
+    
   /* 모달창 나가기 */
   const CancelInsertClick = () => {
     setSchInsertModal(false);
   };
-  
-  return schedule && (
+
+  return (
     <div className={SchIModalCSS.modal}>
       <div className={SchIModalCSS.wrapper}>
         <div className={SchIModalCSS.schCheck}>
@@ -30,12 +68,14 @@ function SchInsertModal({ setSchInsertModal }) {
             type='text'
             name='schName'
             placeholder='일정을 입력해주세요.'
+            onChange={ onChangeHandler }
           />
         </div>
         <div className={SchIModalCSS.schDay}>
           <input
               type='date'
               name='schDate'
+              onChange={ onChangeHandler }
               // required
               // aria-required="true"
             />
@@ -43,36 +83,52 @@ function SchInsertModal({ setSchInsertModal }) {
           <input
               type='date'
               name='schEndDate'
+              onChange={ onChangeHandler }
             />
         </div>
         <div className={SchIModalCSS.schList}>
-          {/* <select>
-            <option value="none" disabled selected>일정 분류</option>
-            <option>회사 일정</option>
-            <option>프로젝트 일정</option>
-            <option>직급별 일정</option>
-            <option>부서별 일정</option>
-            <option>팀별 일정</option>
-            <option>개인 일정</option>
-          </select> */}
+          <select 
+            name='schCategoryCode'
+            onChange={ onChangeHandler }
+            // value="none"
+          >
+            <option value="none" disabled >일정 분류</option>
+            <option value="1">회사 일정</option>
+            <option value="2">프로젝트 일정</option>
+            <option value="3">직급별 일정</option>
+            <option value="4">부서별 일정</option>
+            <option value="5">팀별 일정</option>
+            <option value="6">개인 일정</option>
+          </select>
           <input
             type='text'
             name='schPrarticipant'
-            placeholder='참석자'
+            placeholder='참여자'
+            onChange={ onChangeHandler }
           />
         </div>
+        {/* <div className={SchIModalCSS.schDetail}>일정 설명</div> */}
         <div className={SchIModalCSS.schCont}>
-            <input
-              type='text'
+            <textarea
               name='schContent'
               placeholder='일정에 대한 설명을 입력해주세요.'
+              onChange={ onChangeHandler }
             />
         </div>
         <div className={SchIModalCSS.schBtn}>
-            <button className={SchIModalCSS.schDel}>삭제</button>
-            <button className={SchIModalCSS.schMod}>수정</button>
+            <button 
+              className={SchIModalCSS.schDel}
+              onClick={CancelInsertClick}
+            >
+            취소
+            </button>
+            <button 
+              className={SchIModalCSS.schMod}
+              onClick={ SchInsertClick }
+            >
+            저장
+          </button>
         </div>
-        <div></div>
       </div>
     </div>
   );
