@@ -24,7 +24,7 @@ export const callScheduleListAPI = () => {
             dispatch(getSchedules(result));
         }
 
-    };
+    }
 
 }
 
@@ -48,32 +48,80 @@ export const callScheduleDetailAPI = ({ schCode }) => {
             dispatch(getSchedule(result));
         }
 
-    };
+    }
 
 }
 
 /* 일정 등록 */
-export const callScheduleInsertAPI = (formData) => {
+export const callScheduleInsertAPI = ( form ) => {
+    
+    console.log("form2", form)
 
     const requestURL = `${PRE_URL}/calendar`;
-
+  
     return async (dispatch, getState) => {
 
         const result = await fetch(requestURL, {
-            method: 'POST',
+            method : "POST",
             headers : {
-                // "Content-Type" : "application/json",
+                "Content-Type" : "application/json",
                 "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
             },
-            body : formData
+            body: JSON.stringify(form)
         }).then(res => res.json());
-
-        console.log(result);
-        if(result.status === 200){
-            console.log("[ScheduleAPICalls] callScheduleInsertAPI result : ", result);
+      
+        if(result.status === 200) {
+            console.log('[ScheduleAPICalls] callScheduleInsertAPI : ', result);
+            
             dispatch(postSchedule(result));
-        }
+        
+        } 
 
-    };
+    }
 
 }
+
+// export const callScheduleInsertAPI = ( formData ) => {
+
+//     const requestURL = `${PRE_URL}/calendar`;
+
+//     return async (dispatch, getState) => {
+
+//         const result = await fetch(requestURL, {
+//             method: 'POST',
+//             headers : {
+//                 "Content-Type" : "application/json",
+//                 "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+//             },
+//             body: formData
+//         }).then(res => res.json());
+
+//         console.log(result);
+//         if(result.status === 200){
+//             console.log("[ScheduleAPICalls] callScheduleInsertAPI result : ", result);
+//             dispatch(postSchedule(result));
+//         }
+
+//     };
+
+// }
+
+/* 일정 참여자 조회 */
+// export const CallSchPrarAPI = ({ prar }) => {
+
+//     const requestURL = `${ PRE_URL}/org/search?search=${ search }`;
+
+//     return async( dispatch, getState ) => {
+        
+//         const result = await fetch( requestURL, {
+//             method: 'GET'
+//         }).then( res => res.json());
+
+//         console.log( result);
+//         if ( result.status === 200 ) {
+//             console.log ("[OrganizationAPICalls] CallOrganizationSearchAPI result : ", result);
+//             dispatch(getOrganizationSearch(result));
+//         }
+//     };
+
+// }

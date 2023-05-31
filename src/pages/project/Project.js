@@ -47,10 +47,6 @@ function Project() {
         dispatch(callPorjectDeleteAPI({projCode : selectPorjCode}));
     }
 
-    const onClickCansel= e => {
-        setSeletProjCode(null);
-    }
-
     return (
         <>
             <div className={ProjectCSS.main}>
