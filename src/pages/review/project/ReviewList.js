@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 
 function ReviewList({ task, reviews }){
 
-  
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { regist } = useSelector((state) => state.reviewReducer);
@@ -64,13 +64,14 @@ function ReviewList({ task, reviews }){
 
   
 
-    return reviews && (
+    return (
         <div className={TaskCSS.RightDiv}>
-          <div className={TaskCSS.reviewList}>{reviews.reviewCode}
-            { 
-              Array.isArray(reviews) 
-              && reviews.map(reviews => <ReviewItem key={ reviews.reviewCode } review={reviews}/>)
-            }
+          <div className={TaskCSS.reviewList}>{reviews?.reviewCode}
+           { 
+              reviews 
+                && Array.isArray(reviews) 
+                    && reviews.map(reviews => <ReviewItem key={ reviews?.reviewCode } review={reviews}/>)
+           }
           </div> 
         <div className={TaskCSS.reviewWrite}>
           <textarea name="content" onChange={onReviewChangeHandler} className={TaskCSS.textbox}/>

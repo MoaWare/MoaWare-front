@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProjCSS from "./ProjDetail.module.css";
 import { useParams } from "react-router-dom";
-import { callTaskListAPI } from "../../apis/ProjectAPICalls";
+import { callProjectAPI, callTaskListAPI } from "../../apis/ProjectAPICalls";
 import ProjDetailTitle from "./ProjectDetailTitle";
 import TaskList from "./TaskList";
 
@@ -11,8 +11,7 @@ function ProjDetail() {
     const dispatch = useDispatch();
     const params = useParams();
     const projCode = params.projCode;
-    const { tasks } = useSelector(state => state.projectReducer);
-    let project = {};
+    const { tasks, project } = useSelector(state => state.projectReducer);
     let progress = '';
 
 
@@ -31,10 +30,12 @@ function ProjDetail() {
 
     }, []);
 
+    useEffect(() => {
 
-    if(tasks){
-        project = tasks[0]?.project;
-    }
+        dispatch(callProjectAPI(projCode));
+
+    }, []);
+
    
     console.log("ProjDetail tasks : ", tasks);
     console.log("ProjDetail project : ", project);
@@ -58,14 +59,14 @@ function ProjDetail() {
 
     return (
         <div className={ProjCSS.wrapper}>
-            {tasks && <ProjDetailTitle project={project} progress={progress}/> }
+            <ProjDetailTitle project={project} progress={progress}/> 
             <div className={ProjCSS.lowDiv}>
-                <TaskList task={tasksByStage.todo}/>
-                <TaskList task={tasksByStage.ing}/>
-                <TaskList task={tasksByStage.done}/> 
+                <TaskList task={tasksByStage?.todo?.length > 0 ? tasksByStage?.todo : 'todo'} />
+                <TaskList task={tasksByStage?.ing?.length > 0 ? tasksByStage?.ing : 'ing'} />
+                <TaskList task={tasksByStage?.done?.length > 0 ? tasksByStage?.done : 'done'} />
             </div>
         </div>
-    ) 
+    );
 }
 
 export default ProjDetail;
