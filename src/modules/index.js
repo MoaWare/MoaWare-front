@@ -11,9 +11,9 @@ import memberReducer from "./MemberModule";
 import scheduleReducer from "./ScheduleModule";
 import leaveReducer from "./LeaveModule";
 import leavePayReducer from "./LeavePayModule";
+import reviewReducer from "./ReviewModule";
 import adminReducer from "./AdminModule";
 import boardReducer from "./BoardModule";
-import reviewModule from "./ReviewModule";
 import adminWorkReducer from "./AdminWorkModule";
 
 const rootReducer = combineReducers({
@@ -29,9 +29,11 @@ const rootReducer = combineReducers({
     scheduleReducer,
     leaveReducer,
     leavePayReducer,
-    reviewModule,
+    reviewReducer,
     boardReducer,
     adminWorkReducer,
     workStatusReducer
 });
+
 export default rootReducer
+
