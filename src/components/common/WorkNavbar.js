@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { callTimeInsertAPI, callTimeQuitAPI, } from '../../apis/WorkAPICalls';
 import WorkTime from '../Work/WorkTime';
+import { isAdmin } from '../../utils/TokenUtils';
 // import { setBtnState } from '../../modules/WorkTimeModule';
 
 function WorkNavbar() {
@@ -70,11 +71,13 @@ function WorkNavbar() {
               내 근태현황
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/work/admin" activeclassname="active">
-              직원 일일 근태 현황
-            </NavLink>
-          </li>
+          {isAdmin() && (
+            <li>
+              <NavLink to="/work/admin" activeclassname="active">
+                직원 일일 근태 현황
+              </NavLink>
+            </li>
+          )}
           <li>
             <NavLink to="/work/restReq" activeclassname="active">
               연차 신청

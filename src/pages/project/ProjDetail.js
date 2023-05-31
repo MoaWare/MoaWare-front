@@ -54,7 +54,7 @@ function ProjDetail() {
         console.log("progress", progress);
     }
 
-    
+        
 
     return (
         <div className={ProjCSS.wrapper}>
