@@ -5,7 +5,7 @@ import OrgListModal from './OrgListModal';
 import { orgContext } from '../../../pages/payment/Payment';
 
 
-function OrgSearchModal (){
+function OrgSearchModal ({ empCode }){
 
     const{searchForm, setSearchForm} = useContext(orgContext);
 
@@ -24,7 +24,7 @@ function OrgSearchModal (){
 
     return(
         <div>
-            {searchOrg&&<OrgListModal org={searchOrg} />}
+            {searchOrg&&<OrgListModal org={searchOrg} empCode={empCode}/>}
         </div>
     )
 }
