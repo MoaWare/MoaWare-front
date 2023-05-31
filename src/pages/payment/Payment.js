@@ -345,7 +345,7 @@ function Payment () {
             <div className={payCSS.payName}>{payEmp && payEmp.empName}</div>
             <div className={payCSS.paySign}> 
               
-              {payEmp && payEmp.payFileCategory && payEmp.payFileCategory.filter( file => file.fcategoryType === "sign") ? 
+              {payEmp && payEmp.payFileCategory && payEmp.payFileCategory.filter( file => file.fcategoryType === "sign").length>0 ? 
               <img src={payEmp.payFileCategory.filter( file => file.fcategoryType === "sign")[0].file.filePath} className={payCSS.signImg}/>: 
               <>{payEmp && payEmp.empName}</>
               }
