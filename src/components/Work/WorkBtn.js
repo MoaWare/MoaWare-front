@@ -67,8 +67,14 @@ function WorkBtn() { // 컴포넌트 이름을 대문자로 시작하도록 수�
             </div>
             {myWork.data && myWork.data.length > 0 ? (
               <div className={WorkBtnCSS.p2} key={myWork.data[0].workPk.workTime}>
-                <p className={WorkBtnCSS.ptime2}>출근 시간 {myWork.data[0].workTime ? myWork.data[0].workTime.substring(11, 19) : ""}</p>
-                <p className={WorkBtnCSS.ptime2}>퇴근 시간 {myWork.data[0].quitTime ? myWork.data[0].quitTime.substring(11, 19) : ""}</p>
+                <div>
+                  <p className={WorkBtnCSS.ptime2}>출근시간</p>
+                  <p className={WorkBtnCSS.ptime2}>{myWork.data[0].workTime ? myWork.data[0].workTime.substring(11, 19) : ""}</p>
+                </div>
+                <div>
+                  <p className={WorkBtnCSS.ptime2}>퇴근시간</p>
+                  <p className={WorkBtnCSS.ptime2}>{myWork.data[0].quitTime ? myWork.data[0].quitTime.substring(11, 19) : ""}</p>
+                </div>
               </div>
             ) : 
             // data객체가 없다면
