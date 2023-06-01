@@ -6,7 +6,7 @@ import { CallPaymentingDetailAPI } from '../../apis/PaymentAPICalls';
 
 import PaymentDetailItem from './PaymentDetailItem';
 import PayModal from '../../components/modal/paymentModal/PayModal';
-import PayRefuse from './PayRefuse';
+import PayRefuse from '../../components/modal/paymentModal/PayRefuse';
 
 
 function PaymentDetail () {

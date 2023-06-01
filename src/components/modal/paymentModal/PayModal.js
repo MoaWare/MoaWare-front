@@ -46,16 +46,16 @@ function PayModal({setIsPayModal}) {
     const onClickPay = () => {
 
         const form = {
-            "payCode" : payCode,
+            payCode,
             "paymentMember" : [
                 {
                 payDate : today(),
                 payType : '결재'
-            }
+                }
             ]
         }
         console.log(" payCode : ", form);
-        disPatch(CallPaymentUpdateAPI(form));
+        disPatch(CallPaymentUpdateAPI({form}));
         navigate("/pay/wait");
     }
 
