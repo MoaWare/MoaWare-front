@@ -56,12 +56,13 @@ import PaymentDetail from "./pages/payment/PaymentDetail";
 import BoardPostModify from "./pages/board/BoardPostModify";
 
 
-
 function App() {
+
+
   return (
     <BrowserRouter>
     <ToastContainer />
-      <Routes>
+      <Routes >
         <Route path="/" element={
           <ProtectedRoute loginCheck={true}>
             <Layout />

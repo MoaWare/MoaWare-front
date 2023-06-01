@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 function TaskList({ task }) {
 
     const navigate = useNavigate();
-    const taskStage = task[0]?.stage;
+    const taskStage = task[0]?.stage || task;
     const [ stage , setStage ] = useState('');
     console.log("TaskList task : ", task );
 

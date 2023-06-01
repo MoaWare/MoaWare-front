@@ -38,10 +38,10 @@ export const { project :
 /* 리듀서 */
 const projectReducer = handleActions(
     {
-        [GET_PROJECT] : (state, { payload }) => ({ project : payload }),
+        [GET_PROJECT] : (state, { payload }) => ({...state, project : payload }),
         [GET_PROGRESS] : (state, {payload}) => ({ progress : payload }),
         [GET_DONE] : (state, {payload}) => ({ done : payload }),
-        [GET_TASKS] : (state, { payload }) => ({ tasks : payload }),
+        [GET_TASKS] : (state, { payload }) => ({...state, tasks : payload }),
         [GET_DEPTEMPLIST] : (state, { payload }) => ({ emps : payload}),
         [POST_PROJECT] : (state, { payload }) => ({ regist : payload }),
         [GET_TASK] : (state, { payload }) => ({ task : payload }),

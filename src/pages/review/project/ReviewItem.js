@@ -9,7 +9,6 @@ function ReviewItem({review}){
 
 
     const date = moment(review.date || review.modifyTime).format("YYYY.MM.DD HH:mm:ss");
-    console.log(date);
 
 
 

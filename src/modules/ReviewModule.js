@@ -15,9 +15,9 @@ export const { review : { getReviews, postReview }} = createActions({
 /* 리듀서 */
 const reviewReducer = handleActions(
     {
-        [GET_REVIEWS] : (state, { payload }) => ({ reviews : payload }),
-        [POST_REVIEW] : (state, { payload }) => ({ regist : payload }),
+        [GET_REVIEWS] : (state, { payload }) => ({ ...state, reviews : payload }),
+        [POST_REVIEW] : (state, { payload }) => ({ ...state, regist : payload }),
     }
 , initialState);
 
-export default reviewReducer;
+export default reviewReducer;   

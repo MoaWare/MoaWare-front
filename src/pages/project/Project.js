@@ -15,6 +15,7 @@ function Project() {
     const { delProj } = useSelector(state => state.projectReducer);
     const [selectPorjCode, setSeletProjCode] = useState(null);
     const [selecteCheck, setSelecteCheck] = useState(null);
+    const [projDate, setprojDate] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const pageInfo = progress && progress ? progress.data.pageInfo : null;
