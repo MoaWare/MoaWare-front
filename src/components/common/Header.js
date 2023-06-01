@@ -14,7 +14,7 @@ const Header = () => {
   const { name } = useSelector(state=> state.employeeReducer);
 
   useEffect(() => {
-    dispatch(callHeaderNameAPI(getHeaderName));
+    dispatch(callHeaderNameAPI());
     console.log("Header name: ",name);
   }, [])
 

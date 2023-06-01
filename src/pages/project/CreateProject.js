@@ -3,21 +3,25 @@ import CreteProjCSS from './CreateProject.module.css';
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { callDeptEmpListAPI, callDeptListAPI, callProjectRegistAPI } from '../../apis/ProjectAPICalls';
+import { callDeptEmpListAPI, callProjectRegistAPI } from '../../apis/ProjectAPICalls';
 import moment from "moment";
 import { Navigate, useNavigate } from 'react-router-dom';
+import { callDeptListAPI } from '../../apis/EmployeeAPICalls';
+import { callMemberInfoAPI } from '../../apis/MemberAPICalls';
 
 function CreateProject() {
 
     const [selectedStartDate, setSelectedStartDate] = useState(null)
     const [selectedEndDate, setSelectedEndDate] = useState(null)
-    const [selectedDept, setSelectedDept] = useState("");
-    const [selectedEmp, setSelectedEmp] = useState([]);
+    const [selectedDept, setSelectedDept] = useState(6);
+    const [selectedEmp, setSelectedEmp] = useState("");
     const [selectedEmpList, setSelectedEmpList] = useState([]);
     // const { depts } = useSelector(state => state.projectReducer);
     const [change, setChange ] = useState(false);
-    const { depts, emps, regist } = useSelector(state => state.projectReducer);
+    const { emps, regist } = useSelector(state => state.projectReducer);
+    const { depts } = useSelector(state => state.employeeReducer);
     const { name } = useSelector(state => state.employeeReducer);
+    const { info } = useSelector(state => state.memberReducer);
     const [form, setForm] = useState({});
     // const deptList = dept.data;
     const today = new Date().toISOString().slice(0, 10);
@@ -37,12 +41,9 @@ function CreateProject() {
 
     useEffect(
         () => {        
-            if (selectedDept) {
+
                 dispatch(callDeptEmpListAPI({ deptCode: selectedDept }));
-            } 
-            // else if(change) {
-            //     dispatch(callDeptListAPI())
-            // }
+                dispatch(callMemberInfoAPI());
     }, [selectedDept]);
 
     //초기 직원 상태
@@ -72,8 +73,11 @@ function CreateProject() {
     }
         
     const onChangeEmpHandler = e => {
-            const selectedValue = e.target.value;
-            setSelectedEmp(selectedValue);
+        const selectedValue = e.target.value;
+        console.log(selectedValue);
+        console.log(info.empCode +" "+ info.empName +" "+ info.email);
+        setSelectedEmp(selectedValue);
+
     }
 
     const onStartDateHandler = startDate => {
@@ -104,16 +108,23 @@ function CreateProject() {
         
     const onClickHandler = () => {
         setChange(true)
+
         if (selectedEmp) {
-            const newEmp = {
-                id: selectedEmpList.length + 1,
-                code:selectedEmp.split(' ')[0],
-                name: selectedEmp.split(' ')[1],
-                email: selectedEmp.split(' ')[2]
-              };
-              setSelectedEmpList((prevEmpList) => [...prevEmpList, newEmp]);
-              setSelectedEmp('');
+            // 현재 사용자인지 확인
+            if (selectedEmp === info.empCode + " " + info.empName + " " + info.email) {
+              return;
+            } else {
+                const newEmp = {
+                  id: selectedEmpList.length + 1,
+                  code:selectedEmp.split(' ')[0],
+                  name: selectedEmp.split(" ")[1],
+                  email: selectedEmp.split(" ")[2],
+                };
+                setSelectedEmpList((prevEmpList) => [...prevEmpList, newEmp]);
+                setSelectedEmp("");
+              }
             }
+        
     }
     //_ 요소 변수 사용안해서 _ 현재 인덱스가 같지 않은 경우에만 유지
     const removeEmp = (index) => {
@@ -186,43 +197,54 @@ function CreateProject() {
                     <div className={CreteProjCSS.container}>
                         <span className={CreteProjCSS.span1}>프로젝트 팀장</span>
                         <div className={CreteProjCSS.span2}>
-                            {name}
+                            {info && info.empName}
                         </div>
                     </div>
                     <div className={CreteProjCSS.container}>
-                        <span className={CreteProjCSS.span1}>팀원 선택</span>
-                        {depts && depts.length > 0 && (
-                        <select 
-                                name="dept" id="deptCode" className={CreteProjCSS.span2} onChange={onCangeDeptHandler} value={selectedDept}> 
+                        <span className={CreteProjCSS.span1}>부서 선택</span>
+                            <select name="dept" id="deptCode" className={CreteProjCSS.span2} onChange={onCangeDeptHandler} value={selectedDept}> 
                             {depts &&
-                                depts
-                                .filter((dept) => dept.deptCode >= 6) // 5번까지의 값만 필터링
-                                .map((dept) => (
-                                    <option key={dept.deptCode} value={dept.deptCode}>
-                                    {dept.deptName}
-                                    </option>
-                                ))}
-                        </select>
-                        )}
-                        {emps && emps.length > 0 && (
-                        <select onChange={onChangeEmpHandler} value={selectedEmp} className={CreteProjCSS.span2}>
-                            {emps && 
-                                emps.map((emp) => (
-                                    <option key={emp.empCode} value={`${emp.empCode} ${emp.empName} ${emp.email}`}>
-                                        {emp.empName}
-                                    </option>
-                                ))}
-                        </select>
-                        )}
+                                    depts
+                                    .filter((dept) => dept.deptCode >= 6)
+                                    .map((dept) => (
+                                        <option key={dept.deptCode} value={dept.deptCode}>
+                                        {dept.deptName}
+                                        </option>
+                            ))}
+                            </select>
+                    </div >
+                    <div className={CreteProjCSS.container}>
+                            <span className={CreteProjCSS.span1}>팀원 선택</span>
+                            <select onChange={onChangeEmpHandler} value={selectedEmp} className={CreteProjCSS.span2}>
+                            {emps && emps.length > 0 && 
+                                    emps.map((emp) => (
+                                        <option key={emp.empCode} value={`${emp.empCode} ${emp.empName} ${emp.email}`}>
+                                            {emp.empName}
+                                        </option>
+                            ))}
+                            </select>
+                    </div>
+                    <div>
                         <button onClick={ onClickHandler }>
                             추가하기
                         </button>
-                    </div >
+                    </div>
                     <div className={CreteProjCSS.container}>
                         <span className={CreteProjCSS.span1}>프로젝트 팀원</span>
-                        {selectedEmpList.map((member, index) => (
+                        {/* {selectedEmpList.map((member, index) => (
                             <span key={index}>{member.name} {member.email} <button onClick={ () => removeEmp(index)}> x </button></span>
                             
+                        ))} */}
+                        {selectedEmpList
+                            //self 검색 값 
+                            .filter((member, index, self) =>
+                                //검색했을 때 이메일이 find
+                                index === self.findIndex((m) => m.email === member.email)
+                            )
+                            .map((member, index) => (
+                                <span key={index}>
+                                {member.name} {member.email} <button onClick={() => removeEmp(index)}>x</button>
+                        </span>
                         ))}
                     </div>
                     <div className={CreteProjCSS.container}>

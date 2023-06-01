@@ -5,17 +5,19 @@ import { useNavigate } from "react-router-dom";
 function ProjDetailTitle({ project, progress }){
 
     const navigate = useNavigate();
-    const startDate =  project.startDate.substring(10, 0).replace('-','.');
-    const endDate = project.endDate.substring(10, 0).replace('-','.');
+    const startDate =  project?.startDate?.substring(10, 0).replace('-','.');
+    const endDate = project?.endDate?.substring(10, 0).replace('-','.');
 
     /* 디데이 계산 */
-    const dday = Math.floor((new Date() - new Date(project.endDate)) / (1000*60*60*24));
+    const dday = Math.floor((new Date() - new Date(project?.endDate)) / (1000*60*60*24)) || 0;
     console.log(dday);
 
     
     const goBack = () => {
         navigate(-1); 
     }
+
+    console.log(project);
 
     return(
         <div className={ProjCSS.topDiv}>
@@ -27,7 +29,7 @@ function ProjDetailTitle({ project, progress }){
                     <span>{project && project.projName}</span>
                 </div>
                 <div className={ProjCSS.titleTopRight}>
-                    <p>{startDate} ~ {endDate}</p>
+                    <p>{ (startDate || '')  + ` ~ ` + (endDate ||  '') }</p>
                     <span>D-{dday}</span>
                 </div>
             </div>
@@ -42,7 +44,7 @@ function ProjDetailTitle({ project, progress }){
                         <span>현재 진행율</span>
                     </div>
                     <div className={ProjCSS.titLowRight}>
-                        <span>{progress}%</span>
+                        <span>{progress || ''}%</span>
                     </div>
                 </div>
                 <div className={ProjCSS.bar}>

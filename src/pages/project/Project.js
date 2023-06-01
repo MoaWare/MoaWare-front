@@ -15,10 +15,10 @@ function Project() {
     const { delProj } = useSelector(state => state.projectReducer);
     const [selectPorjCode, setSeletProjCode] = useState(null);
     const [selecteCheck, setSelecteCheck] = useState(null);
+    const [projDate, setprojDate] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const pageInfo = progress && progress ? progress.data.pageInfo : null;
-    
     console.log('progress', progress);
     console.log('pageInfo', pageInfo);
     const projectList = progress && progress.data ? progress.data.data : '';
@@ -28,6 +28,7 @@ function Project() {
                 dispatch(callProjectProgressListAPI({ currentPage }))
         },[currentPage, dispatch]
     );
+    
 
     useEffect(() => {
         if (delProj?.status === 200) {
