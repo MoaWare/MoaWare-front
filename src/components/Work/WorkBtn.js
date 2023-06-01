@@ -57,7 +57,7 @@ function WorkBtn() { // 컴포넌트 이름을 대문자로 시작하도록 수�
       <div className={WorkBtnCSS.wrap2}>
         {myWork ? (
           <div>
-            <p className={WorkBtnCSS.p}>근태 관리</p>
+            <p className={WorkBtnCSS.p}>[ 근태 관리 ]</p>
             <div className={WorkBtnCSS.ptime}></div>
             <div className={WorkBtnCSS.workBtn}>
               <WorkTime
