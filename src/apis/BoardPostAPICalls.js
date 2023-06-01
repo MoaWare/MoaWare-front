@@ -1,4 +1,4 @@
-import { getBoardposts, getBoardpost, postBoardpost } from "../modules/BoardPostModule";
+import { getBoardposts, getBoardpost, postBoardpost, deleteBoardpost, putBoardpost } from "../modules/BoardPostModule";
 
 /* React App에서 .env를 사용할 때는 REACT_APP 접두어가 필요^^;; */
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -89,6 +89,8 @@ export const callBoardPostDetailForAdminAPI = ({ postCode }) => {
    
     return async (dispatch, getState) => {
    
+        //         const result = await fetch(requestURL).then(response => response.json());
+
     const result = await fetch(requestURL, {
                 method: 'POST',
                headers: {
@@ -106,27 +108,57 @@ export const callBoardPostDetailForAdminAPI = ({ postCode }) => {
        }
     }
  
+
+// 수정
 export const callBoardPostUpdateAPI = (formData) => {
 
     const requestURL = `${PRE_URL}/boardPosts`;
 
     return async (dispatch, getState) => {
 
-        const result = await fetch(requestURL, {
-            method: 'PUT',
-            headers: {
-                "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
-            },
-            body: formData
-        }).then(response => response.json());
+
+                 //const result = await fetch(requestURL).then(response => response.json());
+
+         const result = await fetch(requestURL, {
+             method: 'PUT',
+             headers: {
+                 "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+             },
+             body: formData
+         }).then(response => response.json());
 
         if (result.status === 200) {
             console.log('[BoardPostAPICalls] callBoardPostUpdateAPI result :', result);
-            //dispatch(putBoardPost(result));
+            dispatch(putBoardpost(result));
         }
     }
 
 }
+
+
+
+/* 게시글 삭제 */
+export const callBoardPostDeleteAPI = ( postCode ) => {
+
+    const requestURL = `${PRE_URL}/boardPosts/delete/${postCode}`;
+  
+    return async (dispatch, getState) => {
+  
+        const result = await fetch(requestURL, {
+          method : "PUT",
+          headers : {
+              "Content-Type" : "application/json",
+          },
+        }).then(res => res.json());
+  
+        if(result?.status === 200){
+            console.log(result);
+            dispatch(deleteBoardpost(result));
+        } else if(result?.status === 400){
+          alert(result.message);
+        }
+    }
+  }
 
 // export const callBoardpostSearchListAPI = ({ search, currentPage = 1 }) => {
 
