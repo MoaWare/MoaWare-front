@@ -3,16 +3,32 @@ import { useDispatch, useSelector } from "react-redux";
 import TaskCSS from './Task.module.css';import { callProjectAPI, callTaskDetailAPI, callTaskRegistAPI } from "../../apis/ProjectAPICalls";
 import { useNavigate, useParams } from "react-router-dom";
 import { getMemberId } from "../../utils/TokenUtils";
+import { toast } from "react-toastify";
+
+
 
 
 function TaskRegist() {
+
+    // 새로고침시 사용되는 param 값
+    const code = localStorage.getItem('code');
+    localStorage.removeItem('code');
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { project, post } = useSelector(state => state.projectReducer);
     const { projCode } = useParams();
-    const [ stage, setStage ] = useState('');
-    const [ type, setType ] = useState('');
+    // const [ stage, setStage ] = useState("todo");
+    // const [ type, setType ] = useState('plan');
+    // const initialFormState = {
+    //     taskName: "",
+    //     taskNotice: "",
+    //     startDate: "",
+    //     endDate: "",
+    //     type: "plan",
+    //     stage: "todo",
+    //     project: {},
+    //   };
     const [ form, setForm ] = useState({
         taskName : "",
         taskNotice : "",
@@ -21,7 +37,8 @@ function TaskRegist() {
         type : "",
         stage : "",
         project : {},
-    })
+    });
+
 
     let endDate = '';
 
@@ -33,20 +50,25 @@ function TaskRegist() {
     },[]);
 
 
-
     useEffect(()=>{
 
         if(project){
             endDate = project.endDate.substring(10,0);
         }
 
-        setForm({ project : project });
+        setForm({ 
+            type : "plan",
+            stage : "todo",
+            project : project 
+        });
         
-        console.log(endDate);
+        // console.log(endDate);
 
     },[project]);
 
+
     useEffect(() => {
+
         if(post?.status === 200){
             alert(post.message);
             navigate(`/task/${form.project.projCode}`);
@@ -57,10 +79,10 @@ function TaskRegist() {
 
     const onChangeHandler = (e) => {
 
-        setForm({
-            ...form,
+        setForm((prevForm) => ({
+            ...prevForm,
             [e.target.name] : e.target.value,
-        });
+        }));
 
         console.log(form);
     }
@@ -68,7 +90,28 @@ function TaskRegist() {
 
     const onClickHandler = () => {
 
-        dispatch(callTaskRegistAPI(form));
+        if(
+            !form.taskName || 
+            !form.taskNotice || 
+            !form.startDate || 
+            !form.type || 
+            !form.stage || 
+            !form.project
+            ){
+                toast.error('정보를 모두 입력해주세요.', {
+                    position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+                    autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+                    hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+                    progressStyle: {
+                      backgroundColor: '#ff000074', // 프로그레스 바 배경색
+                      height: '5px', // 프로그레스 바 
+                    },
+                  });
+
+                return;
+            } 
+            dispatch(callTaskRegistAPI(form));
+
     };
 
 

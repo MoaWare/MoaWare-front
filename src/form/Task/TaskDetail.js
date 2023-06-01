@@ -19,15 +19,18 @@ function TaskDetail() {
     const [ stage, setStage ] = useState('');
     const [ type, setType ] = useState('');
 
-
-    useEffect(
-        ()=>{
-            dispatch(callTaskDetailAPI(taskCode));
-        },[]
-    );
+    // 이전 페이지에서 코드를 저장
+    localStorage.setItem('code', taskCode);
 
 
-    
+
+    useEffect(()=>{
+        
+      dispatch(callTaskDetailAPI(taskCode));
+
+    },[]);
+
+
     
     useEffect(()=>{
 
@@ -37,7 +40,8 @@ function TaskDetail() {
 
 
     useEffect(() => {   
-      
+
+        /* 업무 stage, type 에 따라 보여지는 상태 변경 */
         if(task){
           switch (task.stage) {
             case 'todo':
@@ -81,10 +85,12 @@ function TaskDetail() {
 
 
       useEffect(()=>{
+
         if(del?.status === 200){
           alert(del.message);
           navigate(`/task/${projCode}`);
         }
+
       },[del]);
 
 
@@ -93,6 +99,7 @@ function TaskDetail() {
         if(window.confirm(`'${task?.taskName}' 업무를 삭제하시겠습니까?`)) {
           dispatch(callTaskDeleteAPI(task?.taskCode));
         }
+
       };
 
       const updateClick = () => {

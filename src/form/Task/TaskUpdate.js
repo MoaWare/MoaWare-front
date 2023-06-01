@@ -11,6 +11,10 @@ import ReviewList from "../../pages/review/project/ReviewList";
 
 function TaskUpdate() {
 
+    // 새로고침시 사용되는 param 값
+    const code = localStorage.getItem('code');
+    localStorage.removeItem('code');
+        
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { taskCode } = useParams();
@@ -33,17 +37,16 @@ function TaskUpdate() {
             
 
     useEffect(()=>{
-        
-      dispatch(callTaskDetailAPI(taskCode));
-      console.log("task------------------------",task);
-    
+            
+        dispatch(callTaskDetailAPI(taskCode));
+
     },[]);
 
 
     
     useEffect(()=>{
 
-      dispatch(callReviewsAPI(taskCode));
+      dispatch(callReviewsAPI({taskCode}));
 
     },[]);
 
@@ -51,12 +54,10 @@ function TaskUpdate() {
     useEffect(()=>{
         
         if(task){
-
           endDate = task.project.endDate.substring(10,0);
-          console.log("endDate ------------------------------", endDate);
-
-          setForm((init) => ({
-              ...init,
+        //   console.log("endDate ------------------------------", endDate);
+          setForm((prevForm) => ({
+              ...prevForm,
               project: task.project,
               taskCode: task.taskCode,
               taskName: task.taskName,
@@ -67,21 +68,19 @@ function TaskUpdate() {
               stage: task.stage,
             }));
           }
-        console.log("form ------------------------------",form);
+        // console.log("form ------------------------------",form);
 
-    },[  ,task]);
+    },[ ]);
 
 
     useEffect(() => {
+
         if(put?.status === 200){
             alert(put.message);
             navigate(`/task/${form?.project?.projCode}`);
         }   
+
     },[put]);
-
-
-
-
 
 
     const onChangeHandler = (e) => {
@@ -107,7 +106,7 @@ function TaskUpdate() {
 
 
 
-    return  reviews && (
+    return  task && (
         <div className={TaskCSS.wrapper}>
             <div className={TaskCSS.wrap}>
                 <div className={TaskCSS.mainTitle}>

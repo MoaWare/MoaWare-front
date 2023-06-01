@@ -19,16 +19,16 @@ function ReviewList({ task, reviews }){
       });
     const [ isSwitchOn, setSwitchOn ] = useState(false);
 
-    console.log("task" , task);
-    console.log("reviews" , reviews);
-    console.log("reviews" , review);
+    // console.log("task" , task);
+    // console.log("reviews" , reviews);
+    // console.log("reviews" , review);
     console.log("taskCode" , taskCode);
     
     useEffect(()=> {
       if(isSwitchOn){
-        dispatch(callReviewsAPI({taskCode}));
+        dispatch(callReviewsAPI(taskCode));
         setSwitchOn(false);
-        console.log("isSwitchOn===========================",isSwitchOn);
+        // console.log("isSwitchOn===========================",isSwitchOn);
       }
     },[isSwitchOn]);
  
@@ -40,7 +40,7 @@ function ReviewList({ task, reviews }){
             [e.target.name] : e.target.value,
             }
         ));
-        console.log(review);
+        // console.log(review);
     }
 
     
@@ -50,33 +50,35 @@ function ReviewList({ task, reviews }){
       try{
         
         await dispatch(callReviewsRegistAPI(review));
-        dispatch(callReviewsAPI({taskCode}));
+                console.log('여기에서 에러가 나나요?');
+        dispatch(callReviewsAPI(review?.task?.taskCode));
+                console.log('여기에서 에러가 나나요?');
 
         setReview({
           content: '', 
           task: task,
         });
 
-        console.log(review);
+        // console.log(review);
 
         toast.success('댓글 등록 ', {
-          position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
-          autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
-          hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+          position: toast.POSITION.TOP_CENTER, // 토스트 위치 
+          autoClose: 2000, 
+          hideProgressBar: false, 
         });
 
       } catch (error) {
         
         toast.error('댓글 등록 오류 '+ error, {
-          position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
-          autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
-          hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+          position: toast.POSITION.TOP_CENTER, 
+          autoClose: 2000, 
+          hideProgressBar: false, 
           progressStyle: {
-            backgroundColor: '#ff000074', // 프로그레스 바 배경색
-            height: '5px', // 프로그레스 바 
+            backgroundColor: '#ff000074', 
+            height: '5px', 
           },
         });
-        console.log(error);
+        // console.log(error);
       }
 
     }
@@ -84,7 +86,7 @@ function ReviewList({ task, reviews }){
 
   
 
-    return (
+    return reviews && (
         <div className={TaskCSS.RightDiv}>
           <div className={TaskCSS.reviewList}>{reviews?.reviewCode}
            { 

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import TaskCSS from "../../../form/Task/Task.module.css";
 import { getMemberId } from "../../../utils/TokenUtils";
 import moment from "moment";
-import { callReviewUpdateAPI, callReviewsAPI } from "../../../apis/ReviewAPICalls";
+import { callReviewUpdateAPI } from "../../../apis/ReviewAPICalls";
 import { useEffect, useState } from "react";
 import { BsFillArrowUpCircleFill, BsPersonCircle } from "react-icons/bs";
 import { toast } from "react-toastify";
@@ -25,8 +25,8 @@ function ReviewItem({ review, setSwitchOn }){
     const [ modifyMode, setModifyMode ] = useState(false);
 
 
-    console.log("review?.modifyTime", review?.modifyDate );
-    console.log("form", form);
+    // console.log("review?.modifyTime", review?.modifyDate );
+    // console.log("form", form);
 
     useEffect(()=>{
         if(review){
@@ -66,7 +66,6 @@ function ReviewItem({ review, setSwitchOn }){
             console.log("onChangeHandler form", form);
 
             await dispatch(callReviewUpdateAPI({form}));
-            // dispatch(callReviewsAPI(review?.task?.taskCode));
     
             // setForm({
             //   content: '', 
@@ -131,7 +130,8 @@ function ReviewItem({ review, setSwitchOn }){
                         className={TaskCSS.textareaItem} 
                         name="content" 
                         value={form?.content}
-                        onChange={onChangeHandler}/> 
+                        onChange={onChangeHandler}
+                    /> 
                     <BsFillArrowUpCircleFill className={TaskCSS.textareaBtn}  onClick={onReviewSubmit}/>
                     </div>}
                 { !modifyMode && 
