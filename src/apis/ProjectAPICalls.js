@@ -252,23 +252,6 @@ export const callProjectProgressListAPI = ({ currentPage = 1 }) => {
 
 
 
-export const callDeptListAPI = () => {
-    const requestURL = `${PRE_URL}/dept`
-    return async (dispatch, getState) => {
-
-        const result = await fetch(requestURL, {
-            method : 'GET',
-            headers : {
-                "Content-Type" : "application/json",
-            }
-        }).then(res => res.json());
-
-        if(result.status === 200){
-            console.log("[ProjectAPICalls] callDeptListAPI result : ", result);
-            dispatch(getDeptlist(result));
-        }
-    }
-}
 
 
 export const callDeptEmpListAPI = ({ deptCode }) => {

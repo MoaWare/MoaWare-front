@@ -150,7 +150,7 @@ function TaskDetail() {
                             </div>
                         </div>
                     </div>
-                  <ReviewList task={task} reviews={reviews} /> 
+                <ReviewList task={task} reviews={reviews} /> 
             </div>
         </div>
     </div>

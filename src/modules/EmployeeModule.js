@@ -13,10 +13,11 @@ const GET_HEADER_NAME = 'emp/GET_HEADER_NAME';
 const GET_EMPLOYEES = 'emp/GET_EMPLOYEES';
 const GET_EMPLOYEE = 'emp/GET_EMPLOYEE';
 
+const GET_DEPTLIST = 'emp/GET_DEPTLIST';
 
 
 
-export const { emp : { postLogin,resetEmp, postFindPwd, postFindId, getHeaderName, getEmployees, getEmployee  }} = createActions({
+export const { emp : { postLogin,resetEmp, postFindPwd, postFindId, getHeaderName, getEmployees, getEmployee, getDeptlist }} = createActions({
     [POST_LOGIN] : res => res,
     [RESET_EMP] : () => {},
     [POST_FIND_PWD] : res => res,
@@ -24,7 +25,9 @@ export const { emp : { postLogin,resetEmp, postFindPwd, postFindId, getHeaderNam
     [GET_HEADER_NAME] : res => res.data,
     
     [GET_EMPLOYEES] : res => res.data,
-    [GET_EMPLOYEE] : res => res.data
+    [GET_EMPLOYEE] : res => res.data,
+
+    [GET_DEPTLIST] : res => res.data,
 
 })
 
@@ -39,6 +42,7 @@ const employeeReducer = handleActions({
     [GET_EMPLOYEES] : (state, { payload }) => payload ,
     [GET_EMPLOYEE] : (state, { payload }) => ({...state, detail : payload }),
 
+    [GET_DEPTLIST] : (state, {payload}) => ({ depts : payload }),
 
     
 }, initialState)
