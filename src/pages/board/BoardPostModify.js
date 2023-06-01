@@ -25,7 +25,7 @@ function BoardPostModify() {
     useEffect(
         () => {
             if(modify?.status === 200) {
-                alert('상품 수정이 완료 되었습니다.');
+                alert('게시물 수정이 완료 되었습니다.');
                 navigate('/boardPosts', { replace : true });
             }
         },
@@ -40,31 +40,31 @@ function BoardPostModify() {
         });
     }
 
-
-    /* 카테고리  변경될 때 */
-    const onChangePostCategoryHandler = (e) => {
-        setForm({
-            ...form,
-            postCategory : { postCategory : e.target.value }
-        });
-    }
-
-
     /* 수정 모드 변경 이벤트 */
     const onClickModifyModeHandler = () => {
         setModifyMode(true);
         setForm({ ...detail });
     }
 
+
+    /* 게시판 (코드별) 분류가 변경될 때 */
+    const onChangeBoardCodeHandler = (e) => {
+        setForm({
+            ...form,
+            board : { boardCode : e.target.value }
+        });
+    }
+
+
+    
     /* 게시물 수정 저장 버튼 클릭 이벤트 */
     const onClickBoardPostUpdateHandler = () => {
 
         const formData = new FormData();
-
         formData.append("postCode", form.postCode);
-        formData.append("postCategory", form.postCategory);
+        formData.append("board.boardCode", form.board.boardCode);
         formData.append("postTitle", form.postTitle);
-        formData.append("modifyDate", form.modifyDate);
+        formData.append("status", form.status);
         formData.append("postContent", form.postContent);
         // formData.append("productDescription", form.productDescription);
         // formData.append("category.categoryCode", form.category.categoryCode);
@@ -73,9 +73,9 @@ function BoardPostModify() {
         dispatch(callBoardPostUpdateAPI(formData));
     }
 
-    const inputStyle = !modifyMode ? { backgroundColor : 'gray'} : null;
-    const checkValue = !modifyMode ? detail.postCategory?.postCategory : form.postCategory?.postCategory;
-
+    const inputStyle = !modifyMode ? { backgroundColor : 'lightgrey'} : null;
+    const checkValue = !modifyMode ? detail.board?.boardCode : form.board?.boardCode;
+    // 모디파일모드? 있을 시에 소스코드 진행/ 디테일? 있을 시에 소스코드 진행 
 
 
     const onClickBackHandler = () => {
@@ -112,13 +112,14 @@ function BoardPostModify() {
                         <tbody>
                        
                             <tr>
-                                <td><label>카테고리: </label></td>
+                                <td><label>게시판 분류: </label></td>
                                 <td>
                                     <label>
+                                        
                                         <input 
                                             type="radio" 
-                                            name="postCategory" 
-                                            onChange={ onChangePostCategoryHandler } 
+                                            name="boardCode" 
+                                            onChange={ onChangeBoardCodeHandler } 
                                             value={1}
                                             readOnly={ !modifyMode }
                                             checked={ checkValue == 1 }
@@ -127,25 +128,58 @@ function BoardPostModify() {
                                     <label>
                                         <input 
                                             type="radio" 
-                                            name="postCategory" 
-                                            onChange={ onChangePostCategoryHandler } 
+                                            name="boardCode" 
+                                            onChange={ onChangeBoardCodeHandler } 
                                             value={2}
                                             readOnly={ !modifyMode }
                                             checked={ checkValue == 2 }
-                                        /> 자유 게시판
+                                        /> 자유게시판
                                     </label> &nbsp;
                                     <label>
                                         <input 
                                             type="radio" 
-                                            name="postCategory" 
-                                            onChange={ onChangePostCategoryHandler } 
+                                            name="boardCode" 
+                                            onChange={ onChangeBoardCodeHandler } 
                                             value={3}
                                             readOnly={ !modifyMode }
                                             checked={ checkValue == 3 }
-                                        /> 부서&직급 게시판
+                                        /> 부서&직급게시판
+                                    </label> &nbsp;
+                                    <label>
+                                        <input 
+                                            type="radio" 
+                                            name="boardCode" 
+                                            onChange={ onChangeBoardCodeHandler } 
+                                            value={4}
+                                            readOnly={ !modifyMode }
+                                            checked={ checkValue == 4 }
+                                        /> 마이게시판
+                                    </label> &nbsp;
+                                    <label>
+                                        <input 
+                                            type="radio" 
+                                            name="boardCode" 
+                                            onChange={ onChangeBoardCodeHandler } 
+                                            value={5}
+                                            readOnly={ !modifyMode }
+                                            checked={ checkValue == 5 }
+                                        /> FAQ게시판
                                     </label>
                                 </td>
-                            </tr>   
+                            </tr>
+                            <td><label>게시글 번호: </label></td>
+                                <td>
+                                    <input 
+                                        name='postCode'
+                                        placeholder='게시글 번호'
+                                        type='number'
+                                        className={ CSS.title }
+                                        onChange={ onChangeHandler }
+                                        value={ !modifyMode ? detail.postCode : detail.postCode }
+                                        readOnly={ !modifyMode }
+                                        style={ inputStyle }
+                                    />
+                                </td>   
                             <tr>
                                 <td><label>제목: </label></td>
                                 <td>
@@ -154,14 +188,14 @@ function BoardPostModify() {
                                         placeholder='제목'
                                         className={ CSS.title }
                                         onChange={ onChangeHandler }
-                                        value={ !modifyMode ? detail.productPrice : form.productPrice }
+                                        value={ !modifyMode ? detail.postTitle : form.postTitle }
                                         readOnly={ !modifyMode }
                                         style={ inputStyle }
                                     />
                                 </td>
                             </tr>    
                             <tr>
-                                <td><label>활성화 여부: </label></td>
+                                <td><label>노출 여부: </label></td>
                                 <td>
                                     <label>
                                         <input 
@@ -186,21 +220,7 @@ function BoardPostModify() {
                                 </td>
                             </tr>    
                             
-                            <tr>
-                                <td><label>수정일: </label></td>
-                                <td>
-                                <input 
-                                        placeholder='수정일'
-                                        type='date'
-                                        name='modifyDate'
-                                        onChange={ onChangeHandler }
-                                        className={ CSS.date }
-                                        value={ !modifyMode ? detail.modifyDate : form.modifyDate }
-                                        readOnly={ !modifyMode }
-                                        style={ inputStyle }
-                                    />
-                                </td>
-                            </tr> 
+                        
                             <tr>
                                 <td><label>내용</label></td>
                                 <td>

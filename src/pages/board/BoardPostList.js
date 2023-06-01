@@ -1,46 +1,87 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callBoardpostBoardsListAPI, callBoardPostListAPI } from '../../apis/BoardPostAPICalls';
+import { callBoardPostDeleteAPI, callBoardpostBoardsListAPI, callBoardPostListAPI } from '../../apis/BoardPostAPICalls';
 import PagingBar from "../../components/common/PagingBar";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import CSS from "./BoardPostList.module.css";
 
 function BoardPostList() {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const boardPosts = useSelector(state => state.boardPostReducer);
-    const pageInfo = boardPosts.pageInfo;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const boardPosts = useSelector(state => state.boardPostReducer);
+  const pageInfo = boardPosts.pageInfo;
+
+  /* 게시판 코드별 요청시 사용할 값 */
+  const { boardCode } = useParams();
+  console.log("boardCode : ", boardCode);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  useEffect(() => {
+    if (boardCode) {
+      /* 게시판 코드별 게시판에 대한 요청 */
+      dispatch(callBoardpostBoardsListAPI({ boardCode, currentPage }));
+    } else {
+      /* 모든 게시물 대한 요청 */
+      dispatch(callBoardPostListAPI({ currentPage }));
+    }
+  }, [boardCode, currentPage]);
+
+  //테이블 클릭시 상세 및 수정 페이지로 라우팅
+  const onClickTableTr = (postCode) => {
+    navigate(`/boardPosts/${postCode}`);
+  };
 
 
-    
-
-/* 게시판 코드별 요청시 사용할 값 */
-    const { boardCode } = useParams();
-    console.log("boardCode : ", boardCode);
 
 
 
-    const [currentPage, setCurrentPage] = useState(1);
-    useEffect(
-        () => {
-            if (boardCode) {
-                /* 게시판 코드별 게시판에 대한 요청 */
-                dispatch(callBoardpostBoardsListAPI({ boardCode, currentPage }));
-            } else {
-                /* 모든 게시물 대한 요청 */
-                dispatch(callBoardPostListAPI({ currentPage }));
-            }
-        },
-        [boardCode, currentPage]
-    );
 
 
-//테이블 클릭시 상세 및 수정 페이지로 라우팅
-    const onClickTableTr = (postCode) => {
-        navigate(`/boardPosts/${postCode}`);
 
-    };
 
+
+
+
+
+
+
+
+
+  // 삭제기능------------------------
+  const [selectedPosts, setSelectedPosts] = useState([]);
+
+  const handleCheckboxClick = (postCode) => {
+    setSelectedPosts((prevSelectedPosts) => {
+      if (prevSelectedPosts.includes(postCode)) {
+        return prevSelectedPosts.filter((code) => code !== postCode);
+      } else {
+        return [...prevSelectedPosts, postCode];
+      }
+    });
+  };
+
+
+
+  const onClickDelete = () => {
+    if (selectedPosts.length === 0) {
+      return;
+    }
+
+    const confirmed = window.confirm("선택한 게시물을 삭제하시겠습니까?");
+    if (confirmed) {
+      Promise.all(
+        selectedPosts.map((postCode) =>
+          dispatch(callBoardPostDeleteAPI(postCode))
+        )
+      )
+        .then(() => {
+          navigate('/boardPosts');
+        })
+        .catch((error) => {
+          console.error('Failed to delete the posts:', error);
+        });
+    }
+  };
     return (
         <>
 
@@ -73,9 +114,20 @@ function BoardPostList() {
                                     key={post.postCode}
                                     onClick={() => onClickTableTr(post.postCode)}
                                 >
+                                    {/* 
                                     <td>
                                         <input type="checkbox" id="checkAll" onClick={(e) => e.stopPropagation()} />
-                                    </td>
+                                    </td> */}
+                                        <td>
+                                            <input
+                                            type="checkbox"
+                                            checked={selectedPosts.includes(post.postCode)}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleCheckboxClick(post.postCode);
+                                            }}
+                                            />
+                                        </td>
                                     <td>{post.postCode}</td>
                                     <td>{post.postCategory}</td>
                                     <td>{post.postTitle}</td>
@@ -88,9 +140,9 @@ function BoardPostList() {
                                 ))}
                         </tbody>
                     </table>
-                    <div className={CSS.content}>
-                                    <button className={CSS.deletepost}>삭제</button>
-                                    </div>
+                        <button className={CSS.deletepost} onClick={onClickDelete}>
+                            삭제
+                        </button>
             <div>
                 {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
             </div>

@@ -11,19 +11,13 @@ function ProjDetailTitle({ project, progress }){
     /* 디데이 계산 */
     const dday = Math.floor((new Date() - new Date(project?.endDate)) / (1000*60*60*24)) || 0;
     console.log(dday);
-
-    
-    const goBack = () => {
-        navigate(-1); 
-    }
-
     console.log(project);
 
     return(
         <div className={ProjCSS.topDiv}>
             <div className={ProjCSS.titleTop}>
                 <div className={ProjCSS.titleTopLeft}>
-                    <button onClick={goBack} className={ProjCSS.beforeBtn}>
+                    <button onClick={ () => navigate(-1) } className={ProjCSS.beforeBtn}>
                         <img src="/icon/before.png" alt="before"/>
                         </button>
                     <span>{project && project.projName}</span>

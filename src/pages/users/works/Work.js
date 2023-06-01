@@ -23,7 +23,7 @@ function Work() {
     const pageInfo = myWork && myWork ? myWork.pageInfo : null;
     // 나중에 수정
     
-    console.log('myWork :', myWork );
+    console.log('myWork :', insert );
     
     const today = new Date();
     
