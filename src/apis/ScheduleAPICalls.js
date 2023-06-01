@@ -81,6 +81,8 @@ export const callScheduleInsertAPI = ( form ) => {
 /* 일정 삭제 */
 export const callScheduleDeleteAPI = ({ schCode }) => {
 
+    console.log('Delete schCode', schCode)
+
     const requestURL = `${PRE_URL}/calendar/${schCode}`;
 
     return async (dispatch, getState) => {

@@ -23,7 +23,7 @@ function SchInsertModal({ setSchInsertModal }) {
 
   const onChangeHandler = (e) => {
     
-    console.log("스케쥴 타입 : ", e.target.name === 'schCategoryCode');
+    console.log("스케줄 타입 : ", e.target.name === 'schCategoryCode');
 
     if(e.target.name === 'schCategoryCode') {
       setForm({
@@ -44,6 +44,7 @@ function SchInsertModal({ setSchInsertModal }) {
       dispatch(callScheduleInsertAPI(form));
       console.log('인서트대라얍~', insert)
     };
+    
     console.log('form', form);
 
   /* 생성 후 일정관리로 이동 */
