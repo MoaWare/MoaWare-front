@@ -7,7 +7,7 @@ const PRE_URL = `http://${SERVER_IP}:${SERVER_PORT}/review`;
 
 
 /* 댓글 조회 */
-export const callReviewsAPI = (taskCode) => {
+export const callReviewsAPI = ({taskCode}) => {
 
     const requestURL = `${PRE_URL}/${taskCode}`;
   

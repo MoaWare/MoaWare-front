@@ -31,7 +31,7 @@ function TaskDetail() {
     
     useEffect(()=>{
 
-      dispatch(callReviewsAPI(taskCode));
+      dispatch(callReviewsAPI({taskCode}));
 
     },[]);
 

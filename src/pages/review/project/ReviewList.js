@@ -17,6 +17,7 @@ function ReviewList({ task, reviews }){
         content : '',
         task : task,
       });
+    const [ isSwitchOn, setSwitchOn ] = useState(false);
 
     console.log("task" , task);
     console.log("reviews" , reviews);
@@ -24,10 +25,13 @@ function ReviewList({ task, reviews }){
     console.log("taskCode" , taskCode);
     
     useEffect(()=> {
-      dispatch(callReviewsAPI(taskCode));
-
-    },[ , put]);
-
+      if(isSwitchOn){
+        dispatch(callReviewsAPI({taskCode}));
+        setSwitchOn(false);
+        console.log("isSwitchOn===========================",isSwitchOn);
+      }
+    },[isSwitchOn]);
+ 
 
     const onReviewChangeHandler = (e) => {
 
@@ -46,7 +50,7 @@ function ReviewList({ task, reviews }){
       try{
         
         await dispatch(callReviewsRegistAPI(review));
-        // dispatch(callReviewsAPI(taskCode));
+        dispatch(callReviewsAPI({taskCode}));
 
         setReview({
           content: '', 
@@ -86,7 +90,7 @@ function ReviewList({ task, reviews }){
            { 
               reviews 
                 && Array.isArray(reviews) 
-                && reviews.map(review => <ReviewItem key={ reviews?.reviewCode } review={review} handler={handleSubmitContent}/>)
+                && reviews.map(review => <ReviewItem key={ reviews?.reviewCode } review={review} setSwitchOn={setSwitchOn}/>)
            }
           </div> 
           <div className={TaskCSS.reviewWrite}>

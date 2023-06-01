@@ -243,7 +243,7 @@
 
 .reviewList{
     width: 40vw;
-    height: 40vh;
+    height: 42vh;
     margin: 3vh 0vw;
     display: flex;
     flex-direction: column;
@@ -333,7 +333,7 @@
 }
 
 .listLow{
-    border: yellowgreen solid 2px;
+    /* border: yellowgreen solid 2px; */
     width: 30vw;
     height: 5.5vh;
     margin: 0.4vh 0vw;
@@ -352,10 +352,48 @@
     font-size: smaller;
 }
 
+.textareaItem{
+    width: 30vw;
+    height: 5.5vh;
+    margin: 0.4vh 0vw;
+    color: #333;
+    overflow-y: auto;
+    z-index: 20;
+    /* display: block; */
+    overflow: hidden;
+    position: relative;
+    /* border: none; */
+    background-color: transparent;
+    line-height: 1.25;
+    letter-spacing: -0.5px;
+    color: #333;
+    resize: none;
+    font-size: smaller;
+    border: lightgray solid 1px;
+}
+
+.textareaBtn {
+    font-size: 2.5vh;
+    color: #254f70;
+    /* width: 2.5vw;
+    height: 2.7vh;
+    color: white;
+    border: none;
+    border-radius: 5px; */
+}
+
+.textareaDiv{
+    display: flex;
+    flex-direction: row;
+    /* margin-bottom: -1vh; */
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
 .reviewWrite{
     width: 37vw;
     height: 13vh;
-    margin-bottom: 3vh;
+    margin-bottom: 1vh;
     display: flex;
     align-items: flex-end;
     flex-direction: column;

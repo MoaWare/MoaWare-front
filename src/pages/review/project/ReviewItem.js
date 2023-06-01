@@ -2,35 +2,41 @@ import { useDispatch, useSelector } from "react-redux";
 import TaskCSS from "../../../form/Task/Task.module.css";
 import { getMemberId } from "../../../utils/TokenUtils";
 import moment from "moment";
-import { callReviewUpdateAPI, callReviewsAPI, callReviewsRegistAPI } from "../../../apis/ReviewAPICalls";
+import { callReviewUpdateAPI, callReviewsAPI } from "../../../apis/ReviewAPICalls";
 import { useEffect, useState } from "react";
-import { BsPersonCircle } from "react-icons/bs";
+import { BsFillArrowUpCircleFill, BsPersonCircle } from "react-icons/bs";
 import { toast } from "react-toastify";
 
 
-function ReviewItem({review}){
+function ReviewItem({ review, setSwitchOn }){
 
 
     const dispatch = useDispatch();
-    const data = useSelector(state => state.reviewReducer);
-
-    const date = moment(review.date || review.modifyTime).format("YYYY.MM.DD HH:mm:ss");
+    // const data = useSelector(state => state.reviewReducer);
+    const date = review && moment(review?.modifyDate || review?.date ).format("YYYY.MM.DD HH:mm:ss");
+    // const { put } = useSelector(state => state.reviewReducer);
     const [ form, setForm ] = useState({
         content : "",
-        task : {}
+        task : {},
+        emp : {}
     });
+
+    /* 수정모드 전환 */
     const [ modifyMode, setModifyMode ] = useState(false);
 
 
-    console.log("review", review);
+    console.log("review?.modifyTime", review?.modifyDate );
     console.log("form", form);
 
     useEffect(()=>{
         if(review){
             setForm({
-                content : review?.content,
-                task : review && review.task
-            })}
+                content : review.content,
+                task : review.task,
+                emp : review.emp,
+                reviewCode : review.reviewCode
+            });
+        }
     },[]);
 
 
@@ -60,17 +66,20 @@ function ReviewItem({review}){
             console.log("onChangeHandler form", form);
 
             await dispatch(callReviewUpdateAPI({form}));
-            // dispatch(callReviewsAPI(taskCode));
+            // dispatch(callReviewsAPI(review?.task?.taskCode));
     
             // setForm({
             //   content: '', 
             //   task: review && review.task
             // });
-            setModifyMode(false);
-    
+
+            // if(put?.status === 200){
+                setModifyMode(false);
+                setSwitchOn(modifyMode);
+            // }
             console.log(review);
     
-            toast.success('댓글 등록 ', {
+            toast.success('댓글 수정 ', {
               position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
               autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
               hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
@@ -78,7 +87,7 @@ function ReviewItem({review}){
     
           } catch (error) {
             
-            toast.error('댓글 등록 오류 '+ error, {
+            toast.error('댓글 수정 오류 '+ error, {
               position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
               autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
               hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
@@ -117,14 +126,14 @@ function ReviewItem({review}){
                         : null )}
                 </div>
                 { modifyMode && 
-                    <>
+                    <div className={TaskCSS.textareaDiv} >
                     <textarea 
-                        className={TaskCSS.listLow} 
+                        className={TaskCSS.textareaItem} 
                         name="content" 
                         value={form?.content}
                         onChange={onChangeHandler}/> 
-                    <button onClick={onReviewSubmit}>변경</button>
-                    </>}
+                    <BsFillArrowUpCircleFill className={TaskCSS.textareaBtn}  onClick={onReviewSubmit}/>
+                    </div>}
                 { !modifyMode && 
                     <div className={TaskCSS.listLow}>
                         {review.content} 
