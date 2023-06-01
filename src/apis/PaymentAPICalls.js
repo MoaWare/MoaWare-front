@@ -1,4 +1,4 @@
-import { getPayment, getPaymentComplete, getPaymentRefuse, getPaymentSign, getPaymentStorage, getPaymentdetail, getPaymentform, getPaymenting, getPaymentwait, postPayment, postPaymentSign, putPaymentSign } from "../modules/PayMentModule";
+import { getPayment, getPaymentComplete, getPaymentRefuse, getPaymentSign, getPaymentStorage, getPaymentdetail, getPaymentform, getPaymenting, getPaymentwait, postPayment, postPaymentSign, putPaymentSign, putPaymentUpdate } from "../modules/PayMentModule";
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${ process.env.REACT_APP_RESTAPI_SERVER_PORT}`
@@ -117,6 +117,33 @@ export const CallPaymentingDetailAPI = ({payCode}) => {
         if ( result.status === 200 ) {
             console.log ("[PaymentAPICalls] CallPaymentingDetailAPI result : ", result);
             dispatch(getPaymentdetail(result));
+        }
+    };
+
+}
+
+
+
+/* 결재 문서 결재 처리 조회 */
+export const CallPaymentUpdateAPI = ({form}) => {
+
+    const requestURL = `${PRE_URL}/updateSign`;
+
+    return async( dispatch, getState ) => {
+        
+        const result = await fetch( requestURL, {
+            method: 'PUT',
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            },
+            body : JSON.stringify(form)
+        }).then( res => res.json());
+
+        console.log( result);
+        if ( result.status === 200 ) {
+            console.log ("[PaymentAPICalls] CallPaymentUpdateAPI result : ", result);
+            dispatch(putPaymentUpdate(result));
         }
     };
 
