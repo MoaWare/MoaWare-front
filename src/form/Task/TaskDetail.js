@@ -13,8 +13,7 @@ function TaskDetail() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { taskCode } = useParams();
-    const { projCode } = useParams();
+    const { projCode, taskCode } = useParams();
     const { reviews } = useSelector((state) => state.reviewReducer );
     const { task , del } = useSelector(state => state.projectReducer);
     const [ stage, setStage ] = useState('');
