@@ -13,7 +13,6 @@ import SchInsertModal from '../../components/modal/scheduleModal/SchInsertModal'
 function Schedule() {
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { schedules, schedule } = useSelector(state => state.scheduleReducer);
   const [scheduleModal, setScheduleModal] = useState(false);
   const [schInsertModal, setSchInsertModal] = useState(false);

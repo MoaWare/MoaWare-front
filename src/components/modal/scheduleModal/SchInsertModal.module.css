@@ -142,6 +142,7 @@
     background-color: rgba(224, 233, 244, 0.5);
     border: none;
     color: #254F70;
+    font-size: 12px;
     overflow: hidden;
     overflow-y: auto;
     z-index: 20;
