@@ -11,9 +11,7 @@ import ScheduleModal from '../../components/modal/scheduleModal/ScheduleModal';
 import SchInsertModal from '../../components/modal/scheduleModal/SchInsertModal';
 
 function Schedule() {
-
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { schedules, schedule } = useSelector(state => state.scheduleReducer);
   const [scheduleModal, setScheduleModal] = useState(false);
   const [schInsertModal, setSchInsertModal] = useState(false);
@@ -81,7 +79,9 @@ function Schedule() {
 
   return (
     <>
-      { scheduleModal ? <ScheduleModal setScheduleModal={setScheduleModal} schedule={schedule} /> : null }
+      { scheduleModal ? <ScheduleModal 
+        setScheduleModal={setScheduleModal} schedule={schedule} schCode={schedule?.schCode} 
+      /> : null }
       { schInsertModal ? <SchInsertModal setSchInsertModal={setSchInsertModal} /> : null}
       <div className="wrapper">
         <div className="wrap">

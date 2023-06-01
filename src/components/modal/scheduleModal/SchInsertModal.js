@@ -22,6 +22,7 @@ function SchInsertModal({ setSchInsertModal }) {
   })
 
   const onChangeHandler = (e) => {
+    
     console.log("스케쥴 타입 : ", e.target.name === 'schCategoryCode');
 
     if(e.target.name === 'schCategoryCode') {
@@ -30,26 +31,30 @@ function SchInsertModal({ setSchInsertModal }) {
         schType : {
           [e.target.name] : e.target.value
         }
-      
       });
-
     } else {
-
-    setForm({
-        ...form,
-        [e.target.name] : e.target.value
-      
-      });
-
+      setForm({
+          ...form,
+          [e.target.name] : e.target.value
+        });
+      }
     }
-
-  }
     
     const SchInsertClick = () => {
       dispatch(callScheduleInsertAPI(form));
       console.log('인서트대라얍~', insert)
     };
     console.log('form', form);
+
+  /* 생성 후 일정관리로 이동 */
+  useEffect(() => {
+    if(insert?.status === 200) {
+      alert('일정 생성이 완료 되었습니다.');
+      setSchInsertModal(false);
+      window.location.reload(); // 새로고침
+    }
+  }, [insert]
+  );
     
   /* 모달창 나가기 */
   const CancelInsertClick = () => {
@@ -126,7 +131,7 @@ function SchInsertModal({ setSchInsertModal }) {
               className={SchIModalCSS.schMod}
               onClick={ SchInsertClick }
             >
-            저장
+            생성
           </button>
         </div>
       </div>

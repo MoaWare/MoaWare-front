@@ -1,41 +1,47 @@
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import SchModalCSS from './ScheduleModal.module.css';
-import { callScheduleDetailAPI } from '../../../apis/ScheduleAPICalls';
+import { callScheduleDetailAPI, callScheduleDeleteAPI } from '../../../apis/ScheduleAPICalls';
 import { FiX } from 'react-icons/fi';
 import moment from 'moment/moment';
 
-function ScheduleModal({ setScheduleModal }) {
-  
-  const { schCode } = useParams(); // schCode 가져오기
-
-  const { schedule } = useSelector((state) => state.scheduleReducer);
+function ScheduleModal({ setScheduleModal, schCode: modalSchCode }) {
+  const { schCode } = useParams();
+  const { schedule, delsch } = useSelector((state) => state.scheduleReducer);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    callScheduleDetailAPI({ schCode }); // 함수 호출 수정
+    callScheduleDetailAPI({ schCode });
   }, [schCode]);
 
-  /* 모달창 나가기 */
   const CancelEventClick = () => {
     setScheduleModal(false);
   };
 
-  const participantNames = schedule&&schedule.schPrarticipant.map(
-    (item) => item.schMember.empName
-  );
+  const participantNames = schedule && schedule.schPrarticipant.map((item) => item.schMember.empName);
 
-  /* 날짜 시간제외 */
   const formatDate = (dateString) => {
     return moment(dateString).format('YYYY년 MM월 DD일');
   };
+
+  const DeleteEventClick = async () => {
+    await dispatch(callScheduleDeleteAPI(modalSchCode));
+    console.log('삭제좀해줘', delsch);
+  };
+
+  useEffect(() => {
+    if (delsch?.status === 200) {
+      alert('일정이 삭제되었습니다.');
+    }
+  }, [delsch]);
   
   return schedule && (
     <div className={SchModalCSS.modal}>
       <div className={SchModalCSS.wrapper}>
         <div className={SchModalCSS.schCheck}>
           <div className={SchModalCSS.check}>일정 조회</div>
-          <FiX onClick={CancelEventClick} />
+          <FiX onClick={ CancelEventClick } />
         </div>
         <div className={SchModalCSS.schTitle}>
           <div className={SchModalCSS.box}></div>
@@ -54,7 +60,13 @@ function ScheduleModal({ setScheduleModal }) {
         <div className={SchModalCSS.schDetail}>일정 설명</div>
         <div className={SchModalCSS.schCont}>{schedule.schContent}</div>
         <div className={SchModalCSS.schBtn}>
-            <button className={SchModalCSS.schDel}>삭제</button>
+            <button 
+              className={SchModalCSS.schDel}
+              onClick={ DeleteEventClick }
+            >
+            삭제
+            </button>
+            {/* { getMemberId() === task?.author?.empID && (<button onClick={ updateClick }>수정</button>) } */}
             <button className={SchModalCSS.schMod}>수정</button>
         </div>
       </div>
