@@ -38,7 +38,7 @@ function PaymentDetailItem ({payDetail}) {
           </div>
           
           {
-            payDetail && payDetail.paymentMember.map( (pay, index) => (
+            payDetail && payDetail.paymentMember.sort((a, b) => a.payRank - b.payRank).map( (pay, index) => (
             <div className={PayDetailCSS.payDiv} key={pay.payCode}>
               <div className={PayDetailCSS.payTitle}>
                 {index === payDetail.paymentMember.length -1 ? '최종 결재자' : '결재자'}
@@ -103,7 +103,7 @@ function PaymentDetailItem ({payDetail}) {
                 <th>첨부파일</th>
                 <td colSpan="5">
                     { payDetail && payDetail.payFileCategory? 
-                    <a href={payDetail.payFileCategory.file.filePath} className={PayDetailCSS.a}> {payDetail.payFileCategory.file.originalFileName}</a> : 
+                    <a href={payDetail.payFileCategory.file.filePath} className={PayDetailCSS.a} download={payDetail.payFileCategory.file.originalFileName}> {payDetail.payFileCategory.file.originalFileName}</a> : 
                     <div className={PayDetailCSS.a}>첨부파일 없음 </div>
                     }
                 </td>
