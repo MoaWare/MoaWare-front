@@ -5,6 +5,7 @@ import WorkBtn from '../Work/WorkBtn';
 import { callWorkMyListAPI } from '../../apis/WorkAPICalls';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { callMyWorkAPI } from '../../apis/WorkStatusAPICalls';
 
 function Navbar() {
 
@@ -14,7 +15,54 @@ function Navbar() {
   const dispatch = useDispatch();
   const { work } = useSelector(state => state.workReducer);
 
+  const { wDay } = useSelector(state => state.workStatusReducer);
+  const today = new Date();
 
+  const formattedDate = formatDate(today);
+  // const [formattedDate, setFormattedDate] = useState(null);
+
+  function formatDate(date) {
+      const year = date.getFullYear();
+      //월은 더하기 1 .padStart는 ???
+      const month = String(date.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1을 해줌
+      const day = String(date.getDate()).padStart(2, "0");
+
+      return `${year}-${month}-${day}`;
+  }
+
+  useEffect(() => {
+      dispatch(callMyWorkAPI({ workDate : formattedDate }));
+  },[])
+
+  console.log(wDay);
+  useEffect(() => 
+  {
+      if (wDay) {
+          console.log('1번')
+          if (wDay.data.workTime && !wDay.data.quitTime) {
+            const timeString = new Date(wDay.data.workTime);
+            localStorage.setItem('clickTime', timeString);
+            localStorage.setItem('workbtn', true);
+            console.log('2번')
+          } else if(wDay.data.workTime && wDay.data.quitTime) {
+            console.log('3번')
+            localStorage.removeItem('clickTime');
+            localStorage.removeItem('workbtn');
+            return;
+          } else {
+            return;
+          }
+        } else {
+          console.log('5번')
+          const timeString = today;
+          localStorage.setItem('clickTime', timeString);
+          localStorage.setItem('workbtn', true);
+        }
+      //   console.log('6번')
+      //   localStorage.setItem('workbtn', true);
+
+  },[wDay, formattedDate, currentPage])
+  
   useEffect(() => {
 
     if (year2 && month2) {
@@ -30,7 +78,7 @@ function Navbar() {
         }
     }
 
-}, [currentPage]);
+}, [currentPage, formattedDate, wDay]);
 
 
   return (
