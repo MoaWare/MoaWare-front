@@ -51,7 +51,7 @@
     margin: 0 auto;
     display: flex;
     justify-content: space-evenly;
-    border-bottom: 0.5px solid gray;
+    border-bottom: 0.5px solid rgba(182, 189, 198, 0.8);
 }
 
 .tableDiv {
@@ -81,23 +81,25 @@
     height: 2vh;
     line-height: 2vh;
     font-size: 14px;
-    border : 1px solid gray;
+    border : 1px solid rgba(182, 189, 198, 0.8);
     border-bottom: none;
+    padding : 5px 0;
 }
 
 .payName{
     height: 3vh;
     line-height: 3vh;
-    border :1px solid gray;
+    border :1px solid rgba(182, 189, 198, 0.8);
     border-bottom: none;
     font-weight: 700;
+    font-size: 14px;
 }
 
 .paySign{
-    border : 1px solid gray;
+    border : 1px solid rgba(182, 189, 198, 0.8);
     height: 5vh;
     line-height: 5vh;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
       
 }
 
@@ -111,10 +113,10 @@
 }
 
 .tbody td{
-    border: 1px solid gray;
+    border: 1px solid rgba(182, 189, 198, 0.8);
     font-size: 12px;
     height: 3vh;
-    width: 25vw;
+    width: 27vw;
     text-indent: 1rem;
 }
 
@@ -124,7 +126,28 @@
     height: 3vh;
     width: 61vw;
     line-height: 3vh;
+    display: none;
 }
+
+.inputLabel{
+    border: none;
+    font-size: 12px;
+    height: 3vh;
+    width: 61vw;
+    line-height: 3vh;
+    display: block;
+}
+
+.inputLabelSet{
+    border: none;
+    font-size: 12px;
+    height: 3vh;
+    width: 61vw;
+    line-height: 3vh;
+}
+
+
+
 ::-webkit-file-upload-button {
     display: none;
 }
@@ -132,7 +155,7 @@
 .tbody th{
     background-color: rgba(37, 79, 112, 1);
     color: white;
-    border: 1px solid gray;
+    border: 1px solid rgba(182, 189, 198, 0.8);
     font-size: 12px;
     text-align: center;
     width: 8vw;
@@ -195,7 +218,7 @@
     
 }
 .docuDiv td {
-    border: 1px solid gray;
+    border: 1px solid rgba(182, 189, 198, 0.8);
     font-size: 14px;
     height: 3vh;
     width: 25vw;

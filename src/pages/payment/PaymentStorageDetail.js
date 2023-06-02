@@ -1,31 +1,67 @@
-import { useEffect, useRef } from 'react';
-import PayDetailCSS from './PaymentDetail.module.css';
+import { useNavigate, useParams } from 'react-router-dom';
+import PayDetailCSS from './PaymentStorageDetail.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
+import { CallPaymentingDetailAPI } from '../../apis/PaymentAPICalls';
+import PayModal from '../../components/modal/paymentModal/PayModal';
+import PayRefuse from '../../components/modal/paymentModal/PayRefuse';
 import moment from "moment";
 
+function PaymentStorageDetail () {
 
-function PaymentDetailItem ({payDetail}) {
-
+    const { payCode } = useParams();
+    console.log("PaymentDetail payCode : " , payCode);
+    const disPatch = useDispatch();
+    const { payDetail } = useSelector( state => state.paymentReducer);
+    const navigator = useNavigate();
+    const [ isPayModal, setIsPayModal ] = useState(false);
+    const [ isPayRefuse, setIsPayRefuse ] = useState(false);
     const htmlRef = useRef();
 
-    console.log( " PaymentDetailItem 의 pay ", payDetail);
 
+    
+   
+    console.log("PaymentDetail payDetail : 우아라아앙" , payDetail);
+
+    useEffect(
+        ()=>{
+            disPatch(CallPaymentingDetailAPI({payCode}));
+
+        },[]
+    )
     useEffect(() => {
 
-        const targetElement = htmlRef.current.getElementsByTagName('input');
-        if (targetElement) {
-          for (let i = 0; i < targetElement.length; i++) {
-            const valuePattern = /\{(\w+)\}/g;
-            if(targetElement[i].value.match(valuePattern)){
-              targetElement[i].value=""
-            }
+      const targetElement = htmlRef.current.getElementsByTagName('input');
+      if (targetElement) {
+        for (let i = 0; i < targetElement.length; i++) {
+          const valuePattern = /\{(\w+)\}/g;
+          if(targetElement[i].value.match(valuePattern)){
+            targetElement[i].value=""
           }
-  
         }
-      }, [payDetail]
-    );
 
-    return(
-        <>
+      }
+    }, [payDetail]
+  );
+
+      const onCancelHandler = () => {
+        navigator('/pay/storage');
+     }  
+
+
+
+    return (
+       <div className={PayDetailCSS.background}>
+          <div className={PayDetailCSS.titleDiv}>
+            <div className={PayDetailCSS.title}>임시 저장 문서</div> 
+            <button className={PayDetailCSS.button} onClick={onCancelHandler}>결재선</button>
+            <button className={PayDetailCSS.button} onClick={onCancelHandler}>결재요청</button>
+            <button className={PayDetailCSS.button} onClick={onCancelHandler}>임시저장</button>
+            <button className={PayDetailCSS.buttonCancel} onClick={onCancelHandler}>취소</button>
+          </div>
+        {isPayModal? <PayModal setIsPayModal={setIsPayModal}/> : "" }
+        {isPayRefuse? <PayRefuse setIsPayRefuse={setIsPayRefuse}/> : "" }
+       
         <div className={PayDetailCSS.payApproval}>
 
           <div className={PayDetailCSS.payDiv}>
@@ -113,11 +149,11 @@ function PaymentDetailItem ({payDetail}) {
               </tbody>
           </table>
         </div>
-      </>
 
 
-    );
 
+      </div>
+    )
 }
 
-export default PaymentDetailItem;
+export default PaymentStorageDetail;

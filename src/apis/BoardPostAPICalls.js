@@ -1,4 +1,4 @@
-import { getBoardposts, getBoardpost, postBoardpost, deleteBoardpost, putBoardpost } from "../modules/BoardPostModule";
+import { getBoardposts, getBoardpost, postBoardpost, putBoardpostdelete, putBoardpost } from "../modules/BoardPostModule";
 
 /* React App에서 .env를 사용할 때는 REACT_APP 접두어가 필요^^;; */
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -138,10 +138,14 @@ export const callBoardPostUpdateAPI = (formData) => {
 
 
 /* 게시글 삭제 */
-export const callBoardPostDeleteAPI = ( postCode ) => {
+export const callBoardPostDeleteAPI =({ postCode }) => {
 
-    const requestURL = `${PRE_URL}/boardPosts/delete/${postCode}`;
+    const requestURL = `${PRE_URL}/delete/${postCode}`;
   
+    console.log(postCode);
+
+    //-----------------------------
+
     return async (dispatch, getState) => {
   
         const result = await fetch(requestURL, {
@@ -152,10 +156,9 @@ export const callBoardPostDeleteAPI = ( postCode ) => {
         }).then(res => res.json());
   
         if(result?.status === 200){
-            console.log(result);
-            dispatch(deleteBoardpost(result));
-        } else if(result?.status === 400){
-          alert(result.message);
+            console.log("[BoardPostDeleteAPI] callBoardPostDeleteAPI result : ", result);
+            dispatch(putBoardpostdelete(result));
+        
         }
     }
   }

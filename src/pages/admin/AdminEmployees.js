@@ -22,7 +22,6 @@ function AdminEmployees() {
 
     useEffect(
         () => {
-    
         dispatch(callAdminEmpListAPI({ currentPage }));
         },
        [currentPage]
@@ -30,9 +29,7 @@ function AdminEmployees() {
 
 
        const onClickTableTr = (empCode) => {
-
         navigate(`/admin/emp/list/${empCode}`);
-
        };
 
        return (
@@ -70,9 +67,12 @@ function AdminEmployees() {
                         </tr>
                     </thead>
                         <tbody >
-                    
+{/*                     
+                            {employees?.data &&
+                            employees.data.map((empList) => ( */}
+                            
                             {Array.isArray(employees) &&
-                                employees.map((empList) => (
+                                 employees.map((empList) => (
 
                                     <tr 
                                     className={CSS.td}

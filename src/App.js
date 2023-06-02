@@ -54,6 +54,8 @@ import AdminBoardList from "./pages/admin/AdminBoardList";
 import WorkAdmin from "./pages/users/works/WorkAdmin";
 import PaymentDetail from "./pages/payment/PaymentDetail";
 import BoardPostModify from "./pages/board/BoardPostModify";
+import PaymentWaitDetail from "./pages/payment/PaymentWaitDetail";
+import PaymentStorageDetail from "./pages/payment/PaymentStorageDetail";
 
 
 function App() {
@@ -104,6 +106,8 @@ function App() {
             <Route path="storage" element={<PaymentStorageBoard />} />
             <Route path="sign" element={<PaymentSign />} />
             <Route path="payDetail/:payCode" element={ <PaymentDetail/> }/>
+            <Route path="payWaitDetail/:payCode" element={ <PaymentWaitDetail/> }/>
+            <Route path="payStorageDetail/:payCode" element={ <PaymentStorageDetail/> }/>
           </Route>
 
           {/* 일정 관리 */}
@@ -160,9 +164,7 @@ function App() {
         <Route
           path="pwdfind"
           element={
-            <ProtectedRoute loginCheck={false}>
               <LoginPwdFind />
-            </ProtectedRoute>
           } />
 
          {/* 프로젝트 */}

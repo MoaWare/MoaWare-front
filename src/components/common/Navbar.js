@@ -68,33 +68,25 @@ function Navbar() {
   },[])
 
   console.log(wDay);
-  useEffect(() => 
-  {
-      if (wDay) {
-          console.log('1번')
-          if (wDay.data.workTime && !wDay.data.quitTime) {
-            const timeString = new Date(wDay.data.workTime);
-            localStorage.setItem('clickTime', timeString);
-            localStorage.setItem('workbtn', true);
-            console.log('2번')
-          } else if(wDay.data.workTime && wDay.data.quitTime) {
-            console.log('3번')
-            localStorage.removeItem('clickTime');
-            localStorage.removeItem('workbtn');
-            return;
-          } else {
-            return;
-          }
-        } else {
-          console.log('5번')
-          const timeString = today;
-          localStorage.setItem('clickTime', timeString);
-          localStorage.setItem('workbtn', true);
-        }
-      //   console.log('6번')
-      //   localStorage.setItem('workbtn', true);
-
-  },[wDay, formattedDate, currentPage])
+  useEffect(() => {
+    if (wDay && wDay.data) {
+      console.log('1번');
+      if (wDay.data.workTime && !wDay.data.quitTime) {
+        const timeString = new Date(wDay.data.workTime);
+        localStorage.setItem('clickTime', timeString);
+        localStorage.setItem('workbtn', true);
+        console.log('2번');
+      } else if (wDay.data.workTime && wDay.data.quitTime) {
+        console.log('3번');
+        localStorage.removeItem('clickTime');
+        localStorage.removeItem('workbtn');
+      } else {
+        return;
+      }
+    } else {
+      return;
+    }
+  }, [wDay, formattedDate, currentPage]);
   
   useEffect(() => {
 
