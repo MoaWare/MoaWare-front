@@ -8,6 +8,7 @@ import TaskList from "./TaskList";
 
 function ProjDetail() {
 
+
     const dispatch = useDispatch();
     const params = useParams();
     const projCode = params.projCode;
@@ -37,8 +38,8 @@ function ProjDetail() {
     }, []);
 
    
-    console.log("ProjDetail tasks : ", tasks);
-    console.log("ProjDetail project : ", project);
+    // console.log("ProjDetail tasks : ", tasks);
+    // console.log("ProjDetail project : ", project);
 
 
     /* task의 stage에 따라 분류 */
@@ -49,10 +50,10 @@ function ProjDetail() {
             tasksByStage[stage].push(task);
         });
         
-        console.log("tasksByStage : ", tasksByStage);
+        // console.log("tasksByStage : ", tasksByStage);
 
         progress = Math.floor(( tasksByStage.done.length / (tasksByStage.todo.length + tasksByStage.ing.length + tasksByStage.done.length)) * 100 ) ; 
-        console.log("progress", progress);
+        // console.log("progress", progress);
     }
 
         

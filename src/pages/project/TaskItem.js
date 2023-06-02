@@ -13,7 +13,7 @@ function TaskItem({ task }) {
   const [ color , setColor ] = useState('');
   const [ time, setTime ] = useState('');
 
-  console.log("TaskItem task : ", task );
+  // console.log("TaskItem task : ", task );
 
   useEffect(() => {
     if(task){
@@ -21,7 +21,6 @@ function TaskItem({ task }) {
         case 'plan':
           setType('기획');
           setColor('#d7c9fe3c');
-          console.log("여기는 테스크의 콘솔이다 오바");
           break;
         case 'design':
           setType('설계');
