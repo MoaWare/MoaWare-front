@@ -3,7 +3,7 @@ import WorkCSS from './Work.module.css';
 import PagingBar from "../../../components/common/PagingBar";
 import { useDispatch, useSelector } from 'react-redux';
 import { callWorkMyListAPI } from '../../../apis/WorkAPICalls';
-import { callAdminWorkListAPI, inputNameAPI, putWorkStatusModifyAPI } from '../../../apis/AdminWorkAPICalls';
+import { callAdminWorkListAPI, inputNameAPI, inputNameAPI2, putWorkStatusModifyAPI } from '../../../apis/AdminWorkAPICalls';
 import { callWorkstatusAPI } from '../../../apis/WorkStatusAPICalls';
 import { useNavigate } from 'react-router-dom';
 import DateSelect from '../../../components/Work/DateSelect';
@@ -14,6 +14,7 @@ function WorkAdmin({ adminList }) {
     const navigate = useNavigate();
     const { myWork } = useSelector(state => state.workReducer);
     const [selectedDate, setSelectedDate] = useState(null)
+    const [selectedDate2, setSelectedDate2] = useState(null)
     const [year, setYear] = useState(new Date().getFullYear());
     const [month, setMonth] = useState(new Date().getMonth() + 1);
     const [currentPage, setCurrentPage] = useState(1);
@@ -53,6 +54,15 @@ function WorkAdmin({ adminList }) {
         return `${year}-${month}-${day}`;
     }
 
+
+
+    const onChangeDateHandler2 = (e) => {
+        const date2 = e.target.value;
+        setSelectedDate2(date2);
+        console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', e.target.name, e.target.value);
+        console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', date2);
+        // dispatch(callAdminWorkListAPI({ date, currentPage }))
+    }
     const onChangeDateHandler = (e) => {
         const date = e.target.value;
         setSelectedDate(date);
@@ -106,7 +116,12 @@ function WorkAdmin({ adminList }) {
     function handleKeyPress(event) {
         if (event.key === 'Enter') {
             console.log('Entered value:', insertName);
-            dispatch(inputNameAPI({ name : insertName, workDate : selectedDate ? selectedDate : formattedDate, currentPage}))
+            if(selectedDate2 == null){
+                dispatch(inputNameAPI({ name : insertName, workDate : selectedDate ? selectedDate : formattedDate, currentPage}))
+            } else {
+                dispatch(inputNameAPI2({ name : insertName, workDate : selectedDate ? selectedDate : formattedDate, workDate2 : selectedDate2 ,currentPage, 
+                }))
+            }
         }
       }
 
@@ -162,24 +177,24 @@ function WorkAdmin({ adminList }) {
         } 
     }, [selectedDate, formattedDate, currentPage, modify])
 
-    useEffect(() => {
-        console.log('year2 : ', year2);
-        console.log('month2 : ', month2);
+    // useEffect(() => {
+    //     console.log('year2 : ', year2);
+    //     console.log('month2 : ', month2);
 
-        if (year2 && month2) {
-            if (month2 < 10) {
-                const month = '0' + month2.toString()
-                const workDate = year2.toString() + '-' + month;
-                console.log(workDate);
-                dispatch(callWorkMyListAPI({ workDate, currentPage }));
-            } else {
-                const workDate = year2.toString() + month2.toString();
-                console.log(workDate);
-                dispatch(callWorkMyListAPI({ workDate, currentPage }));
-            }
-        }
+    //     if (year2 && month2) {
+    //         if (month2 < 10) {
+    //             const month = '0' + month2.toString()
+    //             const workDate = year2.toString() + '-' + month;
+    //             console.log(workDate);
+    //             dispatch(callWorkMyListAPI({ workDate, currentPage }));
+    //         } else {
+    //             const workDate = year2.toString() + month2.toString();
+    //             console.log(workDate);
+    //             dispatch(callWorkMyListAPI({ workDate, currentPage }));
+    //         }
+    //     }
 
-    }, [currentPage]);
+    // }, [currentPage]);
 
     console.log('currentPage : ', currentPage);
 
@@ -210,8 +225,12 @@ function WorkAdmin({ adminList }) {
                         /> */}
                         <input type="date"
                             name="date"
+                            onChange={onChangeDateHandler2}
+                        ></input> ~ 
+                        <input type="date"
+                            name="date"
                             onChange={onChangeDateHandler}
-                        ></input>
+                        ></input> 
                         <input className={WorkCSS.inputBox}
                                 value={insertName}
                                 onChange={handleInputChange}

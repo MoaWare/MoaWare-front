@@ -144,6 +144,9 @@ function CreateProject() {
         if(!form.projName || !form.projContent) {
             alert('정보를 모두 입력해주세요');
             return;
+        } else if (selectedStartDate || selectedEndDate == null) {
+            alert('날짜를 입력해주세요');
+            return;
         } else if(selectedStartDate > selectedEndDate) {
             alert('종료일이 시작일 보다 빠릅니다.');
             return;
@@ -252,7 +255,6 @@ function CreateProject() {
                         <div className={CreteProjCSS.date}>
                             <DatePicker className={CreteProjCSS.datepicker}
                                 selected={selectedStartDate}
-                                // onChange={(startDate) => setSelectedStartDate(startDate)}
                                 onChange={ onStartDateHandler }
                                 dateFormat='yyyy-MM-dd'
                                 minDate={today}
@@ -262,7 +264,6 @@ function CreateProject() {
                         <div className={CreteProjCSS.date}>
                             <DatePicker className={CreteProjCSS.datepicker}
                                 selected={selectedEndDate}
-                                // onChange={(endDate) => setSelectedEndDate(endDate)}
                                 onChange={ onEndeDateHandler }
                                 dateFormat='yyyy-MM-dd'
                             />
