@@ -272,7 +272,7 @@ function Payment () {
       }
       setCountInput(targetElement.length);
       console.log("htmlRef : ", htmlRef.current.getElementsByTagName('input'));
-    }, [htmlString]);
+    }, []);
 
 
 
@@ -290,15 +290,15 @@ function Payment () {
       formData.append("payFileCategory.fCategoryType", "payment")
       formData.append("payFileCategory.pay.draftDate", today());
       formData.append("payFileCategory.pay.draftTitle", form.draftTitle);
-      formData.append("payFileCategory.pay.draftContent",htmlString);
+      formData.append("payFileCategory.pay.draftContent",HTML);
       formData.append("payFileCategory.pay.form.formCode", select);
       formData.append("payFileCategory.pay.payStatus", "임시")
-      
       payMember && payMember.forEach( (member, index) => { 
+        console.log("이얃!!! : " , payMember.length);
         formData.append(`payFileCategory.pay.PaymentMember[${index}].PaymentMemberPk.payCode`, 0)
         formData.append(`payFileCategory.pay.PaymentMember[${index}].PaymentMemberPk.empCode`, member.empCode)
         formData.append(`payFileCategory.pay.PaymentMember[${index}].payRank`, index+1)
-        index=== member.length-1 ? formData.append(`payFileCategory.pay.PaymentMember[${index}].payFinalYn`, 'Y')
+        index=== payMember.length-1 ? formData.append(`payFileCategory.pay.PaymentMember[${index}].payFinalYn`, 'Y')
         : formData.append(`payFileCategory.pay.PaymentMember[${index}].payFinalYn`, 'N')
       } );
 
@@ -432,7 +432,7 @@ function Payment () {
             
               <tr className={payCSS.attach}>
                 <th>첨부파일</th>
-                <td colSpan="5"><input type='file' name="payFile" ref={fileInput} className={payCSS.input}
+                <td colSpan="5"><input type='file' name="payFile" ref={fileInput} className={payCSS.inputFile}
                 onChange={onChangeFile}/>
                 {file===undefined ? <label className={payCSS.inputLabel} onClick={ onClickinputLabel }></label>
                   :

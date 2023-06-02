@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import PayDetailCSS from './PaymentStorageDetail.module.css';
+import PayDetailCSS from './PaymentDetail.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
-import { CallPaymentingDetailAPI } from '../../apis/PaymentAPICalls';
+import { CallPaymentFormAPI, CallPaymentingDetailAPI } from '../../apis/PaymentAPICalls';
 import PayModal from '../../components/modal/paymentModal/PayModal';
 import PayRefuse from '../../components/modal/paymentModal/PayRefuse';
 import moment from "moment";
@@ -12,42 +12,142 @@ function PaymentStorageDetail () {
     const { payCode } = useParams();
     console.log("PaymentDetail payCode : " , payCode);
     const disPatch = useDispatch();
-    const { payDetail } = useSelector( state => state.paymentReducer);
+    const { payDetail, payForm, payEmp } = useSelector( state => state.paymentReducer);
+    console.log("PaymentDetail payForm1 : " , payForm);
+    console.log("PaymentDetail payForm2 : " , payDetail);
+    console.log("PaymentDetail payForm3 : " , payEmp);
     const navigator = useNavigate();
     const [ isPayModal, setIsPayModal ] = useState(false);
     const [ isPayRefuse, setIsPayRefuse ] = useState(false);
     const htmlRef = useRef();
+    const [ form, setForm ] = useState({ });
+    const [ focusEmp, setFocusEmp ] = useState([]);
+    const [ isFocus, setIsFocus ] = useState([]);
+    const [ payMember , setPayMember ] = useState([]);
+    const [ refPayMember , setRefPayMember ] = useState([]);
+    const [ paymentModal, setPaymentModal ] = useState(false);
+    const [ refpaymentModal, setRefPaymentModal ] = useState(false);
+    const [searchForm, setSearchForm] = useState({
+      search : '',
+      isSearch : false
+    });
+    const html = payDetail&&payDetail.draftContent;
 
+  const contextValue =  () => {
 
-    
+      setSearchForm({
+        search : '',
+        isSearch : false
+      }); 
+      setFocusEmp([]);
+      setIsFocus([]);
+   
+  }
    
     console.log("PaymentDetail payDetail : 우아라아앙" , payDetail);
+
+
+    const onChangeHandler = (e) => {
+      const { name, value } = e.target;
+      if(name === 'total'){
+        setForm(prevForm => ({
+          ...prevForm,
+          [name]: value,
+          supply:  Math.round(value/1.1),
+          tax: Math.round(value/1.1*0.1)
+        }));
+      }
+      else{
+      setForm(prevForm => ({
+        ...prevForm,
+        [name]: value
+      }));
+    }
+      console.log( "폼의 값 : ", form);
+    }
+
 
     useEffect(
         ()=>{
             disPatch(CallPaymentingDetailAPI({payCode}));
-
+            disPatch(CallPaymentFormAPI());
         },[]
     )
+
+
     useEffect(() => {
 
       const targetElement = htmlRef.current.getElementsByTagName('input');
       if (targetElement) {
         for (let i = 0; i < targetElement.length; i++) {
+          targetElement[i].addEventListener('change', onChangeHandler);
           const valuePattern = /\{(\w+)\}/g;
           if(targetElement[i].value.match(valuePattern)){
             targetElement[i].value=""
-          }
+          } 
         }
-
       }
-    }, [payDetail]
+      console.log("htmlRef : ", htmlRef.current.getElementsByTagName('input'));
+    }, [html]
   );
-
+  console.log("form은123 ?: ", form);
       const onCancelHandler = () => {
         navigator('/pay/storage');
      }  
 
+     const savePayment =  
+      ()=> {
+
+        
+
+        const processHtmlString = (html) => {
+
+          let modifiedHTML = html;
+          modifiedHTML = modifiedHTML.replace(/<input(?! readOnly)/g, '<input readOnly');
+          Object.entries(form).forEach(([key, value]) => {
+            const regex = new RegExp(`{${key}}`, "g");
+  
+            if (form[key] === undefined || form[key] === null) {
+              modifiedHTML = modifiedHTML.replace(regex, "");
+            } else {
+              modifiedHTML = modifiedHTML.replace(regex, `"${value}"`.trim() || " ");
+            }
+         
+          });  
+     
+          return modifiedHTML;
+        };
+        
+        console.log("form은 ?: ", form);
+        // DB에서 가져온 HTML 문자열
+         // DB에서 가져온 HTML 문자열
+         const payPath = payForm[payDetail.form.formCode-1].formString
+         const htmlFromDB = payPath;
+
+         console.log("payPath은 ?: ", payPath);
+         if (payPath) {
+           const filteredHTML = processHtmlString(htmlFromDB);
+           setForm({});
+           return filteredHTML;
+         }
+        return null;
+       
+    };
+
+
+
+     const onButtonHandler= () => {
+
+      const HTML = savePayment();
+      console.log(`saveHTML`, HTML)
+
+     
+      alert("저장 되었습니다.");
+        navigator("/pay/storage");
+
+      
+      
+    }
 
 
     return (
@@ -55,13 +155,10 @@ function PaymentStorageDetail () {
           <div className={PayDetailCSS.titleDiv}>
             <div className={PayDetailCSS.title}>임시 저장 문서</div> 
             <button className={PayDetailCSS.button} onClick={onCancelHandler}>결재선</button>
-            <button className={PayDetailCSS.button} onClick={onCancelHandler}>결재요청</button>
-            <button className={PayDetailCSS.button} onClick={onCancelHandler}>임시저장</button>
-            <button className={PayDetailCSS.buttonCancel} onClick={onCancelHandler}>취소</button>
+          <button className={PayDetailCSS.button} onClick={onButtonHandler}>결재요청</button>
+          <button className={PayDetailCSS.button} onClick={onCancelHandler}>임시저장</button>
+            <button className={PayDetailCSS.buttonCancel} onClick={onCancelHandler} >취소</button>
           </div>
-        {isPayModal? <PayModal setIsPayModal={setIsPayModal}/> : "" }
-        {isPayRefuse? <PayRefuse setIsPayRefuse={setIsPayRefuse}/> : "" }
-       
         <div className={PayDetailCSS.payApproval}>
 
           <div className={PayDetailCSS.payDiv}>
@@ -119,8 +216,8 @@ function PaymentStorageDetail () {
               </tr>
               <tr>
                 <th>문서제목</th>
-                <td colSpan='3'><input type='text' name="draftTitle" value={payDetail&& payDetail.draftTitle} className={PayDetailCSS.input}
-             /></td>
+                <td colSpan='3'><input type='text' name="draftTitle" value={form && form?.draftTitle ? form.draftTitle : payDetail&&payDetail.draftTitle } className={PayDetailCSS.input}
+             onChange={onChangeHandler}/></td>
               </tr>
               </tbody>
           </table>
