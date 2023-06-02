@@ -18,10 +18,11 @@ const POST_PAYMENT_SIGN = 'pay/POST_PAYMENT_SIGN';
 const PUT_PAYMENT_SIGN = 'pay/PUT_PAYMENT_SIGN';
 const GET_PAYMENTDETAIL = 'pay/GET_PAYMENTDETAIL';
 const PUT_PAYMENT_UPDATE = 'pay/PUT_PAYMENT_UPDATE';
+const SET_PAYMENT = "pay/SET_PAYMENT";
 
 export const { pay : { getPayment, getPaymentform, postPayment, getPaymentwait, getPaymenting 
                 , getPaymentComplete, getPaymentRefuse, getPaymentStorage, getPaymentSign
-                , postPaymentSign, putPaymentSign, getPaymentdetail, putPaymentUpdate }} = createActions({
+                , postPaymentSign, putPaymentSign, getPaymentdetail, putPaymentUpdate, setPayment }} = createActions({
     [GET_PAYMENT] : res => res.data,
     [GET_PAYMENTFORM] : res => res.data,
     [POST_PAYMENT] : res => res,
@@ -35,6 +36,7 @@ export const { pay : { getPayment, getPaymentform, postPayment, getPaymentwait, 
     [PUT_PAYMENT_SIGN] : res => res,
     [GET_PAYMENTDETAIL] : res=> res.data,
     [PUT_PAYMENT_UPDATE] : res=> res.data,
+    [SET_PAYMENT] : res => res,
 
 })
 
@@ -60,6 +62,8 @@ const paymentReducer = handleActions({
     [GET_PAYMENTDETAIL] : ( state, { payload }) => ({ payDetail : payload}),
 
     [PUT_PAYMENT_UPDATE] : ( state, { payload }) => ({...state, payload}),
+
+    [SET_PAYMENT] : ( state, { payload }) => ({isPayment : payload}),
 
 }, initialState)
 
