@@ -20,7 +20,6 @@ function MemberInfoModify(){
     const [imageUrl, setImageUrl] = useState('');
     const [ file, setFile ] = useState({ });
     const [ isCheck , setIsCheck ] = useState(false);
-
     
     /* 회원 정보 조회 */
     useEffect(()=>{
