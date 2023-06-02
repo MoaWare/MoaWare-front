@@ -4,6 +4,7 @@ import { FiX } from 'react-icons/fi';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { CallPaymentUpdateAPI } from '../../../apis/PaymentAPICalls';
+import { setPayment } from '../../../modules/PayMentModule';
 
 
 function PayModal({setIsPayModal}) {
@@ -39,6 +40,7 @@ function PayModal({setIsPayModal}) {
         }
         console.log(" payCode : ", form);
         disPatch(CallPaymentUpdateAPI({form}));
+        disPatch(setPayment(false));
         navigate("/pay/wait");
     }
 
@@ -56,6 +58,7 @@ function PayModal({setIsPayModal}) {
         }
         console.log(" payCode : ", form);
         disPatch(CallPaymentUpdateAPI({form}));
+        disPatch(setPayment(false));
         navigate("/pay/wait");
     }
 

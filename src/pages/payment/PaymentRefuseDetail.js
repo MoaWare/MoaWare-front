@@ -3,11 +3,11 @@ import PayDetailCSS from './PaymentDetail.module.css';
 import moment from "moment";
 
 
-function PaymentDetailItem ({payDetail}) {
+function PaymentRefuseDetail ({payDetail}) {
 
     const htmlRef = useRef();
 
-    console.log( " PaymentDetailItem 의 pay ", payDetail);
+    console.log( " PaymentRefuseDetail 의 pay ", payDetail);
 
     useEffect(() => {
 
@@ -40,7 +40,7 @@ function PaymentDetailItem ({payDetail}) {
           </div>
           
           {
-            payDetail && payDetail.paymentMember.sort((a, b) => a.payRank - b.payRank).map( (pay, index, array) => (
+            payDetail && payDetail.paymentMember.sort((a, b) => a.payRank - b.payRank).map( (pay, index) => (
             <div className={PayDetailCSS.payDiv} key={pay.payCode}>
               <div className={PayDetailCSS.payTitle}>
                 {index === payDetail.paymentMember.length -1 ? '최종 결재자' : '결재자'}
@@ -50,7 +50,7 @@ function PaymentDetailItem ({payDetail}) {
                 {pay.payType ==="결재" ? 
                 pay.emp.payFileCategory.filter( file => file.fcategoryType === "sign").length > 0 ?
                 <img src={pay.emp.payFileCategory.filter( file => file.fcategoryType === "sign")[0].file.filePath} className={PayDetailCSS.signImg}/>
-                : pay.emp.empName : pay.payType ==="반려" ? "반려" : pay.payType === null && array.filter( paym => paym.payTotalYn==="Y" ).length>0 ?  array.filter( paym => paym.payTotalYn==="Y" )[0].emp.empName + " 전결" : "실패" 
+                : pay.emp.empName : pay.payType ==="반려" ? "반려" : "" 
                 }
               </div>
             </div>
@@ -93,7 +93,7 @@ function PaymentDetailItem ({payDetail}) {
           <table className={PayDetailCSS.tbody}>
             <tbody >
               <tr>
-                <td colSpan='3' className={PayDetailCSS.docuMain}>
+                <td colSpan='5' className={PayDetailCSS.docuMain}>
                   <div className={PayDetailCSS.docuText}>
                   <div ref={htmlRef&&htmlRef} dangerouslySetInnerHTML={{ __html: payDetail && payDetail.draftContent }} />
                   </div>
@@ -110,6 +110,42 @@ function PaymentDetailItem ({payDetail}) {
                     }
                 </td>
               </tr>
+              <tr className={PayDetailCSS.attach}>
+                <th>반려자</th>
+                <td colSpan="1"> 
+                {payDetail && payDetail.paymentMember.filter( 
+                        pay => {
+                            if(pay.payType ==="반려"){
+                              
+                                return true}
+                            return false;
+                            }).length>0 ?payDetail.paymentMember.filter( 
+                                pay => {
+                                    if(pay.payType ==="반려"){
+                                      
+                                        return true}
+                                    return false;
+                                    })[0].emp.empName
+                            : ""}
+                </td>
+                <th>반려 사유</th>
+                <td colSpan="2">
+                    {payDetail && payDetail.paymentMember.filter( 
+                        pay => {
+                            if(pay.payType ==="반려"){
+                              
+                                return true}
+                            return false;
+                            }).length>0 ?payDetail.paymentMember.filter( 
+                                pay => {
+                                    if(pay.payType ==="반려"){
+                                      
+                                        return true}
+                                    return false;
+                                    })[0].cancleReason
+                            : ""}
+                </td>
+              </tr>
               </tbody>
           </table>
         </div>
@@ -117,7 +153,6 @@ function PaymentDetailItem ({payDetail}) {
 
 
     );
-
 }
 
-export default PaymentDetailItem;
+export default PaymentRefuseDetail;

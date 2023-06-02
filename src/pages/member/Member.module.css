@@ -110,6 +110,7 @@
     margin-top: 1.5vh;
     align-items: center;
     justify-content: space-around;
+    color: #172936;
 }
 
 .midFrist{
@@ -139,7 +140,7 @@
 }
 
 .memberImageButton{
-    margin-top: 5px;
+    margin-top: 2vh;
     margin-bottom: 5px;
     height: 30px;
     width: 150px;
@@ -164,7 +165,7 @@
 }
 
 .midThird{
-    width: 16vw;
+    width: 15vw;
     display: flex;
     flex-direction: column;
     height: 30vh;
@@ -181,8 +182,8 @@
 
 .pwdInfo {
     font-size: 0.1rem;
-    margin-left: 1vw;
-    margin-top: -1.5vh;
+    /* margin-left: 1vw; */
+    margin-top: -0.5vh;
     color: #ff7373;
 }
 
@@ -197,6 +198,6 @@
     display: flex;
     align-content: stretch;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 

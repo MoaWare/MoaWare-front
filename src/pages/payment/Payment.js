@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import PaymentModal from '../../components/modal/paymentModal/PaymentModal';
 import { BsPersonFillAdd } from "react-icons/bs";
 import RefPaymentModal from '../../components/modal/paymentModal/RefPaymentModal';
+import { FiX } from 'react-icons/fi';
 
 
 
@@ -99,10 +100,11 @@ function Payment () {
       formData.append("payFileCategory.pay.form.formCode", select);
       formData.append("payFileCategory.pay.payStatus", "진행중")
       payMember && payMember.forEach( (member, index) => { 
+        console.log("이얃!!! : " , payMember.length);
         formData.append(`payFileCategory.pay.PaymentMember[${index}].PaymentMemberPk.payCode`, 0)
         formData.append(`payFileCategory.pay.PaymentMember[${index}].PaymentMemberPk.empCode`, member.empCode)
         formData.append(`payFileCategory.pay.PaymentMember[${index}].payRank`, index+1)
-        index=== member.length-1 ? formData.append(`payFileCategory.pay.PaymentMember[${index}].payFinalYn`, 'Y')
+        index=== payMember.length-1 ? formData.append(`payFileCategory.pay.PaymentMember[${index}].payFinalYn`, 'Y')
         : formData.append(`payFileCategory.pay.PaymentMember[${index}].payFinalYn`, 'N')
       } );
 
@@ -121,6 +123,15 @@ function Payment () {
       
       
     }
+
+    const onClickinputLabel = () => {
+      fileInput.current.click();
+    }
+
+    const onClickCancleFile = () => {
+      setFile();
+    }
+
 
     const onChangeFile = (e) => {
       console.log("첨부파일 : " , e.target.files[0]);
@@ -422,7 +433,11 @@ function Payment () {
               <tr className={payCSS.attach}>
                 <th>첨부파일</th>
                 <td colSpan="5"><input type='file' name="payFile" ref={fileInput} className={payCSS.input}
-                onChange={onChangeFile}/></td>
+                onChange={onChangeFile}/>
+                {file===undefined ? <label className={payCSS.inputLabel} onClick={ onClickinputLabel }></label>
+                  :
+                <><label className={payCSS.inputLabelSet} onClick={ onClickinputLabel }>{file && file.name} </label><FiX onClick={onClickCancleFile}/></>}
+                </td>
               </tr>
               </tbody>
           </table>

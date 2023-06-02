@@ -10,8 +10,8 @@ function ProjDetailTitle({ project, progress }){
 
     /* 디데이 계산 */
     const dday = Math.floor((new Date() - new Date(project?.endDate)) / (1000*60*60*24)) || 0;
-    console.log(dday);
-    console.log(project);
+    // console.log(dday);
+    // console.log(project);
 
     return(
         <div className={ProjCSS.topDiv}>

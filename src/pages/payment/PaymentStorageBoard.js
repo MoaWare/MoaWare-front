@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import payBoardCSS from './PaymentBoard.module.css';
-import PaymentBoardContext from './PaymentBoardContext';
 import { useEffect, useState } from 'react';
-import { CallPaymentRefuseListAPI, CallPaymentStorageListAPI, CallPaymentWaitListAPI } from '../../apis/PaymentAPICalls';
+import { CallPaymentStorageListAPI } from '../../apis/PaymentAPICalls';
+import PaymentStorageBoardContext from './PaymentStorageBoardContext';
 
 
 function PaymentStorageBoard () {
@@ -30,7 +30,7 @@ function PaymentStorageBoard () {
 
             </div>
 
-            <PaymentBoardContext pay={pay} pageInfo={pageInfo} setCurrentPage={setCurrentPage}/>
+            <PaymentStorageBoardContext pay={pay} pageInfo={pageInfo} setCurrentPage={setCurrentPage}/>
 
         </div>
     );

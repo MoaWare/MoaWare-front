@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callAdminBoardListAPI } from '../../apis/AdminBoardAPICalls';
+import { callAdminBoardDeleteAPI, callAdminBoardListAPI } from '../../apis/AdminBoardAPICalls';
 import PagingBar from "../../components/common/PagingBar";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import CSS from "./AdminBoardList.module.css";
@@ -11,20 +11,19 @@ function AdminBoardList() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const boards = useSelector(state => state.boardReducer);
-
-
     const pageInfo = boards.pageInfo;
+    const [selectedLists, setSelectedLists] = useState([]);
 
+    const { del } = useSelector(state => state.boardReducer);
 
 
 
     const [currentPage, setCurrentPage] = useState(1);
     useEffect(
         () => {
-    
             dispatch(callAdminBoardListAPI({ currentPage }));
             },
-           [currentPage]
+           []
            );
 
 
@@ -38,6 +37,31 @@ function AdminBoardList() {
     // const onClickProductInsert = () => {
     //     navigate("/product-registration");
     // };
+
+
+    useEffect(() => {
+        if (del?.status === 200) {
+          alert('게시판 삭제가 완료되었습니다.');
+          dispatch(callAdminBoardListAPI({ currentPage }))
+        }
+      }, [del]);
+         
+    
+      
+  const handleCheckboxChange = (event, boardCode) => {
+    // 이벤트 전파 방지
+    event.stopPropagation(); 
+    setSelectedLists(boardCode);
+    if(selectedLists == boardCode) {
+        setSelectedLists(null);
+    }
+};
+
+const onClickDelete = () => {
+    console.log('클릭ㅎㅎ',selectedLists)
+    dispatch(callAdminBoardDeleteAPI({ boardCode : selectedLists})); // boardCode 배열 전달
+  };
+
 
     return (
         <>
@@ -73,9 +97,13 @@ function AdminBoardList() {
                                     <tr
                                     className={CSS.td}
                                     key={b.boardCode}>
-                                    <td>
-                                        <input type="checkbox" id="checkAll" onClick={(e) => e.stopPropagation()} />
-                                    </td>
+                                    <input
+                                    type="checkbox" 
+                                    // checked={selectedPosts.includes(post.postCode)}
+                                    checked={selectedLists === b.boardCode}
+                                    onChange={(event) => handleCheckboxChange(event, b.boardCode)}
+                                                onClick={(event) => event.stopPropagation()}
+                                                />
                                     <td>{b.boardCode}</td>
                                     <td>{b.boardName}</td>
                                 
@@ -88,7 +116,12 @@ function AdminBoardList() {
                         </tbody>
                     </table>
                     <div className={CSS.content}>
-                                    <button className={CSS.deletepost}>삭제</button>
+                                <button
+                                        className={CSS.deletepost}
+                                        onClick={onClickDelete}
+                                      >
+                                삭제하기
+                                </button>
                                     </div>
                                     <div>
                 {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}

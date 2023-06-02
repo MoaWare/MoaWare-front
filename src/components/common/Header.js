@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import './Header.css'
 import HeaderCSS from './Header.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getHeaderName } from '../../modules/EmployeeModule';
