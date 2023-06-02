@@ -17,20 +17,21 @@ function ReviewList({ task, reviews }){
         content : '',
         task : task,
       });
-    const [ isSwitchOn, setSwitchOn ] = useState(false);
+    // const [ isSwitchOn, setSwitchOn ] = useState(false);
 
     // console.log("task" , task);
     // console.log("reviews" , reviews);
     // console.log("reviews" , review);
-    console.log("taskCode" , taskCode);
     
-    useEffect(()=> {
-      if(isSwitchOn){
-        dispatch(callReviewsAPI(taskCode));
-        setSwitchOn(false);
-        // console.log("isSwitchOn===========================",isSwitchOn);
-      }
-    },[isSwitchOn]);
+    // useEffect(()=> {
+      
+    //   // if(isSwitchOn){
+    //       console.log("taskCode" , taskCode);
+    //     // dispatch(callReviewsAPI(taskCode));
+    //     // setSwitchOn(false);
+    //     console.log("isSwitchOn===========================",isSwitchOn);
+    //   // }
+    // },[ , isSwitchOn]);
  
 
     const onReviewChangeHandler = (e) => {
@@ -49,10 +50,10 @@ function ReviewList({ task, reviews }){
             
       try{
         
+        // console.log(review);
         await dispatch(callReviewsRegistAPI(review));
-                console.log('여기에서 에러가 나나요?');
-        dispatch(callReviewsAPI(review?.task?.taskCode));
-                console.log('여기에서 에러가 나나요?');
+        // setSwitchOn((current)=>!current);
+                // console.log('여기에서 에러가 나나요?');
 
         setReview({
           content: '', 
@@ -92,7 +93,7 @@ function ReviewList({ task, reviews }){
            { 
               reviews 
                 && Array.isArray(reviews) 
-                && reviews.map(review => <ReviewItem key={ reviews?.reviewCode } review={review} setSwitchOn={setSwitchOn}/>)
+                && reviews.map((review, index, array) => <ReviewItem review={review} />)
            }
           </div> 
           <div className={TaskCSS.reviewWrite}>

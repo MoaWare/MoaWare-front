@@ -2,13 +2,13 @@ import { useDispatch, useSelector } from "react-redux";
 import TaskCSS from "../../../form/Task/Task.module.css";
 import { getMemberId } from "../../../utils/TokenUtils";
 import moment from "moment";
-import { callReviewUpdateAPI } from "../../../apis/ReviewAPICalls";
+import { callReviewDelete, callReviewUpdateAPI } from "../../../apis/ReviewAPICalls";
 import { useEffect, useState } from "react";
 import { BsFillArrowUpCircleFill, BsPersonCircle } from "react-icons/bs";
 import { toast } from "react-toastify";
 
 
-function ReviewItem({ review, setSwitchOn }){
+function ReviewItem({ review }){
 
 
     const dispatch = useDispatch();
@@ -41,12 +41,24 @@ function ReviewItem({ review, setSwitchOn }){
 
 
     const onClickUpdate = () => {
+
         setModifyMode(true);
         // setForm({ ...data });
     }
 
-    const onClickDelete = () => {
-        
+    const onClickDelete = (setSwitchOn) => {
+
+        if(window.confirm('댓글을 삭제하시겠습니까?')){
+
+            if(getMemberId() === review.emp.empID){
+                // window.location.reload(); // 새로고침
+                console.log('들어왔다 !');
+                dispatch(callReviewDelete(review?.reviewCode));
+                // setSwitchOn((current) => !current);
+            } else {
+                alert('최초 작성자만 삭제가 가능합니다.');
+            }
+        };
     }
 
 
@@ -60,21 +72,21 @@ function ReviewItem({ review, setSwitchOn }){
         console.log("onChangeHandler form", form);
     }
 
-    async function onReviewSubmit (){
+    async function onUpdateSubmit (){
 
         try{
             console.log("onChangeHandler form", form);
 
             await dispatch(callReviewUpdateAPI({form}));
     
-            // setForm({
-            //   content: '', 
-            //   task: review && review.task
-            // });
+            setForm({
+              content: '', 
+              task: review && review.task
+            });
 
             // if(put?.status === 200){
                 setModifyMode(false);
-                setSwitchOn(modifyMode);
+                // setSwitchOn((current) => !current);
             // }
             console.log(review);
     
@@ -104,7 +116,7 @@ function ReviewItem({ review, setSwitchOn }){
     return review && 
 
         (
-            <div className={TaskCSS.reviewItem}>
+            <div className={TaskCSS.reviewItem} key={review.reviewCode}>
                 <div className={TaskCSS.reviewLeft}>
                     <img src={review.emp.fileCategory[0].file.filePath || <BsPersonCircle />}  alt="profile"/>
                 </div>
@@ -116,13 +128,15 @@ function ReviewItem({ review, setSwitchOn }){
                     <div className={TaskCSS.listDate}>
                         {date}
                     </div>
-                    { !modifyMode && 
-                        ( getMemberId() === review.emp.empID ? 
-                            <div className={TaskCSS.listBtn}>
-                                <button onClick={ onClickUpdate }>수정</button>
-                                <button onClick={ onClickDelete }>삭제</button> 
-                            </div>
-                        : null )}
+                    { 
+                        !modifyMode && 
+                            ( getMemberId() === review.emp.empID ? 
+                                <div className={TaskCSS.listBtn}>
+                                    <button onClick={ onClickUpdate }>수정</button>
+                                    <button onClick={ onClickDelete }>삭제</button> 
+                                </div>
+                            : null )
+                        }
                 </div>
                 { modifyMode && 
                     <div className={TaskCSS.textareaDiv} >
@@ -132,7 +146,7 @@ function ReviewItem({ review, setSwitchOn }){
                         value={form?.content}
                         onChange={onChangeHandler}
                     /> 
-                    <BsFillArrowUpCircleFill className={TaskCSS.textareaBtn}  onClick={onReviewSubmit}/>
+                    <BsFillArrowUpCircleFill className={TaskCSS.textareaBtn}  onClick={onUpdateSubmit}/>
                     </div>}
                 { !modifyMode && 
                     <div className={TaskCSS.listLow}>

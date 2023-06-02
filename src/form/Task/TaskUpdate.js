@@ -100,7 +100,7 @@ function TaskUpdate() {
             dispatch(callTaskUpdateAPI( form ));
         } else {
             alert('최초 작성자만 수정이 가능합니다.');
-            navigate(-1);
+            navigate(`/task/${task.project.projCode}`);
         }
     };
 

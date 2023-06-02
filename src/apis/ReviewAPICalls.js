@@ -1,5 +1,5 @@
 import { json } from "react-router-dom";
-import { getReviews, postReview, putReview } from "../modules/ReviewModule";
+import { deleteReview, getReviews, postReview, putReview } from "../modules/ReviewModule";
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -75,6 +75,30 @@ export const callReviewUpdateAPI = ({form}) => {
         if(result?.status === 200){
             console.log(result);
             dispatch(putReview(result));
+        } else if(result?.status === 400){
+        alert(result.message);
+        }
+    }
+}
+
+/* 댓글 삭제 */
+export const callReviewDelete = ( reviewCode ) => {
+
+    const requestURL = `${PRE_URL}/delete/${reviewCode}`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+        method : "PUT",
+        headers : {
+            "Content-Type" : "application/json",
+            "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+        },
+        }).then(res => res.json());
+
+        if(result?.status === 200){
+            console.log(result);
+            dispatch(deleteReview(result));
         } else if(result?.status === 400){
         alert(result.message);
         }
