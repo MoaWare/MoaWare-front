@@ -1,24 +1,27 @@
 import { useDispatch, useSelector } from 'react-redux';
 import payBoardCSS from './PaymentBoard.module.css';
-import PaymentBoardContext from './PaymentBoardContext';
 import { useEffect, useState } from 'react';
 import { CallPaymentWaitListAPI } from '../../apis/PaymentAPICalls';
+import PaymentWaitBoardContext from './PaymentWaitBoardContext';
+import { setPayment } from '../../modules/PayMentModule';
 
 
 function PaymentWaitBoard() {
 
     const disPatch = useDispatch();
+    const { isPayment } = useSelector(state=>state.paymentReducer);
     const  payment  = useSelector( state => state.paymentReducer);
     const pay = payment.data && payment.data.content;
     const pageInfo = payment.pageInfo;
     const [ currentPage, setCurrentPage ] = useState(1);
     
-
+    console.log("PaymentWaitBoard의 isPay는 : ", isPayment)
     console.log("PaymentWaitBoard의 pay는 : ", pay);
 
     useEffect( ()=>{
         disPatch(CallPaymentWaitListAPI(currentPage));
-    },[currentPage]
+        disPatch(setPayment(true));
+    },[currentPage,isPayment]
         
     );
 
@@ -30,7 +33,7 @@ function PaymentWaitBoard() {
 
             </div>
 
-            <PaymentBoardContext pay={pay} pageInfo={pageInfo} setCurrentPage={setCurrentPage}/>
+            <PaymentWaitBoardContext pay={pay} pageInfo={pageInfo} setCurrentPage={setCurrentPage}/>
 
         </div>
     );
