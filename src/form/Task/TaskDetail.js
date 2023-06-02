@@ -6,38 +6,49 @@ import { Link, NavLink, Navigate, useNavigate, useParams } from "react-router-do
 import { getMemberId } from "../../utils/TokenUtils";
 import ReviewList from "../../pages/review/project/ReviewList";
 import { callReviewsAPI, callReviewsRegistAPI } from "../../apis/ReviewAPICalls";
+import { toast } from "react-toastify";
+
+
 
 
 function TaskDetail() {
 
 
+    // // 새로고침시 사용되는 param 값
+    // const code = localStorage.getItem('code');
+    // localStorage.removeItem('code');
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { projCode, taskCode } = useParams();
-    const { reviews } = useSelector((state) => state.reviewReducer );
+    const { reviews, put, replDel, regist } = useSelector((state) => state.reviewReducer );
     const { task , del } = useSelector(state => state.projectReducer);
     const [ stage, setStage ] = useState('');
     const [ type, setType ] = useState('');
 
-
-    useEffect(
-        ()=>{
-            dispatch(callTaskDetailAPI(taskCode));
-        },[]
-    );
+    // 이전 페이지에서 코드를 저장
+    localStorage.setItem('code', taskCode);
 
 
-    
-    
+
     useEffect(()=>{
-
-      dispatch(callReviewsAPI(taskCode));
+        
+      dispatch(callTaskDetailAPI(taskCode));
 
     },[]);
 
 
+    
+    useEffect(()=>{
+
+      dispatch(callReviewsAPI({taskCode}));
+
+    },[ , regist, put, replDel ]);
+
+
     useEffect(() => {   
-      
+
+        /* 업무 stage, type 에 따라 보여지는 상태 변경 */
         if(task){
           switch (task.stage) {
             case 'todo':
@@ -79,11 +90,31 @@ function TaskDetail() {
       },[task]);
 
 
-
       useEffect(()=>{
+
         if(del?.status === 200){
-          alert(del.message);
+
+          toast.success('업무 삭제 완료', {
+            position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+            autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+            hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+          });
+
+          del.status = null;
+
           navigate(`/task/${projCode}`);
+
+        } else if(del?.status === 400) {
+
+          toast.error('업무 삭제 오류 ', {
+            position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+            autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+            hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+            progressStyle: {
+              backgroundColor: '#ff000074', // 프로그레스 바 배경색
+              height: '5px', // 프로그레스 바 
+            },
+          });
         }
       },[del]);
 
@@ -93,9 +124,11 @@ function TaskDetail() {
         if(window.confirm(`'${task?.taskName}' 업무를 삭제하시겠습니까?`)) {
           dispatch(callTaskDeleteAPI(task?.taskCode));
         }
+
       };
 
       const updateClick = () => {
+
         navigate(`/task/${task.project.projCode}/update/${task.taskCode}`);
       }
       
@@ -149,6 +182,7 @@ function TaskDetail() {
                             </div>
                         </div>
                     </div>
+                {/* <ReviewList task={task} reviews={reviews} setSwitchOn={setSwitchOn} />  */}
                 <ReviewList task={task} reviews={reviews} /> 
             </div>
         </div>

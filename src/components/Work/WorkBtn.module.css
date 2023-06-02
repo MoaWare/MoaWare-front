@@ -1,0 +1,67 @@
+.p {
+    margin: 1.5rem;
+    color: rgba(37, 79, 112, 1);
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 4px;
+}
+
+.ptime {
+    text-align: center;
+    color: #50A4E4;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 10px; 
+}
+
+.workBtn {
+    margin-top: 1rem;
+}
+
+.workBtn button {
+    margin-right: 1rem;
+    letter-spacing: 2px;
+}
+
+.workBtn button:first-child {
+    padding: 0.4rem 0.8rem;
+
+    border: transparent;
+    border-radius: 10px;
+    background-color: rgba(37, 79, 112, 1);
+    border: 2px solid rgba(37, 79, 112, 1);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.workBtn button:last-child {
+    padding: 0.4rem 0.8rem;
+    border: 2px solid rgba(37, 79, 112, 1);
+    border-radius: 10px;
+    color: rgba(37, 79, 112, 1);
+    background-color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.p2 {
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+    font-size: 14px;
+    font-weight: bold;
+    color: rgba(37, 79, 112, 1);
+    margin: 2vh 2vw;
+    letter-spacing: 6px;
+}
+
+.p2 div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.p2 div:last-child {
+    margin-top: 1rem;
+}

@@ -164,9 +164,7 @@ function App() {
         <Route
           path="pwdfind"
           element={
-            <ProtectedRoute loginCheck={false}>
               <LoginPwdFind />
-            </ProtectedRoute>
           } />
 
          {/* 프로젝트 */}

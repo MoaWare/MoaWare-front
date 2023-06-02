@@ -26,7 +26,7 @@ function Project() {
     useEffect(
         ()=>{
                 dispatch(callProjectProgressListAPI({ currentPage }))
-        },[currentPage, dispatch]
+        },[currentPage, dispatch, delProj]
     );
     
 

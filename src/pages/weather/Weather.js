@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { WiDaySunny, WiThunderstorm, WiRainMix, WiRain, WiSnowWind, WiFog, WiCloudy } from 'react-icons/wi';
+import { WiDaySunny, WiWindy, WiThunderstorm, WiRainMix, WiRain, WiUmbrella, WiSnowWind, WiFog, WiCloudy } from 'react-icons/wi';
 import WeatherCSS from './Weather.module.css';
 
 const Weather = () => {
@@ -87,12 +87,16 @@ const Weather = () => {
     switch (iconId) {
       case "0":
         return <WiDaySunny />;
+      case "1":
+        return <WiWindy />;
+        return <WiDaySunny />;
       case "2":
         return <WiThunderstorm />;
       case "3":
         return <WiRainMix />;
       case "5":
-        return <WiRain />;
+        // return <WiRain />;
+        return <WiUmbrella />;
       case "6":
         return <WiSnowWind />;
       case "7":
@@ -100,6 +104,9 @@ const Weather = () => {
       case "8":
         return <WiCloudy />;
     }
+
+    console.log('정신차려이각박한세상속에', iconId)
+
   };
 
   // const imgSrc = `https://openweathermap.com/img/w/${icon}.png`;
