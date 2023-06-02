@@ -23,7 +23,7 @@ function AdminBoardList() {
         () => {
             dispatch(callAdminBoardListAPI({ currentPage }));
             },
-           [s]
+           []
            );
 
 
