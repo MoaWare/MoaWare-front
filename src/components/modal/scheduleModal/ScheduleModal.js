@@ -18,6 +18,7 @@ function ScheduleModal({ setScheduleModal }) {
     const schCode = schedule.schCode;
     console.log('schCode', schCode)
     dispatch(callScheduleDeleteAPI({schCode}));
+    alert('일정이 삭제 되었습니다.')
   }
 
   /* 모달창 나가기 */

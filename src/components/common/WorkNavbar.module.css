@@ -63,7 +63,8 @@
 }
 
 .p {
-    margin: 1.5rem;
+    margin: 0 1.5rem;
+    margin-top: 1.5rem;
     color: rgba(37, 79, 112, 1);
     font-size: 16px;
     font-weight: bold;
@@ -76,12 +77,18 @@
     color: #50A4E4;
     font-size: 18px;
     font-weight: bold;
-    letter-spacing: 16px; 
+    letter-spacing: 16px;
+    margin: 0 auto;
 }
 
 .workBtn {
     margin-top: 1rem;
     text-align: center;
+}
+
+.workBtn button {
+    margin-right: 1rem;
+    letter-spacing: 2px;
 }
 
 .workBtn button:first-child {
@@ -97,7 +104,7 @@
 
 .workBtn button:last-child {
     padding: 0.4rem 0.8rem;
-    margin-left: 0.6rem;
+    /* margin-left: 0.6rem; */
     border: 2px solid rgba(37, 79, 112, 1);
     border-radius: 10px;
     color: rgba(37, 79, 112, 1);
@@ -113,7 +120,7 @@
     font-size: 14px;
     font-weight: bold;
     color: rgba(37, 79, 112, 1);
-    margin: 1.5rem 3rem;
+    margin: 1.5rem 2rem;
     text-align: start;
     letter-spacing: 6px;
 }

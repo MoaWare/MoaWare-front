@@ -17,7 +17,11 @@
 
 .workBtn {
     margin-top: 1rem;
-    text-align: center;
+}
+
+.workBtn button {
+    margin-right: 1rem;
+    letter-spacing: 2px;
 }
 
 .workBtn button:first-child {
@@ -34,7 +38,6 @@
 
 .workBtn button:last-child {
     padding: 0.4rem 0.8rem;
-    margin-left: 0.6rem;
     border: 2px solid rgba(37, 79, 112, 1);
     border-radius: 10px;
     color: rgba(37, 79, 112, 1);
@@ -50,7 +53,7 @@
     font-size: 14px;
     font-weight: bold;
     color: rgba(37, 79, 112, 1);
-    margin: 1.5rem 3rem;
+    margin: 2vh 2vw;
     letter-spacing: 6px;
 }
 
