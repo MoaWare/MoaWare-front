@@ -144,12 +144,13 @@ function CreateProject() {
         if(!form.projName || !form.projContent) {
             alert('정보를 모두 입력해주세요');
             return;
-        } else if (selectedStartDate || selectedEndDate == null) {
-            alert('날짜를 입력해주세요');
-            return;
+        } else if(selectedEndDate == null ){
+            alert('날짜를 입력해주세요.');          
         } else if(selectedStartDate > selectedEndDate) {
             alert('종료일이 시작일 보다 빠릅니다.');
             return;
+        } else if(selectedStartDate == null) {
+            alert('날짜를 입력해주세요.');
         }
         /* 서버로 전달할 FormData 형태의 객체 설정 */
         const formData = new FormData();

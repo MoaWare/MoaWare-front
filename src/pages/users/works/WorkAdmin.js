@@ -54,20 +54,13 @@ function WorkAdmin({ adminList }) {
         return `${year}-${month}-${day}`;
     }
 
-
-
-    const onChangeDateHandler2 = (e) => {
-        const date2 = e.target.value;
-        setSelectedDate2(date2);
-        console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', e.target.name, e.target.value);
-        console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', date2);
-        // dispatch(callAdminWorkListAPI({ date, currentPage }))
-    }
     const onChangeDateHandler = (e) => {
         const date = e.target.value;
         setSelectedDate(date);
         console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', e.target.name, e.target.value);
         console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', date);
+        console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', selectedDate);
+        console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', selectedDate2);
         // dispatch(callAdminWorkListAPI({ date, currentPage }))
     }
 
@@ -116,14 +109,9 @@ function WorkAdmin({ adminList }) {
     function handleKeyPress(event) {
         if (event.key === 'Enter') {
             console.log('Entered value:', insertName);
-            if(selectedDate2 == null){
                 dispatch(inputNameAPI({ name : insertName, workDate : selectedDate ? selectedDate : formattedDate, currentPage}))
-            } else {
-                dispatch(inputNameAPI2({ name : insertName, workDate : selectedDate ? selectedDate : formattedDate, workDate2 : selectedDate2 ,currentPage, 
-                }))
-            }
         }
-      }
+    }
 
 
     const onChangeCheckBox = (empCode) => {
@@ -175,7 +163,7 @@ function WorkAdmin({ adminList }) {
         } else if (formattedDate) {
             dispatch(callAdminWorkListAPI({ date: formattedDate, currentPage }))
         } 
-    }, [selectedDate, formattedDate, currentPage, modify])
+    }, [formattedDate, currentPage, modify])
 
     // useEffect(() => {
     //     console.log('year2 : ', year2);
@@ -223,10 +211,6 @@ function WorkAdmin({ adminList }) {
                         // onChageHandler={ onChageHandler }
                         
                         /> */}
-                        <input type="date"
-                            name="date"
-                            onChange={onChangeDateHandler2}
-                        ></input> ~ 
                         <input type="date"
                             name="date"
                             onChange={onChangeDateHandler}
@@ -292,6 +276,8 @@ function WorkAdmin({ adminList }) {
                                         <option value="지각">지각</option>
                                         <option value="결근">결근</option>
                                         <option value="연차">연차</option>            
+                                        <option value="반차">반차</option>            
+                                        <option value="공무">공무</option>            
                                     </select>
                                 </td>
                             </tr> 

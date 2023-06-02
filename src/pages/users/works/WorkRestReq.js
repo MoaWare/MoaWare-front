@@ -33,19 +33,20 @@ function WorkRestReq() {
 
     const onClickCreate = () => {
 
-        if (selectedStartDate || selectedEndDate == null) {
-            alert('날짜를 입력해주세요');
-            return;
+        if(selectedEndDate == null ){
+            alert('날짜를 입력해주세요.');          
         } else if(selectedStartDate > selectedEndDate) {
             alert('종료일이 시작일 보다 빠릅니다.');
             return;
+        } else if(selectedStartDate == null) {
+            alert('날짜를 입력해주세요.');
         }
         /* 서버로 전달할 FormData 형태의 객체 설정 */
         const formData = new FormData();
         formData.append("leaveType", selectedOption);
-        formData.append("leaveReqDaate", moment(today).format('YYYY-MM-DD'));
-        formData.append("projStartDate", moment(selectedStartDate).format('YYYY-MM-DD'));
-        formData.append("projEndDate", moment(selectedEndDate).format('YYYY-MM-DD'));
+        formData.append("leaveReqDate", moment(today).format('YYYY-MM-DD'));
+        formData.append("leaveStartDay", moment(selectedStartDate).format('YYYY-MM-DD'));
+        formData.append("leaveEndDay", moment(selectedEndDate).format('YYYY-MM-DD'));
 
         console.log(moment(selectedEndDate).format('YYYY-MM-DD'))
         console.log(moment(selectedStartDate).format('YYYY-MM-DD'))
@@ -73,6 +74,7 @@ function WorkRestReq() {
                     <span className={WorkRestReqCSS.span3}>연차 시작일</span>
                     <div className={WorkRestReqCSS.date}>
                         <DatePicker className={WorkRestReqCSS.datepicker}
+                            name="leaveStartDay"
                             selected={selectedStartDate}
                             onChange={onStartDateHandler}
                             dateFormat='yyyy-MM-dd'
@@ -81,6 +83,7 @@ function WorkRestReq() {
                     <span className={WorkRestReqCSS.span3}>연차 종료일</span>
                     <div className={WorkRestReqCSS.date}>
                         <DatePicker className={WorkRestReqCSS.datepicker}
+                            name="leaveEndDay"
                             selected={selectedEndDate}
                             onChange={onEndeDateHandler}
                             dateFormat='yyyy-MM-dd'
@@ -113,9 +116,15 @@ function WorkRestReq() {
                     </div>
                 </div>
                 <div className={WorkRestReqCSS.container}>
+                    <span className={WorkRestReqCSS.span1}>이름</span>
+                    <div className={WorkRestReqCSS.span2}>
+                        {info?.empName}
+                    </div>
+                </div>
+                <div className={WorkRestReqCSS.container}>
                     <span className={WorkRestReqCSS.span1}>신청 날짜</span>
                     <input className={WorkRestReqCSS.span2}
-                        name="leaveReqDaate"
+                        name="leaveReqDate"
                         value={today}
                         readOnly
                     >

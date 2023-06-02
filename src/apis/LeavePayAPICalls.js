@@ -31,12 +31,13 @@ export const callLeaveRequestAPI = (formData) => {
 
     const requestURL = `${PRE_URL}/leave/request`;
 
+    console.log(formData);
+
     return async (dispatch, getState) => {
 
         const result = await fetch(requestURL, {
-            method : 'GET',
+            method : 'POST',
             headers : {
-                "Content-Type" : "application/json",
                 "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
             },
             body : formData
