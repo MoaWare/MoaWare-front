@@ -119,7 +119,7 @@ function App() {
             <Route path=":postCode" element={<BoardPostDetail />} />
             <Route path="boards/:boardCode" element={<BoardPostList />} />
             <Route path="regist" element={<BoardPostRegist />}/> 
-            <Route path="modify" element={<BoardPostModify />}/>
+            <Route path="modify/:postCode" element={<BoardPostModify />}/>
 
 
           </Route>

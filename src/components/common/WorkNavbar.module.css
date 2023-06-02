@@ -10,7 +10,8 @@
 }
 
 .submenu {
-    /* border: 1px solid blue;s */
+    /* border: 1px solid blue; */
+    /* margin: 2vw; */
     text-align: center;
     list-style: none;
 }
@@ -40,7 +41,7 @@
     font-size: 20px;
     font-weight: 700;
     margin: 2vw;
-    padding: 2vh;
+    padding: 1.5vh;
 }
 
 .wrap {
@@ -49,7 +50,7 @@
     background-color: white;
     border-radius: 30px;
     margin: 4vh 2vw;
-    height: 60vh;
+    height: 50vh;
 }
 
 .wrap2 {
@@ -57,67 +58,71 @@
     background-color: white;
     border-radius: 30px;
     margin: 4vh 2vw;
+    margin-top: 4vh;
     height: 25vh;    
 }
 
 .p {
-    margin-top: 10px;
-    font-size: 14px;
-    text-align: center;
+    margin: 1.5rem;
+    color: rgba(37, 79, 112, 1);
+    font-size: 16px;
     font-weight: bold;
-    color:  rgba(37, 79, 112, 1);
-
+    text-align: center;
+    letter-spacing: 4px;
 }
 
 .ptime {
-    margin-top: 10px;
     text-align: center;
     color: #50A4E4;
+    font-size: 18px;
     font-weight: bold;
+    letter-spacing: 16px; 
 }
 
 .workBtn {
+    margin-top: 1rem;
     text-align: center;
-    display: flex; 
-    justify-content :center
 }
 
-.workBtn1{
-    margin-top: 10px;
+.workBtn button:first-child {
+    padding: 0.4rem 0.8rem;
+    border: transparent;
+    border-radius: 10px;
     background-color: rgba(37, 79, 112, 1);
+    border: 2px solid rgba(37, 79, 112, 1);
     color: white;
-    border-radius: 10px;
-    width: 80px;
-    height: 40px;
+    font-size: 12px;
     font-weight: bold;
-    /* flex-direction: column */
 }
 
-.workBtn2{
-    margin-top: 10px;
+.workBtn button:last-child {
+    padding: 0.4rem 0.8rem;
+    margin-left: 0.6rem;
+    border: 2px solid rgba(37, 79, 112, 1);
+    border-radius: 10px;
+    color: rgba(37, 79, 112, 1);
     background-color: white;
-    color:  rgba(37, 79, 112, 1);
-    border-radius: 10px;
-    width: 80px;
-    height: 40px;
+    font-size: 12px;
     font-weight: bold;
-    margin-left: 10px;
-    /* flex-direction: column */
-}
-
-.ptime2 {
-    margin-top: 10px;
-    margin : auto;
-    color: #254F70;
-    font-weight: bold;
-    /* text-align: left; */
-    display: block;
 }
 
 .p2 {
-    margin-top: 10px;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+    font-size: 14px;
+    font-weight: bold;
+    color: rgba(37, 79, 112, 1);
+    margin: 1.5rem 3rem;
+    text-align: start;
+    letter-spacing: 6px;
+}
+
+.p2 div {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.p2 div:last-child {
+    margin-top: 1rem;
 }

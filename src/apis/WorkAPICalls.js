@@ -1,4 +1,4 @@
-import { getWorklist, postInsertstart, putQuittime } from "../modules/WorkModule";
+import { getWorkday, getWorklist, postInsertstart, putQuittime } from "../modules/WorkModule";
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${ process.env.REACT_APP_RESTAPI_SERVER_PORT}`

@@ -1,20 +1,24 @@
-import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import SchModalCSS from './ScheduleModal.module.css';
-import { callScheduleDetailAPI } from '../../../apis/ScheduleAPICalls';
+import { callScheduleDeleteAPI } from '../../../apis/ScheduleAPICalls';
 import { FiX } from 'react-icons/fi';
 import moment from 'moment/moment';
 
 function ScheduleModal({ setScheduleModal }) {
   
-  const { schCode } = useParams(); // schCode 가져오기
-
+  const dispatch = useDispatch();
   const { schedule } = useSelector((state) => state.scheduleReducer);
 
-  useEffect(() => {
-    callScheduleDetailAPI({ schCode }); // 함수 호출 수정
-  }, [schCode]);
+  console.log('1 처음 schCode', schedule?.schCode);
+
+  console.log('3 이걸 확인해봐야해 schCode입니당!~', schedule?.schCode);
+
+  /* 일정 삭제 */
+  const DeletelEventClick = () => {
+    const schCode = schedule.schCode;
+    console.log('schCode', schCode)
+    dispatch(callScheduleDeleteAPI({schCode}));
+  }
 
   /* 모달창 나가기 */
   const CancelEventClick = () => {
@@ -54,7 +58,10 @@ function ScheduleModal({ setScheduleModal }) {
         <div className={SchModalCSS.schDetail}>일정 설명</div>
         <div className={SchModalCSS.schCont}>{schedule.schContent}</div>
         <div className={SchModalCSS.schBtn}>
-            <button className={SchModalCSS.schDel}>삭제</button>
+            <button 
+              className={SchModalCSS.schDel}
+              onClick={DeletelEventClick}
+            >삭제</button>
             <button className={SchModalCSS.schMod}>수정</button>
         </div>
       </div>
