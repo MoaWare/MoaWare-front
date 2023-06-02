@@ -6,13 +6,21 @@ import { callWorkMyListAPI } from '../../apis/WorkAPICalls';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { callMyWorkAPI } from '../../apis/WorkStatusAPICalls';
+import { callHeaderNameAPI } from '../../apis/EmployeeAPICalls';
 
 function Navbar() {
+
+  const dispatch = useDispatch();
+  const { name } = useSelector(state=> state.employeeReducer);
+
+  useEffect(() => {
+    dispatch(callHeaderNameAPI());
+    console.log("Header name: ",name);
+  }, [])
 
   const [currentPage, setCurrentPage] = useState(1);
   const [year2, setYear2] = useState(new Date().getFullYear());
   const [month2, setMonth2] = useState(new Date().getMonth() + 1);
-  const dispatch = useDispatch();
   const { work } = useSelector(state => state.workReducer);
 
   const { wDay } = useSelector(state => state.workStatusReducer);
@@ -90,7 +98,7 @@ function Navbar() {
           <img src="./icon/user.jpg" />
           {/* <img src="./icon/profile.jpg" /> */}
           <div className={NavbarCSS.team}>경영지원팀</div>
-          <div className={NavbarCSS.name}>김모아님</div>
+          <div className={NavbarCSS.name}>{ name && <span> {name}님</span> }</div>
         </div>
         <WorkBtn />
       </div>

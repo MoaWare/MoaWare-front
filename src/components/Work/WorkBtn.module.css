@@ -19,6 +19,11 @@
     margin-top: 1rem;
 }
 
+.workBtn button {
+    margin-right: 1rem;
+    letter-spacing: 2px;
+}
+
 .workBtn button:first-child {
     padding: 0.4rem 0.8rem;
 
@@ -48,7 +53,7 @@
     font-size: 14px;
     font-weight: bold;
     color: rgba(37, 79, 112, 1);
-    margin: 1.5rem 2rem;
+    margin: 2vh 2vw;
     letter-spacing: 6px;
 }
 

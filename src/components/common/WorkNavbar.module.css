@@ -63,7 +63,8 @@
 }
 
 .p {
-    margin: 1.5rem;
+    margin: 0 1.5rem;
+    margin-top: 1.5rem;
     color: rgba(37, 79, 112, 1);
     font-size: 16px;
     font-weight: bold;
@@ -87,6 +88,7 @@
 
 .workBtn button {
     margin-right: 1rem;
+    letter-spacing: 2px;
 }
 
 .workBtn button:first-child {
