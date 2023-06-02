@@ -1,4 +1,4 @@
-import { getBoards, getBoard, postBoard } from "../modules/BoardModule";
+import { getBoards, putBoarddelete, postBoard } from "../modules/BoardModule";
 
 /* React App에서 .env를 사용할 때는 REACT_APP 접두어가 필요^^;; */
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -49,3 +49,31 @@ export const callAdminBoardRegistAPI = (formData) => {
        }
     }
 
+
+
+
+    /* 게시글 삭제 */
+export const callAdminBoardDeleteAPI =({ boardCode }) => {
+
+    const requestURL = `${PRE_URL}/delete/${boardCode}`;
+  
+    console.log(boardCode);
+
+    //-----------------------------
+
+    return async (dispatch, getState) => {
+  
+        const result = await fetch(requestURL, {
+          method : "PUT",
+          headers : {
+              "Content-Type" : "application/json",
+          },
+        }).then(res => res.json());
+  
+        if(result?.status === 200){
+            console.log("[AdminBoardAPICalls] callAdminBoardDeleteAPI result : ", result);
+            dispatch(putBoarddelete(result));
+        
+        }
+    }
+  }
