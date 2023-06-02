@@ -23,6 +23,8 @@ const Header = () => {
 
     if (window.confirm('로그아웃 하시겠습니까?')) {
       window.localStorage.removeItem('accessToken');
+      localStorage.removeItem('clickTime');
+      localStorage.removeItem('workbtn');
       console.log('로그아웃 확인');
       navigate('/login');
       console.log('로그아웃 확인');
