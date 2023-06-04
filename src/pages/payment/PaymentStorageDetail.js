@@ -1,17 +1,23 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import PayDetailCSS from './PaymentDetail.module.css';
+import PayDetailCSS from './PaymentStorageDetail.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useRef, useState } from 'react';
-import { CallPaymentFormAPI, CallPaymentingDetailAPI } from '../../apis/PaymentAPICalls';
-import PayModal from '../../components/modal/paymentModal/PayModal';
-import PayRefuse from '../../components/modal/paymentModal/PayRefuse';
+import { createContext, useEffect, useRef, useState } from 'react';
+import { BsPersonFillAdd } from "react-icons/bs";
+import { CallPaymentFormAPI, CallPaymentRegistAPI, CallPaymentStorageUpdateAPI, CallPaymentingDetailAPI } from '../../apis/PaymentAPICalls';
 import moment from "moment";
+import { FiX } from 'react-icons/fi';
+import PaymentStorageModal from '../../components/modal/paymentStorageModal/PaymentStorageModal';
+import RefPaymentStorageModal from '../../components/modal/paymentStorageModal/RefPaymentStorageModal';
+
+
+export const payStorageContext = createContext();
+
 
 function PaymentStorageDetail () {
 
     const { payCode } = useParams();
     console.log("PaymentDetail payCode : " , payCode);
-    const disPatch = useDispatch();
+    const dispatch = useDispatch();
     const { payDetail, payForm, payEmp } = useSelector( state => state.paymentReducer);
     console.log("PaymentDetail payForm1 : " , payForm);
     console.log("PaymentDetail payForm2 : " , payDetail);
@@ -32,17 +38,19 @@ function PaymentStorageDetail () {
       isSearch : false
     });
     const html = payDetail&&payDetail.draftContent;
+    const [ file, setFile ] = useState();
+    const fileInput = useRef();
+    const [ isModifyFile, setIsModifyFile ] = useState(false)
+    const contextValue =  () => {
 
-  const contextValue =  () => {
-
-      setSearchForm({
-        search : '',
-        isSearch : false
-      }); 
-      setFocusEmp([]);
-      setIsFocus([]);
-   
-  }
+        setSearchForm({
+          search : '',
+          isSearch : false
+        }); 
+        setFocusEmp([]);
+        setIsFocus([]);
+    
+    }
    
     console.log("PaymentDetail payDetail : 우아라아앙" , payDetail);
 
@@ -69,8 +77,8 @@ function PaymentStorageDetail () {
 
     useEffect(
         ()=>{
-            disPatch(CallPaymentingDetailAPI({payCode}));
-            disPatch(CallPaymentFormAPI());
+            dispatch(CallPaymentingDetailAPI({payCode}));
+            dispatch(CallPaymentFormAPI());
         },[]
     )
 
@@ -84,7 +92,14 @@ function PaymentStorageDetail () {
           const valuePattern = /\{(\w+)\}/g;
           if(targetElement[i].value.match(valuePattern)){
             targetElement[i].value=""
-          } 
+          } else{
+            setForm(prevForm => {
+              const updatedForm = {
+                ...prevForm,
+                [targetElement[i].name]: targetElement[i].value
+              };
+              return updatedForm;
+            })};
         }
       }
       console.log("htmlRef : ", htmlRef.current.getElementsByTagName('input'));
@@ -119,7 +134,6 @@ function PaymentStorageDetail () {
         };
         
         console.log("form은 ?: ", form);
-        // DB에서 가져온 HTML 문자열
          // DB에서 가져온 HTML 문자열
          const payPath = payForm[payDetail.form.formCode-1].formString
          const htmlFromDB = payPath;
@@ -134,29 +148,193 @@ function PaymentStorageDetail () {
        
     };
 
+    const storagePayment =  
+    ()=> {
+    
+      const processHtmlString = (html) => {
 
+        let modifiedHTML = html;
+        Object.entries(form).forEach(([key, value]) => {
+          const regex = new RegExp(`{${key}}`, "g");
 
-     const onButtonHandler= () => {
-
-      const HTML = savePayment();
-      console.log(`saveHTML`, HTML)
-
-     
-      alert("저장 되었습니다.");
-        navigator("/pay/storage");
-
+          if (form[key] === undefined || form[key] === null) {
+            modifiedHTML = modifiedHTML.replace(regex, "");
+          } else {
+            modifiedHTML = modifiedHTML.replace(regex, `"${value}"`.trim() || " ");
+          }
+       
+        });  
+   
+        return modifiedHTML;
+      };
       
+      console.log("form은 ?: ", form);
+      // DB에서 가져온 HTML 문자열
+      const payPath = payForm[payDetail.form.formCode-1].formString
+      const htmlFromDB = payPath;
+      if (payPath) {
+        const filteredHTML = processHtmlString(htmlFromDB);
+        setForm({});
+        return filteredHTML;
+      }
+      return null;
+     
+  };
+
+  const onButtonHandler= () => {
+
+    const HTML = savePayment();
+    console.log(`saveHTML`, HTML)
+
+    const formData = new FormData();
+    if(file){
+      formData.append("originalFileName", file.name)
+      formData.append("fileInfo", file)
+    }
+    formData.append("payFileCategory.pay.payCode", payDetail.payCode)
+    formData.append("payFileCategory.fCategoryName", form.draftTitle? form.draftTitle: payDetail.draftTitle)
+    formData.append("payFileCategory.fCategoryType", "payment")
+    formData.append("payFileCategory.pay.draftDate", payDetail.draftDate);
+    formData.append("payFileCategory.pay.draftTitle", form.draftTitle? form.draftTitle: payDetail.draftTitle);
+    formData.append("payFileCategory.pay.draftContent",HTML);
+    formData.append("payFileCategory.pay.form.formCode", payDetail.form.formCode);
+    formData.append("payFileCategory.pay.payStatus", "진행중")
+    payMember && payMember.forEach( (member, index) => { 
+      console.log("이얃!!! : " , payMember.length);
+      formData.append(`payFileCategory.pay.PaymentMember[${index}].PaymentMemberPk.payCode`, 0)
+      formData.append(`payFileCategory.pay.PaymentMember[${index}].PaymentMemberPk.empCode`, member.empCode)
+      formData.append(`payFileCategory.pay.PaymentMember[${index}].payRank`, index+1)
+      index=== payMember.length-1 ? formData.append(`payFileCategory.pay.PaymentMember[${index}].payFinalYn`, 'Y')
+      : formData.append(`payFileCategory.pay.PaymentMember[${index}].payFinalYn`, 'N')
+    } );
+
+    refPayMember && refPayMember.forEach( (member, index) => { 
+      formData.append(`payFileCategory.pay.refenceMember[${index}].refenceMemberPk.payCode`, 0)
+      formData.append(`payFileCategory.pay.refenceMember[${index}].refenceMemberPk.empCode`, member.empCode)
+    } );
+
+    console.log("저장한다 : ", [...formData.entries()]);
+
+    dispatch(CallPaymentStorageUpdateAPI(formData));
+
+    alert("저장 되었습니다.");
+      navigator("/pay/storage");
+
+    
+    
+  }
+
+  const onSavePayment = () => {
+
+    const HTML = storagePayment();
+    console.log(`saveHTML`, HTML)
+
+    const formData = new FormData();
+
+    
+    if(file){
+      formData.append("originalFileName", file.name)
+      formData.append("fileInfo", file)
+    } 
+    formData.append("payFileCategory.pay.payCode", payDetail.payCode)
+    formData.append("payFileCategory.fCategoryName", form.draftTitle? form.draftTitle: payDetail.draftTitle)
+    formData.append("payFileCategory.fCategoryType", "payment")
+    formData.append("payFileCategory.pay.draftDate", payDetail.draftDate);
+    formData.append("payFileCategory.pay.draftTitle", form.draftTitle? form.draftTitle: payDetail.draftTitle);
+    formData.append("payFileCategory.pay.draftContent",HTML);
+    formData.append("payFileCategory.pay.form.formCode", payDetail.form.formCode);
+    formData.append("payFileCategory.pay.payStatus", "임시")
+    payMember && payMember.forEach( (member, index) => { 
+      console.log("이얃!!! : " , payMember.length);
+      formData.append(`payFileCategory.pay.PaymentMember[${index}].PaymentMemberPk.payCode`, 0)
+      formData.append(`payFileCategory.pay.PaymentMember[${index}].PaymentMemberPk.empCode`, member.empCode)
+      formData.append(`payFileCategory.pay.PaymentMember[${index}].payRank`, index+1)
+      index=== payMember.length-1 ? formData.append(`payFileCategory.pay.PaymentMember[${index}].payFinalYn`, 'Y')
+      : formData.append(`payFileCategory.pay.PaymentMember[${index}].payFinalYn`, 'N')
+    } );
+
+    refPayMember && refPayMember.forEach( (member, index) => { 
+      formData.append(`payFileCategory.pay.refenceMember[${index}].refenceMemberPk.payCode`, 0)
+      formData.append(`payFileCategory.pay.refenceMember[${index}].refenceMemberPk.empCode`, member.empCode)
+    } );
+    
+   
+
+    console.log("임시저장한다 : ", [...formData.entries()]);
+
+    dispatch(CallPaymentStorageUpdateAPI(formData));
+
+    alert("임시 저장 되었습니다.");
+      navigator("/pay/storage");
+
+  }
+
+  const onRefModalHandler = () => {
+    contextValue();
+    setRefPaymentModal(true);
+ }
+
+    const onOrgModalHandler = () => {
+      contextValue();
+      setPaymentModal(true);
+      if(payDetail.paymentMember){
+        const paymentMemberEmp= []
+        payDetail.paymentMember.map( member => paymentMemberEmp.push({emp:member.emp, sub:member.emp.dept}))
+        console.log("과연 focu1s는 : ", paymentMemberEmp);
+        setFocusEmp(paymentMemberEmp)
+    }
+
+    console.log("모달이다앙!! : ", payMember);
+    console.log("모달이다앙!! : ", payDetail.paymentMember)
+
+    }
+    const onClickinputLabel = () => {
+      fileInput.current.click();
+    }
+
+    const onClickCancleFile = () => {
+      if(payDetail.payFileCategory && payDetail.payFileCategory.file){
+      payDetail.payFileCategory.file="";
+    }
+      setFile();
+    }
+    
+
+    
+    const onChangeFile = (e) => {
+      console.log("첨부파일 : " , e.target.files[0]);
+      setFile(e.target.files[0]);
+      if(payDetail.payFileCategory && payDetail.payFileCategory.file){payDetail.payFileCategory.file=e.target.files[0];}
+    }
+
+    const onClickModify = () => {
+      if(payDetail.payFileCategory.file !== ""){
+      setFile(payDetail.payFileCategory.file);
+      }
+      setIsModifyFile(true);
       
     }
 
+    const onClickModifySave = (e) => {
+      
+      setIsModifyFile(false);
+    }
 
+    console.log("기안자? " , payMember)
+    // console.log("파일인가?", payDetail&&payDetail.payFileCategory.file)
     return (
        <div className={PayDetailCSS.background}>
+        
+        <payStorageContext.Provider value={{searchForm, setSearchForm, setFocusEmp, focusEmp, isFocus, setIsFocus, setPayMember, setRefPayMember}}>
+        { paymentModal ? (<PaymentStorageModal setPaymentModal={setPaymentModal} payEmp={payEmp} payDetail={payDetail}/>) : null }
+        { refpaymentModal ? (<RefPaymentStorageModal setRefPaymentModal={setRefPaymentModal} payEmp={payEmp}/>) : null }
+        </payStorageContext.Provider>
+        
           <div className={PayDetailCSS.titleDiv}>
             <div className={PayDetailCSS.title}>임시 저장 문서</div> 
-            <button className={PayDetailCSS.button} onClick={onCancelHandler}>결재선</button>
+            <button className={PayDetailCSS.button} onClick={onOrgModalHandler}>결재선</button>
           <button className={PayDetailCSS.button} onClick={onButtonHandler}>결재요청</button>
-          <button className={PayDetailCSS.button} onClick={onCancelHandler}>임시저장</button>
+          <button className={PayDetailCSS.button} onClick={onSavePayment}>임시저장</button>
             <button className={PayDetailCSS.buttonCancel} onClick={onCancelHandler} >취소</button>
           </div>
         <div className={PayDetailCSS.payApproval}>
@@ -171,9 +349,19 @@ function PaymentStorageDetail () {
               }
             </div>
           </div>
-          
-          {
-            payDetail && payDetail.paymentMember.sort((a, b) => a.payRank - b.payRank).map( (pay, index, array) => (
+          {payMember.length>0? (
+            payMember && payMember.map( (pay, index) => (
+              <div className={PayDetailCSS.payDiv}>
+              <div className={PayDetailCSS.payTitle}>
+                {index === payMember.length -1 ? '최종 결재자' : '결재자'}
+              </div>
+              <div className={PayDetailCSS.payName}>{pay.empName}</div>
+              <div className={PayDetailCSS.paySign}></div>
+            </div>
+            ))
+          ) :
+          (
+            payDetail && payDetail.paymentMember&& payDetail.paymentMember.sort((a, b) => a.payRank - b.payRank).map( (pay, index, array) => (
             <div className={PayDetailCSS.payDiv} key={pay.payCode}>
               <div className={PayDetailCSS.payTitle}>
                 {index === payDetail.paymentMember.length -1 ? '최종 결재자' : '결재자'}
@@ -183,13 +371,13 @@ function PaymentStorageDetail () {
                 {pay.payType ==="결재" ? 
                 pay.emp.payFileCategory.filter( file => file.fcategoryType === "sign").length > 0 ?
                 <img src={pay.emp.payFileCategory.filter( file => file.fcategoryType === "sign")[0].file.filePath} className={PayDetailCSS.signImg}/>
-                : pay.emp.empName : pay.payType ==="반려" ? "반려" : pay.payType === null && array.filter( paym => paym.payTotalYn==="Y" ).length>0 ?  array.filter( paym => paym.payTotalYn==="Y" )[0].emp.empName + " 전결" : "실패" 
+                : pay.emp.empName : pay.payType ==="반려" ? "반려" : pay.payType === null && array.filter( paym => paym.payTotalYn==="Y" ).length>0 ?  array.filter( paym => paym.payTotalYn==="Y" )[0].emp.empName + " 전결" : "" 
                 }
               </div>
             </div>
             ))
+          )  
           }
-
         </div>
         <div className={PayDetailCSS.tableDiv}>
           <table className={PayDetailCSS.tbody}>
@@ -211,6 +399,7 @@ function PaymentStorageDetail () {
                 <td colSpan='3' >
                   <div className={[PayDetailCSS.refMemebertd]}>
                     <div> {payDetail && payDetail.refenceMember.map( ref =><> {ref.emp.empName} </>)}</div>
+                    <BsPersonFillAdd className={PayDetailCSS.refMemeber} onClick={onRefModalHandler}/>
                 </div>
                 </td>
               </tr>
@@ -236,10 +425,65 @@ function PaymentStorageDetail () {
             
               <tr className={PayDetailCSS.attach}>
                 <th>첨부파일</th>
-                <td colSpan="5">
+                <td className={PayDetailCSS.inputTd} colSpan="5">
                     { payDetail && payDetail.payFileCategory? 
-                    <a href={payDetail.payFileCategory.file.filePath} className={PayDetailCSS.a} download={payDetail.payFileCategory.file.originalFileName}> {payDetail.payFileCategory.file.originalFileName}</a> : 
-                    <div className={PayDetailCSS.a}>첨부파일 없음 </div>
+                    <>
+                      {isModifyFile?  
+                        (<> <input type='file' name="payFile" ref={fileInput} className={PayDetailCSS.inputFile} onChange={onChangeFile}/> 
+                          {
+                            file===undefined ? 
+                            (<label className={PayDetailCSS.inputLabel} onClick={ onClickinputLabel }>첨부파일 없음</label>)
+                          :
+                            (<>
+                              <div className={PayDetailCSS.inputLabelDiv}><label className={PayDetailCSS.inputLabelSet} onClick={ onClickinputLabel }> {file && file.originalFileName? file.originalFileName: file.name}  </label>
+                              <FiX className={PayDetailCSS.inputFix} onClick={onClickCancleFile}/></div>
+                            </>)
+                          }<button className={PayDetailCSS.modifyButton}  onClick={onClickModifySave}>저장</button>
+                        </> )
+                        : payDetail && payDetail.payFileCategory!==""? 
+                        file? 
+                        (<><input type='file' name="payFile" ref={fileInput} className={PayDetailCSS.inputFile} onChange={onChangeFile}/> 
+                          <label className={PayDetailCSS.aModi} onClick={ onClickinputLabel }>{file && file.name} </label>
+                          <FiX className={PayDetailCSS.inputFix} onClick={onClickCancleFile}/>
+                        
+                        </> ): (
+                          <>
+                            <a href={payDetail.payFileCategory.file.filePath} className={PayDetailCSS.a} target='_blank' rel='noreferrer' download={payDetail.payFileCategory.file.originalFileName}> 
+                              {payDetail.payFileCategory.file.originalFileName? payDetail.payFileCategory.file.originalFileName : "첨부파일 없음"}</a> 
+                            <button className={PayDetailCSS.modifyButton}  onClick={onClickModify}>수정</button>
+                          </>
+                        ) : 
+                        (
+                          <>
+                            <input type='file' name="payFile" ref={fileInput} className={PayDetailCSS.inputFile} onChange={onChangeFile}/>
+                            {
+                              file===undefined ? 
+                              (<label className={PayDetailCSS.inputLabel} onClick={ onClickinputLabel }>첨부파일 없음</label>)
+                            :
+                              (<>
+                                <label className={PayDetailCSS.inputLabelSet} onClick={ onClickinputLabel }>{file && file.name} </label>
+                                <FiX className={PayDetailCSS.inputFix} onClick={onClickCancleFile}/>
+                              </>)
+                            }
+                          </>
+                        )
+                        }
+                    </>
+                    : 
+                      (
+                        <>
+                          <input type='file' name="payFile" ref={fileInput} className={PayDetailCSS.inputFile} onChange={onChangeFile}/>
+                          {
+                            file===undefined ? 
+                            (<label className={PayDetailCSS.inputLabel} onClick={ onClickinputLabel }>첨부파일 없음</label>)
+                          :
+                            (<>
+                              <label className={PayDetailCSS.inputLabelSet} onClick={ onClickinputLabel }>{file && file.name} </label>
+                              <FiX className={PayDetailCSS.inputFix} onClick={onClickCancleFile}/>
+                            </>)
+                          }
+                        </>
+                      )
                     }
                 </td>
               </tr>

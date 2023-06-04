@@ -272,7 +272,7 @@ function Payment () {
       }
       setCountInput(targetElement.length);
       console.log("htmlRef : ", htmlRef.current.getElementsByTagName('input'));
-    }, []);
+    }, [htmlString]);
 
 
 
@@ -434,7 +434,7 @@ function Payment () {
                 <th>첨부파일</th>
                 <td colSpan="5"><input type='file' name="payFile" ref={fileInput} className={payCSS.inputFile}
                 onChange={onChangeFile}/>
-                {file===undefined ? <label className={payCSS.inputLabel} onClick={ onClickinputLabel }></label>
+                {file===undefined ? <label className={payCSS.inputLabel} onClick={ onClickinputLabel }>첨부파일 없음</label>
                   :
                 <><label className={payCSS.inputLabelSet} onClick={ onClickinputLabel }>{file && file.name} </label><FiX onClick={onClickCancleFile}/></>}
                 </td>
