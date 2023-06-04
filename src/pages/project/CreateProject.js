@@ -219,7 +219,7 @@ function CreateProject() {
                     </div >
                     <div className={CreteProjCSS.container}>
                             <span className={CreteProjCSS.span1}>팀원 선택</span>
-                            <select onChange={onChangeEmpHandler} value={selectedEmp} className={CreteProjCSS.span2}>
+                            <select onChange={onChangeEmpHandler} value={selectedEmp} className={CreteProjCSS.span5}>
                             {emps && emps.length > 0 && 
                                     emps.map((emp) => (
                                         <option key={emp.empCode} value={`${emp.empCode} ${emp.empName} ${emp.email}`}>
@@ -227,29 +227,30 @@ function CreateProject() {
                                         </option>
                             ))}
                             </select>
-                    </div>
-                    <div>
-                        <button onClick={ onClickHandler }>
+                            <button onClick={ onClickHandler } className={CreteProjCSS.createBtn}>
                             추가하기
-                        </button>
+                            </button>
+                    </div>
+                    <div >
+                        {/* <button onClick={ onClickHandler } className={CreteProjCSS.createBtn}>
+                            추가하기
+                        </button> */}
                     </div>
                     <div className={CreteProjCSS.container}>
-                        <span className={CreteProjCSS.span1}>프로젝트 팀원</span>
-                        {/* {selectedEmpList.map((member, index) => (
-                            <span key={index}>{member.name} {member.email} <button onClick={ () => removeEmp(index)}> x </button></span>
-                            
-                        ))} */}
-                        {selectedEmpList
-                            //self 검색 값 
-                            .filter((member, index, self) =>
-                                //검색했을 때 이메일이 find
-                                index === self.findIndex((m) => m.email === member.email)
-                            )
-                            .map((member, index) => (
-                                <span key={index}>
-                                {member.name} {member.email} <button onClick={() => removeEmp(index)}>x</button>
-                        </span>
-                        ))}
+                        <span className={CreteProjCSS.span7}>프로젝트 팀원</span>
+                        <div className={CreteProjCSS.span6}>
+                            {selectedEmpList
+                                //self 검색 값 
+                                .filter((member, index, self) =>
+                                    //검색했을 때 이메일이 find
+                                    index === self.findIndex((m) => m.email === member.email)
+                                )
+                                .map((member, index) => (
+                                    <div key={index} className={CreteProjCSS.span8}>
+                                    {member.name} {member.email} <button onClick={() => removeEmp(index)} className={CreteProjCSS.createBtn2}>x</button>
+                            </div>
+                            ))}
+                        </div>
                     </div>
                     <div className={CreteProjCSS.container}>
                         <span className={CreteProjCSS.span1}>프로젝트 시작일</span>

@@ -169,8 +169,8 @@ function WorkRestList() {
                         <tr className={WorkRestListCSS.td} key={leave.leaveCode}>
                             <td>{leave.leaveReqDate.substring(0, 10)}</td>
                             <td>{lYear ? lYear.data.emp.dept.deptName : ""}</td>
-                            <td>{lYear ? lYear.data.emp.dept.deptName : ""}</td>
                             <td>{lYear ? lYear.data.emp.job.jobName : ""}</td>
+                            <td>{lYear ? lYear.data.emp.empName : ""}</td>
                             <td>{leave.leaveType}</td>
                             <td>{leave.leaveStartDay.substring(0, 10)}</td>
                             <td>{leave.leaveEndDate.substring(0, 10)}</td>

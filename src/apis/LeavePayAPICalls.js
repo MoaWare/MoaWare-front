@@ -1,4 +1,4 @@
-import { getDone, postLeave } from "../modules/LeavePayModule";
+import { getDone, getLeaverequestlist, getRequest, postLeave } from "../modules/LeavePayModule";
 
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -46,6 +46,50 @@ export const callLeaveRequestAPI = (formData) => {
         if(result.status === 200){
             console.log("[LeavePayAPICalls] callLeaveRequestAPI result ", result);
             dispatch(postLeave(result));
+        }
+        
+    }
+}
+
+export const callMyLeaveRequestListAPI = ({ currentPage = 1}) => {
+
+    const requestURL = `${PRE_URL}/leave/request/list?page=${currentPage}`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : 'GET',
+            headers : {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            },
+        }).then(response => response.json());
+
+        if(result.status === 200){
+            console.log("[LeavePayAPICalls] callMyLeaveRequestListAPI result ", result);
+            dispatch(getLeaverequestlist(result));
+        }
+        
+    }
+}
+
+export const callLeaveRestDetailAPI = ({leaveCode}) => {
+
+    const requestURL = `${PRE_URL}/leave/request/${leaveCode}`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : 'GET',
+            headers : {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            },
+        }).then(response => response.json());
+
+        if(result.status === 200){
+            console.log("[LeavePayAPICalls] callLeaveRestDetailAPI result ", result);
+            dispatch(getRequest(result));
         }
         
     }

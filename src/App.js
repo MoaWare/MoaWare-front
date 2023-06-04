@@ -56,7 +56,7 @@ import PaymentDetail from "./pages/payment/PaymentDetail";
 import BoardPostModify from "./pages/board/BoardPostModify";
 import PaymentWaitDetail from "./pages/payment/PaymentWaitDetail";
 import PaymentStorageDetail from "./pages/payment/PaymentStorageDetail";
-
+import WorkReqListItemDetail from './pages/users/works/WorkReqListItemDetail';
 
 function App() {
 
@@ -86,6 +86,7 @@ function App() {
             <Route path="restReq" element={<WorkRestReq />} />
             <Route path="restReqList" element={<WorkRestReqList />} />
             <Route path="restList" element={<WorkRestList />} />
+            <Route path="reqListItem/:leaveCode" element={<WorkReqListItemDetail />} />
           </Route>
   
           {/* 프로젝트 */}

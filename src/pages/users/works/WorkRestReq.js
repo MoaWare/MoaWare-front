@@ -7,14 +7,17 @@ import moment from "moment";
 import { callMemberInfoAPI } from '../../../apis/MemberAPICalls';
 import { useDispatch, useSelector } from 'react-redux';
 import { callLeaveRequestAPI } from '../../../apis/LeavePayAPICalls';
+import { useNavigate } from 'react-router-dom';
 
 function WorkRestReq() {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [selectedStartDate, setSelectedStartDate] = useState(null)
     const [selectedEndDate, setSelectedEndDate] = useState(null)
     const [selectedOption, setSelectedOption] = useState("");
     const { info } = useSelector((state) => state.memberReducer);
+    const { request } = useSelector((state) => state.leavePayReducer);
     const today = new Date().toISOString().slice(0, 10);
     const options = ["연차", "반차", "공무", "경조사"];
 
@@ -46,7 +49,7 @@ function WorkRestReq() {
         formData.append("leaveType", selectedOption);
         formData.append("leaveReqDate", moment(today).format('YYYY-MM-DD'));
         formData.append("leaveStartDay", moment(selectedStartDate).format('YYYY-MM-DD'));
-        formData.append("leaveEndDay", moment(selectedEndDate).format('YYYY-MM-DD'));
+        formData.append("leaveEndDate", moment(selectedEndDate).format('YYYY-MM-DD'));
 
         console.log(moment(selectedEndDate).format('YYYY-MM-DD'))
         console.log(moment(selectedStartDate).format('YYYY-MM-DD'))
@@ -63,8 +66,19 @@ function WorkRestReq() {
 
         dispatch(callMemberInfoAPI());
 
-    },[]);
+    },[request]);
+    
+    useEffect(() => {
 
+        if (request?.status === 200) {
+            alert('신청 완료.');
+            navigate("/work/restReq");
+          } else if (request?.state === 400) {
+            alert(request.message);
+          }
+
+    },[request])
+    
     return (
         <>
             <div className={WorkRestReqCSS.main}>
@@ -83,7 +97,7 @@ function WorkRestReq() {
                     <span className={WorkRestReqCSS.span3}>연차 종료일</span>
                     <div className={WorkRestReqCSS.date}>
                         <DatePicker className={WorkRestReqCSS.datepicker}
-                            name="leaveEndDay"
+                            name="leaveEndDate"
                             selected={selectedEndDate}
                             onChange={onEndeDateHandler}
                             dateFormat='yyyy-MM-dd'
@@ -101,7 +115,7 @@ function WorkRestReq() {
                     <select value={selectedOption} onChange={handleSelectChange}
                         className={WorkRestReqCSS.selectBox}
                     >
-                        <option value="">선택</option>
+                        {/* <option value="">선택</option> */}
                         {options.map((option) => (
                             <option key={option} value={option}>
                                 {option}
@@ -138,7 +152,6 @@ function WorkRestReq() {
                 </div>
                 <div>
                     <button className={WorkRestReqCSS.workBtn1} onClick={onClickCreate}>신청하기</button>
-                    <button className={WorkRestReqCSS.workBtn2}>신청하기</button>
                 </div>
             </div>
         </>
