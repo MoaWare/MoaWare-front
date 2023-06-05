@@ -19,6 +19,7 @@ function LoginPwdFind(){
         email : ""
     });
 
+
     useEffect(()=>{
         if(password?.status === 200){
 
@@ -28,13 +29,14 @@ function LoginPwdFind(){
         } 
     },[password])
 
+
     const onChangeHandler = (e) => {
         setForm({
             ...form,
             [e.target.name]: e.target.value
         });
-        console.log(e.target.value); 
     };
+
 
     function onClickHandler(){
         
@@ -54,7 +56,6 @@ function LoginPwdFind(){
               });
             return;
         }
-
         dispatch(callFindPwdAccountAPI(form));
         setForm('');
     };
@@ -70,7 +71,7 @@ function LoginPwdFind(){
     return (
         <>
             <header className={LoginCSS.header}>
-                <h3 className={LoginCSS.logo}>MOAWARE</h3>
+                <h3 className={LoginCSS.logo} onClick={()=>{navigate('/');}}>MOAWARE</h3>
             </header>
             <div className={LoginCSS.backgroundDiv}>
                 <div className={ LoginCSS.loginDiv }>

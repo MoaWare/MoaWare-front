@@ -13,21 +13,13 @@ function LoginIdFind(){
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { id } = useSelector(state => state.employeeReducer);
-
     const [ form, setForm ] = useState({
         empCode : "",
         empName : "",
         email : ""
     });
 
-    const onChangeHandler = (e) => {
 
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        });
-        console.log(e.target.value);
-    };
 
     useEffect(() => {
         if( id?.state === 400 ){
@@ -36,13 +28,23 @@ function LoginIdFind(){
                 autoClose: 2000, 
                 hideProgressBar: false, 
                 progressStyle: {
-                  backgroundColor: '#ff000074', 
-                  height: '5px', 
+                    backgroundColor: '#ff000074', 
+                    height: '5px', 
                 },
-              });
+                });
             setForm({});
         }
     },[id])
+
+
+    const onChangeHandler = (e) => {
+
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        });
+    };
+
 
     const onClickHandler =()=>{
 
@@ -64,7 +66,6 @@ function LoginIdFind(){
         }
 
         dispatch(callFindAccountAPI(form));
-        console.log(id);
     };
 
     const onClickLoginHandler = () => {

@@ -34,7 +34,6 @@ function TaskUpdate() {
       project : {},
     });
 
-
     let endDate = '';
 
             
@@ -58,7 +57,7 @@ function TaskUpdate() {
         
         if(task){
           endDate = task.project.endDate.substring(10,0);
-        //   console.log("endDate ------------------------------", endDate);
+
           setForm((prevForm) => ({
               ...prevForm,
               project: task.project,
@@ -71,7 +70,6 @@ function TaskUpdate() {
               stage: task.stage,
             }));
           }
-        // console.log("form ------------------------------",form);
 
     },[ ]);
 
@@ -96,8 +94,6 @@ function TaskUpdate() {
             ...prevForm,
             [e.target.name] : e.target.value,
         }));
-
-        console.log(form);
     }
 
 
@@ -115,7 +111,7 @@ function TaskUpdate() {
                   height: '5px', 
                 },
               });
-              
+
             navigate(`/task/${task.project.projCode}`);
         }
     };

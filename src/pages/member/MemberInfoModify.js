@@ -24,6 +24,7 @@ function MemberInfoModify(){
     const [ isCheck , setIsCheck ] = useState(false);
     const userImage = '../icon/user.jpg';
     
+
     /* 회원 정보 조회 */
     useEffect(()=>{
 
@@ -74,6 +75,7 @@ function MemberInfoModify(){
     }, [image]);
 
 
+
     const { modify } = useSelector(state => state.memberReducer);
     
     useEffect(() => {
@@ -95,7 +97,6 @@ function MemberInfoModify(){
             ...form,
             [e.target.name] : e.target.value
         });
-        console.log(e.target.value);
     };
 
     const onChangeImageUpload = (e) => {

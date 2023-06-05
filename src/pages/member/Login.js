@@ -11,31 +11,26 @@ function Login(){
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
     const { login } = useSelector(state => state.employeeReducer);
     
-    useEffect(
-        
-        ()=>{
-            if( login?.status === 200 ){
-                
-                navigate("/", { replace : true });
-                dispatch(resetEmp());
 
-            } else if( login?.state === 400 ){
+    useEffect(()=>{
 
-                toast.error(login.message, {
-                    position: toast.POSITION.TOP_CENTER, 
-                    autoClose: 2000, 
-                    hideProgressBar: false, 
-                    progressStyle: {
-                      backgroundColor: '#ff000074', 
-                      height: '5px', 
-                    },
-                  });
+        if( login?.status === 200 ){
+            navigate("/", { replace : true });
+            dispatch(resetEmp());
 
-                dispatch(resetEmp());   
-            }
+        } else if( login?.state === 400 ){
+            toast.error(login.message, {
+                position: toast.POSITION.TOP_CENTER, 
+                autoClose: 2000, 
+                hideProgressBar: false, 
+                progressStyle: {
+                    backgroundColor: '#ff000074', 
+                    height: '5px'},
+                });
+            dispatch(resetEmp());   
+        }
         },[login]
     );
 

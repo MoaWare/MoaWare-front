@@ -13,7 +13,6 @@ function TaskItem({ task }) {
   const [ color , setColor ] = useState('');
   const [ time, setTime ] = useState('');
 
-  // console.log("TaskItem task : ", task );
 
   useEffect(() => {
     if(task){
@@ -54,10 +53,7 @@ function TaskItem({ task }) {
   },[taskType]);
 
 
-
-
   const onTaskClick = () => { 
-
     navigate(`/task/${task?.project?.projCode}/detail/${task?.taskCode}`);
   }
 

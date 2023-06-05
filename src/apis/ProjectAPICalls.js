@@ -22,7 +22,6 @@ export const callProjectAPI = (projCode) => {
         }).then(res => res.json());
 
         if(result.status === 200){
-            console.log(result);
             dispatch(getProject(result));
         }
     }
@@ -43,7 +42,6 @@ export const callTaskListAPI = ({ projCode }) => {
         }).then(res => res.json());
 
         if(result.status === 200){
-            console.log(result);
             dispatch(getTasks(result));
         }
     }
@@ -65,7 +63,6 @@ export const callTaskDetailAPI = (taskCode) => {
         }).then(res => res.json());
 
         if(result.status === 200){
-            console.log(result);
             dispatch(getTask(result));
         }
     }
@@ -89,8 +86,6 @@ export const callTaskRegistAPI = ( form ) => {
       }).then(res => res.json());
 
       if(result?.status === 200){
-          console.log(result);
-
           dispatch(postTask(result));
 
       } else if(result?.status === 400){
@@ -124,7 +119,6 @@ export const callTaskUpdateAPI = ( form ) => {
       }).then(res => res.json());
 
       if(result?.status === 200){
-          console.log(result);
           dispatch(putTask(result));
       } else if(result?.status === 400){
         toast.error(result.message, {
@@ -157,7 +151,6 @@ export const callTaskDeleteAPI = ( taskCode ) => {
       }).then(res => res.json());
 
       if(result?.status === 200){
-          console.log(result);
           dispatch(deleteTask(result));
       } else if(result?.status === 400){
         toast.error(result.message, {
