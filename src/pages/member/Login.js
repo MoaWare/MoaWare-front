@@ -4,6 +4,7 @@ import LoginCSS from './Login.module.css';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { resetEmp } from "../../modules/EmployeeModule";
+import { toast } from "react-toastify";
 
 
 function Login(){
@@ -17,10 +18,22 @@ function Login(){
         
         ()=>{
             if( login?.status === 200 ){
+                
                 navigate("/", { replace : true });
                 dispatch(resetEmp());
+
             } else if( login?.state === 400 ){
-                alert(login.message);
+
+                toast.error(login.message, {
+                    position: toast.POSITION.TOP_CENTER, 
+                    autoClose: 2000, 
+                    hideProgressBar: false, 
+                    progressStyle: {
+                      backgroundColor: '#ff000074', 
+                      height: '5px', 
+                    },
+                  });
+
                 dispatch(resetEmp());   
             }
         },[login]

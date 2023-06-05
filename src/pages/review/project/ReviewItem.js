@@ -58,7 +58,15 @@ function ReviewItem({ review }){
                 dispatch(callReviewDelete(review?.reviewCode));
                 // setSwitchOn((current) => !current);
             } else {
-                alert('최초 작성자만 삭제가 가능합니다.');
+                toast.error('최초 작성자만 삭제가 가능합니다.', {
+                    position: toast.POSITION.TOP_CENTER, 
+                    autoClose: 2000, 
+                    hideProgressBar: false, 
+                    progressStyle: {
+                      backgroundColor: '#ff000074', 
+                      height: '5px', 
+                    },
+                  });
             }
         };
     }

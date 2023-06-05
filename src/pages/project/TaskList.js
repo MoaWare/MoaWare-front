@@ -8,7 +8,6 @@ function TaskList({ task }) {
     const navigate = useNavigate();
     const taskStage = task[0]?.stage || task;
     const [ stage , setStage ] = useState('');
-    // console.log("TaskList task : ", task );
 
     useEffect(() => {
       

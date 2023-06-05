@@ -70,7 +70,11 @@ function TaskRegist() {
     useEffect(() => {
 
         if(post?.status === 200){
-            alert(post.message);
+            toast.success(post.message, {
+                position: toast.POSITION.TOP_CENTER, 
+                autoClose: 2000, 
+                hideProgressBar: false,
+              });
             navigate(`/task/${form.project.projCode}`);
         }
     },[post]);

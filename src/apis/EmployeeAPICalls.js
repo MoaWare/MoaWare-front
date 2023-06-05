@@ -1,5 +1,8 @@
 import { getDeptlist, getHeaderName, postFindId, postFindPwd, postLogin, getProfile } from "../modules/EmployeeModule";
 import { postMemberInfo, getMemberInfo } from "../modules/MemberModule";
+import { toast } from "react-toastify";
+
+
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${ process.env.REACT_APP_RESTAPI_SERVER_PORT}`
@@ -21,8 +24,6 @@ export const callLoginAPI = (form) => {
             body : JSON.stringify(form)
         })
         .then(response => response.json());
-
-        console.log('[callLoginAPI] result : ', result);
 
         if(result.status === 200) {
             window.localStorage.setItem('accessToken', result.data.accessToken);
@@ -50,10 +51,17 @@ export const callFindAccountAPI = (form) => {
         }).then(res => res.json());
         
         if( result.status === 200 ){
-            console.log("[callIdFindAPI] result :", result);
             dispatch(postFindId(result));
         } else {
-            alert(result.message);
+            toast.error(result.message, {
+                position: toast.POSITION.TOP_CENTER, 
+                autoClose: 2000, 
+                hideProgressBar: false, 
+                progressStyle: {
+                  backgroundColor: '#ff000074', 
+                  height: '5px', 
+                },
+              });
         }
     }
 }
@@ -75,10 +83,17 @@ export const callFindPwdAccountAPI = (form) => {
         }).then(res => res.json());
         
         if( result?.status === 200 ){
-            console.log("[callFindPwdAccountAPI] result :", result);
             dispatch(postFindPwd(result));
         } else {
-            alert(result.message);
+            toast.error(result.message, {
+                position: toast.POSITION.TOP_CENTER, 
+                autoClose: 2000, 
+                hideProgressBar: false, 
+                progressStyle: {
+                  backgroundColor: '#ff000074', 
+                  height: '5px', 
+                },
+              });
         }
     }
 }
@@ -97,7 +112,6 @@ export const callHeaderNameAPI = () => {
         }).then(res => res.json());
 
         if(result.status === 200){
-            console.log(result);
             dispatch(getHeaderName(result));
         }
     }
@@ -116,7 +130,6 @@ export const callDeptListAPI = () => {
         }).then(res => res.json());
 
         if(result.status === 200){
-            console.log("[ProjectAPICalls] callDeptListAPI result : ", result);
             dispatch(getDeptlist(result));
         }
     }

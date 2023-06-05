@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { callFindPwdAccountAPI } from "../../apis/EmployeeAPICalls";
 import { resetEmp } from "../../modules/EmployeeModule";
+import { toast } from "react-toastify";
+
+
 
 function LoginPwdFind(){
 
@@ -18,6 +21,7 @@ function LoginPwdFind(){
 
     useEffect(()=>{
         if(password?.status === 200){
+
             alert("비밀번호가 이메일로 전송되었습니다. \n확인 후 비밀번호를 재설정해주세요.");
             dispatch(resetEmp);
             navigate("/");
@@ -39,7 +43,15 @@ function LoginPwdFind(){
             !form.empId ||
             !form.email
         ) {
-            alert("정보를 모두 입력해주세요");
+            toast.error("정보를 모두 입력해주세요", {
+                position: toast.POSITION.TOP_CENTER, 
+                autoClose: 2000, 
+                hideProgressBar: false, 
+                progressStyle: {
+                  backgroundColor: '#ff000074', 
+                  height: '5px', 
+                },
+              });
             return;
         }
 
