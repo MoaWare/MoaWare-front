@@ -1,6 +1,6 @@
 import { useEffect, } from "react";
-import { useNavigate } from 'react-router-dom';import 
-{ useDispatch, useSelector, } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector, } from "react-redux";
 import { callBoardPostDetailAPI } from '../../apis/BoardPostAPICalls';
 import CSS from "./BoardPostDetail.module.css";
 import { useParams } from "react-router-dom";

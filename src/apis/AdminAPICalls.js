@@ -1,4 +1,4 @@
-import { postAdminEmp } from "../modules/AdminModule";
+import { postAdminEmp, putAdminEmp, putAdminEmpdelete } from "../modules/AdminModule";
 import { getEmployees, getEmployee  } from "../modules/EmployeeModule";
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -16,15 +16,15 @@ export const callAdminEmpListAPI = ({ currentPage = 1 }) => {
     return async (dispatch, getState) => {
 
 
-        const result = await fetch(requestURL).then(response => response.json());
+        //const result = await fetch(requestURL).then(response => response.json());
+         const result = await fetch(requestURL, {
+             method : 'GET',
+             headers : {
+                 'Content-Type' : 'application/json',
+                 "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+             },
+         }).then(res => res.json());
 
-        // const result = await fetch(requestURL, {
-        //     method : 'GET',
-        //     headers : {
-        //         'Content-Type' : 'application/json',
-        //         "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
-        //     },
-        // }).then(res => res.json());
 
         if (result.status === 200) {
             console.log('[AdminAPICalls] : callAdminEmpListAPI result : ', result);
@@ -48,6 +48,8 @@ export const callAdminEmpDetailAPI = ({ empCode }) => {
                  "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
             }
          }).then(response => response.json());
+
+
         if (result.status === 200) {
             console.log('[AdminAPICalls] callAdminEmpDetailAPI result : ', result);
             dispatch(getEmployee(result));
@@ -82,8 +84,60 @@ export const callAdminEmpRegistAPI = (formData) => {
 
 
 
+    /*계정(직원) 퇴직 처리 */
+    export const callAdminEmpDeleteAPI =({ empCode }) => {
+
+        const requestURL = `${PRE_URL}/delete/${empCode}`;
+      
+        console.log(empCode);
+    
+        return async (dispatch, getState) => {
+      
+            const result = await fetch(requestURL, {
+              method : "PUT",
+              headers : {
+                  "Content-Type" : "application/json",
+                  "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+
+              },
+            }).then(res => res.json());
+      
+
+            if(result?.status === 200){
+                console.log("[AdminEmpAPICalls] callAdminEmpDeleteAPI result : ", result);
+                dispatch(putAdminEmpdelete(result));
+            
+            }
+        }
+      }
 
 
+
+// 수정
+export const callAdminEmpUpdateAPI = (formData) => {
+
+    const requestURL = `${PRE_URL}/modify`;
+
+    return async (dispatch, getState) => {
+
+        //const result = await fetch(requestURL).then(response => response.json());
+         const result = await fetch(requestURL, {
+             method: 'PUT',
+             headers: {
+                 "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+             },
+             body: formData
+         }).then(response => response.json());
+
+
+
+        if (result.status === 200) {
+            console.log('[AdminEmpAPICalls] callAdminEmpUpdateAPI result :', result);
+         dispatch(putAdminEmp(result));
+        }
+    }
+
+}
 
 
 
