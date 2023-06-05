@@ -46,14 +46,9 @@ function ReviewList({ task, reviews }){
 
     
     /* 댓글 등록 및 재조회 */
-    const handleSubmitContent = async (e) => {
+    const handleSubmitContent = () => {
             
-      try{
-        
-        // console.log(review);
-        await dispatch(callReviewsRegistAPI(review));
-        // setSwitchOn((current)=>!current);
-                // console.log('여기에서 에러가 나나요?');
+        dispatch(callReviewsRegistAPI(review));
 
         setReview({
           content: '', 
@@ -68,21 +63,22 @@ function ReviewList({ task, reviews }){
           hideProgressBar: false, 
         });
 
-      } catch (error) {
+      } 
+    //   catch (error) {
         
-        toast.error('댓글 등록 오류 '+ error, {
-          position: toast.POSITION.TOP_CENTER, 
-          autoClose: 2000, 
-          hideProgressBar: false, 
-          progressStyle: {
-            backgroundColor: '#ff000074', 
-            height: '5px', 
-          },
-        });
-        // console.log(error);
-      }
+    //     toast.error('댓글 등록 오류 '+ error, {
+    //       position: toast.POSITION.TOP_CENTER, 
+    //       autoClose: 2000, 
+    //       hideProgressBar: false, 
+    //       progressStyle: {
+    //         backgroundColor: '#ff000074', 
+    //         height: '5px', 
+    //       },
+    //     });
+    //     // console.log(error);
+    //   }
 
-    }
+    // }
 
 
   
