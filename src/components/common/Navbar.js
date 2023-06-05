@@ -17,7 +17,6 @@ function Navbar() {
     
   useEffect(() => {
     dispatch(callHeaderNameAPI());
-    console.log("Header name: ",name);
   }, [])
 
   // const { member } = useSelector((state) => state.memberReducer);
@@ -43,8 +42,6 @@ function Navbar() {
     }
   }, [info]);
 
-  console.log("file",file?.file?.filePath);
-
   const [currentPage, setCurrentPage] = useState(1);
   const [year2, setYear2] = useState(new Date().getFullYear());
   const [month2, setMonth2] = useState(new Date().getMonth() + 1);
@@ -56,6 +53,8 @@ function Navbar() {
 
   const formattedDate = formatDate(today);
 
+
+  const userImage = '../icon/user.jpg';
 
   function formatDate(date) {
       const year = date.getFullYear();
@@ -114,6 +113,7 @@ function Navbar() {
             <img 
               src={ !imageUrl ? file?.file?.filePath : imageUrl } 
               className={ NavbarCSS.memberImage } 
+              onError={(e) => {e.target.src = userImage;}}
               alt="profile"
             />
           </div>

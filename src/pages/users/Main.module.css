@@ -45,6 +45,11 @@ a {
     border-collapse : collapse;
 }
 
+.waitList tr th {
+    padding: 0vh;
+    font-size: 12px;
+}
+
 .waitList td {
     padding: 1.5vh;
     /* border: 1px solid orange; */
@@ -57,8 +62,27 @@ a {
     /* border: solid 1px blue; */
 }
 
+.waitList tr td {
+    /* border: 1px solid red; */
+    padding: 0vh;
+}
+
+.myWait th:nth-child(5),
+.myWait td:nth-child(5) {
+    display: none;
+}
+
+.myWait th:nth-child(6),
+.myWait td:nth-child(6) {
+    display: none;
+}
+
+.myWait .pageInfo {
+    border: 1px solid red;
+}
+
 .myProg {
-    width: 30vw;
+    width: 60vw;
     /* border: solid 1px red; */
 }
 
@@ -78,10 +102,19 @@ a {
     /* border: 1px solid orange; */
 }
 
-.progList td {
-    padding: 1.5vh;
-    /* border: 1px solid blue; */
+.progList tr th {
+    /* border: 1px solid red; */
+    padding: 0vh;
+}
+
+.progList th:nth-child(5),
+.progList td:nth-child(5) {
+    display: none;
+}
+
+.progList tr td {
     border-top: 1px solid rgba(182, 189, 198, 0.5);
+    /* padding: 0.4vh; */
 }
 
 .icon {
@@ -148,9 +181,17 @@ a {
 
 .myPrj td {
     text-align: center;
-    padding: 2vh;
+    padding: 0.4vh;
     font-size: 12px;
     border-top: 1px solid rgba(182, 189, 198, 0.5);
+}
+
+.myPrj td:first-child {
+    display: none;
+}
+
+.prjtd {
+    width: 60vw;
 }
 
 /* 진행률 */

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { WiDaySunny, WiWindy, WiThunderstorm, WiRainMix, WiRain, WiUmbrella, WiSnowWind, WiFog, WiCloudy } from 'react-icons/wi';
+import { HiOutlineLocationMarker } from 'react-icons/hi';
 import WeatherCSS from './Weather.module.css';
 
 const Weather = () => {
   const [temp, setTemp] = useState(0);
   const [temp_max, setTempMax] = useState(0);
   const [temp_min, setTempMin] = useState(0);
+  const [humidity, setHumidity] = useState(0);
   const [desc, setDesc] = useState('');
   const [icon, setIcon] = useState('');
   const [loading, setLoading] = useState(true);
@@ -27,7 +29,6 @@ const Weather = () => {
       (position) => {
         let lat = position.coords.latitude;
         let lon = position.coords.longitude;
-        // console.log("Current location", lat, lon);
         setLocation({ lat, lon });
       },
       (error) => {
@@ -54,6 +55,7 @@ const Weather = () => {
           setTemp(data.main.temp);
           setTempMax(data.main.temp_max);
           setTempMin(data.main.temp_min);
+          setHumidity(data.main.humidity);
           setDesc(data.weather[0].description);
           setIcon(data.weather[0].icon);
           setLoading(false);
@@ -113,15 +115,23 @@ const Weather = () => {
     return (
       <div className={WeatherCSS.wrapper}>
         <div className={WeatherCSS.today}>{getFormattedDate()}</div>
-        <div className={WeatherCSS.addr}>{address}</div>
+        <div className={WeatherCSS.mylocation}>
+          <HiOutlineLocationMarker />
+          <div className={WeatherCSS.addr}>{address}</div>
+        </div>
         <div className={WeatherCSS.myWeather}>
           <div className={WeatherCSS.icon}>{selectIcon()}</div>
           <div className={WeatherCSS.temperature}>
-            <div className={WeatherCSS.now}>{(temp - 273.15).toFixed(0)}°</div>
-            <div className={WeatherCSS.maxmin}>▲ {(temp_max - 273.15).toFixed(0)}° ▼{(temp_min - 273.15).toFixed(0)}°</div>
+            <div className={WeatherCSS.now}>{(temp - 273.15).toFixed(0)}°C</div>
+            <div className={WeatherCSS.max}>최고기온 : {(temp_max - 273.15).toFixed(0)}°C</div>
+            <div className={WeatherCSS.min}>최저기온 : {(temp_min - 273.15).toFixed(0)}°C</div>
+            {/* <div className={WeatherCSS.humidity}>습도 : {humidity}%</div> */}
           </div>
         </div>
-        <div className={WeatherCSS.comment}>현재 날씨는 {desc} ☺</div>
+        <div className={WeatherCSS.mycomment}>
+          <span>현재 날씨는?</span>
+          <div className={WeatherCSS.comment}>{desc}</div>
+        </div>
       </div>
     );
   }

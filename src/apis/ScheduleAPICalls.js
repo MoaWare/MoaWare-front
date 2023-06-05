@@ -1,4 +1,4 @@
-import { getSchedules, getSchedule, postSchedule, putSchedule } from "../modules/ScheduleModule";
+import { getSchedules, getSchedule, postSchedule, putSchedule, putSchModify } from "../modules/ScheduleModule";
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${ process.env.REACT_APP_RESTAPI_SERVER_PORT}`
@@ -94,6 +94,30 @@ export const callScheduleDeleteAPI = ({ schCode }) => {
         if(result.status === 200){
             dispatch(putSchedule(result));
         }
+
+    }
+
+}
+
+/* 일정 수정 */
+export const callScheduleModifyAPI = ( form ) => {
+    
+    const requestURL = `${PRE_URL}/calendar`;
+  
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : "PUT",
+            headers : {
+                "Content-Type" : "application/json",
+            },
+            body: JSON.stringify(form)
+        }).then(res => res.json());
+      
+        if(result.status === 200) {
+            dispatch(putSchModify(result));
+        
+        } 
 
     }
 

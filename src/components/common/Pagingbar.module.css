@@ -13,8 +13,15 @@
     border-radius: 12px;
     background-color: white;
     font-weight: bold;
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
+    border: none;
     font-size: 10px;
+    color: #254F70;
+}
+
+.pagingBtn:disabled {
+    /* border: 1px solid blue; */
+    border: none;
 }
 
 .pagingBtn:hover{

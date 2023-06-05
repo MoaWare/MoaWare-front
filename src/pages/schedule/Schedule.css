@@ -25,11 +25,13 @@
     height: 87vh;
     /* width: 70vw; */
     font-size: 0.85rem;
+    letter-spacing: 2px;
 }
 
 :root {
     /* 달력 선 색상 */
-    --fc-border-color: rgba(182, 189, 198, 0.5);
+    --fc-border-color: rgba(182, 189, 198, 0.3);
+    /* --fc-border-color: transparent; */
     /* 버튼 글씨 */
     --fc-button-text-color: #254F70;
     /* 버튼 배경 */
@@ -108,3 +110,12 @@ button.fc-today-button.fc-button.fc-button-primary {
 .fc-day-sun a {
     color: rgba(80, 164, 228, 1)
 } */
+
+.fc button.fc-myCustomButton-button.fc-button.fc-button-primary {
+    font-weight: bold;
+}
+
+.fc .fc-button-group button {
+    font-weight: bold;
+    letter-spacing: 3px;
+}
