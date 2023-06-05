@@ -1,3 +1,4 @@
+
 .backgroundDiv{
     height: 80vh;
     display: flex;
@@ -7,6 +8,7 @@
     margin-left: 10vw;
     padding: 0;
 }
+
 
 .registerDiv{    
     height: 200vh;
@@ -95,3 +97,4 @@
       .dateInput:focus + .datePlaceholder {
         color: #9ECDF1;
       }
+

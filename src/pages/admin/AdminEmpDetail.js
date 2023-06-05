@@ -1,9 +1,9 @@
 import { useEffect, } from "react";
-import { useDispatch, useSelector, } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
 import { callAdminEmpDetailAPI } from '../../apis/AdminAPICalls';
 import CSS from "./AdminEmpDetail.module.css";
 import { useParams } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
 
 
 
@@ -25,6 +25,12 @@ function AdminEmpDetail() {
     const onClickBackHandler = () => {
         navigate('/admin/emp/list');
     }
+
+
+    const onClickModifyHandler = () => {
+        navigate(`/admin/emp/modify/${empCode}`);
+    }
+
 
 
     return (
@@ -67,8 +73,8 @@ function AdminEmpDetail() {
                         </tbody>
                 </table>
                 <div className={CSS.content}>
-                                    <button className={CSS.boardcancel} onClick = { onClickBackHandler } >이전</button>
-                                    <button className={CSS.modifypost}>수정</button>
+                                    <button onClick = { onClickBackHandler } >이전</button>
+                                    <button onClick = { onClickModifyHandler }>수정</button>
                                     </div>
 
 

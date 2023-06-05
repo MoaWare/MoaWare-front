@@ -12,7 +12,16 @@ export const callAdminBoardListAPI = ({ currentPage = 1 }) => {
 
     return async (dispatch, getState) => {
 
-        const result = await fetch(requestURL).then(response => response.json());
+    
+    //   const result = await fetch(requestURL).then(response => response.json());
+        const result = await fetch(requestURL, {
+            method : 'GET',
+            headers : {
+                'Content-Type' : 'application/json',
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
+
 
         if (result.status === 200) {
             console.log('[AdminBoardAPICalls] : callAdminBoardListAPI result : ', result);
@@ -29,7 +38,8 @@ export const callAdminBoardRegistAPI = (formData) => {
    
     return async (dispatch, getState) => {
    
-    const result = await fetch(requestURL, {
+
+        const result = await fetch(requestURL, {
                 method: 'POST',
                headers: {
                    "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
@@ -37,7 +47,7 @@ export const callAdminBoardRegistAPI = (formData) => {
                 body: formData
              }).then(response => response.json()); 
 
-        //).then(response => response.json());
+
 
         //      body : JSON.stringify(formData)
         //   }) .then(response => response.json());
@@ -59,17 +69,19 @@ export const callAdminBoardDeleteAPI =({ boardCode }) => {
   
     console.log(boardCode);
 
-    //-----------------------------
-
     return async (dispatch, getState) => {
-  
+
+        
+
         const result = await fetch(requestURL, {
           method : "PUT",
           headers : {
-              "Content-Type" : "application/json",
+            "Content-Type" : "application/json",
+                  "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
           },
         }).then(res => res.json());
   
+        
         if(result?.status === 200){
             console.log("[AdminBoardAPICalls] callAdminBoardDeleteAPI result : ", result);
             dispatch(putBoarddelete(result));

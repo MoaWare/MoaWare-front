@@ -56,6 +56,7 @@ import PaymentDetail from "./pages/payment/PaymentDetail";
 import BoardPostModify from "./pages/board/BoardPostModify";
 import PaymentWaitDetail from "./pages/payment/PaymentWaitDetail";
 import PaymentStorageDetail from "./pages/payment/PaymentStorageDetail";
+import AdminEmpModify from "./pages/admin/AdminEmpModify";
 
 
 function App() {
@@ -137,6 +138,8 @@ function App() {
             <Route path="emp/list" element={<AdminEmployees />} />
             <Route path="emp/list/:empCode" element={<AdminEmpDetail />} />
             <Route path="emp/regist" element={<AdminEmpRegist />}/> 
+            <Route path="emp/modify/:empCode" element={<AdminEmpModify />}/>
+
 
             <Route path="board/list" element={<AdminBoardList />} />
             {/* <Route path="emp/list/:empCode" element={<AdminEmpDetail />} /> */}
