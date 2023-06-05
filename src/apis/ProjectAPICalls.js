@@ -53,7 +53,13 @@ export const callTaskDetailAPI = (taskCode) => {
     const requestURL = `${PRE_URL}/task/${taskCode}`
     return async (dispatch, getState) => {
 
-        const result = await fetch(requestURL).then(res => res.json());
+        const result = await fetch(requestURL, {
+          method : 'GET',
+            headers : {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(res => res.json());
 
         if(result.status === 200){
             console.log(result);
@@ -101,6 +107,7 @@ export const callTaskUpdateAPI = ( form ) => {
         method : "PUT",
         headers : {
             "Content-Type" : "application/json",
+            "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
         },
         body: JSON.stringify(form)
       }).then(res => res.json());
@@ -126,6 +133,7 @@ export const callTaskDeleteAPI = ( taskCode ) => {
         method : "PUT",
         headers : {
             "Content-Type" : "application/json",
+            "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
         },
       }).then(res => res.json());
 
