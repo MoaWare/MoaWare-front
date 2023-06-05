@@ -60,3 +60,9 @@ height: 87vh;
     font-size: 14px;
     font-weight: 600;
 }
+
+.active{
+    background-color: rgba(80, 164, 228, 0.5);
+    color: white !important;
+
+}

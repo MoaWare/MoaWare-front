@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import WorkNavbarCSS from './WorkNavbar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -18,6 +18,7 @@ function WorkNavbar() {
   const btn = useSelector(state => state.workTimeReducer.btn);
   const { insert } = useSelector(state => state.workReducer);
   const { quit } = useSelector(state => state.workReducer);
+  const location = useLocation();
   //변수를 함수 안에 넣은 이유 함수 밖에서 같이 쓰면 오류남
   const onClickStartTime = () => {
 
@@ -66,33 +67,33 @@ function WorkNavbar() {
       <div className={WorkNavbarCSS.wrap}>
         <div className={WorkNavbarCSS.title}>근태 관리</div>
         <ul className={WorkNavbarCSS.submenu}>
-          <li>
-            <NavLink to="/work" activeclassname="active" exact="true">
+          <NavLink to="/work" activeClassName="active" exact="true">
+            <li className={location.pathname === '/work' ? WorkNavbarCSS.active : {}}>
               내 근태현황
-            </NavLink>
-          </li>
-          {isAdmin() && (
-            <li>
-              <NavLink to="/work/admin" activeclassname="active">
-                직원 일일 근태 현황
-              </NavLink>
             </li>
+          </NavLink>
+          {isAdmin() && (
+            <NavLink to="/work/admin" activeClassName={WorkNavbarCSS.active} exact="ture">
+              <li className={location.pathname === '/work/admin' ? WorkNavbarCSS.active : {}}>
+                직원 일일 근태 현황
+              </li>
+            </NavLink>
           )}
-          <li>
-            <NavLink to="/work/restReq" activeclassname="active">
+          <NavLink to="/work/restReq" activeClassName={WorkNavbarCSS.active} exact="ture">
+            <li className={location.pathname === '/work/restReq' ? WorkNavbarCSS.active : {}}>
               연차 신청
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/work/restReqList" activeclassname="active">
+            </li>
+          </NavLink>
+          <NavLink to="/work/restReqList" activeClassName={WorkNavbarCSS.active} exact="ture">
+            <li className={location.pathname === '/work/restReqList' ? WorkNavbarCSS.active : {}}>
               연차 신청 목록
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/work/restList" activeclassname="active">
+            </li>
+          </NavLink>
+          <NavLink to="/work/restList" activeClassName={WorkNavbarCSS.active} exact="ture">
+            <li className={location.pathname === '/work/restList' ? WorkNavbarCSS.active : {}}>
               연차 내역
-            </NavLink>
-          </li>
+            </li>
+          </NavLink>
         </ul>
       </div>
       <div className={WorkNavbarCSS.wrap2}>
@@ -110,35 +111,35 @@ function WorkNavbar() {
             </div>
             {/* data 객체가 있다면 */}
             {myWork.data && myWork.data.length > 0 ? (
-            /* 원래 유명님의 코드 */
+              /* 원래 유명님의 코드 */
               // <div className={WorkNavbarCSS.p2} key={myWork.data[0].workPk.workTime}>
               //   <p className={WorkNavbarCSS.ptime2}>출근 시간 {myWork.data[0].workTime ? myWork.data[0].workTime.substring(11, 19) : ""}</p>
               //   <p className={WorkNavbarCSS.ptime2}>퇴근 시간 {myWork.data[0].quitTime ? myWork.data[0].quitTime.substring(11, 19) : ""}</p>
               // </div>
-            /* 효진 수정 코드 */
-            <div className={WorkNavbarCSS.p2} key={myWork.data[0].workPk.workTime}>
-              <div>
-                <p className={WorkNavbarCSS.ptime2}>출근시간</p>
-                <p className={WorkNavbarCSS.ptime2}>{myWork.data[0].workTime ? myWork.data[0].workTime.substring(11, 19) : ""}</p>
+              /* 효진 수정 코드 */
+              <div className={WorkNavbarCSS.p2} key={myWork.data[0].workPk.workTime}>
+                <div>
+                  <p className={WorkNavbarCSS.ptime2}>출근시간</p>
+                  <p className={WorkNavbarCSS.ptime2}>{myWork.data[0].workTime ? myWork.data[0].workTime.substring(11, 19) : ""}</p>
+                </div>
+                <div>
+                  <p className={WorkNavbarCSS.ptime2}>퇴근시간</p>
+                  <p className={WorkNavbarCSS.ptime2}>{myWork.data[0].quitTime ? myWork.data[0].quitTime.substring(11, 19) : ""}</p>
+                </div>
               </div>
-              <div>
-                <p className={WorkNavbarCSS.ptime2}>퇴근시간</p>
-                <p className={WorkNavbarCSS.ptime2}>{myWork.data[0].quitTime ? myWork.data[0].quitTime.substring(11, 19) : ""}</p>
-              </div>
-            </div>
-            ) : 
-            // data객체가 없다면
-            (
-              <div>
-                <p></p>
-              </div>
-            )}
+            ) :
+              // data객체가 없다면
+              (
+                <div>
+                  <p></p>
+                </div>
+              )}
           </div>
-        ) : 
-        // mywork 가없다면
-        (
-          <div>
-            {/* <p className={WorkNavbarCSS.p}>근태 관리</p>
+        ) :
+          // mywork 가없다면
+          (
+            <div>
+              {/* <p className={WorkNavbarCSS.p}>근태 관리</p>
             <div className={WorkNavbarCSS.ptime}></div>
             <div className={WorkNavbarCSS.workBtn}>
               <WorkTime
@@ -151,8 +152,8 @@ function WorkNavbar() {
                 <p className={WorkNavbarCSS.ptime2}>출근 시간</p>
                 <p className={WorkNavbarCSS.ptime2}>퇴근 시간</p>
               </div> */}
-          </div>
-        )}
+            </div>
+          )}
       </div>
     </nav>
   );
