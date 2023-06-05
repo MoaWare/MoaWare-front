@@ -155,7 +155,7 @@ function Work() {
                 <p className={ WorkCSS.p }>근태 관리</p>
                 <div className={ WorkCSS.btnContainer }>
                 <button className={ WorkCSS.btn }>&lt;</button>
-                <p className={ WorkCSS.pMonth }>2023-05</p>
+                <p className={ WorkCSS.pMonth }>{formattedDate}</p>
                 <button className={ WorkCSS.btn2 }>&gt;</button>
                 <button className={ WorkCSS.btn3 }>Today</button>
                 </div>

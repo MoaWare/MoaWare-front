@@ -30,14 +30,9 @@ function WorkAdmin({ adminList }) {
     const [ selectValue, setSelectValue ] = useState(undefined);
     const [ insertName, setInsertName ] = useState(undefined);
     
-    // const [isFirstRender, setFirstRender] = useState(true);
-    // const pageInfo = myWork.pageInfo;
     const pageInfo = admin && admin ? admin.pageInfo : null;
     console.log("페이징 처리ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ",pageInfo);
     // 나중에 수정
-
-    // console.log('admin :', admin ? admin.data : "");
-    // console.log('status :', status);
     console.log('name :', name);
 
     const today = new Date();
@@ -176,7 +171,7 @@ function WorkAdmin({ adminList }) {
                 <p className={WorkCSS.p}>근태 관리</p>
                 <div className={WorkCSS.btnContainer}>
                     <button className={WorkCSS.btn}>&lt;</button>
-                    <p className={WorkCSS.pMonth}>2023-05</p>
+                    <p className={WorkCSS.pMonth}>{formattedDate}</p>
                     <button className={WorkCSS.btn2}>&gt;</button>
                     <button className={WorkCSS.btn3}>Today</button>
                 </div>
