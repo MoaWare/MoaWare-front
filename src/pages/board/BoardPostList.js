@@ -127,7 +127,7 @@ function BoardPostList() {
 
         <div className={CSS.deletepost}>
           <button onClick={onClickDelete}  >
-            삭제하기
+            삭제 하기
           </button>
         </div>
 

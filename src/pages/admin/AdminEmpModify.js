@@ -89,7 +89,7 @@ function AdminEmpModify() {
                             <tbody>
 
                                 <tr>
-                                    <th className={CSS.th}><label>직급변경: </label></th>
+                                    <th className={CSS.th}><label>직급변경 </label></th>
                                     <td className={CSS.td}>
                                         <label>
 
@@ -146,7 +146,7 @@ function AdminEmpModify() {
                                 </tr>
 
                                 <tr>
-                                    <th className={CSS.th}><label>부서변동: </label></th>
+                                    <th className={CSS.th}><label>부서변동 </label></th>
                                     <td className={CSS.td}>
                                         <label>
 
@@ -157,7 +157,7 @@ function AdminEmpModify() {
                                                 value={1}
                                                 readOnly={!modifyMode}
                                                 checked={checkValue2 == 1}
-                                            />경영관리실
+                                            />경영관리
                                         </label> &nbsp;
                                         <label>
                                             <input
@@ -167,7 +167,7 @@ function AdminEmpModify() {
                                                 value={2}
                                                 readOnly={!modifyMode}
                                                 checked={checkValue2 == 2}
-                                            />전략기획실
+                                            />전략기획
                                         </label> &nbsp;
                                         <label>
                                             <input
@@ -177,7 +177,7 @@ function AdminEmpModify() {
                                                 value={3}
                                                 readOnly={!modifyMode}
                                                 checked={checkValue2 == 3}
-                                            />마케팅실
+                                            />마케팅
                                         </label> &nbsp;
                                         <label>
                                             <input
@@ -197,13 +197,93 @@ function AdminEmpModify() {
                                                 value={5}
                                                 readOnly={!modifyMode}
                                                 checked={checkValue2 == 5}
-                                            />시스템 관실
-                                        </label>
+                                            />시스템
+                                        </label> &nbsp;
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="deptCode"
+                                                onChange={onChangeDeptCodeHandler}
+                                                value={6}
+                                                readOnly={!modifyMode}
+                                                checked={checkValue2 == 6}
+                                            />재무1
+                                        </label> &nbsp;
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="deptCode"
+                                                onChange={onChangeDeptCodeHandler}
+                                                value={7}
+                                                readOnly={!modifyMode}
+                                                checked={checkValue2 == 7}
+                                            />재무2
+                                        </label> &nbsp;
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="deptCode"
+                                                onChange={onChangeDeptCodeHandler}
+                                                value={8}
+                                                readOnly={!modifyMode}
+                                                checked={checkValue2 == 8}
+                                            />영업1
+                                        </label> &nbsp;
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="deptCode"
+                                                onChange={onChangeDeptCodeHandler}
+                                                value={9}
+                                                readOnly={!modifyMode}
+                                                checked={checkValue2 == 9}
+                                            />영업2
+                                        </label> &nbsp;
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="deptCode"
+                                                onChange={onChangeDeptCodeHandler}
+                                                value={10}
+                                                readOnly={!modifyMode}
+                                                checked={checkValue2 == 10}
+                                            />마케팅1
+                                        </label> &nbsp;
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="deptCode"
+                                                onChange={onChangeDeptCodeHandler}
+                                                value={11}
+                                                readOnly={!modifyMode}
+                                                checked={checkValue2 == 11}
+                                            />마케팅2
+                                        </label> &nbsp;
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="deptCode"
+                                                onChange={onChangeDeptCodeHandler}
+                                                value={12}
+                                                readOnly={!modifyMode}
+                                                checked={checkValue2 == 12}
+                                            />전산1
+                                        </label> &nbsp;
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="deptCode"
+                                                onChange={onChangeDeptCodeHandler}
+                                                value={13}
+                                                readOnly={!modifyMode}
+                                                checked={checkValue2 == 13}
+                                            />전산2
+                                        </label> &nbsp;
                                     </td>
                                 </tr>
 
                                 <tr>
-                                    <th className={CSS.th}><label>직원ID : </label></th>
+                                    <th className={CSS.th}><label>직원ID </label></th>
                                     <td className={CSS.td}>
                                         <input
                                             name='empID'
@@ -219,7 +299,7 @@ function AdminEmpModify() {
                                 </tr>
 
                                 <tr>
-                                    <th className={CSS.th}><label>사원이름: </label></th>
+                                    <th className={CSS.th}><label>사원이름 </label></th>
                                     <td className={CSS.td}>
                                         <input
                                             name='empName'
@@ -235,7 +315,7 @@ function AdminEmpModify() {
                                 </tr>
 
                                 <tr>
-                                    <th className={CSS.th}><label>사원번호 : </label></th>
+                                    <th className={CSS.th}><label>사원번호 </label></th>
                                     <td className={CSS.td}>
                                         <input
                                             name='empCode'
@@ -251,7 +331,7 @@ function AdminEmpModify() {
                                 </tr>
 
                                 <tr>
-                                    <th className={CSS.th}><label>전화번호 : </label></th>
+                                    <th className={CSS.th}><label>전화번호 </label></th>
                                     <td className={CSS.td}>
                                         <input
                                             name='phone'
@@ -281,7 +361,7 @@ function AdminEmpModify() {
                     {modifyMode &&
                         <button
                             onClick={onClickAdminEmpUpdateHandler}    >
-                            계정 수정 저장하기
+                            계정 수정사항 저장하기
                         </button>
                     }
                 </div>

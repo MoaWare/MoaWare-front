@@ -10,7 +10,7 @@ function AdminEmployees() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { emps } = useSelector(state => state.employeeReducer);
-    const pageInfo = emps.pageInfo;
+    const pageInfo = emps?.pageInfo;
     const [selectedEmps, setSelectedEmps] = useState([]);
 
 
@@ -125,7 +125,7 @@ function AdminEmployees() {
                 </table>
                 <div className={CSS.deletepost}>
                     <button onClick={onClickDelete}>
-                        퇴직처리
+                        퇴직 처리
                     </button>
                 </div>
                 <div>
