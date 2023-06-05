@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callBoardPostDeleteAPI, callBoardpostBoardsListAPI, callBoardPostListAPI, callBoardPostListForAdminAPI} from '../../apis/BoardPostAPICalls';
+import { callBoardpostBoardsListForAdminAPI, callBoardPostDeleteAPI, callBoardpostBoardsListAPI, callBoardPostListAPI, callBoardPostListForAdminAPI} from '../../apis/BoardPostAPICalls';
 import PagingBar from "../../components/common/PagingBar";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import CSS from "./BoardPostList.module.css";
@@ -31,7 +31,7 @@ useEffect(() => {
   if (boardCode) {
     /* 게시판 코드별 게시판에 대한 요청 */
     if (isAdmin()) {
-      dispatch(callBoardpostBoardsListAPI({ boardCode, currentPage }));
+      dispatch(callBoardpostBoardsListForAdminAPI({ boardCode, currentPage }));
     } else {
       dispatch(callBoardpostBoardsListAPI({ boardCode, currentPage }));
     }
