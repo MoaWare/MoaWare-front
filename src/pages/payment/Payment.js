@@ -117,6 +117,7 @@ function Payment () {
 
       dispatch(CallPaymentRegistAPI(formData));
 
+      
       alert("저장 되었습니다.");
         navigator("/pay");
 
