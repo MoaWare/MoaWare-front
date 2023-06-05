@@ -14,8 +14,6 @@ function PaymentRefuseBoard () {
     const pageInfo = payment.pageInfo;
     const [ currentPage, setCurrentPage ] = useState(1);
 
-    console.log("PaymentRefuseBoard의 pay는 : ", payment);
-
     useEffect( ()=>{
         disPatch(CallPaymentRefuseListAPI(currentPage));
     },[currentPage]

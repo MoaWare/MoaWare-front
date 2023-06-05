@@ -1,4 +1,4 @@
-import { getSchedules, getSchedule, postSchedule, putSchedule } from "../modules/ScheduleModule";
+import { getSchedules, getSchedule, postSchedule, putSchedule, putSchModify } from "../modules/ScheduleModule";
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${ process.env.REACT_APP_RESTAPI_SERVER_PORT}`
@@ -20,7 +20,6 @@ export const callScheduleListAPI = () => {
         }).then(res => res.json());
 
         if(result.status === 200){
-            console.log("[ScheduleAPICalls] callScheduleListAPI result : ", result);
             dispatch(getSchedules(result));
         }
 
@@ -44,7 +43,6 @@ export const callScheduleDetailAPI = ({ schCode }) => {
         }).then(res => res.json());
 
         if(result.status === 200){
-            console.log("[ScheduleAPICalls] callScheduleDetailAPI result : ", result);
             dispatch(getSchedule(result));
         }
 
@@ -69,7 +67,6 @@ export const callScheduleInsertAPI = ( form ) => {
         }).then(res => res.json());
       
         if(result.status === 200) {
-            console.log('[ScheduleAPICalls] callScheduleInsertAPI : ', result);
             dispatch(postSchedule(result));
         
         } 
@@ -81,7 +78,6 @@ export const callScheduleInsertAPI = ( form ) => {
 /* 일정 삭제 */
 export const callScheduleDeleteAPI = ({ schCode }) => {
 
-    console.log('Delete schCode', schCode)
 
     const requestURL = `${PRE_URL}/calendar/${schCode}`;
 
@@ -96,9 +92,32 @@ export const callScheduleDeleteAPI = ({ schCode }) => {
         }).then(res => res.json());
 
         if(result.status === 200){
-            console.log("[ScheduleAPICalls] callScheduleDeleteAPI result : ", result);
             dispatch(putSchedule(result));
         }
+
+    }
+
+}
+
+/* 일정 수정 */
+export const callScheduleModifyAPI = ( form ) => {
+    
+    const requestURL = `${PRE_URL}/calendar`;
+  
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : "PUT",
+            headers : {
+                "Content-Type" : "application/json",
+            },
+            body: JSON.stringify(form)
+        }).then(res => res.json());
+      
+        if(result.status === 200) {
+            dispatch(putSchModify(result));
+        
+        } 
 
     }
 

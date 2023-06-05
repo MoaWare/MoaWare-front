@@ -5,6 +5,7 @@ import PagingBar from "../../components/common/PagingBar";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import CSS from "./AdminBoardList.module.css";
 import { NavLink } from 'react-router-dom';
+
 function AdminBoardList() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -13,98 +14,87 @@ function AdminBoardList() {
     const [selectedLists, setSelectedLists] = useState([]);
     const { del } = useSelector(state => state.boardReducer);
     const [currentPage, setCurrentPage] = useState(1);
+
     useEffect(
         () => {
             dispatch(callAdminBoardListAPI({ currentPage }));
-            },
-           []
-           );
-    // const onClickTableTr = (boardCode) => {
-    //     navigate(`/admin/boards/list/${boardCode}`);
-    // };
-    // const onClickProductInsert = () => {
-    //     navigate("/product-registration");
-    // };
+        },
+        []
+    );
+
     useEffect(() => {
         if (del?.status === 200) {
-          alert('게시판 삭제가 완료되었습니다.');
-          dispatch(callAdminBoardListAPI({ currentPage }))
+            alert('게시판 삭제가 완료되었습니다.');
+            dispatch(callAdminBoardListAPI({ currentPage }))
         }
-      }, [del]);
-         
-    
-      
-  const handleCheckboxChange = (event, boardCode) => {
-    // 이벤트 전파 방지
-    event.stopPropagation(); 
-    setSelectedLists(boardCode);
-    if(selectedLists == boardCode) {
-        setSelectedLists(null);
-    }
-};
-const onClickDelete = () => {
-    console.log('클릭ㅎㅎ',selectedLists)
-    dispatch(callAdminBoardDeleteAPI({ boardCode : selectedLists})); // boardCode 배열 전달
-  };
+    }, [del]);
+
+
+
+    const handleCheckboxChange = (event, boardCode) => {
+        event.stopPropagation();
+        setSelectedLists(boardCode);
+        if (selectedLists == boardCode) {
+            setSelectedLists(null);
+        }
+    };
+    const onClickDelete = () => {
+        console.log('클릭ㅎㅎ', selectedLists)
+        dispatch(callAdminBoardDeleteAPI({ boardCode: selectedLists }));
+    };
     return (
         <>
-        
+
             <div className={CSS.main}>
-            <div class={CSS.menutitle}> 게시판
-            <div className={CSS.content}>
-                    <button>
-                        <NavLink to="/admin/board/regist">
-                        게시판 생성
-                        </NavLink>
-                    </button>
-                    </div>  </div>  
-                
-                <table className={CSS.table }>
+                <div class={CSS.menutitle}> 게시판
+                    <div className={CSS.content}>
+                        <button>
+                            <NavLink to="/admin/board/regist">
+                                게시판 생성
+                            </NavLink>
+                        </button>
+                    </div>  </div>
+
+                <table className={CSS.table}>
                     <thead>
-                        <tr className={ CSS.th }> 
-                        <th className="table-header"><input type="checkbox" id="checkAll" /></th>
+                        <tr className={CSS.th}>
+                            <th className="table-header"><input type="checkbox" id="checkAll" /></th>
                             <th>게시판 코드</th>
                             <th>게시판 이름</th>
-                            
+
                         </tr>
                     </thead>
-                        <tbody>
-                    
-                            {boards.data &&
-                                boards.data.map((b) => (
-                                    
-                                    <tr
+                    <tbody>
+
+                        {boards.data &&
+                            boards.data.map((b) => (
+
+                                <tr
                                     className={CSS.td}
                                     key={b.boardCode}>
                                     <input
-                                    type="checkbox" 
-                                    // checked={selectedPosts.includes(post.postCode)}
-                                    checked={selectedLists === b.boardCode}
-                                    onChange={(event) => handleCheckboxChange(event, b.boardCode)}
-                                                onClick={(event) => event.stopPropagation()}
-                                                />
+                                        type="checkbox"
+
+                                        checked={selectedLists === b.boardCode}
+                                        onChange={(event) => handleCheckboxChange(event, b.boardCode)}
+                                        onClick={(event) => event.stopPropagation()} />
                                     <td>{b.boardCode}</td>
                                     <td>{b.boardName}</td>
-                                
-                                
-                                        {/* <td>    <button className="view-post-button" onClick={onClickProductInsert}>
-                                        게시물 조회
-                                    </button></td> */}
-                                    </tr>
-                                ))}
-                        </tbody>
-                    </table>
-                    <div className={CSS.deletepost}>
-                                <button onClick={onClickDelete}>
-                                삭제하기
-                                </button>
-                                    </div>
-                                    <div>
-                {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
+                                </tr>
+                            ))}
+                    </tbody>
+                </table>
+
+                <div className={CSS.deletepost}>
+                    <button onClick={onClickDelete}>삭제하기
+                    </button>
+                </div>
+                <div>
+                    {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
+                </div>
             </div>
-            </div>
-            
-            
+
+
         </>
     );
 }

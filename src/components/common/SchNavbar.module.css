@@ -58,7 +58,7 @@
 }
 
 .share div {
-    margin-bottom: 2.5vh;
+    margin-bottom: 1.5vh;
 }
 
 .type {
@@ -79,4 +79,48 @@
 
 .unshare div {
     margin-bottom: 2.5vh;
+}
+
+.boxwrap {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: space-between;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+}
+
+.box1 {
+    width: 20px;
+    height: 20px;
+    background-color: rgba(215, 201, 254, 0.5);
+}
+
+.box2 {
+    width: 20px;
+    height: 20px;
+    background-color: rgba(253, 208, 208, 0.5);
+}
+
+.box3 {
+    width: 20px;
+    height: 20px;
+    background-color: rgba(252, 232, 163, 0.5);
+}
+
+.box4 {
+    width: 20px;
+    height: 20px;
+    background-color: rgba(218, 245, 141, 0.5);
+}
+
+.box5 {
+    width: 20px;
+    height: 20px;
+    background-color: rgba(205, 238, 249, 0.5);
+}
+
+.box6 {
+    width: 20px;
+    height: 20px;
+    background-color: rgba(178, 226, 195, 0.5);
 }

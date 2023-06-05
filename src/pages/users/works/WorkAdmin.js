@@ -31,8 +31,6 @@ function WorkAdmin({ adminList }) {
     const [ insertName, setInsertName ] = useState(undefined);
     
     const pageInfo = admin && admin ? admin.pageInfo : null;
-    console.log("페이징 처리ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ",pageInfo);
-    console.log('name :', name);
 
     const today = new Date();
 
@@ -49,10 +47,6 @@ function WorkAdmin({ adminList }) {
 
     const onChangeDateHandler = (e) => {
         const date = e.target.value;
-        console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', e.target.name, e.target.value);
-        console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', date);
-        console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', selectedDate);
-        console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', selectedDate2);
     }
 
     const baicTime = '09:00:00';
@@ -231,6 +225,7 @@ function WorkAdmin({ adminList }) {
                                         <option value="연차">연차</option>            
                                         <option value="반차">반차</option>            
                                         <option value="공무">공무</option>            
+                                        <option value="정상출근">정상출근</option>           
                                     </select>
                                 </td>
                             </tr> 
@@ -269,7 +264,10 @@ function WorkAdmin({ adminList }) {
                                         <option value=""></option>
                                         <option value="지각">지각</option>
                                         <option value="결근">결근</option>
-                                        <option value="연차">연차</option>            
+                                        <option value="연차">연차</option>
+                                        <option value="반차">반차</option>            
+                                        <option value="공무">공무</option>            
+                                        <option value="정상출근">정상출근</option>              
                                     </select>
                                 </td>
                             </tr> 

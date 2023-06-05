@@ -141,7 +141,7 @@ function WorkRestList() {
                             <th>연차 사유</th>
                             <th>연차 시작</th>
                             <th>연차 종료</th>
-                            <th>사용일</th>
+                            {/* <th>사용일</th> */}
                         </tr>
                     </thead>
                     <tbody>

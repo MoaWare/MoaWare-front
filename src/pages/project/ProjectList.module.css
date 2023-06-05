@@ -89,13 +89,12 @@
     border-collapse: collapse;
     width: 97%;
     border-spacing: 2px;
-    border: #B6BDC6 solid 1px;
+    /* border: #B6BDC6 solid 1px; */
     border-top: none;
     border-right: none;
     border-left: none;
     margin-bottom: 30px;
     color: #254F70;
-
 }
 
 .th {
@@ -109,6 +108,7 @@
     text-align: center;
     border-right: none;
     border-left: none;
+    border-bottom: none;
     line-height: 3rem;
 }
 

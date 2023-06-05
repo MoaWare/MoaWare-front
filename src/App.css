@@ -30,3 +30,8 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+::selection {
+    background-color: #DEEDFF;
+    color: rgba(37, 79, 112, 1);
+}
