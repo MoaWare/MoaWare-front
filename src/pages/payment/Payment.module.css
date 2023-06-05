@@ -126,6 +126,16 @@
     height: 3vh;
     width: 61vw;
     line-height: 3vh;
+
+}
+
+
+.inputFile  {
+    border: none;
+    font-size: 12px;
+    height: 3vh;
+    width: 61vw;
+    line-height: 3vh;
     display: none;
 }
 

@@ -115,11 +115,8 @@ const onClickDelete = () => {
                                 ))}
                         </tbody>
                     </table>
-                    <div className={CSS.content}>
-                                <button
-                                        className={CSS.deletepost}
-                                        onClick={onClickDelete}
-                                      >
+                    <div className={CSS.deletepost}>
+                                <button onClick={onClickDelete}>
                                 삭제하기
                                 </button>
                                     </div>

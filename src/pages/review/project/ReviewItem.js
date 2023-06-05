@@ -20,7 +20,7 @@ function ReviewItem({ review }){
         task : {},
         emp : {}
     });
-
+    const userImage = '../icon/user.jpg';
     /* 수정모드 전환 */
     const [ modifyMode, setModifyMode ] = useState(false);
 
@@ -118,7 +118,11 @@ function ReviewItem({ review }){
         (
             <div className={TaskCSS.reviewItem} key={review.reviewCode}>
                 <div className={TaskCSS.reviewLeft}>
-                    <img src={review.emp.fileCategory[0].file.filePath || <BsPersonCircle />}  alt="profile"/>
+                <img 
+                    src={review.emp.fileCategory[0].file.filePath || userImage} 
+                    onError={(e) => {e.target.src = userImage;}}
+                    alt=""
+                    />
                 </div>
                 <div className={TaskCSS.reviewRight}>
                 <div className={TaskCSS.listTop}>

@@ -17,6 +17,7 @@ export const callReviewsAPI = ({taskCode}) => {
           method : "GET",
           headers : {
               "Content-Type" : "application/json",
+              "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
           },
         }).then(res => res.json());
   

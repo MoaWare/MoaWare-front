@@ -53,7 +53,13 @@ export const callTaskDetailAPI = (taskCode) => {
     const requestURL = `${PRE_URL}/task/${taskCode}`
     return async (dispatch, getState) => {
 
-        const result = await fetch(requestURL).then(res => res.json());
+        const result = await fetch(requestURL, {
+          method : 'GET',
+            headers : {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(res => res.json());
 
         if(result.status === 200){
             console.log(result);
@@ -101,6 +107,7 @@ export const callTaskUpdateAPI = ( form ) => {
         method : "PUT",
         headers : {
             "Content-Type" : "application/json",
+            "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
         },
         body: JSON.stringify(form)
       }).then(res => res.json());
@@ -126,6 +133,7 @@ export const callTaskDeleteAPI = ( taskCode ) => {
         method : "PUT",
         headers : {
             "Content-Type" : "application/json",
+            "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
         },
       }).then(res => res.json());
 
@@ -229,7 +237,7 @@ export const callProjectProgressListAPI = ({ currentPage = 1 }) => {
 
 
   export const callProjectDoneListAPI = ({ currentPage = 1 }) => {
-    const requestURL = `${PRE_URL}/progress?page=${currentPage}`;
+    const requestURL = `${PRE_URL}/doneProj?page=${currentPage}`;
   
     return async (dispatch, getState) => {
       const result = await fetch(requestURL, {
@@ -262,6 +270,7 @@ export const callDeptEmpListAPI = ({ deptCode }) => {
             method : 'GET',
             headers : {
                 "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
             }
         }).then(res => res.json());
 
@@ -318,6 +327,7 @@ export const callPorjectDeleteAPI = ({projCode}) => {
         method : 'PUT',
         headers : {
             "Content-Type" : "application/json",
+            "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
         }
     }).then(res => res.json());
 

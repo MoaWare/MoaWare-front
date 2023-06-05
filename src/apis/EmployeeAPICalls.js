@@ -15,7 +15,8 @@ export const callLoginAPI = (form) => {
         const result = await fetch(requestURL, {
             method : 'POST',
             headers : {
-                'Content-Type' : 'application/json'
+                'Content-Type' : 'application/json',
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
             },
             body : JSON.stringify(form)
         })
@@ -42,7 +43,8 @@ export const callFindAccountAPI = (form) => {
         const result = await fetch(requestURL, {
             method : "POST",
             headers : {
-                "Content-Type" : "application/json"
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
             },
             body: JSON.stringify(form)
         }).then(res => res.json());
@@ -66,7 +68,8 @@ export const callFindPwdAccountAPI = (form) => {
         const result = await fetch(requestURL, {
             method : "POST",
             headers : {
-                "Content-Type" : "application/json"
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
             },
             body: JSON.stringify(form)
         }).then(res => res.json());

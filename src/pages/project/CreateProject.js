@@ -144,9 +144,13 @@ function CreateProject() {
         if(!form.projName || !form.projContent) {
             alert('정보를 모두 입력해주세요');
             return;
+        } else if(selectedEndDate == null ){
+            alert('날짜를 입력해주세요.');          
         } else if(selectedStartDate > selectedEndDate) {
             alert('종료일이 시작일 보다 빠릅니다.');
             return;
+        } else if(selectedStartDate == null) {
+            alert('날짜를 입력해주세요.');
         }
         /* 서버로 전달할 FormData 형태의 객체 설정 */
         const formData = new FormData();
@@ -215,7 +219,7 @@ function CreateProject() {
                     </div >
                     <div className={CreteProjCSS.container}>
                             <span className={CreteProjCSS.span1}>팀원 선택</span>
-                            <select onChange={onChangeEmpHandler} value={selectedEmp} className={CreteProjCSS.span2}>
+                            <select onChange={onChangeEmpHandler} value={selectedEmp} className={CreteProjCSS.span5}>
                             {emps && emps.length > 0 && 
                                     emps.map((emp) => (
                                         <option key={emp.empCode} value={`${emp.empCode} ${emp.empName} ${emp.email}`}>
@@ -223,36 +227,36 @@ function CreateProject() {
                                         </option>
                             ))}
                             </select>
-                    </div>
-                    <div>
-                        <button onClick={ onClickHandler }>
+                            <button onClick={ onClickHandler } className={CreteProjCSS.createBtn}>
                             추가하기
-                        </button>
+                            </button>
+                    </div>
+                    <div >
+                        {/* <button onClick={ onClickHandler } className={CreteProjCSS.createBtn}>
+                            추가하기
+                        </button> */}
                     </div>
                     <div className={CreteProjCSS.container}>
-                        <span className={CreteProjCSS.span1}>프로젝트 팀원</span>
-                        {/* {selectedEmpList.map((member, index) => (
-                            <span key={index}>{member.name} {member.email} <button onClick={ () => removeEmp(index)}> x </button></span>
-                            
-                        ))} */}
-                        {selectedEmpList
-                            //self 검색 값 
-                            .filter((member, index, self) =>
-                                //검색했을 때 이메일이 find
-                                index === self.findIndex((m) => m.email === member.email)
-                            )
-                            .map((member, index) => (
-                                <span key={index}>
-                                {member.name} {member.email} <button onClick={() => removeEmp(index)}>x</button>
-                        </span>
-                        ))}
+                        <span className={CreteProjCSS.span7}>프로젝트 팀원</span>
+                        <div className={CreteProjCSS.span6}>
+                            {selectedEmpList
+                                //self 검색 값 
+                                .filter((member, index, self) =>
+                                    //검색했을 때 이메일이 find
+                                    index === self.findIndex((m) => m.email === member.email)
+                                )
+                                .map((member, index) => (
+                                    <div key={index} className={CreteProjCSS.span8}>
+                                    {member.name} {member.email} <button onClick={() => removeEmp(index)} className={CreteProjCSS.createBtn2}>x</button>
+                            </div>
+                            ))}
+                        </div>
                     </div>
                     <div className={CreteProjCSS.container}>
                         <span className={CreteProjCSS.span1}>프로젝트 시작일</span>
                         <div className={CreteProjCSS.date}>
                             <DatePicker className={CreteProjCSS.datepicker}
                                 selected={selectedStartDate}
-                                // onChange={(startDate) => setSelectedStartDate(startDate)}
                                 onChange={ onStartDateHandler }
                                 dateFormat='yyyy-MM-dd'
                                 minDate={today}
@@ -262,7 +266,6 @@ function CreateProject() {
                         <div className={CreteProjCSS.date}>
                             <DatePicker className={CreteProjCSS.datepicker}
                                 selected={selectedEndDate}
-                                // onChange={(endDate) => setSelectedEndDate(endDate)}
                                 onChange={ onEndeDateHandler }
                                 dateFormat='yyyy-MM-dd'
                             />
@@ -280,7 +283,6 @@ function CreateProject() {
                         <button className={CreteProjCSS.workBtn1}
                             onClick={ onClickCreate }
                         >생성하기</button>
-                        <button className={CreteProjCSS.workBtn2}>취소하기</button>
                     </div>
                 </div>
             </div>
