@@ -21,9 +21,10 @@ function SchInsertModal({ setSchInsertModal }) {
     }
   })
 
+
   const onChangeHandler = (e) => {
     
-    console.log("스케줄 타입 : ", e.target.name === 'schCategoryCode');
+    console.log("일정 타입 : ", e.target.name === 'schCategoryCode');
 
     if(e.target.name === 'schCategoryCode') {
       setForm({
@@ -32,20 +33,37 @@ function SchInsertModal({ setSchInsertModal }) {
           [e.target.name] : e.target.value
         }
       });
+               
+    } else if(e.target.name === 'schMember') {
+
+      const schPrarticipant = [];
+      schPrarticipant.push(
+        {
+          schPrarPk: {
+            schCode: 0,
+            schMember : e.target.value
+          }  
+        }
+      )
+      
+      setForm({
+        ...form, schPrarticipant
+      });
     } else {
       setForm({
-          ...form,
-          [e.target.name] : e.target.value
-        });
-      }
+        ...form,
+        [e.target.name] : e.target.value
+      });
     }
+
+  }
+
+  const SchInsertClick = () => {
+    dispatch(callScheduleInsertAPI(form));
+    console.log('인서트대라얍~', insert)
+  };
     
-    const SchInsertClick = () => {
-      dispatch(callScheduleInsertAPI(form));
-      console.log('인서트대라얍~', insert)
-    };
-    
-    console.log('form', form);
+  console.log('form', form);
 
   /* 생성 후 일정관리로 이동 */
   useEffect(() => {
@@ -63,6 +81,7 @@ function SchInsertModal({ setSchInsertModal }) {
   };
 
   return (
+
     <div className={SchIModalCSS.modal}>
       <div className={SchIModalCSS.wrapper}>
         <div className={SchIModalCSS.schCheck}>
@@ -108,7 +127,7 @@ function SchInsertModal({ setSchInsertModal }) {
           </select>
           <input
             type='text'
-            name='schPrarticipant'
+            name='schMember'
             placeholder='참여자'
             onChange={ onChangeHandler }
           />
@@ -138,7 +157,6 @@ function SchInsertModal({ setSchInsertModal }) {
       </div>
     </div>
   );
-
 }
 
 export default SchInsertModal;

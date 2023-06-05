@@ -237,7 +237,7 @@ export const callProjectProgressListAPI = ({ currentPage = 1 }) => {
 
 
   export const callProjectDoneListAPI = ({ currentPage = 1 }) => {
-    const requestURL = `${PRE_URL}/progress?page=${currentPage}`;
+    const requestURL = `${PRE_URL}/doneProj?page=${currentPage}`;
   
     return async (dispatch, getState) => {
       const result = await fetch(requestURL, {

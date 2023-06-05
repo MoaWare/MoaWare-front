@@ -1,16 +1,16 @@
-import PaymentModalCSS from './PaymentModal.module.css';
-import OrgMainModal from './OrgMainModal';
+import PaymentModalCSS from './PaymentStorageModal.module.css';
+import PayStorageOrgMainModal from './PayStorageOrgMainModal';
 import {  useContext, useRef, useState } from 'react';
-import OrgSearchModal from './OrgSearchModal';
+import PayStorageOrgSearchModal from './PayStorageOrgSearchModal';
 import { TbSquareRoundedChevronLeft, TbSquareRoundedChevronRight } from 'react-icons/tb';
 
-import { orgContext } from '../../../pages/payment/Payment';
+import { payStorageContext } from '../../../pages/payment/PaymentStorageDetail';
 
 
 
-function RefPaymentModal( {setRefPaymentModal, payEmp }) {
+function RefPaymentStorageModal( {setRefPaymentModal, payEmp }) {
 
-  const{searchForm, setSearchForm, setFocusEmp, focusEmp, isFocus , setIsFocus, setRefPayMember} = useContext(orgContext);
+  const{searchForm, setSearchForm, setFocusEmp, focusEmp, isFocus , setIsFocus, setRefPayMember} = useContext(payStorageContext);
 
     console.log( " 참조장  : payEmp : ", payEmp);
     const onClickSavedHandler = () => {
@@ -27,7 +27,6 @@ function RefPaymentModal( {setRefPaymentModal, payEmp }) {
     
     console.log("searchForm search 는 : ", searchForm.search);
     console.log("searchForm isSearch 는 : ", searchForm.isSearch);
-
 
 
     console.log("모달 : " , focusEmp);
@@ -51,10 +50,10 @@ function RefPaymentModal( {setRefPaymentModal, payEmp }) {
         <div className={PaymentModalCSS.modal}>
         <div className={PaymentModalCSS.modalContainer}>
         <div className={PaymentModalCSS.paymemtDiv}>
-          
+        
           <div className={PaymentModalCSS.paymentOrgDiv}>
-          {searchForm.isSearch? <OrgSearchModal empCode={payEmp.empCode}/> 
-            : <OrgMainModal empCode={payEmp.empCode}/>}
+          {searchForm.isSearch? <PayStorageOrgSearchModal empCode={payEmp.empCode}/> 
+            : <PayStorageOrgMainModal empCode={payEmp.empCode}/>}
           </div>
           <div className={ PaymentModalCSS.imgDiv} >
             <TbSquareRoundedChevronRight className={ PaymentModalCSS.directionImg} />
@@ -77,7 +76,7 @@ function RefPaymentModal( {setRefPaymentModal, payEmp }) {
 
           </div>
           
-
+      
         </div>
         <div className={PaymentModalCSS.paymentButtonDiv}>
             <button
@@ -101,4 +100,4 @@ function RefPaymentModal( {setRefPaymentModal, payEmp }) {
     );
 }
 
-export default RefPaymentModal;
+export default RefPaymentStorageModal;
