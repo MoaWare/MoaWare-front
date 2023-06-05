@@ -69,6 +69,7 @@
     background-color: #254F70;
     color: white;
     font-weight: bolder;
+    cursor: pointer;
 }
 
 .buttonCenter {
@@ -80,6 +81,7 @@
 .buttonCenter button{
     border: none;
     background-color: white;
+    cursor: pointer;
 }
 
 .wrapper{
@@ -149,6 +151,7 @@
     font-weight: bold;
     border: none;
     color: #E8E8E8;
+    cursor: pointer;
 }
 
 .midSec{

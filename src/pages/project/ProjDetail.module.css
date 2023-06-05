@@ -78,7 +78,7 @@
     width: 89vw;
     height: 4vh;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
 }
 
 .titleLowLeft{
@@ -89,13 +89,15 @@
     color: #4B5766;
     font-size: 1.9vh;
     margin-bottom: 1vh;
+    font-weight: bold;
 }
 
 .titLowRight span{
     color: #1066a8;
-    font-size: 2.9vh;
+    font-size: 1.9vh;
     margin-bottom: 1vh;
     margin-right: 2vw;
+    margin-left: 0.5vw;
     font-weight: bold;
 }
 
@@ -217,6 +219,7 @@
 .taskTop button{
     border: none;
     background-color: transparent;
+    cursor: pointer;
 }
 
 .todoBox hr{

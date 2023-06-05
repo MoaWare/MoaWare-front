@@ -8,6 +8,7 @@ import { BsFillArrowUpCircleFill, BsPersonCircle } from "react-icons/bs";
 import { toast } from "react-toastify";
 
 
+
 function ReviewItem({ review }){
 
 
@@ -20,7 +21,7 @@ function ReviewItem({ review }){
         task : {},
         emp : {}
     });
-    const userImage = '../icon/user.jpg';
+    const userImage = "../../../../public/icon/user.jpg";
     /* 수정모드 전환 */
     const [ modifyMode, setModifyMode ] = useState(false);
 
@@ -37,6 +38,7 @@ function ReviewItem({ review }){
                 reviewCode : review.reviewCode
             });
         }
+        console.log("review.emp.fileCategory[0].file.filePath",review.emp.fileCategory[0].file.filePath);
     },[]);
 
 
@@ -118,11 +120,7 @@ function ReviewItem({ review }){
         (
             <div className={TaskCSS.reviewItem} key={review.reviewCode}>
                 <div className={TaskCSS.reviewLeft}>
-                <img 
-                    src={review.emp.fileCategory[0].file.filePath || userImage} 
-                    onError={(e) => {e.target.src = userImage;}}
-                    alt=""
-                    />
+                    <img src={review.emp.fileCategory[0].file.filePath || <BsPersonCircle />}  alt="profile"/>
                 </div>
                 <div className={TaskCSS.reviewRight}>
                 <div className={TaskCSS.listTop}>
@@ -145,6 +143,7 @@ function ReviewItem({ review }){
                 { modifyMode && 
                     <div className={TaskCSS.textareaDiv} >
                     <textarea 
+                        maxlength="1000"
                         className={TaskCSS.textareaItem} 
                         name="content" 
                         value={form?.content}

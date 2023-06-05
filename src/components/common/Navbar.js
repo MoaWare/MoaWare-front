@@ -31,6 +31,7 @@ function Navbar() {
   const [ file, setFile ] = useState({ });
 
   useEffect(() => {
+    
     if(info){
         info.fileCategory.forEach((file) => {
             if(file.fcategoryType === 'emp'){

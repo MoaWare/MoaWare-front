@@ -13,6 +13,7 @@
 .login-button button{
     border: none;
     background-color: white;
+    cursor: pointer;
 }
 
 button.loginbutton {
@@ -23,6 +24,7 @@ button.loginbutton {
     background-color: #254F70;
     color: white;
     font-weight: 2px;
+    cursor: pointer;
 }
 
 .titleblue{
@@ -34,6 +36,7 @@ button.loginbutton {
     border: none;
     background-color: white;
     margin: 0px 20px;
+    cursor: pointer;
 }
 
 .subtitleTiny{
