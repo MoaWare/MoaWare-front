@@ -3,7 +3,7 @@ import WorkCSS from './Work.module.css';
 import PagingBar from "../../../components/common/PagingBar";
 import { useDispatch, useSelector } from 'react-redux';
 import { callWorkMyListAPI } from '../../../apis/WorkAPICalls';
-import { callAdminWorkListAPI, inputNameAPI, putWorkStatusModifyAPI } from '../../../apis/AdminWorkAPICalls';
+import { callAdminWorkListAPI, inputNameAPI, inputNameAPI2, putWorkStatusModifyAPI } from '../../../apis/AdminWorkAPICalls';
 import { callWorkstatusAPI } from '../../../apis/WorkStatusAPICalls';
 import { useNavigate } from 'react-router-dom';
 import DateSelect from '../../../components/Work/DateSelect';
@@ -14,6 +14,7 @@ function WorkAdmin({ adminList }) {
     const navigate = useNavigate();
     const { myWork } = useSelector(state => state.workReducer);
     const [selectedDate, setSelectedDate] = useState(null)
+    const [selectedDate2, setSelectedDate2] = useState(null)
     const [year, setYear] = useState(new Date().getFullYear());
     const [month, setMonth] = useState(new Date().getMonth() + 1);
     const [currentPage, setCurrentPage] = useState(1);
@@ -29,20 +30,13 @@ function WorkAdmin({ adminList }) {
     const [ selectValue, setSelectValue ] = useState(undefined);
     const [ insertName, setInsertName ] = useState(undefined);
     
-    // const [isFirstRender, setFirstRender] = useState(true);
-    // const pageInfo = myWork.pageInfo;
     const pageInfo = admin && admin ? admin.pageInfo : null;
     console.log("페이징 처리ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ",pageInfo);
-    // 나중에 수정
-
-    // console.log('admin :', admin ? admin.data : "");
-    // console.log('status :', status);
     console.log('name :', name);
 
     const today = new Date();
 
     const formattedDate = formatDate(today);
-    // const [formattedDate, setFormattedDate] = useState(null);
 
     function formatDate(date) {
         const year = date.getFullYear();
@@ -55,17 +49,16 @@ function WorkAdmin({ adminList }) {
 
     const onChangeDateHandler = (e) => {
         const date = e.target.value;
-        setSelectedDate(date);
         console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', e.target.name, e.target.value);
         console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', date);
-        // dispatch(callAdminWorkListAPI({ date, currentPage }))
+        console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', selectedDate);
+        console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', selectedDate2);
     }
 
     const baicTime = '09:00:00';
 
 
     const dateObj = new Date(`1970-01-01T${baicTime}.000Z`);
-    // const dateObj2 = new Date(`1970-01-01T${quitTIme}.000Z`);
 
     // getTime() 메서드로 밀리초 단위 시간으로 변환
     const timeInMs = dateObj.getTime();
@@ -105,16 +98,14 @@ function WorkAdmin({ adminList }) {
 
     function handleKeyPress(event) {
         if (event.key === 'Enter') {
-            console.log('Entered value:', insertName);
-            dispatch(inputNameAPI({ name : insertName, workDate : selectedDate ? selectedDate : formattedDate, currentPage}))
+                dispatch(inputNameAPI({ name : insertName, workDate : selectedDate ? selectedDate : formattedDate, currentPage}))
         }
-      }
+    }
 
 
     const onChangeCheckBox = (empCode) => {
 
         setSelectCheck(empCode);
-        console.log(selectCheck)
         if(selectCheck == empCode) {
             setSelectCheck(null);
         }
@@ -124,8 +115,6 @@ function WorkAdmin({ adminList }) {
     const onChangeSelect = e => {
         const selectvalue = e.target.value;
         const updatedDate = selectedDate ? selectedDate : formattedDate;
-        // const workDate = admin.workPk.workDate;
-        // console.log('날짜확인ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ', workDate);
         setForm({
             ...form,
             workPk : {
@@ -160,28 +149,7 @@ function WorkAdmin({ adminList }) {
         } else if (formattedDate) {
             dispatch(callAdminWorkListAPI({ date: formattedDate, currentPage }))
         } 
-    }, [selectedDate, formattedDate, currentPage, modify])
-
-    useEffect(() => {
-        console.log('year2 : ', year2);
-        console.log('month2 : ', month2);
-
-        if (year2 && month2) {
-            if (month2 < 10) {
-                const month = '0' + month2.toString()
-                const workDate = year2.toString() + '-' + month;
-                console.log(workDate);
-                dispatch(callWorkMyListAPI({ workDate, currentPage }));
-            } else {
-                const workDate = year2.toString() + month2.toString();
-                console.log(workDate);
-                dispatch(callWorkMyListAPI({ workDate, currentPage }));
-            }
-        }
-
-    }, [currentPage]);
-
-    console.log('currentPage : ', currentPage);
+    }, [formattedDate, currentPage, modify])
 
 
 
@@ -191,27 +159,16 @@ function WorkAdmin({ adminList }) {
             <div className={WorkCSS.main}>
                 <p className={WorkCSS.p}>근태 관리</p>
                 <div className={WorkCSS.btnContainer}>
-                    <button className={WorkCSS.btn}>&lt;</button>
-                    <p className={WorkCSS.pMonth}>2023-05</p>
-                    <button className={WorkCSS.btn2}>&gt;</button>
+                    <p className={WorkCSS.pMonth}>{formattedDate}</p>
                     <button className={WorkCSS.btn3}>Today</button>
                 </div>
                 <hr className={WorkCSS.hr}></hr>
                 <div className={WorkCSS.btnContainer2}>
                     <div className={WorkCSS.dateSelect}>
-                        {/* <DateSelect 
-                        year2={year2}
-                        month2={month2}
-                        
-                        onYearChange={handleYearChange} onMonthChange={handleMonthChange}
-                        
-                        // onChageHandler={ onChageHandler }
-                        
-                        /> */}
                         <input type="date"
                             name="date"
                             onChange={onChangeDateHandler}
-                        ></input>
+                        ></input> 
                         <input className={WorkCSS.inputBox}
                                 value={insertName}
                                 onChange={handleInputChange}
@@ -246,7 +203,6 @@ function WorkAdmin({ adminList }) {
                                         onChange={() => onChangeCheckBox(name.empCode)}
                                     />
                                 </td>
-                                {/* <td>{selectedDate ? selectedDate : formattedDate}</td> */}
                                 <td>{name.work && name.work.workPk.workDate ? name.work.workPk.workDate.substring(0,10) : selectedDate ? selectedDate : formattedDate ? formattedDate : "" }</td>
                                 <td>{name.dept.deptName}</td>
                                 <td>{name.job.jobName}</td>
@@ -273,6 +229,8 @@ function WorkAdmin({ adminList }) {
                                         <option value="지각">지각</option>
                                         <option value="결근">결근</option>
                                         <option value="연차">연차</option>            
+                                        <option value="반차">반차</option>            
+                                        <option value="공무">공무</option>            
                                     </select>
                                 </td>
                             </tr> 

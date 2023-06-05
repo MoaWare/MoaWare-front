@@ -1,4 +1,4 @@
-import { getAdminworklist, getEmpnamelist, putWorkstatusmodify  } from "../modules/AdminWorkModule";
+import { getAdminworklist, getEmpnamelist, getEmpnamelist2, putWorkstatusmodify  } from "../modules/AdminWorkModule";
 
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -19,7 +19,6 @@ export const callAdminWorkListAPI = ({ date, currentPage = 1 }) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log("[AdminWorkAPICalls] callAdminWorkListAPI result : ", result);
             dispatch(getAdminworklist(result))
         }
 
@@ -28,7 +27,6 @@ export const callAdminWorkListAPI = ({ date, currentPage = 1 }) => {
 
 export const putWorkStatusModifyAPI = (form) => {
 
-    console.log('put폼잉ㅇㅇㅇㅇㅇㅇ', form);
 
     const requestURL = `${PRE_URL}/work/status/modify`;
 
@@ -45,7 +43,6 @@ export const putWorkStatusModifyAPI = (form) => {
         .then(response => response.json());
 
         if(result.status === 200) {
-            console.log('[AdminWorkAPICalls] putWorkStatusModifyAPI result :', result);
             dispatch(putWorkstatusmodify(result));
         }
     }
@@ -67,8 +64,28 @@ export const inputNameAPI = ({ name, workDate, currentPage = 1 }) => {
         .then(response => response.json());
 
         if(result.status === 200) {
-            console.log('[AdminWorkAPICalls] inputNameAPI result :', result);
             dispatch(getEmpnamelist(result));
+        }
+    }
+}
+
+export const inputNameAPI2 = ({ name, workDate2, workDate, currentPage = 1 }) => {
+
+    const requestURL = `${PRE_URL}/work/emp/name/${name}/${workDate2}/${workDate}?page=${currentPage}`;
+
+    return async (dispatch,getState) => {
+
+        const result = await fetch(requestURL, {
+            method : 'GET',
+            headers : {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            },
+        })
+        .then(response => response.json());
+
+        if(result.status === 200) {
+            dispatch(getEmpnamelist2(result));
         }
     }
 }

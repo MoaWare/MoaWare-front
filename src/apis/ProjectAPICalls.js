@@ -1,4 +1,7 @@
 import { getProject, getTasks, getDone, getProgress, getDeptlist, getDeptemplist, postProject, getTask, postTask, putTask, deleteTask, putProjdelete } from "../modules/ProjectModule";
+import { toast } from "react-toastify";
+
+
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -19,7 +22,6 @@ export const callProjectAPI = (projCode) => {
         }).then(res => res.json());
 
         if(result.status === 200){
-            console.log(result);
             dispatch(getProject(result));
         }
     }
@@ -40,7 +42,6 @@ export const callTaskListAPI = ({ projCode }) => {
         }).then(res => res.json());
 
         if(result.status === 200){
-            console.log(result);
             dispatch(getTasks(result));
         }
     }
@@ -53,10 +54,15 @@ export const callTaskDetailAPI = (taskCode) => {
     const requestURL = `${PRE_URL}/task/${taskCode}`
     return async (dispatch, getState) => {
 
-        const result = await fetch(requestURL).then(res => res.json());
+        const result = await fetch(requestURL, {
+          method : 'GET',
+            headers : {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(res => res.json());
 
         if(result.status === 200){
-            console.log(result);
             dispatch(getTask(result));
         }
     }
@@ -80,12 +86,18 @@ export const callTaskRegistAPI = ( form ) => {
       }).then(res => res.json());
 
       if(result?.status === 200){
-          console.log(result);
-
           dispatch(postTask(result));
 
       } else if(result?.status === 400){
-        alert(result.message);
+        toast.error(result.message, {
+          position: toast.POSITION.TOP_CENTER, 
+          autoClose: 2000, 
+          hideProgressBar: false, 
+          progressStyle: {
+            backgroundColor: '#ff000074', 
+            height: '5px', 
+          },
+        });
       }
   }
 }
@@ -101,15 +113,23 @@ export const callTaskUpdateAPI = ( form ) => {
         method : "PUT",
         headers : {
             "Content-Type" : "application/json",
+            "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
         },
         body: JSON.stringify(form)
       }).then(res => res.json());
 
       if(result?.status === 200){
-          console.log(result);
           dispatch(putTask(result));
       } else if(result?.status === 400){
-        alert(result.message);
+        toast.error(result.message, {
+          position: toast.POSITION.TOP_CENTER, 
+          autoClose: 2000, 
+          hideProgressBar: false, 
+          progressStyle: {
+            backgroundColor: '#ff000074', 
+            height: '5px', 
+          },
+        });
       }
   }
 }
@@ -126,14 +146,22 @@ export const callTaskDeleteAPI = ( taskCode ) => {
         method : "PUT",
         headers : {
             "Content-Type" : "application/json",
+            "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
         },
       }).then(res => res.json());
 
       if(result?.status === 200){
-          console.log(result);
           dispatch(deleteTask(result));
       } else if(result?.status === 400){
-        alert(result.message);
+        toast.error(result.message, {
+          position: toast.POSITION.TOP_CENTER, 
+          autoClose: 2000, 
+          hideProgressBar: false, 
+          progressStyle: {
+            backgroundColor: '#ff000074', 
+            height: '5px', 
+          },
+        });
       }
   }
 }
@@ -219,7 +247,6 @@ export const callProjectProgressListAPI = ({ currentPage = 1 }) => {
       }).then((response) => response.json());
   
       if (result.status === 200) {
-        console.log("[ProjectAPICalls] callProjectProgressListAPI result : ", result);
   
         dispatch(getProgress(result));
       }
@@ -229,7 +256,7 @@ export const callProjectProgressListAPI = ({ currentPage = 1 }) => {
 
 
   export const callProjectDoneListAPI = ({ currentPage = 1 }) => {
-    const requestURL = `${PRE_URL}/progress?page=${currentPage}`;
+    const requestURL = `${PRE_URL}/doneProj?page=${currentPage}`;
   
     return async (dispatch, getState) => {
       const result = await fetch(requestURL, {
@@ -241,7 +268,6 @@ export const callProjectProgressListAPI = ({ currentPage = 1 }) => {
       }).then((response) => response.json());
   
       if (result.status === 200) {
-        console.log("[ProjectAPICalls] callProjectDoneListAPI result : ", result);
   
         dispatch(getDone(result));
       }
@@ -262,11 +288,11 @@ export const callDeptEmpListAPI = ({ deptCode }) => {
             method : 'GET',
             headers : {
                 "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
             }
         }).then(res => res.json());
 
         if(result.status === 200){
-            console.log("[ProjectAPICalls] callDeptListAPI result : ", result);
             dispatch(getDeptemplist(result));
         }
     }
@@ -300,7 +326,6 @@ export const callProjectRegistAPI = (formData, selectedEmpList) => {
       }).then((res) => res.json());
   
       if (result.status === 200) {
-        console.log('[ProjectAPICalls] callDeptListAPI result: ', result);
         dispatch(postProject(result));
       }
     };
@@ -318,11 +343,11 @@ export const callPorjectDeleteAPI = ({projCode}) => {
         method : 'PUT',
         headers : {
             "Content-Type" : "application/json",
+            "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
         }
     }).then(res => res.json());
 
     if(result.status === 200){
-        console.log("[ProjectAPICalls] callPorjectDeleteAPI result : ", result);
         dispatch(putProjdelete(result));
     }
   }

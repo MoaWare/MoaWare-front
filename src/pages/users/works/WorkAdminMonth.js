@@ -23,18 +23,13 @@ function WorkAdminMonth({ adminList }) {
     //nabvar 에서의 변경값이 있을 떄 변경 해주기 위한 설정 
     const { status } = useSelector(state => state.workStatusReducer);
     const { work } = useSelector(state => state.workReducer);
-    
-    // const [isFirstRender, setFirstRender] = useState(true);
-    // const pageInfo = myWork.pageInfo;
     const pageInfo = status && status ? status.pageInfo : null;
-    // 나중에 수정
 
-    console.log('status :', status);
+
 
     const today = new Date();
 
     const formattedDate = formatDate(today);
-    // const [formattedDate, setFormattedDate] = useState(null);
 
     function formatDate(date) {
         const year = date.getFullYear();
@@ -85,15 +80,11 @@ function WorkAdminMonth({ adminList }) {
 
     const handleYearChange = (bYear, year) => {
         setYear2(year);
-        console.log('bYear : ', bYear);
-        console.log('year : ', year);
         setCurrentPage(1);
     };
     
     const handleMonthChange = (bMonth, month) => {
         setMonth2(month);
-        console.log('bMonth : ', bMonth);
-        console.log('month : ', month);
         setCurrentPage(1);
     }
 
@@ -108,19 +99,15 @@ function WorkAdminMonth({ adminList }) {
     }, [selectedDate, formattedDate])
 
     useEffect(() => {
-        console.log('year2 : ', year2);
-        console.log('month2 : ', month2);
 
         if (year2 && month2) {
             if (month2 < 10) {
                 const month = '0' + month2.toString()
                 const workDate = year2.toString() + '-' + month;
-                console.log(workDate);
                 dispatch(callWorkMyListAPI({ workDate, currentPage }));
                 dispatch(callWorkstatusAPI({ date: selectedDate }))
             } else {
                 const workDate = year2.toString() + month2.toString();
-                console.log(workDate);
                 dispatch(callWorkMyListAPI({ workDate, currentPage }));
                 dispatch(callWorkstatusAPI({ date: formattedDate }))
 
@@ -128,8 +115,6 @@ function WorkAdminMonth({ adminList }) {
         }
 
     }, [currentPage]);
-
-    console.log('currentPage : ', currentPage);
 
 
 

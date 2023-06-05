@@ -3,15 +3,28 @@ import { getBoardposts, getBoardpost, postBoardpost, putBoardpostdelete, putBoar
 /* React App에서 .env를 사용할 때는 REACT_APP 접두어가 필요^^;; */
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
-const PRE_URL = `http://${SERVER_IP}:${SERVER_PORT}/api/v1`;
+const PRE_URL = `http://${SERVER_IP}:${SERVER_PORT}/api/b`;
 
+
+
+
+// 전체 조회(사용자)
 export const callBoardPostListAPI = ({ currentPage = 1 }) => {
 
-    const requestURL = `${PRE_URL}/boardPosts-management?page=${currentPage}`;
+    const requestURL = `${PRE_URL}/boardPosts?page=${currentPage}`;
 
     return async (dispatch, getState) => {
 
-        const result = await fetch(requestURL).then(response => response.json());
+        //const result = await fetch(requestURL).then(response => response.json());
+        const result = await fetch(requestURL, {
+            method: 'GET',
+            headers: {
+                "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+            },
+        }).then(response => response.json());
+
+        
+
 
         if (result.status === 200) {
             console.log('[BoardPostAPICalls] : callBoardPostListAPI result : ', result);
@@ -20,6 +33,31 @@ export const callBoardPostListAPI = ({ currentPage = 1 }) => {
     }
 }
 
+
+                //전체 조회(관리자)
+                export const callBoardPostListForAdminAPI = ({ currentPage = 1 }) => {
+
+                    const requestURL = `${PRE_URL}/boardPosts-management?page=${currentPage}`;
+
+                    return async (dispatch, getState) => {
+
+                        //const result = await fetch(requestURL).then(response => response.json());
+                        const result = await fetch(requestURL, {
+                            method: 'GET',
+                            headers: {
+                                "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+                            },
+                        }).then(response => response.json());
+
+
+
+                        if (result.status === 200) {
+                            console.log('[BoardPostAPICalls] : callBoardPostListForAdminAPI result : ', result);
+                            dispatch(getBoardposts(result));
+                        }
+                    }
+                }
+
 // 상세 조회
 export const callBoardPostDetailAPI = ({ postCode }) => {
 
@@ -27,7 +65,14 @@ export const callBoardPostDetailAPI = ({ postCode }) => {
 
     return async (dispatch, getState) => {
 
-        const result = await fetch(requestURL).then(response => response.json());
+    //    const result = await fetch(requestURL).then(response => response.json());
+    const result = await fetch(requestURL, {
+        method: 'GET',
+        headers: {
+            "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+        },
+        }).then(response => response.json());
+
 
         if (result.status === 200) {
             console.log("[BoardPostAPICalls] callBoardPostDetailAPI result : ", result);
@@ -38,6 +83,32 @@ export const callBoardPostDetailAPI = ({ postCode }) => {
 
 
 
+                    // 관리자(상세 조회) 
+                    export const callBoardPostDetailForAdminAPI = ({ postCode }) => {
+
+                        const requestURL = `${PRE_URL}/boardPosts-management/${postCode}`;
+
+                        return async (dispatch, getState) => {
+
+                        
+                            const result = await fetch(requestURL, {
+                                method: 'GET',
+                                headers: {
+                                    "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+                                },
+                            
+                            }).then(response => response.json());
+                            
+
+                            if (result.status === 200) {
+                                console.log("[BoardPostAPICalls] callBoardPostDetailForAdminAPI result : ", result);
+                                dispatch(getBoardpost(result));
+                            }
+                        }
+                    }
+
+
+
 // 게시판 코드별 조회
  export const callBoardpostBoardsListAPI = ({ boardCode, currentPage = 1 }) => {
 
@@ -45,7 +116,14 @@ export const callBoardPostDetailAPI = ({ postCode }) => {
 
      return async (dispatch, getState) => {
 
-        const result = await fetch(requestURL).then(response => response.json());
+        //const result = await fetch(requestURL).then(response => response.json());
+        const result = await fetch(requestURL, {
+            method: 'GET',
+            headers: {
+                "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+            },
+        
+        }).then(response => response.json());
 
         if (result.status === 200) {
              console.log("[BoardpostAPICalls] callBoardpostBoardsListAPI result : ", result);
@@ -55,29 +133,31 @@ export const callBoardPostDetailAPI = ({ postCode }) => {
  }
 
 
-// 관리자(상세 조회) 
-export const callBoardPostDetailForAdminAPI = ({ postCode }) => {
+ 
+// 게시판 코드별 조회
+export const callBoardpostBoardsListForAdminAPI = ({ boardCode, currentPage = 1 }) => {
 
-    const requestURL = `${PRE_URL}/boardPosts-management/${postCode}`;
+    const requestURL = `${PRE_URL}/boardPosts-management/boards/${boardCode}?page=${currentPage}`;
 
     return async (dispatch, getState) => {
 
-    
-        const result = await fetch(requestURL, {
-            method: 'GET',
-            headers: {
-                "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
-            },
-        
-        }).then(response => response.json());
-        
+       //const result = await fetch(requestURL).then(response => response.json());
+       const result = await fetch(requestURL, {
+           method: 'GET',
+           headers: {
+               "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+           },
+       
+       }).then(response => response.json());
 
-        if (result.status === 200) {
-            console.log("[BoardPostAPICalls] callBoardPostDetailForAdminAPI result : ", result);
-            dispatch(getBoardpost(result));
-        }
+       if (result.status === 200) {
+            console.log("[BoardpostAPICalls] callBoardpostBoardsListForAdminAPI result : ", result);
+            dispatch(getBoardposts(result));
+      }
     }
 }
+
+
 
 
 
@@ -89,8 +169,7 @@ export const callBoardPostDetailForAdminAPI = ({ postCode }) => {
    
     return async (dispatch, getState) => {
    
-        //         const result = await fetch(requestURL).then(response => response.json());
-
+        // const result = await fetch(requestURL).then(response => response.json())
     const result = await fetch(requestURL, {
                 method: 'POST',
                headers: {
@@ -117,8 +196,7 @@ export const callBoardPostUpdateAPI = (formData) => {
     return async (dispatch, getState) => {
 
 
-                 //const result = await fetch(requestURL).then(response => response.json());
-
+        //const result = await fetch(requestURL).then(response => response.json());
          const result = await fetch(requestURL, {
              method: 'PUT',
              headers: {
@@ -126,6 +204,7 @@ export const callBoardPostUpdateAPI = (formData) => {
              },
              body: formData
          }).then(response => response.json());
+
 
         if (result.status === 200) {
             console.log('[BoardPostAPICalls] callBoardPostUpdateAPI result :', result);
@@ -155,6 +234,7 @@ export const callBoardPostDeleteAPI =({ postCode }) => {
           },
         }).then(res => res.json());
   
+
         if(result?.status === 200){
             console.log("[BoardPostDeleteAPI] callBoardPostDeleteAPI result : ", result);
             dispatch(putBoardpostdelete(result));
@@ -222,5 +302,4 @@ export const callBoardPostDeleteAPI =({ postCode }) => {
 //         }
 //     }
 // }
-
 

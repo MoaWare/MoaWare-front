@@ -13,11 +13,6 @@ import { toast } from "react-toastify";
 
 function TaskDetail() {
 
-
-    // // 새로고침시 사용되는 param 값
-    // const code = localStorage.getItem('code');
-    // localStorage.removeItem('code');
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { projCode, taskCode } = useParams();
@@ -95,9 +90,9 @@ function TaskDetail() {
         if(del?.status === 200){
 
           toast.success('업무 삭제 완료', {
-            position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
-            autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
-            hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+            position: toast.POSITION.TOP_CENTER, 
+            autoClose: 2000, 
+            hideProgressBar: false, 
           });
 
           del.status = null;
@@ -107,12 +102,12 @@ function TaskDetail() {
         } else if(del?.status === 400) {
 
           toast.error('업무 삭제 오류 ', {
-            position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
-            autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
-            hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+            position: toast.POSITION.TOP_CENTER, 
+            autoClose: 2000, 
+            hideProgressBar: false, 
             progressStyle: {
-              backgroundColor: '#ff000074', // 프로그레스 바 배경색
-              height: '5px', // 프로그레스 바 
+              backgroundColor: '#ff000074', 
+              height: '5px', 
             },
           });
         }
@@ -182,7 +177,6 @@ function TaskDetail() {
                             </div>
                         </div>
                     </div>
-                {/* <ReviewList task={task} reviews={reviews} setSwitchOn={setSwitchOn} />  */}
                 <ReviewList task={task} reviews={reviews} /> 
             </div>
         </div>

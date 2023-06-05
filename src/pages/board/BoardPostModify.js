@@ -82,26 +82,7 @@ function BoardPostModify() {
         navigate('/boardPosts');
     }
 
-        {/* <div className={CSS.main}>
-            <div class={CSS.menutitle}> 게시판 {">"} 상세 및 수정 </div>
-              {detail&& (
-                <div className={CSS.container}  key={detail.postCode}>
-                
-                    <div className={CSS.category}>분류[{detail.postCategory}]</div>
-                    <div className={CSS.content1}>
-                    <ul className={CSS.td}>
-                    <li style={{ fontWeight: 'bold' }} className={CSS.title}>제목: {detail.postTitle}</li>
-                        <li style={{ fontWeight: 'bold' }} className={CSS.date}>작성일: {detail.createDate}</li>
-                    </ul>
-                    <div className={CSS.content2} alt="내용">{detail.postContent}</div>
-                    </div>
-                </div>
-                    
-                    
-                )}
-            
-            </div> */}
-
+    
     return (
         <>
                 <div className={ CSS.main }>
@@ -111,6 +92,38 @@ function BoardPostModify() {
                     <div className={CSS.container}  key={detail.postCode}>
                         <tbody>
                        
+
+                            <tr>
+                                    <td><label>게시글 번호: </label></td>
+                                        <td>
+                                            <input 
+                                                name='postCode'
+                                                placeholder='게시글 번호'
+                                                type='number'
+                                                className={ CSS.title }
+                                                onChange={ onChangeHandler }
+                                                value={ !modifyMode ? detail.postCode : detail.postCode }
+                                                readOnly={ !modifyMode }
+                                                style={ inputStyle }
+                                            />
+                                        </td> 
+                            </tr> 
+
+                            <tr>
+                                <td><label>제목: </label></td>
+                                <td>
+                                    <input 
+                                        name='postTitle'
+                                        placeholder='제목'
+                                        className={ CSS.title }
+                                        onChange={ onChangeHandler }
+                                        value={ !modifyMode ? detail.postTitle : form.postTitle }
+                                        readOnly={ !modifyMode }
+                                        style={ inputStyle }
+                                    />
+                                </td>
+                            </tr>    
+
                             <tr>
                                 <td><label>게시판 분류: </label></td>
                                 <td>
@@ -167,33 +180,9 @@ function BoardPostModify() {
                                     </label>
                                 </td>
                             </tr>
-                            <td><label>게시글 번호: </label></td>
-                                <td>
-                                    <input 
-                                        name='postCode'
-                                        placeholder='게시글 번호'
-                                        type='number'
-                                        className={ CSS.title }
-                                        onChange={ onChangeHandler }
-                                        value={ !modifyMode ? detail.postCode : detail.postCode }
-                                        readOnly={ !modifyMode }
-                                        style={ inputStyle }
-                                    />
-                                </td>   
-                            <tr>
-                                <td><label>제목: </label></td>
-                                <td>
-                                    <input 
-                                        name='postTitle'
-                                        placeholder='제목'
-                                        className={ CSS.title }
-                                        onChange={ onChangeHandler }
-                                        value={ !modifyMode ? detail.postTitle : form.postTitle }
-                                        readOnly={ !modifyMode }
-                                        style={ inputStyle }
-                                    />
-                                </td>
-                            </tr>    
+                         
+                            
+
                             <tr>
                                 <td><label>노출 여부: </label></td>
                                 <td>

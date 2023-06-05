@@ -22,7 +22,6 @@ function Loginform(){
     };
     
     const onClickHandler = () => {
-        console.log("callLoginAPI",form);
         dispatch(callLoginAPI(form));
     }
 
@@ -36,7 +35,6 @@ function Loginform(){
 
     const onEnterKeyHandler = (e) => {
         if(e.key === 'Enter' ) {
-            console.log("callLoginAPI",form);
             dispatch(callLoginAPI(form));
         }
     }

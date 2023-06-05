@@ -8,6 +8,7 @@ import moment from "moment";
 import { Navigate, useNavigate } from 'react-router-dom';
 import { callDeptListAPI } from '../../apis/EmployeeAPICalls';
 import { callMemberInfoAPI } from '../../apis/MemberAPICalls';
+import { toast } from "react-toastify";
 
 function CreateProject() {
 
@@ -16,25 +17,20 @@ function CreateProject() {
     const [selectedDept, setSelectedDept] = useState(6);
     const [selectedEmp, setSelectedEmp] = useState("");
     const [selectedEmpList, setSelectedEmpList] = useState([]);
-    // const { depts } = useSelector(state => state.projectReducer);
     const [change, setChange ] = useState(false);
     const { emps, regist } = useSelector(state => state.projectReducer);
     const { depts } = useSelector(state => state.employeeReducer);
     const { name } = useSelector(state => state.employeeReducer);
     const { info } = useSelector(state => state.memberReducer);
     const [form, setForm] = useState({});
-    // const deptList = dept.data;
     const today = new Date().toISOString().slice(0, 10);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
 
-    console.log('프로젝트 생성에서의 내임 출력', name);
-    // const [depties, setDepties] = useState([]);
     
     useEffect(
         () => {        
-                console.log('화ㅗㅘㅘㅗㅘㅘㅘㅏㄱ아아아아아')
                 setChange(false);
                 dispatch(callDeptListAPI())
     }, [change]);
@@ -51,7 +47,7 @@ function CreateProject() {
         if (emps && emps.length > 0) {
           setSelectedEmp(`${emps[0].empCode} ${emps[0].empName} ${emps[0].email}`);
         }
-      }, [emps]);
+      }, [emps, selectedEmpList]);
 
     useEffect(() => {
          dateCheck();
@@ -59,7 +55,11 @@ function CreateProject() {
 
     useEffect(() => {
         if (regist?.status === 200) {
-          alert('생성 완료.');
+        toast.success('생성 완료 ', {
+            position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+            autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+            hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+          });
           navigate("/project");
         } else if (regist?.state === 400) {
           alert(regist.message);
@@ -68,14 +68,11 @@ function CreateProject() {
 
     const onCangeDeptHandler = (e) => {
             const selectedValue = e.target.value;
-            setSelectedDept(selectedValue)
-            console.log(selectedValue);
+            setSelectedDept(selectedValue);
     }
         
     const onChangeEmpHandler = e => {
         const selectedValue = e.target.value;
-        console.log(selectedValue);
-        console.log(info.empCode +" "+ info.empName +" "+ info.email);
         setSelectedEmp(selectedValue);
 
     }
@@ -92,17 +89,12 @@ function CreateProject() {
 
     const dateCheck = () => {
 
-        console.log('selectedStartDate:', selectedStartDate);
-        console.log('selectedEndDate:', selectedEndDate);
-        console.log('날짜 체크');
         if (
           selectedStartDate &&
           selectedEndDate &&
           selectedStartDate.getTime() > selectedEndDate.getTime()
         ) {
-          console.log('selectedStartDate가 selectedEndDate보다 이후입니다.');
         } else {
-          console.log('조건 미충족');
         }
       };
         
@@ -137,16 +129,35 @@ function CreateProject() {
             [e.target.name] : e.target.value
         });
     }
-    console.log(form);
 
     const onClickCreate = () => {
 
         if(!form.projName || !form.projContent) {
-            alert('정보를 모두 입력해주세요');
+            toast.success('정보를 모두 입력해주세요. ', {
+                position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+                autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+                hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+              });
             return;
+        } else if(selectedEndDate == null ){
+            toast.success('날짜를 입력해주세요.', {
+                position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+                autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+                hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+              });         
         } else if(selectedStartDate > selectedEndDate) {
-            alert('종료일이 시작일 보다 빠릅니다.');
+            toast.success('종료일이 시작일 보다 빠릅니다.', {
+                position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+                autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+                hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+              });      
             return;
+        } else if(selectedStartDate == null) {
+            toast.success('날짜를 입력해주세요.', {
+                position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+                autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+                hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+              });      
         }
         /* 서버로 전달할 FormData 형태의 객체 설정 */
         const formData = new FormData();
@@ -160,22 +171,13 @@ function CreateProject() {
         })));
         
 
-        console.log(moment(selectedEndDate).format('YYYY-MM-DD'))
-        console.log(moment(selectedStartDate).format('YYYY-MM-DD'))
-        console.log(form.projContent)
-        console.log(form.projName)
-        console.log(selectedEmpList);
 
         for (const entry of formData.entries()) {
-            console.log('f폼이다', entry);
         }
-        console.log('f폼이다', formData);
 
         dispatch(callProjectRegistAPI(formData, selectedEmpList))
     }    
 
-    console.log(depts);
-    console.log(emps);
 
     return (
         <>
@@ -215,7 +217,7 @@ function CreateProject() {
                     </div >
                     <div className={CreteProjCSS.container}>
                             <span className={CreteProjCSS.span1}>팀원 선택</span>
-                            <select onChange={onChangeEmpHandler} value={selectedEmp} className={CreteProjCSS.span2}>
+                            <select onChange={onChangeEmpHandler} value={selectedEmp} className={CreteProjCSS.span5}>
                             {emps && emps.length > 0 && 
                                     emps.map((emp) => (
                                         <option key={emp.empCode} value={`${emp.empCode} ${emp.empName} ${emp.email}`}>
@@ -223,36 +225,31 @@ function CreateProject() {
                                         </option>
                             ))}
                             </select>
-                    </div>
-                    <div>
-                        <button onClick={ onClickHandler }>
+                            <button onClick={ onClickHandler } className={CreteProjCSS.createBtn}>
                             추가하기
-                        </button>
+                            </button>
                     </div>
                     <div className={CreteProjCSS.container}>
-                        <span className={CreteProjCSS.span1}>프로젝트 팀원</span>
-                        {/* {selectedEmpList.map((member, index) => (
-                            <span key={index}>{member.name} {member.email} <button onClick={ () => removeEmp(index)}> x </button></span>
-                            
-                        ))} */}
-                        {selectedEmpList
-                            //self 검색 값 
-                            .filter((member, index, self) =>
-                                //검색했을 때 이메일이 find
-                                index === self.findIndex((m) => m.email === member.email)
-                            )
-                            .map((member, index) => (
-                                <span key={index}>
-                                {member.name} {member.email} <button onClick={() => removeEmp(index)}>x</button>
-                        </span>
-                        ))}
+                        <span className={CreteProjCSS.span7}>프로젝트 팀원</span>
+                        <div className={CreteProjCSS.span6}>
+                            {selectedEmpList
+                                //self 검색 값 
+                                .filter((member, index, self) =>
+                                    //검색했을 때 이메일이 find
+                                    index === self.findIndex((m) => m.email === member.email)
+                                )
+                                .map((member, index) => (
+                                    <div key={index} className={CreteProjCSS.span8}>
+                                    {member.name} {member.email} <button onClick={() => removeEmp(index)} className={CreteProjCSS.createBtn2}>x</button>
+                            </div>
+                            ))}
+                        </div>
                     </div>
                     <div className={CreteProjCSS.container}>
                         <span className={CreteProjCSS.span1}>프로젝트 시작일</span>
                         <div className={CreteProjCSS.date}>
                             <DatePicker className={CreteProjCSS.datepicker}
                                 selected={selectedStartDate}
-                                // onChange={(startDate) => setSelectedStartDate(startDate)}
                                 onChange={ onStartDateHandler }
                                 dateFormat='yyyy-MM-dd'
                                 minDate={today}
@@ -262,7 +259,6 @@ function CreateProject() {
                         <div className={CreteProjCSS.date}>
                             <DatePicker className={CreteProjCSS.datepicker}
                                 selected={selectedEndDate}
-                                // onChange={(endDate) => setSelectedEndDate(endDate)}
                                 onChange={ onEndeDateHandler }
                                 dateFormat='yyyy-MM-dd'
                             />
@@ -280,7 +276,6 @@ function CreateProject() {
                         <button className={CreteProjCSS.workBtn1}
                             onClick={ onClickCreate }
                         >생성하기</button>
-                        <button className={CreteProjCSS.workBtn2}>취소하기</button>
                     </div>
                 </div>
             </div>

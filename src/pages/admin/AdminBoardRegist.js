@@ -89,7 +89,7 @@ function AdminBoardRegist() {
                     list="boardCodeOptions"
                     />
     
-                    <datalist id="boardCodeOptions">
+                    <datalist id="boardCodeOptions" className={CSS.datalistOptions}>
                         <option value="6">6번 이후 자유 입력</option>
                         <option value="7">번호 선택후 이름 입력</option>
                         

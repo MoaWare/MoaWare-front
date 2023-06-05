@@ -7,16 +7,17 @@ import { getHeaderName } from '../../modules/EmployeeModule';
 import { callHeaderNameAPI } from '../../apis/EmployeeAPICalls';
 import ProtectedRoute from '../router/ProtectedRoute';
 import { isAdmin } from '../../utils/TokenUtils';
+import { setBtnState } from '../../modules/WorkTimeModule';
 
 const Header = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { name } = useSelector(state=> state.employeeReducer);
+  const btn = useSelector(state => state.workTimeReducer.btn);
 
   useEffect(() => {
     dispatch(callHeaderNameAPI());
-    console.log("Header name: ",name);
   }, [])
 
 
@@ -26,9 +27,8 @@ const Header = () => {
       window.localStorage.removeItem('accessToken');
       localStorage.removeItem('clickTime');
       localStorage.removeItem('workbtn');
-      console.log('로그아웃 확인');
+      dispatch(setBtnState(!btn));
       navigate('/login');
-      console.log('로그아웃 확인');
     }
   }
 

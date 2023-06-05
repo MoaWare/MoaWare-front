@@ -17,22 +17,7 @@ function ReviewList({ task, reviews }){
         content : '',
         task : task,
       });
-    // const [ isSwitchOn, setSwitchOn ] = useState(false);
 
-    // console.log("task" , task);
-    // console.log("reviews" , reviews);
-    // console.log("reviews" , review);
-    
-    // useEffect(()=> {
-      
-    //   // if(isSwitchOn){
-    //       console.log("taskCode" , taskCode);
-    //     // dispatch(callReviewsAPI(taskCode));
-    //     // setSwitchOn(false);
-    //     console.log("isSwitchOn===========================",isSwitchOn);
-    //   // }
-    // },[ , isSwitchOn]);
- 
 
     const onReviewChangeHandler = (e) => {
 
@@ -41,50 +26,26 @@ function ReviewList({ task, reviews }){
             [e.target.name] : e.target.value,
             }
         ));
-        // console.log(review);
     }
 
     
     /* 댓글 등록 및 재조회 */
-    const handleSubmitContent = async (e) => {
+    const handleSubmitContent = () => {
             
-      try{
-        
-        // console.log(review);
-        await dispatch(callReviewsRegistAPI(review));
-        // setSwitchOn((current)=>!current);
-                // console.log('여기에서 에러가 나나요?');
+        dispatch(callReviewsRegistAPI(review));
+
+        toast.success('댓글 등록 ', {
+          position: toast.POSITION.TOP_CENTER, 
+          autoClose: 2000, 
+          hideProgressBar: false, 
+        });   
 
         setReview({
           content: '', 
           task: task,
         });
-
-        // console.log(review);
-
-        toast.success('댓글 등록 ', {
-          position: toast.POSITION.TOP_CENTER, // 토스트 위치 
-          autoClose: 2000, 
-          hideProgressBar: false, 
-        });
-
-      } catch (error) {
-        
-        toast.error('댓글 등록 오류 '+ error, {
-          position: toast.POSITION.TOP_CENTER, 
-          autoClose: 2000, 
-          hideProgressBar: false, 
-          progressStyle: {
-            backgroundColor: '#ff000074', 
-            height: '5px', 
-          },
-        });
-        // console.log(error);
-      }
-
-    }
-
-
+      } 
+    
   
 
     return reviews && (

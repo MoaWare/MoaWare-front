@@ -22,7 +22,6 @@ function Schedule() {
   }, []);
 
   const handleEventDrop = (info) => {
-    console.log('일정을 옮길래! :', info.event);
   };
 
   const getEventColor = (categoryCode) => {
@@ -60,22 +59,13 @@ function Schedule() {
     const schCode = info.event.id; // Get the event id
       dispatch(callScheduleDetailAPI({ schCode }));
       setScheduleModal(true);
-      console.log('handleEventClick', scheduleModal);
   };
 
-  /* 모달창! */
-  // useEffect(() => {
-  //   if (schedule) {
-  //     console.log('일정 누르기!: ', schedule);
-  //     setScheduleModal(true);
-  //   }
-  // }, [schedule]);
+
 
   /* 일정 등록 */
   const EventInsertClick = () => {
-    console.log('일정 등록할래ㅠ0ㅠ: ');
     setSchInsertModal(true); // schInsertModal 열기
-    console.log('모달창 클릭티비:', schInsertModal);
   };
 
   return (

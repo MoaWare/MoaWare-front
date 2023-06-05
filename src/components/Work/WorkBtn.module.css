@@ -26,7 +26,6 @@
 
 .workBtn button:first-child {
     padding: 0.4rem 0.8rem;
-
     border: transparent;
     border-radius: 10px;
     background-color: rgba(37, 79, 112, 1);
@@ -47,9 +46,6 @@
 }
 
 .p2 {
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* align-items: center; */
     font-size: 14px;
     font-weight: bold;
     color: rgba(37, 79, 112, 1);

@@ -9,7 +9,6 @@
     display: flex;
     flex-direction: column;
     border-radius: 20px;
-    /* align-items: ; */
 }
 
 .hr{
@@ -28,7 +27,6 @@
 }
 
 .table {
-    /* margin-top: 2%; */
     margin-left: 20px;
     border-collapse: collapse;
     width: 97%;
@@ -57,7 +55,6 @@
 }
 
 .workBtn1{
-    /* margin-top: 30%; */
     margin-top: 400px;
     margin-left: 90%;
     background-color: rgba(37, 79, 112, 1);
@@ -66,5 +63,4 @@
     width: 80px;
     height: 40px;
     font-weight: bold;
-    /* flex-direction: column */
 }

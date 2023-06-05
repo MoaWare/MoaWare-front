@@ -5,12 +5,11 @@ import PagingBar from "../../components/common/PagingBar";
 import { callPorjectDeleteAPI, callProjectProgressListAPI } from '../../apis/ProjectAPICalls';
 import ProjectList from "./ProjectList";
 import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Project() {
     
     const [currentPage, setCurrentPage] = useState(1);
-    // const [year2, setYear2] = useState(new Date().getFullYear());
-    // const [month2, setMonth2 ] = useState(new Date().getMonth() + 1);
     const { progress } = useSelector(state => state.projectReducer);
     const { delProj } = useSelector(state => state.projectReducer);
     const [selectPorjCode, setSeletProjCode] = useState(null);
@@ -19,10 +18,7 @@ function Project() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const pageInfo = progress && progress ? progress.data.pageInfo : null;
-    console.log('progress', progress);
-    console.log('pageInfo', pageInfo);
     const projectList = progress && progress.data ? progress.data.data : '';
-    // console.log('projectList', projectList);
     useEffect(
         ()=>{
                 dispatch(callProjectProgressListAPI({ currentPage }))
@@ -32,7 +28,11 @@ function Project() {
 
     useEffect(() => {
         if (delProj?.status === 200) {
-          alert('프로젝트 삭제가 완료 되었습니다.');
+          toast.success('프로젝트 삭제가 완료 되었습니다.', {
+            position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+            autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+            hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+          });
           navigate("/project");
         } else if (delProj?.state === 400) {
           alert(delProj.message);
@@ -40,8 +40,7 @@ function Project() {
       }, [delProj]);
 
     const onSelectHandler = (projCode) => {
-        setSeletProjCode(projCode)
-        console.log(projCode);
+        setSeletProjCode(projCode);
     }
 
     const onClickDelete = e => {
@@ -56,19 +55,6 @@ function Project() {
                 </div>
                 <hr className={ProjectCSS.hr}></hr>
                 <div className={ProjectCSS.btnContainer2}>
-                    {/* <div className={ProjectCSS.dateSelect}>
-                        <DateSelect
-
-                            year2={year2}
-                            month2={month2}
-
-                            // onYearChange={handleYearChange} onMonthChange={handleMonthChange}
-
-                        // onChageHandler={ onChageHandler }
-
-                        />
-                        <input className={ProjectCSS.inputBox}></input>
-                    </div> */}
                 </div>
                 <div >
                     <table className={ ProjectCSS.table }>
@@ -86,7 +72,6 @@ function Project() {
                 { projectList && <ProjectList projectList={projectList} 
                     onProjectSelectHandler={onSelectHandler}
                 /> }
-                {/* <button>프로젝트 상세</button> */}
                 </table>
                 </div>
                     <div>

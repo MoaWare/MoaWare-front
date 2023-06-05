@@ -14,10 +14,6 @@ function ProjDetail() {
     const projCode = params.projCode;
     const { tasks, project } = useSelector(state => state.projectReducer);
     let progress = '';
-
-
-    console.log("projCode : ", projCode);
-    
     const tasksByStage = {
         todo: [],
         ing: [],
@@ -37,10 +33,6 @@ function ProjDetail() {
 
     }, []);
 
-   
-    // console.log("ProjDetail tasks : ", tasks);
-    // console.log("ProjDetail project : ", project);
-
 
     /* task의 stage에 따라 분류 */
     if(tasks){
@@ -49,11 +41,7 @@ function ProjDetail() {
             const { stage } = task;
             tasksByStage[stage].push(task);
         });
-        
-        // console.log("tasksByStage : ", tasksByStage);
-
         progress = Math.floor(( tasksByStage.done.length / (tasksByStage.todo.length + tasksByStage.ing.length + tasksByStage.done.length)) * 100 ) ; 
-        // console.log("progress", progress);
     }
 
         
