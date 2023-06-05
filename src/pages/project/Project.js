@@ -5,6 +5,7 @@ import PagingBar from "../../components/common/PagingBar";
 import { callPorjectDeleteAPI, callProjectProgressListAPI } from '../../apis/ProjectAPICalls';
 import ProjectList from "./ProjectList";
 import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Project() {
     
@@ -27,7 +28,11 @@ function Project() {
 
     useEffect(() => {
         if (delProj?.status === 200) {
-          alert('프로젝트 삭제가 완료 되었습니다.');
+          toast.success('프로젝트 삭제가 완료 되었습니다.', {
+            position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+            autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+            hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+          });
           navigate("/project");
         } else if (delProj?.state === 400) {
           alert(delProj.message);
