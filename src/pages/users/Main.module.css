@@ -94,8 +94,8 @@ a {
 }
 
 .progList {
-    width: 94%;
-    margin: 1rem;
+    width: 96%;
+    margin: 1rem auto;
     font-size: 12px;
     text-align: center;
     border-collapse : collapse;
