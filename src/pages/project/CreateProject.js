@@ -231,11 +231,6 @@ function CreateProject() {
                             추가하기
                             </button>
                     </div>
-                    <div >
-                        {/* <button onClick={ onClickHandler } className={CreteProjCSS.createBtn}>
-                            추가하기
-                        </button> */}
-                    </div>
                     <div className={CreteProjCSS.container}>
                         <span className={CreteProjCSS.span7}>프로젝트 팀원</span>
                         <div className={CreteProjCSS.span6}>
