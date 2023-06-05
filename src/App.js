@@ -105,8 +105,10 @@ function App() {
             <Route path="refuse" element={<PaymentRefuseBoard />} />
             <Route path="storage" element={<PaymentStorageBoard />} />
             <Route path="sign" element={<PaymentSign />} />
-            <Route path="payDetail/:payCode" element={ <PaymentDetail/> }/>
             <Route path="payWaitDetail/:payCode" element={ <PaymentWaitDetail/> }/>
+            <Route path="payPayingDetail/:payCode" element={ <PaymentDetail/> }/>
+            <Route path="payCompletedDetail/:payCode" element={ <PaymentDetail/> }/>
+            <Route path="payRefuseDetail/:payCode" element={ <PaymentDetail/> }/>
             <Route path="payStorageDetail/:payCode" element={ <PaymentStorageDetail/> }/>
           </Route>
 

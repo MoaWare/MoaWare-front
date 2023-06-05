@@ -227,7 +227,7 @@ function PaymentStorageDetail () {
   const onSavePayment = () => {
 
     const HTML = storagePayment();
-    console.log(`saveHTML`, HTML)
+    console.log(`임시 file : `, payDetail)
 
     const formData = new FormData();
 
@@ -235,7 +235,12 @@ function PaymentStorageDetail () {
     if(file){
       formData.append("originalFileName", file.name)
       formData.append("fileInfo", file)
+    } else if(payDetail.payFileCategory.file) {
+      formData.append("originalFileName", payDetail.payFileCategory.file.originalFileName)
+      formData.append("savedFileName", payDetail.payFileCategory.file.savedFileName)
     } 
+
+
     formData.append("payFileCategory.pay.payCode", payDetail.payCode)
     formData.append("payFileCategory.fCategoryName", form.draftTitle? form.draftTitle: payDetail.draftTitle)
     formData.append("payFileCategory.fCategoryType", "payment")
@@ -351,7 +356,7 @@ function PaymentStorageDetail () {
           </div>
           {payMember.length>0? (
             payMember && payMember.map( (pay, index) => (
-              <div className={PayDetailCSS.payDiv}>
+              <div className={PayDetailCSS.payDiv} key={pay.payCode}>
               <div className={PayDetailCSS.payTitle}>
                 {index === payMember.length -1 ? '최종 결재자' : '결재자'}
               </div>
