@@ -4,18 +4,6 @@ import CSS from './Admin.module.css';
 const Admin = () => {
 
 
-
-
-
-
-
-
-
-
-
-
-
-    
   return (
     <div className={CSS.content}>
       <a className={CSS.cards} href="admin/emp/list">
@@ -37,5 +25,6 @@ const Admin = () => {
     </div>
   );
 };
+
 
 export default Admin;

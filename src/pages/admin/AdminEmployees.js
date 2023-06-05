@@ -16,51 +16,41 @@ function AdminEmployees() {
 
     const { del } = useSelector(state => state.adminReducer);
 
-   const [currentPage, setCurrentPage] = useState(1);
-//    const { empCode } = useParams();
-//    console.log("empCode : ", empCode);
-
-
-
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(
         () => {
-        dispatch(callAdminEmpListAPI({ currentPage }));
+            dispatch(callAdminEmpListAPI({ currentPage }));
         },
-       [currentPage]
-       );
+        [currentPage]
+    );
 
 
-       const onClickTableTr = (empCode) => {
+    const onClickTableTr = (empCode) => {
         navigate(`/admin/emp/list/${empCode}`);
-       };
+    };
 
-
-
-
-       useEffect(() => {
+    useEffect(() => {
         if (del?.status === 200) {
-          alert('퇴직 처리가 완료되었습니다.');
-          dispatch(callAdminEmpListAPI({ currentPage }))
+            alert('퇴직 처리가 완료되었습니다.');
+            dispatch(callAdminEmpListAPI({ currentPage }))
         }
-      }, [del]);
-         
-    
-      
-  const handleCheckboxChange = (event, empCode) => {
-    // 이벤트 전파 방지
-    event.stopPropagation(); 
-    setSelectedEmps(empCode);
-    if(selectedEmps == empCode) {
-        setSelectedEmps(null);
-    }
-};
+    }, [del]);
 
-const onClickDelete = () => {
-    console.log('클릭ㅎㅎ',selectedEmps)
-    dispatch(callAdminEmpDeleteAPI({ empCode : selectedEmps})); // boardCode 배열 전달
-  };
 
+
+    const handleCheckboxChange = (event, empCode) => {
+        event.stopPropagation();
+        setSelectedEmps(empCode);
+        if (selectedEmps == empCode) {
+            setSelectedEmps(null);
+        }
+    };
+
+    const onClickDelete = () => {
+        console.log('클릭ㅎㅎ', selectedEmps)
+        dispatch(callAdminEmpDeleteAPI({ empCode: selectedEmps }));
+    };
 
 
 
@@ -70,27 +60,26 @@ const onClickDelete = () => {
 
 
 
-       return (
+
+    return (
         <>
-
-        
             <div className={CSS.main}>
-                
-            <div className={CSS.menutitle}> 계정 관리
-            <div className={CSS.content}>
-                    <button>
-                        <NavLink to="/admin/emp/regist">
-                        계정 생성
-                        </NavLink>
-                    </button>
-                    </div>  </div>  
-                    
-            <table className={CSS.table}>
+
+                <div className={CSS.menutitle}> 계정 관리
+                    <div className={CSS.content}>
+                        <button>
+                            <NavLink to="/admin/emp/regist">
+                                계정 생성
+                            </NavLink>
+                        </button>
+                    </div>  </div>
+
+                <table className={CSS.table}>
 
 
                     <thead>
-                        <tr className={ CSS.th }> 
-                        <th><input type="checkbox" id="checkAll" /></th>
+                        <tr className={CSS.th}>
+                            <th><input type="checkbox" id="checkAll" /></th>
 
                             <th>사번</th>
                             <th>이름</th>
@@ -104,51 +93,47 @@ const onClickDelete = () => {
 
                         </tr>
                     </thead>
-                        <tbody >
-                    
-                            {employees?.data &&
-                            employees.data.map((e) => ( 
-                            
-                            // {Array.isArray(employees) &&
-                            //      employees.map((empList) => (
+                    <tbody >
 
-                                    <tr 
+                        {employees?.data &&
+                            employees.data.map((e) => (
+
+                                <tr
                                     className={CSS.td}
                                     key={e.empCode}
                                     onClick={() => onClickTableTr(e.empCode)}>
-                                   <input
-                                    type="checkbox" 
-                                    // checked={selectedPosts.includes(post.postCode)}
-                                    checked={selectedEmps === e.empCode}
-                                    onChange={(event) => handleCheckboxChange(event, e.empCode)}
-                                                onClick={(event) => event.stopPropagation()}
-                                                />
-                                        <td>{e.empCode}</td>
-                                        <td>{e.empName}</td>
-                                        <td>{e.empID}</td>
-                                        <td>{e.dept.deptName}</td>
-                                        <td>{e.job.jobName}</td>
-                                        <td>{e.hireDate}</td>                                
-                                        <td>{e.retireYn}</td>
-                                        <td></td>
-                                        <td></td>
-                                    
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedEmps === e.empCode}
+                                        onChange={(event) => handleCheckboxChange(event, e.empCode)}
+                                        onClick={(event) => event.stopPropagation()}
+                                    />
+                                    <td>{e.empCode}</td>
+                                    <td>{e.empName}</td>
+                                    <td>{e.empID}</td>
+                                    <td>{e.dept.deptName}</td>
+                                    <td>{e.job.jobName}</td>
+                                    <td>{e.hireDate}</td>
+                                    <td>{e.retireYn}</td>
+                                    <td></td>
+                                    <td></td>
 
-                                    </tr>
-                                ))}
-                        </tbody>
-                    </table>
-                    <div className={CSS.deletepost}>
-                                        <button onClick={onClickDelete}>
-                                            퇴직처리
-                                        </button>
-                                    </div>
-                                    <div>
-                {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
+
+                                </tr>
+                            ))}
+                    </tbody>
+                </table>
+                <div className={CSS.deletepost}>
+                    <button onClick={onClickDelete}>
+                        퇴직처리
+                    </button>
+                </div>
+                <div>
+                    {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
+                </div>
             </div>
-            </div>
-            
-        
+
+
         </>
     );
 }
