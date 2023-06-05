@@ -116,14 +116,14 @@ export const callBoardPostDetailAPI = ({ postCode }) => {
 
      return async (dispatch, getState) => {
 
-        const result = await fetch(requestURL).then(response => response.json());
-        // const result = await fetch(requestURL, {
-        //     method: 'GET',
-        //     headers: {
-        //         "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
-        //     },
+        //const result = await fetch(requestURL).then(response => response.json());
+        const result = await fetch(requestURL, {
+            method: 'GET',
+            headers: {
+                "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+            },
         
-        // }).then(response => response.json());
+        }).then(response => response.json());
 
         if (result.status === 200) {
              console.log("[BoardpostAPICalls] callBoardpostBoardsListAPI result : ", result);
@@ -179,6 +179,7 @@ export const callBoardPostUpdateAPI = (formData) => {
              body: formData
          }).then(response => response.json());
 
+
         if (result.status === 200) {
             console.log('[BoardPostAPICalls] callBoardPostUpdateAPI result :', result);
             dispatch(putBoardpost(result));
@@ -207,6 +208,7 @@ export const callBoardPostDeleteAPI =({ postCode }) => {
           },
         }).then(res => res.json());
   
+        
         if(result?.status === 200){
             console.log("[BoardPostDeleteAPI] callBoardPostDeleteAPI result : ", result);
             dispatch(putBoardpostdelete(result));
