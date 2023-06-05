@@ -4,6 +4,7 @@ import { callBoardPostDeleteAPI, callBoardpostBoardsListAPI, callBoardPostListAP
 import PagingBar from "../../components/common/PagingBar";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import CSS from "./BoardPostList.module.css";
+import { isAdmin } from "../../utils/TokenUtils";
 
 
 
@@ -13,7 +14,7 @@ function BoardPostList() {
   const boardPosts = useSelector(state => state.boardPostReducer);
   const pageInfo = boardPosts.pageInfo;
   const [selectedPosts, setSelectedPosts] = useState([]);
-
+  const { empCode } = useParams();
   const { del } = useSelector(state => state.boardPostReducer);
 
 
@@ -24,18 +25,25 @@ function BoardPostList() {
 
   
   
-  
-  const [currentPage, setCurrentPage] = useState(1);
-  useEffect(() => {
-    if (boardCode) {
-      /* 게시판 코드별 게시판에 대한 요청 */
+
+const [currentPage, setCurrentPage] = useState(1);
+useEffect(() => {
+  if (boardCode) {
+    /* 게시판 코드별 게시판에 대한 요청 */
+    if (isAdmin()) {
       dispatch(callBoardpostBoardsListAPI({ boardCode, currentPage }));
     } else {
-      /* 모든 게시물 대한 요청 */
+      dispatch(callBoardpostBoardsListAPI({ boardCode, currentPage }));
+    }
+  } else {
+    /* 모든 게시물 대한 요청 */
+    if (isAdmin()) {
+      dispatch(callBoardPostListForAdminAPI({ currentPage }));
+    } else {
       dispatch(callBoardPostListAPI({ currentPage }));
     }
-  }, [boardCode, currentPage]);
-
+  }
+}, [boardCode, currentPage, empCode]);
 
 
   //테이블 클릭시 상세 및 수정 페이지로 라우팅
@@ -47,7 +55,7 @@ function BoardPostList() {
 useEffect(() => {
   if (del?.status === 200) {
     alert('게시물 삭제가 완료되었습니다.');
-    dispatch(callBoardPostListAPI({ currentPage }))
+    dispatch(callBoardPostListForAdminAPI({ currentPage }))
   }
 }, [del]);
    
