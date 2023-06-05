@@ -165,25 +165,6 @@ function WorkAdmin({ adminList }) {
         } 
     }, [formattedDate, currentPage, modify])
 
-    // useEffect(() => {
-    //     console.log('year2 : ', year2);
-    //     console.log('month2 : ', month2);
-
-    //     if (year2 && month2) {
-    //         if (month2 < 10) {
-    //             const month = '0' + month2.toString()
-    //             const workDate = year2.toString() + '-' + month;
-    //             console.log(workDate);
-    //             dispatch(callWorkMyListAPI({ workDate, currentPage }));
-    //         } else {
-    //             const workDate = year2.toString() + month2.toString();
-    //             console.log(workDate);
-    //             dispatch(callWorkMyListAPI({ workDate, currentPage }));
-    //         }
-    //     }
-
-    // }, [currentPage]);
-
     console.log('currentPage : ', currentPage);
 
 

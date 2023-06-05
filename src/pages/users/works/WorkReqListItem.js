@@ -21,7 +21,7 @@ function WorkReqListItem({ rqListItem, infoItem }) {
                             <td>{infoItem?.empName? infoItem?.empName : ""}</td>
                             <td>{rqList.leaveType}</td>
                             <td>{rqList.leaveStartDay.substring(0, 10)}</td>
-                            {/* <td>{rqList.leaveEndDate.substring(0, 10) ? rqList.leaveEndDate.substring(0, 10) : ""}</td> */}
+                            <td>{rqList.leaveEndDate.substring(0, 10) ? rqList.leaveEndDate.substring(0, 10) : ""}</td>
                         </tr>
                     ))}
             </tbody>

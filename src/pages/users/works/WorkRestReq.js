@@ -66,13 +66,13 @@ function WorkRestReq() {
 
         dispatch(callMemberInfoAPI());
 
-    },[request]);
+    },[]);
     
     useEffect(() => {
 
         if (request?.status === 200) {
             alert('신청 완료.');
-            navigate("/work/restReq");
+            navigate("/work/restReqList");
           } else if (request?.state === 400) {
             alert(request.message);
           }
