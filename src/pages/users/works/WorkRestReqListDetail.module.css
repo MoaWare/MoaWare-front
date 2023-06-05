@@ -43,8 +43,8 @@
     height: 55px;
     text-align: center;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 }
 
 .span1 {
@@ -72,17 +72,17 @@
     align-items: center;
 }
 
-.date{
-    /* margin-top: 2%; */
-    /* margin-left: 29%; */
-    /* margin-bottom: ; */
-}
 
-.datepicker {
-    margin-top: 25%;
+
+.date {
+    margin-top: 50px;
     width: 200px;
     height: 55px;
     font-size: 16px;
+    border: 1px solid;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .selectBox {
@@ -90,6 +90,7 @@
     width: 605px;
     height: 55px;
     text-align: center;
+    border: 1px solid;
 }
 
 .box {

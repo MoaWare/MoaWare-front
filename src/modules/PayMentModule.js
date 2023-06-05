@@ -19,10 +19,11 @@ const PUT_PAYMENT_SIGN = 'pay/PUT_PAYMENT_SIGN';
 const GET_PAYMENTDETAIL = 'pay/GET_PAYMENTDETAIL';
 const PUT_PAYMENT_UPDATE = 'pay/PUT_PAYMENT_UPDATE';
 const SET_PAYMENT = "pay/SET_PAYMENT";
+const PUT_PAYMENT_STORAGE_UPDATE = "pay/PUT_PAYMENT_STORAGE_UPDATE"
 
 export const { pay : { getPayment, getPaymentform, postPayment, getPaymentwait, getPaymenting 
                 , getPaymentComplete, getPaymentRefuse, getPaymentStorage, getPaymentSign
-                , postPaymentSign, putPaymentSign, getPaymentdetail, putPaymentUpdate, setPayment }} = createActions({
+                , postPaymentSign, putPaymentSign, getPaymentdetail, putPaymentUpdate, setPayment, putPaymentStorageUpdate }} = createActions({
     [GET_PAYMENT] : res => res.data,
     [GET_PAYMENTFORM] : res => res.data,
     [POST_PAYMENT] : res => res,
@@ -37,13 +38,14 @@ export const { pay : { getPayment, getPaymentform, postPayment, getPaymentwait, 
     [GET_PAYMENTDETAIL] : res=> res.data,
     [PUT_PAYMENT_UPDATE] : res=> res.data,
     [SET_PAYMENT] : res => res,
+    [PUT_PAYMENT_STORAGE_UPDATE] : res => res
 
 })
 
 /* 리듀서 */
 const paymentReducer = handleActions({
     [GET_PAYMENT] : (state, { payload } ) => ({...state, pay : payload}),
-    [GET_PAYMENTFORM] : (state, { payload } ) => (payload),
+    [GET_PAYMENTFORM] : (state, { payload } ) => ({...state, ...payload}),
     [POST_PAYMENT] : ( state, { payload }) => payload,
 
     [GET_PAYMENTWAIT] : (state, { payload } ) => ({...state, ...payload}),
@@ -59,11 +61,13 @@ const paymentReducer = handleActions({
 
     [PUT_PAYMENT_SIGN] : ( state, { payload }) => ({signUpdate : payload}),
 
-    [GET_PAYMENTDETAIL] : ( state, { payload }) => ({ payDetail : payload}),
+    [GET_PAYMENTDETAIL] : ( state, { payload }) => ({ ...state, payDetail : payload}),
 
     [PUT_PAYMENT_UPDATE] : ( state, { payload }) => ({...state, payload}),
 
     [SET_PAYMENT] : ( state, { payload }) => ({isPayment : payload}),
+
+    [PUT_PAYMENT_STORAGE_UPDATE] : ( state, { payload }) => payload,
 
 }, initialState)
 

@@ -13,7 +13,7 @@ function WorkTime({ onClickStartHandler, onClickEndHandler }) {
     const workbtnValue = localBtn === 'true'; // 문자열을 불리언으로 변환
     const [formattedTime, setFormattedTime] = useState('00:00:00');
     //리듀서는 안 써도 됨
-    // const btn = useSelector(state => state.workTimeReducer.btn);
+    const btn = useSelector(state => state.workTimeReducer.btn);
     useEffect(() => {
       
       if(workbtnValue) {
@@ -39,17 +39,22 @@ function WorkTime({ onClickStartHandler, onClickEndHandler }) {
     
     const handleStartClick = () => {
         //리듀서로 관리하는 btn을 가져오는 건데 안 써도 됨
-        // dispatch(setBtnState(!btn));
-        localStorage.setItem('clickTime', today);
-        localStorage.setItem('workbtn', true);
-        onClickStartHandler();
+        if(!btn){
+          dispatch(setBtnState(!btn));
+          localStorage.setItem('clickTime', today);
+          localStorage.setItem('workbtn', true);
+          onClickStartHandler();
+        }
     }
 
     const handleEndClick = () => {
         // dispatch(setBtnState(!btn));
-        onClickEndHandler();
-        localStorage.removeItem('clickTime');
-        localStorage.removeItem('workbtn');
+        if(btn) {
+          dispatch(setBtnState(!btn));
+          onClickEndHandler();
+          localStorage.removeItem('workbtn');
+          localStorage.removeItem('clickTime');
+        }
     }
 
     return (
@@ -58,8 +63,8 @@ function WorkTime({ onClickStartHandler, onClickEndHandler }) {
         <p className={WorkNavbarCSS.ptime}>{formattedTime}</p>
         )}
         <div className={WorkNavbarCSS.workBtn}>
-            <button className={WorkNavbarCSS.workBtn1} onClick={handleStartClick}>출근하기</button>
-            <button className={WorkNavbarCSS.workBtn2} onClick={handleEndClick}>퇴근하기</button>
+            <button className={WorkNavbarCSS.workBtn1} onClick={handleStartClick}  disabled={btn}>출근하기</button>
+            <button className={WorkNavbarCSS.workBtn2} onClick={handleEndClick}  disabled={!btn}>퇴근하기</button>
         </div>
     </div>
   );

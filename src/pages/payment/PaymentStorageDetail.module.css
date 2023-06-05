@@ -41,8 +41,7 @@
     height: 4vh;
     border: none;
     border-radius: 8px;
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 12px;
 }
 
 .buttonCancel {
@@ -52,7 +51,7 @@
     height: 4vh;
     border: 2px solid rgba(37, 79, 112, 1);;
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
 
 }
@@ -140,14 +139,83 @@
     line-height: 3vh;
 }
 
+.inputFile  {
+    border: none;
+    font-size: 12px;
+    height: 3vh;
+    width: 61vw;
+    line-height: 3vh;
+    display: none;
+    
+}
+
+.aModi{
+    display: block;
+    border: none;
+    font-size: 12px;
+    height: 3vh;
+    line-height: 3vh;
+}
+
+.inputLabel{
+    border: none;
+    font-size: 12px;
+    height: 3vh;
+    width: 61vw;
+    line-height: 3vh;
+    display: block;
+}
+
+.inputLabelSet{
+    border: none;
+    font-size: 12px;
+    height: 3vh;
+
+    line-height: 3vh;
+    display: block;
+}
+
+.inputFix{
+    height: 3vh;
+    line-height : 3vh;
+}
+
+.inputTd{
+    display: flex;
+    width: 61vw !important;
+    justify-content: flex-start;
+}
+
 .a  {
     display: block;
     border: none;
     font-size: 12px;
     height: 3vh;
-    width: 62vw;
+    width: 61vw;
+    margin-right: 1vw;
     line-height: 3vh;
+    
+    
 }
+
+.modifyButton{
+    border: 1px solid rgba(37, 79, 112, 1);
+    font-size: 12px;
+    color: white;
+    height: 2vh;
+    line-height: 2vh;
+    margin-top:0.5vh;
+    background-color: rgba(37, 79, 112, 1);
+    width: 3vw;
+    margin-right: 1vw;
+}
+
+.inputLabelDiv{
+    width: 61vw;
+    display: flex;
+}
+
+
 ::-webkit-file-upload-button {
     display: none;
 }

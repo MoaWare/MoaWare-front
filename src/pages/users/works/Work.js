@@ -172,7 +172,7 @@ function Work() {
                         // onChageHandler={ onChageHandler }
                         
                         />
-                        <input className={ WorkCSS.inputBox }></input>
+                        {/* <input className={ WorkCSS.inputBox }></input> */}
                     </div>
                 </div>
                 <hr className={ WorkCSS.hr }></hr>
