@@ -51,13 +51,9 @@ function WorkRestReq() {
         formData.append("leaveStartDay", moment(selectedStartDate).format('YYYY-MM-DD'));
         formData.append("leaveEndDate", moment(selectedEndDate).format('YYYY-MM-DD'));
 
-        console.log(moment(selectedEndDate).format('YYYY-MM-DD'))
-        console.log(moment(selectedStartDate).format('YYYY-MM-DD'))
 
         for (const entry of formData.entries()) {
-            console.log('f폼이다', entry);
         }
-        console.log('f폼이다', formData);
 
         dispatch(callLeaveRequestAPI(formData))
     }
@@ -115,7 +111,6 @@ function WorkRestReq() {
                     <select value={selectedOption} onChange={handleSelectChange}
                         className={WorkRestReqCSS.selectBox}
                     >
-                        {/* <option value="">선택</option> */}
                         {options.map((option) => (
                             <option key={option} value={option}>
                                 {option}

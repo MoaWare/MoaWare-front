@@ -21,7 +21,6 @@ export const callLeaveYearAPI = ({ year }) =>{
         }).then(response => response.json());
 
         if(result.status === 200){
-            console.log("[LeaveAPICalls] callLeaveYearAPI result ", result);
             dispatch(getYear(result));
         }
         
@@ -34,7 +33,6 @@ export const callLeavePostAPI = ({ year }) => {
 
     return async (dispatch, getState) => {
 
-        console.log('리브 인서트의 ' , year)
 
         const result = await fetch(requestURL, {
             method : 'POST',
@@ -46,7 +44,6 @@ export const callLeavePostAPI = ({ year }) => {
         }).then(response => response.json());
 
         if(result.status === 200){
-            console.log("[LeaveAPICalls] callLeaveYearAPI result ", result);
             dispatch(postLeave(result));
         }
         

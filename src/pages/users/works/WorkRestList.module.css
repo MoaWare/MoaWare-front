@@ -7,9 +7,6 @@
     border-radius: 20px;
     background-color: #fff;
     position: fixed;
-    /* display: flex; */
-    /* flex-direction: column;
-    align-items: center; */
 }
 
 .btnContainer {
@@ -36,7 +33,6 @@
     background-color: rgba(37, 79, 112, 1);
     color: white;
     border-radius: 10px;
-    /* margin-top: 1.2%; */
     margin-left: 10px;
     width: 60px;
     height: 30px;
@@ -54,7 +50,6 @@
     color: #254f70;
     font-size: 24px;
     font-weight: 600;
-    /* margin-top: 1%; */
     padding-left: 10px;
     padding-right: 10px;
 }
@@ -114,11 +109,11 @@
 }
 
 .box {
-    width: 80px; /* 너비 설정 */
-    height: 60px; /* 높이 설정 */
-    background-color: #f00; /* 배경색 설정 */
+    width: 80px;
+    height: 60px; 
+    background-color: #f00; 
     border: 1px solid;
-    float: left; /* 왼쪽으로 정렬 */
+    float: left; 
   }
 
 .space {

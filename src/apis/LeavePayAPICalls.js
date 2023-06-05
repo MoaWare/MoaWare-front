@@ -20,7 +20,6 @@ export const callSelectMyLeaveListAPI = ( { workDate ,currentPage = 1} ) =>{
         }).then(response => response.json());
 
         if(result.status === 200){
-            console.log("[LeaveAPICalls] callselectMyLeaveListAPI result ", result);
             dispatch(getDone(result));
         }
         
@@ -31,7 +30,6 @@ export const callLeaveRequestAPI = (formData) => {
 
     const requestURL = `${PRE_URL}/leave/request`;
 
-    console.log(formData);
 
     return async (dispatch, getState) => {
 
@@ -44,7 +42,6 @@ export const callLeaveRequestAPI = (formData) => {
         }).then(response => response.json());
 
         if(result.status === 200){
-            console.log("[LeavePayAPICalls] callLeaveRequestAPI result ", result);
             dispatch(postLeave(result));
         }
         
@@ -66,7 +63,6 @@ export const callMyLeaveRequestListAPI = ({ currentPage = 1}) => {
         }).then(response => response.json());
 
         if(result.status === 200){
-            console.log("[LeavePayAPICalls] callMyLeaveRequestListAPI result ", result);
             dispatch(getLeaverequestlist(result));
         }
         
@@ -88,7 +84,6 @@ export const callLeaveRestDetailAPI = ({leaveCode}) => {
         }).then(response => response.json());
 
         if(result.status === 200){
-            console.log("[LeavePayAPICalls] callLeaveRestDetailAPI result ", result);
             dispatch(getRequest(result));
         }
         

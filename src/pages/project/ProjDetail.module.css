@@ -26,7 +26,6 @@
     width: 89vw;
     height: 10vh;
     display: flex;
-    /* border-bottom: 1px solid #b4b4b4; */
     flex-direction: row;
     justify-content: space-between;
 }
@@ -211,7 +210,6 @@
     margin-top: 2vh;
     font-weight: bold;
     font-size: large;
-    /* border-bottom: 1px solid #b4b4b4; */
 }
 
 .taskTop button{

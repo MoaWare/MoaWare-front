@@ -26,7 +26,6 @@ function WorkTime({ onClickStartHandler, onClickEndHandler }) {
           const hours = Math.floor(workTime / 3600000).toString().padStart(2, '0');
           const min = Math.floor((workTime % 3600000) / 60000).toString().padStart(2, '0');
           const sec = Math.floor((workTime % 60000) / 1000).toString().padStart(2, '0');
-          console.log(formattedTime);
           const newFormattedTime = `${hours}:${min}:${sec}`;
           setFormattedTime(newFormattedTime);
         }, interval);

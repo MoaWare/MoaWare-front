@@ -37,30 +37,10 @@ function WorkNavbar() {
     const sec = now.getSeconds().toString().padStart(2, '0');
 
     const quitTime = new Date().toISOString().substr(0, 11) + `${hours}:${min}:${sec}`;
-    console.log(quitTime);
     dispatch(callTimeQuitAPI({ quitTime }));
   }
 
-  // useEffect(
-  //   () => {
-  //     if (insert?.status === 200) {
-  //       alert('출근 등록 되었습니다.')
-  //       navigate("/work");
-  //     } else if (insert?.state === 400) {
-  //       alert(insert.message);
-  //     }
 
-  //     if (quit?.status === 200) {
-  //       alert('퇴근 등록 되었습니다.')
-  //       navigate("/work")
-  //     } else if (quit?.state === 400) {
-  //       alert(quit.message);
-  //     }
-  //   }, [insert, quit]
-  // )
-
-  console.log('insert : ', insert);
-  console.log('btn : ', btn);
 
   return (
     <nav className={WorkNavbarCSS.navbar}>
@@ -139,19 +119,6 @@ function WorkNavbar() {
           // mywork 가없다면
           (
             <div>
-              {/* <p className={WorkNavbarCSS.p}>근태 관리</p>
-            <div className={WorkNavbarCSS.ptime}></div>
-            <div className={WorkNavbarCSS.workBtn}>
-              <WorkTime
-                onClickStartHandler={onClickStartTime}
-                onClickEndHandler={onClickEndTime}
-              // btn={btn}
-              />
-            </div>
-              <div className={WorkNavbarCSS.p2}>
-                <p className={WorkNavbarCSS.ptime2}>출근 시간</p>
-                <p className={WorkNavbarCSS.ptime2}>퇴근 시간</p>
-              </div> */}
             </div>
           )}
       </div>

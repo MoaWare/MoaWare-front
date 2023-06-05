@@ -16,25 +16,20 @@ function CreateProject() {
     const [selectedDept, setSelectedDept] = useState(6);
     const [selectedEmp, setSelectedEmp] = useState("");
     const [selectedEmpList, setSelectedEmpList] = useState([]);
-    // const { depts } = useSelector(state => state.projectReducer);
     const [change, setChange ] = useState(false);
     const { emps, regist } = useSelector(state => state.projectReducer);
     const { depts } = useSelector(state => state.employeeReducer);
     const { name } = useSelector(state => state.employeeReducer);
     const { info } = useSelector(state => state.memberReducer);
     const [form, setForm] = useState({});
-    // const deptList = dept.data;
     const today = new Date().toISOString().slice(0, 10);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
 
-    console.log('프로젝트 생성에서의 내임 출력', name);
-    // const [depties, setDepties] = useState([]);
     
     useEffect(
         () => {        
-                console.log('화ㅗㅘㅘㅗㅘㅘㅘㅏㄱ아아아아아')
                 setChange(false);
                 dispatch(callDeptListAPI())
     }, [change]);
@@ -68,14 +63,11 @@ function CreateProject() {
 
     const onCangeDeptHandler = (e) => {
             const selectedValue = e.target.value;
-            setSelectedDept(selectedValue)
-            console.log(selectedValue);
+            setSelectedDept(selectedValue);
     }
         
     const onChangeEmpHandler = e => {
         const selectedValue = e.target.value;
-        console.log(selectedValue);
-        console.log(info.empCode +" "+ info.empName +" "+ info.email);
         setSelectedEmp(selectedValue);
 
     }
@@ -92,17 +84,12 @@ function CreateProject() {
 
     const dateCheck = () => {
 
-        console.log('selectedStartDate:', selectedStartDate);
-        console.log('selectedEndDate:', selectedEndDate);
-        console.log('날짜 체크');
         if (
           selectedStartDate &&
           selectedEndDate &&
           selectedStartDate.getTime() > selectedEndDate.getTime()
         ) {
-          console.log('selectedStartDate가 selectedEndDate보다 이후입니다.');
         } else {
-          console.log('조건 미충족');
         }
       };
         
@@ -137,7 +124,6 @@ function CreateProject() {
             [e.target.name] : e.target.value
         });
     }
-    console.log(form);
 
     const onClickCreate = () => {
 
@@ -164,22 +150,13 @@ function CreateProject() {
         })));
         
 
-        console.log(moment(selectedEndDate).format('YYYY-MM-DD'))
-        console.log(moment(selectedStartDate).format('YYYY-MM-DD'))
-        console.log(form.projContent)
-        console.log(form.projName)
-        console.log(selectedEmpList);
 
         for (const entry of formData.entries()) {
-            console.log('f폼이다', entry);
         }
-        console.log('f폼이다', formData);
 
         dispatch(callProjectRegistAPI(formData, selectedEmpList))
     }    
 
-    console.log(depts);
-    console.log(emps);
 
     return (
         <>

@@ -15,9 +15,6 @@ function WorkReqListItemDetail() {
         dispatch(callLeaveRestDetailAPI({ leaveCode }));
     }, []);
 
-    console.log(leaveCode);
-    console.log(rDetail);
-
     return(
         <>  
             <div className={WorkRestReqListDetailCSS.main}>

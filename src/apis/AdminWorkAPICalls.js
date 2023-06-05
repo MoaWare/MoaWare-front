@@ -19,7 +19,6 @@ export const callAdminWorkListAPI = ({ date, currentPage = 1 }) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log("[AdminWorkAPICalls] callAdminWorkListAPI result : ", result);
             dispatch(getAdminworklist(result))
         }
 
@@ -28,7 +27,6 @@ export const callAdminWorkListAPI = ({ date, currentPage = 1 }) => {
 
 export const putWorkStatusModifyAPI = (form) => {
 
-    console.log('put폼잉ㅇㅇㅇㅇㅇㅇ', form);
 
     const requestURL = `${PRE_URL}/work/status/modify`;
 
@@ -45,7 +43,6 @@ export const putWorkStatusModifyAPI = (form) => {
         .then(response => response.json());
 
         if(result.status === 200) {
-            console.log('[AdminWorkAPICalls] putWorkStatusModifyAPI result :', result);
             dispatch(putWorkstatusmodify(result));
         }
     }
@@ -67,7 +64,6 @@ export const inputNameAPI = ({ name, workDate, currentPage = 1 }) => {
         .then(response => response.json());
 
         if(result.status === 200) {
-            console.log('[AdminWorkAPICalls] inputNameAPI result :', result);
             dispatch(getEmpnamelist(result));
         }
     }
@@ -89,7 +85,6 @@ export const inputNameAPI2 = ({ name, workDate2, workDate, currentPage = 1 }) =>
         .then(response => response.json());
 
         if(result.status === 200) {
-            console.log('[AdminWorkAPICalls] inputNameAPI2 result :', result);
             dispatch(getEmpnamelist2(result));
         }
     }

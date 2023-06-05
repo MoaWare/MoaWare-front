@@ -20,7 +20,6 @@ function WorkRestReqList() {
         dispatch(callMemberInfoAPI());
     },[])
 
-    console.log(rqList);
     return(
         <>
         <div className={ WorkRestReqListCSS.main }>
