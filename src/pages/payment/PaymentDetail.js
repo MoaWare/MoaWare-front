@@ -26,9 +26,11 @@ function PaymentDetail () {
     useEffect(
         ()=>{
             disPatch(CallPaymentingDetailAPI({payCode}));
-
+            
+           
         },[isPayModal, isPayRefuse]
     )
+
         
       const onClickCheckedHandler = () => {
      
@@ -52,23 +54,13 @@ function PaymentDetail () {
         }
      }  
 
-     const onClickPayHandler = () => {
-        setIsPayModal(true);
-     }
-
-     const onClickPayRefuseHandler = () => {
-      setIsPayRefuse(true);
-     }
-
-
     return (
        <div className={PayDetailCSS.background}>
         
           {payDetail && payDetail.payStatus === "진행중" ?
 
           <div className={PayDetailCSS.titleDiv}>
-          <div className={PayDetailCSS.title}>결재 진행 문서</div> 
-          <button className={PayDetailCSS.button} onClick={ onClickCheckedHandler }>확인</button>
+          <div className={PayDetailCSS.titleIng}>결재 진행 문서</div> 
           <button className={PayDetailCSS.button} onClick={ onClickCheckedHandler }>확인</button>
           <button className={PayDetailCSS.buttonCancel} onClick={onCancelHandler} >취소</button>
           </div>

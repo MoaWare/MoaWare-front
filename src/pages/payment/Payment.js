@@ -366,7 +366,7 @@ function Payment () {
           
           {
             payMember && payMember.map( (pay, index) => (
-              <div className={payCSS.payDiv}>
+              <div className={payCSS.payDiv} key={pay.payCode}>
               <div className={payCSS.payTitle}>
                 {index === payMember.length -1 ? '최종 결재자' : '결재자'}
               </div>

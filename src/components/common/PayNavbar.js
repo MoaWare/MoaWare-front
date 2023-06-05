@@ -20,31 +20,31 @@ function PayNavbar() {
           </NavLink>
 
           <NavLink to="/pay/wait" activeclassname={NavbarCSS.active}>
-            <li className={location.pathname === '/pay/wait' ? NavbarCSS.active : {}}>
+            <li className={location.pathname === '/pay/wait/' || location.pathname.includes('/pay/PaymentWaitDetail') ? NavbarCSS.active : {}}>
                   결재 대기함
             </li>
           </NavLink>
 
           <NavLink to="/pay/paying" activeclassname={NavbarCSS.active}>
-            <li className={location.pathname === '/pay/ing' ? NavbarCSS.active : {}}>
+            <li className={location.pathname === '/pay/paying' || location.pathname.includes('/pay/payPayingDetail') ? NavbarCSS.active : {}}>
                   결재 진행함
             </li>
           </NavLink>
             
           <NavLink to="/pay/completed" activeclassname={NavbarCSS.active}>
-            <li className={location.pathname === '/pay/completed' ? NavbarCSS.active : {}}>
+            <li className={location.pathname === '/pay/completed' || location.pathname.includes('/pay/payCompletedDetail') ? NavbarCSS.active : {}}>
                   완료 문서함
             </li>
           </NavLink>
 
             <NavLink to="/pay/refuse" activeclassname={NavbarCSS.active}>
-          <li className={location.pathname === '/pay/refuse' ? NavbarCSS.active : {}}>
+          <li className={location.pathname === '/pay/refuse' || location.pathname.includes('/pay/payRefuseDetail') ? NavbarCSS.active : {}}>
                 반려 문서함
           </li>
             </NavLink>
 
           <NavLink to="/pay/storage" activeclassname={NavbarCSS.active}>
-            <li className={location.pathname === '/pay/storage' ? NavbarCSS.active : {}}>
+            <li className={location.pathname === '/pay/storage' || location.pathname.includes('/pay/payStorageDetail') ? NavbarCSS.active : {}}>
                   임시 저장함
             </li>
           </NavLink>
