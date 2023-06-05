@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MemCSS from './Member.module.css';
 import { callMemberInfoAPI, callMemberModifyAPI } from "../../apis/MemberAPICalls";
+import { toast } from "react-toastify";
+
 
 function MemberInfoModify(){
 
@@ -22,6 +24,7 @@ function MemberInfoModify(){
     const [ isCheck , setIsCheck ] = useState(false);
     const userImage = '../icon/user.jpg';
     
+
     /* 회원 정보 조회 */
     useEffect(()=>{
 
@@ -72,11 +75,16 @@ function MemberInfoModify(){
     }, [image]);
 
 
+
     const { modify } = useSelector(state => state.memberReducer);
     
     useEffect(() => {
         if(modify?.status === 200) {
-            alert(modify?.message);
+            toast.success(modify?.message, {
+                position: toast.POSITION.TOP_CENTER, 
+                autoClose: 2000, 
+                hideProgressBar: false,
+              });
             navigate('/');
         }
     }, [modify]);
@@ -89,7 +97,6 @@ function MemberInfoModify(){
             ...form,
             [e.target.name] : e.target.value
         });
-        console.log(e.target.value);
     };
 
     const onChangeImageUpload = (e) => {
@@ -109,7 +116,15 @@ function MemberInfoModify(){
             !form.phone ||
             !form.extensionNum 
             ){
-                alert("정보를 모두 입력해주세요");
+                toast.error("정보를 모두 입력해주세요", {
+                    position: toast.POSITION.TOP_CENTER, 
+                    autoClose: 2000, 
+                    hideProgressBar: false, 
+                    progressStyle: {
+                      backgroundColor: '#ff000074', 
+                      height: '5px', 
+                    },
+                  });
                 return;
         }
         

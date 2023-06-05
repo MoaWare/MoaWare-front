@@ -1,4 +1,7 @@
 import { getProject, getTasks, getDone, getProgress, getDeptlist, getDeptemplist, postProject, getTask, postTask, putTask, deleteTask, putProjdelete } from "../modules/ProjectModule";
+import { toast } from "react-toastify";
+
+
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -19,7 +22,6 @@ export const callProjectAPI = (projCode) => {
         }).then(res => res.json());
 
         if(result.status === 200){
-            console.log(result);
             dispatch(getProject(result));
         }
     }
@@ -40,7 +42,6 @@ export const callTaskListAPI = ({ projCode }) => {
         }).then(res => res.json());
 
         if(result.status === 200){
-            console.log(result);
             dispatch(getTasks(result));
         }
     }
@@ -62,7 +63,6 @@ export const callTaskDetailAPI = (taskCode) => {
         }).then(res => res.json());
 
         if(result.status === 200){
-            console.log(result);
             dispatch(getTask(result));
         }
     }
@@ -86,12 +86,18 @@ export const callTaskRegistAPI = ( form ) => {
       }).then(res => res.json());
 
       if(result?.status === 200){
-          console.log(result);
-
           dispatch(postTask(result));
 
       } else if(result?.status === 400){
-        alert(result.message);
+        toast.error(result.message, {
+          position: toast.POSITION.TOP_CENTER, 
+          autoClose: 2000, 
+          hideProgressBar: false, 
+          progressStyle: {
+            backgroundColor: '#ff000074', 
+            height: '5px', 
+          },
+        });
       }
   }
 }
@@ -113,10 +119,17 @@ export const callTaskUpdateAPI = ( form ) => {
       }).then(res => res.json());
 
       if(result?.status === 200){
-          console.log(result);
           dispatch(putTask(result));
       } else if(result?.status === 400){
-        alert(result.message);
+        toast.error(result.message, {
+          position: toast.POSITION.TOP_CENTER, 
+          autoClose: 2000, 
+          hideProgressBar: false, 
+          progressStyle: {
+            backgroundColor: '#ff000074', 
+            height: '5px', 
+          },
+        });
       }
   }
 }
@@ -138,10 +151,17 @@ export const callTaskDeleteAPI = ( taskCode ) => {
       }).then(res => res.json());
 
       if(result?.status === 200){
-          console.log(result);
           dispatch(deleteTask(result));
       } else if(result?.status === 400){
-        alert(result.message);
+        toast.error(result.message, {
+          position: toast.POSITION.TOP_CENTER, 
+          autoClose: 2000, 
+          hideProgressBar: false, 
+          progressStyle: {
+            backgroundColor: '#ff000074', 
+            height: '5px', 
+          },
+        });
       }
   }
 }

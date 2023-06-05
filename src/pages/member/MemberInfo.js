@@ -10,7 +10,6 @@ function MemberInfo(){
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { member } = useSelector((state) => state.memberReducer);
-
     const [form,setForm] = useState({
         empPwd : ""
     });
@@ -36,13 +35,11 @@ function MemberInfo(){
     }
     
     const onClickHandler = () => {
-        console.log("callLoginAPI",form);
         dispatch(callMemberInfoLoginAPI(form));
     }
     
     const onEnterKeyHandler = (e) => {
         if(e.key === 'Enter' ) {
-            console.log("callLoginAPI",form);
             dispatch(callMemberInfoLoginAPI(form));
         }
     }

@@ -1,5 +1,8 @@
 import { json } from "react-router-dom";
 import { deleteReview, getReviews, postReview, putReview } from "../modules/ReviewModule";
+import { toast } from "react-toastify";
+
+
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -22,10 +25,17 @@ export const callReviewsAPI = ({taskCode}) => {
         }).then(res => res.json());
   
         if(result?.status === 200){
-            console.log(result);
             dispatch(getReviews(result));
         } else if(result?.status === 400){
-          alert(result.message);
+            toast.error(result.message, {
+                position: toast.POSITION.TOP_CENTER, 
+                autoClose: 2000, 
+                hideProgressBar: false, 
+                progressStyle: {
+                  backgroundColor: '#ff000074', 
+                  height: '5px', 
+                },
+              });
         }
     }
   }
@@ -48,10 +58,17 @@ export const callReviewsRegistAPI = (form) => {
         }).then(res => res.json());
 
         if(result?.status === 200){
-            console.log(result);
             dispatch(postReview(result));
         } else if(result?.status === 400){
-        alert(result.message);
+            toast.error(result.message, {
+                position: toast.POSITION.TOP_CENTER, 
+                autoClose: 2000, 
+                hideProgressBar: false, 
+                progressStyle: {
+                  backgroundColor: '#ff000074', 
+                  height: '5px', 
+                },
+              });
         }
     }
 }
@@ -74,10 +91,17 @@ export const callReviewUpdateAPI = ({form}) => {
         }).then(res => res.json());
 
         if(result?.status === 200){
-            console.log(result);
             dispatch(putReview(result));
         } else if(result?.status === 400){
-        alert(result.message);
+            toast.error(result.message, {
+                position: toast.POSITION.TOP_CENTER, 
+                autoClose: 2000, 
+                hideProgressBar: false, 
+                progressStyle: {
+                  backgroundColor: '#ff000074', 
+                  height: '5px', 
+                },
+              });
         }
     }
 }
@@ -98,10 +122,17 @@ export const callReviewDelete = ( reviewCode ) => {
         }).then(res => res.json());
 
         if(result?.status === 200){
-            console.log(result);
             dispatch(deleteReview(result));
         } else if(result?.status === 400){
-        alert(result.message);
+            toast.error(result.message, {
+                position: toast.POSITION.TOP_CENTER, 
+                autoClose: 2000, 
+                hideProgressBar: false, 
+                progressStyle: {
+                  backgroundColor: '#ff000074', 
+                  height: '5px', 
+                },
+              });
         }
     }
 }
