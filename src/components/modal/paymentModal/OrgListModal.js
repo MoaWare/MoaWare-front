@@ -8,8 +8,6 @@ import { useDrag, useDrop } from 'react-dnd';
 function OrgListModal({org , empCode}) {
 
     const{searchForm, setSearchForm, setFocusEmp, focusEmp, isFocus , setIsFocus} = useContext(orgContext);
-
-    console.log("org : ", org);
     const [ isOpen, setIsOpen ] = useState({});
     
 
@@ -24,7 +22,6 @@ function OrgListModal({org , empCode}) {
     }
 
     const onClickImgHandler = (e) => {
-        console.log([e.target.getAttribute("name")]);
 
         if(isOpen[e.target.getAttribute("name")]) {
             setIsOpen({
@@ -94,9 +91,6 @@ function OrgListModal({org , empCode}) {
     }
 
     const onClickEmp = (e, emp, sub) => {
-        console.log("클릭 emp " , emp)
-        console.log("클릭 e " , e.target)
-        console.log("클릭 sub " , sub)
         
        const isDuplicatteFocusEmp = focusEmp.some(
             (focus) => focus.emp.empName === emp.empName 
@@ -113,8 +107,6 @@ function OrgListModal({org , empCode}) {
         }
         setIsFocus([...isFocus, emp.empCode]);
     }
-
-    console.log("searchForm :" ,searchForm);
        
     return (
         <div className={ orgCSS.background}>

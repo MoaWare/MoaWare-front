@@ -29,11 +29,9 @@ const Weather = () => {
       (position) => {
         let lat = position.coords.latitude;
         let lon = position.coords.longitude;
-        // console.log("Current location", lat, lon);
         setLocation({ lat, lon });
       },
       (error) => {
-        console.log(error);
       },
       { enableHighAccuracy: true, timeout: 10000 }
     );
@@ -76,7 +74,6 @@ const Weather = () => {
           const fullAddress = kakaoData.documents[0].address.address_name;
           setAddress(fullAddress);
         } catch (error) {
-          console.log(error);
         }
       }
     };
@@ -107,8 +104,6 @@ const Weather = () => {
       case "8":
         return <WiCloudy />;
     }
-
-    console.log('정신차려이각박한세상속에', iconId)
 
   };
 

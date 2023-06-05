@@ -13,22 +13,21 @@ import PaymentRefuseDetail from './PaymentRefuseDetail';
 function PaymentDetail () {
 
     const { payCode } = useParams();
-    console.log("PaymentDetail payCode : " , payCode);
     const disPatch = useDispatch();
     const { payDetail } = useSelector( state => state.paymentReducer);
     const htmlRef = useRef();
     const navigator = useNavigate();
     const [ isPayModal, setIsPayModal ] = useState(false);
     const [ isPayRefuse, setIsPayRefuse ] = useState(false);
-   
-    console.log("PaymentDetail payDetail : 우아라아앙" , payDetail);
 
     useEffect(
         ()=>{
             disPatch(CallPaymentingDetailAPI({payCode}));
-
+            
+           
         },[isPayModal, isPayRefuse]
     )
+
         
       const onClickCheckedHandler = () => {
      
@@ -52,23 +51,13 @@ function PaymentDetail () {
         }
      }  
 
-     const onClickPayHandler = () => {
-        setIsPayModal(true);
-     }
-
-     const onClickPayRefuseHandler = () => {
-      setIsPayRefuse(true);
-     }
-
-
     return (
        <div className={PayDetailCSS.background}>
         
           {payDetail && payDetail.payStatus === "진행중" ?
 
           <div className={PayDetailCSS.titleDiv}>
-          <div className={PayDetailCSS.title}>결재 진행 문서</div> 
-          <button className={PayDetailCSS.button} onClick={ onClickCheckedHandler }>확인</button>
+          <div className={PayDetailCSS.titleIng}>결재 진행 문서</div> 
           <button className={PayDetailCSS.button} onClick={ onClickCheckedHandler }>확인</button>
           <button className={PayDetailCSS.buttonCancel} onClick={onCancelHandler} >취소</button>
           </div>

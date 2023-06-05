@@ -8,12 +8,10 @@ function OrganizationSearch (){
 
     const[ searchParams ] = useSearchParams();
     const search = searchParams.get('search');
-    console.log("search : ", search);
     const dispatch = useDispatch();
     const { searchOrg } = useSelector( (state) => state.organizationReducer);
     const [isSearch, setIsSearch] = useState(true);
 
-    console.log("searchOrg : ", searchOrg);
 
     useEffect(
         ()=>{

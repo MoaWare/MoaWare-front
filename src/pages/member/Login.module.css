@@ -69,6 +69,7 @@
 .login-button button{
     border: none;
     background-color: white;
+    cursor: pointer;
     /* margin-top: 5px;
     margin-bottom: 5px;
     height: 30px;
@@ -90,11 +91,13 @@ label {
     background-color: #254F70;
     color: white;
     font-weight: bolder;
+    cursor: pointer;
 }
 
 .loginfind button{
     border: none;
     background-color: white;
+    cursor: pointer;
 }
 
 

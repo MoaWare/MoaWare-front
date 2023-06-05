@@ -18,17 +18,6 @@ function TaskRegist() {
     const dispatch = useDispatch();
     const { project, post } = useSelector(state => state.projectReducer);
     const { projCode } = useParams();
-    // const [ stage, setStage ] = useState("todo");
-    // const [ type, setType ] = useState('plan');
-    // const initialFormState = {
-    //     taskName: "",
-    //     taskNotice: "",
-    //     startDate: "",
-    //     endDate: "",
-    //     type: "plan",
-    //     stage: "todo",
-    //     project: {},
-    //   };
     const [ form, setForm ] = useState({
         taskName : "",
         taskNotice : "",
@@ -39,12 +28,10 @@ function TaskRegist() {
         project : {},
     });
 
-
     let endDate = '';
 
+
     
-
-
     useEffect(()=>{
         dispatch(callProjectAPI(projCode));
     },[]);
@@ -62,15 +49,17 @@ function TaskRegist() {
             project : project 
         });
         
-        // console.log(endDate);
-
     },[project]);
 
 
     useEffect(() => {
 
         if(post?.status === 200){
-            alert(post.message);
+            toast.success(post.message, {
+                position: toast.POSITION.TOP_CENTER, 
+                autoClose: 2000, 
+                hideProgressBar: false,
+              });
             navigate(`/task/${form.project.projCode}`);
         }
     },[post]);
@@ -83,8 +72,6 @@ function TaskRegist() {
             ...prevForm,
             [e.target.name] : e.target.value,
         }));
-
-        console.log(form);
     }
 
 
@@ -193,6 +180,7 @@ function TaskRegist() {
                                             <td className={TaskCSS.tableTitle}>공지사항</td>
                                             <td className={TaskCSS.tableBorder}>
                                                 <textarea 
+                                                    maxlength="100"
                                                     className={TaskCSS.inputbox}
                                                     name="taskNotice"
                                                     onChange={onChangeHandler}

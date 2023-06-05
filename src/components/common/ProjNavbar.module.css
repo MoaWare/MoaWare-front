@@ -40,7 +40,7 @@ border-radius: 40px;
 font-size: 20px;
 font-weight: 700;
 margin: 2vw;
-padding: 2vh;
+padding: 1.5vh;
 }
 
 .wrap {
@@ -59,4 +59,10 @@ height: 87vh;
     color: rgba(37, 79, 112, 1);
     font-size: 14px;
     font-weight: 600;
+}
+
+.active{
+    background-color: rgba(80, 164, 228, 0.5);
+    color: white !important;
+
 }

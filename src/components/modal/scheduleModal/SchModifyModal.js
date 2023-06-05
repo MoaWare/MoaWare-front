@@ -14,10 +14,7 @@ function SchModifyModal({ setSchModifyModal }) {
 
   /* 일정 저장 */
   const SaveEventClick = () => {
-    console.log('schCode', schCode)
-    console.log('일정 클릭되는거 맞음?')
     dispatch(callScheduleModifyAPI({schCode}));
-    console.log('api 호출하겠습니당', callScheduleModifyAPI)
     alert('일정이 수정 되었습니다.')
   }
 
@@ -78,7 +75,6 @@ function SchModifyModal({ setSchModifyModal }) {
 
     useEffect(() => {
         dispatch(callScheduleDetailAPI({ schCode }));
-        console.log('결과', callScheduleDetailAPI)
     }, []);
 
     
@@ -143,7 +139,7 @@ function SchModifyModal({ setSchModifyModal }) {
             name='schCategoryCode'
             onChange={ onChangeHandler }
             // value="none"
-            // value={ schedule? schedule.schCategoryCode : schedule.schCategoryCode }
+            value={ schedule? schedule.schCategoryCode : schedule.schCategoryCode }
           >
             <option value="none" disabled >일정 분류</option>
             <option value="1">회사 일정</option>
@@ -158,18 +154,11 @@ function SchModifyModal({ setSchModifyModal }) {
             name='schMember'
             placeholder='참여자'
             onChange={ onChangeHandler }
-            // value={ schedule? schedule.schMember : schedule.schMember }
+            value={ schedule? schedule.schMember : schedule.schMember }
           />
         </div>
         <div className={SchModalCSS.schPrar}>
             <span>일정 참여자</span>
-            {/* <input
-            type='text'
-            name='schMember'
-            placeholder='참여자'
-            onChange={ onChangeHandler }
-            value={ schedule? schedule.schMember : schedule.schMember }
-            /> */}
         </div>
         {/* <div className={SchModalCSS.schDetail}>일정 내용</div> */}
         <div className={SchModalCSS.schCont}>
@@ -185,12 +174,6 @@ function SchModifyModal({ setSchModifyModal }) {
               className={SchModalCSS.schDel}
               onClick={SaveEventClick}
             >저장</button>
-            {/* {!modifyMode &&
-            <button 
-              className={SchModalCSS.schMod}
-              onClick={ModifyEventClick}
-            >수정</button>
-            } */}
         </div>
       </div>
     </div>

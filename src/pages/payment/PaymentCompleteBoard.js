@@ -7,13 +7,12 @@ import { CallPaymentCompleteListAPI } from '../../apis/PaymentAPICalls';
 
 function PaymentCompleteBoard () {
 
+    const [ status , setStatus ] = useState("Completed");
     const disPatch = useDispatch();
     const  payment  = useSelector( state => state.paymentReducer);
     const pay = payment.data &&payment.data.content;
     const pageInfo = payment.pageInfo;
     const [ currentPage, setCurrentPage ] = useState(1);
-
-    console.log("PaymentCompleteBoard의 pay는 : ", payment);
 
     useEffect( ()=>{
         disPatch(CallPaymentCompleteListAPI(currentPage));
@@ -29,7 +28,7 @@ function PaymentCompleteBoard () {
 
             </div>
 
-            <PaymentBoardContext pay={pay} pageInfo={pageInfo} setCurrentPage={setCurrentPage}/>
+            <PaymentBoardContext pay={pay} pageInfo={pageInfo} setCurrentPage={setCurrentPage} status={status}/>
 
         </div>
     );

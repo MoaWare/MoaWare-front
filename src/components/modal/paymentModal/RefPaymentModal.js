@@ -11,8 +11,6 @@ import { orgContext } from '../../../pages/payment/Payment';
 function RefPaymentModal( {setRefPaymentModal, payEmp }) {
 
   const{searchForm, setSearchForm, setFocusEmp, focusEmp, isFocus , setIsFocus, setRefPayMember} = useContext(orgContext);
-
-    console.log( " 참조장  : payEmp : ", payEmp);
     const onClickSavedHandler = () => {
       setRefPaymentModal(false);
       setRefPayMember(focusEmp.map(focus => focus.emp));
@@ -23,15 +21,6 @@ function RefPaymentModal( {setRefPaymentModal, payEmp }) {
 
     }
 
-    
-    
-    console.log("searchForm search 는 : ", searchForm.search);
-    console.log("searchForm isSearch 는 : ", searchForm.isSearch);
-
-
-
-    console.log("모달 : " , focusEmp);
-
     const removePayment = (focus,index) => {
 
       const updateFocusEmp = focusEmp.filter((_, i) => i !== index);
@@ -40,7 +29,7 @@ function RefPaymentModal( {setRefPaymentModal, payEmp }) {
       if(isFocus.includes(focus.emp.empCode)){
         setIsFocus( isFocus.filter( empCode => empCode !== focus.emp.empCode));
       }
-      console.log("변해라아아 : ", focus.emp.empCode);
+
     };  
 
     

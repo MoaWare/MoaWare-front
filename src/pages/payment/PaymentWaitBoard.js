@@ -15,9 +15,6 @@ function PaymentWaitBoard() {
     const pageInfo = payment.pageInfo;
     const [ currentPage, setCurrentPage ] = useState(1);
     
-    console.log("PaymentWaitBoard의 isPay는 : ", isPayment)
-    console.log("PaymentWaitBoard의 pay는 : ", pay);
-
     useEffect( ()=>{
         disPatch(CallPaymentWaitListAPI(currentPage));
         disPatch(setPayment(true));

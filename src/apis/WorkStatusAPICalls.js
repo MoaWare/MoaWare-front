@@ -20,7 +20,6 @@ export const callWorkstatusAPI = ({ date }) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log("[AdminWorkAPICalls] callWorkstatusAPI result : ", result);
             dispatch(getWorkstatus(result))
         }
 
@@ -42,7 +41,6 @@ export const callMyWorkAPI = ({ workDate }) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log("[WorkAPICalls] callWorkMyListAPI result : ", result);
             dispatch(getWorkday(result))
         }
 

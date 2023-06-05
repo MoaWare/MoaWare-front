@@ -5,19 +5,13 @@ import PagingBar from "../../components/common/PagingBar";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import CSS from "./AdminBoardList.module.css";
 import { NavLink } from 'react-router-dom';
-
-
 function AdminBoardList() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const boards = useSelector(state => state.boardReducer);
     const pageInfo = boards.pageInfo;
     const [selectedLists, setSelectedLists] = useState([]);
-
     const { del } = useSelector(state => state.boardReducer);
-
-
-
     const [currentPage, setCurrentPage] = useState(1);
     useEffect(
         () => {
@@ -25,20 +19,12 @@ function AdminBoardList() {
             },
            []
            );
-
-
-
     // const onClickTableTr = (boardCode) => {
-
     //     navigate(`/admin/boards/list/${boardCode}`);
-
     // };
-
     // const onClickProductInsert = () => {
     //     navigate("/product-registration");
     // };
-
-
     useEffect(() => {
         if (del?.status === 200) {
           alert('게시판 삭제가 완료되었습니다.');
@@ -56,16 +42,12 @@ function AdminBoardList() {
         setSelectedLists(null);
     }
 };
-
 const onClickDelete = () => {
     console.log('클릭ㅎㅎ',selectedLists)
     dispatch(callAdminBoardDeleteAPI({ boardCode : selectedLists})); // boardCode 배열 전달
   };
-
-
     return (
         <>
-
         
             <div className={CSS.main}>
             <div class={CSS.menutitle}> 게시판
@@ -77,13 +59,10 @@ const onClickDelete = () => {
                     </button>
                     </div>  </div>  
                 
-
                 <table className={CSS.table }>
-
                     <thead>
                         <tr className={ CSS.th }> 
                         <th className="table-header"><input type="checkbox" id="checkAll" /></th>
-
                             <th>게시판 코드</th>
                             <th>게시판 이름</th>
                             
@@ -129,5 +108,4 @@ const onClickDelete = () => {
         </>
     );
 }
-
 export default AdminBoardList;

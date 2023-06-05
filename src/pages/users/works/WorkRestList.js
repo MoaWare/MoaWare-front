@@ -7,21 +7,14 @@ import DateSelect from '../../../components/Work/DateSelect';
 import { callMyLeaveListAPI, callSelectMyLeaveListAPI } from '../../../apis/LeavePayAPICalls';
 import { callWorkMyListAPI } from '../../../apis/WorkAPICalls';
 import PagingBar from '../../../components/common/PagingBar';
-// import PagingBar from "../../components/common/PagingBar";
 
 function WorkRestList() {
-
-    // const [selectedDate, setSelectedDate] = useState(null)
-    // const [year, setYear] = useState(new Date().getFullYear());
-    // const [month, setMonth] = useState(new Date().getMonth() + 1);
     const [currentPage, setCurrentPage] = useState(1);
     const dispatch = useDispatch();
     const { leave } = useSelector(state => state.leavePayReducer);
     const { lYear } = useSelector(state => state.leaveReducer);
     const [year2, setYear2] = useState(new Date().getFullYear());
     const [month2, setMonth2 ] = useState(new Date().getMonth() + 1);
-    // const { lYear } = useSelector(state => state.leaveReducer);
-    // const pageInfo = products.pageInfo; 나중에 수정
     const pageInfo = leave && leave ? leave.data.pageInfo : null;
     const today = new Date();
 
@@ -32,7 +25,6 @@ function WorkRestList() {
     }
 
     const formattedDate = formatDate(today);
-    // const [formattedDate, setFormattedDate] = useState(null);
     
     function formatDate(date) {
         const year = date.getFullYear();
@@ -42,23 +34,14 @@ function WorkRestList() {
         return `${year}-${month}`;
     }
 
-    // const handleDateChange = (year, month) => {
-    console.log('leaveddddddddddddddddddddddddddd', leave);
-    // console.log('lYearddddddddddddddddd', lYear.data.emp.dept.deptName);
-    console.log('lYearddddddddddddddddd', lYear);
-    // };
     
     const handleYearChange = (bYear, year) => {
         setYear2(year);
-        console.log('bYear : ', bYear);
-        console.log('year : ', year);
         setCurrentPage(1);
     };
     
     const handleMonthChange = (bMonth, month) => {
         setMonth2(month);
-        console.log('bMonth : ', bMonth);
-        console.log('month : ', month);
         setCurrentPage(1);
     }
     
@@ -73,7 +56,6 @@ function WorkRestList() {
         if (formattedDate) {
             console.log('formattedDate : ', formattedDate)
             dispatch(callWorkMyListAPI({ workDate: formattedDate, currentPage }));
-            // setFirstRender(false);
             } 
             else {
             dispatch(callWorkMyListAPI({ workDate: formattedDate, currentPage }));
@@ -82,7 +64,6 @@ function WorkRestList() {
 
     useEffect(
         ()=> {
-                // dispatch(callMyLeaveListAPI( {currentPage} ))
                 dispatch(callLeaveYearAPI({ year : formattedYear }))
         },
         [formattedYear]
@@ -129,7 +110,6 @@ function WorkRestList() {
                         // onChageHandler={ onChageHandler }
                         
                         />
-                        {/* <input className={ WorkRestListCSS.inputBox }></input> */}
                     </div>
                         <table className={ WorkRestListCSS.space}>
                             <thead>

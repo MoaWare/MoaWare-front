@@ -4,18 +4,38 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { callFindAccountAPI } from "../../apis/EmployeeAPICalls";
 import LoginIdFindResult from "../../form/Login/LoginIdFindResult";
+import { toast } from "react-toastify";
+
+
 
 function LoginIdFind(){
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { id } = useSelector(state => state.employeeReducer);
-
     const [ form, setForm ] = useState({
         empCode : "",
         empName : "",
         email : ""
     });
+
+
+
+    useEffect(() => {
+        if( id?.state === 400 ){
+            toast.error(id.message, {
+                position: toast.POSITION.TOP_CENTER, 
+                autoClose: 2000, 
+                hideProgressBar: false, 
+                progressStyle: {
+                    backgroundColor: '#ff000074', 
+                    height: '5px', 
+                },
+                });
+            setForm({});
+        }
+    },[id])
+
 
     const onChangeHandler = (e) => {
 
@@ -23,16 +43,8 @@ function LoginIdFind(){
             ...form,
             [e.target.name]: e.target.value
         });
-        console.log(e.target.value);
     };
 
-    useEffect(() => {
-        if( id?.state === 400 ){
-            console.log(id);
-            alert(id.message);
-            setForm({});
-        }
-    },[id])
 
     const onClickHandler =()=>{
 
@@ -41,12 +53,19 @@ function LoginIdFind(){
             !form.empName ||
             !form.email
         ) {
-            alert("정보를 모두 입력해주세요");
+            toast.error("정보를 모두 입력해주세요", {
+                position: toast.POSITION.TOP_CENTER, 
+                autoClose: 2000, 
+                hideProgressBar: false, 
+                progressStyle: {
+                  backgroundColor: '#ff000074', 
+                  height: '5px', 
+                },
+              });
             return;
         }
 
         dispatch(callFindAccountAPI(form));
-        console.log(id);
     };
 
     const onClickLoginHandler = () => {
@@ -60,7 +79,7 @@ function LoginIdFind(){
     return id ? <LoginIdFindResult/> : (
         <>
             <header className={LoginCSS.header}>
-                <h3 className={LoginCSS.logo}>MOAWARE</h3>
+                <h3 className={LoginCSS.logo} onClick={()=>{navigate('/');}}>MOAWARE</h3>
             </header>
             <div className={LoginCSS.backgroundDiv}>
                 <div className={ LoginCSS.loginDiv }>

@@ -75,6 +75,7 @@ export const callAdminEmpRegistAPI = (formData) => {
         //      body : JSON.stringify(formData)
         //   }) .then(response => response.json());
    
+        
            if (result.status === 200) {
                console.log('[AdminEmpAPICalls] : callAdminEmpRegistAPI result : ', result);
             dispatch(postAdminEmp(result));

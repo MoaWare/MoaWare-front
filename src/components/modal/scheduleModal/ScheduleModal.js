@@ -13,10 +13,7 @@ function ScheduleModal({ setScheduleModal }) {
   /* 일정 삭제 */
   const DeleteEventClick = () => {
     const schCode = schedule.schCode;
-    console.log('schCode', schCode);
-    console.log('일정 클릭되는거 맞음?');
     dispatch(callScheduleDeleteAPI({ schCode }));
-    console.log('api 호출하겠습니당', callScheduleDeleteAPI);
     alert('일정이 삭제되었습니다.');
   };
 

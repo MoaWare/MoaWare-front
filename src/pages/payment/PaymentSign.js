@@ -18,12 +18,6 @@ function PaymentSign () {
     const navigate = useNavigate(); 
     const [ isModify, setIsModify ] = useState(false);
 
-    console.log( " sign은 ?! : ", sign );
-    console.log( " signSave은 ?! : ", signSave );
-    console.log( " signUpdate은 ?! : ", signUpdate );
-    console.log( " path으으으 ?!  : " , sign?.fileCategory.filter( fileCategory => fileCategory.fcategoryType==="sign").length ?
-    sign?.fileCategory.filter( fileCategory => fileCategory.fcategoryType==="sign")[0].file : "false");
-
     const onClickPaySignModal = () => {
         if(isModify){
         setPaymentSignModal(true);
@@ -33,7 +27,6 @@ function PaymentSign () {
 
     const onClickPaySignSaved = () => {
         
-        console.log( "sign 이당:", imageForm===undefined);
         if(imageForm===undefined) {
             setIsModify(false)
         } else { 
@@ -105,8 +98,6 @@ function PaymentSign () {
         }, [signUpdate]
 
     );
-
-    console.log(" 넘어온 값 : " , imageForm?.imageUrl);
 
     return(
 

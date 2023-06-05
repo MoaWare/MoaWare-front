@@ -9,6 +9,7 @@ import { CallPaymentingListAPI, CallPaymentWaitListAPI } from '../../apis/Paymen
 import ProjectList from "../project/ProjectList";
 import PaymentBoardContext from '../payment/PaymentBoardContext';
 import PaymentWaitBoardContext from '../payment/PaymentWaitBoardContext';
+import BoardPostList from "../board/BoardPostList";
 
 function Main() {
     const dispatch = useDispatch();
@@ -30,7 +31,6 @@ function Main() {
 
     const onSelectHandler = (projCode) => {
         setSeletProjCode(projCode)
-        console.log(projCode);
     }
 
     /* 결재 사항 - 대기 */
@@ -54,12 +54,6 @@ function Main() {
         <div className={MainCSS.wrapper}>
             <div className={MainCSS.wrap}>
                 <div className={MainCSS.payment}>
-                    {/* <div className={MainCSS.myWait}>
-                        <div className={MainCSS.wait}>결재 대기</div>
-                        <div className={MainCSS.waitList}>
-                            <PaymentWaitBoardContext pay={payWait} setCurrentPage={setCurrentPage} />
-                        </div>
-                    </div> */}
                     <div className={MainCSS.myProg}>
                         <div className={MainCSS.prog}>결재 진행</div>
                         <div className={MainCSS.progList}>
@@ -127,7 +121,7 @@ function Main() {
             </div>
             <div className={MainCSS.wrap2}>
                 <div className={MainCSS.notification}>
-                    <div className={MainCSS.announcement}>공지사항</div>
+                    <div className={MainCSS.announcement}>게시판</div>
                     <table className={MainCSS.notice}>
                         <tbody>
                             <tr>
@@ -137,23 +131,23 @@ function Main() {
                             </tr>
                             <tr>
                                 <td>2023.06.04</td>
-                                <td>부서</td>
-                                <td>내일 회식입니다.</td>
+                                <td>공지사항</td>
+                                <td>서비스 이용...</td>
                             </tr>
                             <tr>
-                                <td>2023.05.01</td>
-                                <td>정부정책</td>
-                                <td>공부하기 싫다</td>
+                                <td>2023.06.02</td>
+                                <td>이벤트</td>
+                                <td>신제품 출시...</td>
                             </tr>
                             <tr>
-                                <td>2023.05.01</td>
-                                <td>정부정책</td>
-                                <td>냐냐냐냐뇨뇬ㄴ뇨뇬뇨뇨뇨뇨뇨링~</td>
+                                <td>2023.05.29</td>
+                                <td>공지사항</td>
+                                <td>시스템 업데..</td>
                             </tr>
                             <tr>
-                                <td>2023.05.01</td>
-                                <td>정부정책</td>
-                                <td>공부하기 싫다</td>
+                                <td>2023.05.26</td>
+                                <td>공지사항</td>
+                                <td>IT 관련 공지</td>
                             </tr>
                         </tbody>
                     </table>

@@ -10,7 +10,7 @@ function SchInsertModal({ setSchInsertModal }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { insert } = useSelector((state) => state.scheduleReducer);
-  // const { schCode } = useParams();
+  
   const [form, setForm] = useState({
     // schCode: schCode,
     schName: "",
@@ -24,7 +24,6 @@ function SchInsertModal({ setSchInsertModal }) {
 
   const onChangeHandler = (e) => {
     
-    console.log("일정 타입 : ", e.target.name === 'schCategoryCode');
 
     if(e.target.name === 'schCategoryCode') {
       setForm({
@@ -60,21 +59,17 @@ function SchInsertModal({ setSchInsertModal }) {
 
   const SchInsertClick = () => {
     dispatch(callScheduleInsertAPI(form));
-    console.log('인서트대라얍~', insert)
   };
     
-  console.log('form', form);
 
   /* 생성 후 일정관리로 이동 */
   useEffect(() => {
     if(insert?.status === 200) {
       alert('일정 생성이 완료 되었습니다.');
       setSchInsertModal(false);
-      // window.location.reload(); // 새로고침
-      // navigate('/schedule'); // 원하는 경로로 변경
+      window.location.reload(); // 새로고침
     }
-  }, [insert]
-  );
+  }, [insert]);
     
   /* 모달창 나가기 */
   const CancelInsertClick = () => {
@@ -116,9 +111,8 @@ function SchInsertModal({ setSchInsertModal }) {
           <select 
             name='schCategoryCode'
             onChange={ onChangeHandler }
-            // value="none"
           >
-            <option value="none" disabled >일정 분류</option>
+            <option value="none">일정 분류</option>
             <option value="1">회사 일정</option>
             <option value="2">프로젝트 일정</option>
             <option value="3">직급별 일정</option>

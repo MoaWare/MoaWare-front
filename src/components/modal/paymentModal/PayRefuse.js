@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PayRefuseCSS from './PayRefuse.module.css';
 import { FiX } from 'react-icons/fi';
-import { Navigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { CallPaymentUpdateAPI } from '../../../apis/PaymentAPICalls';
 import { useDispatch } from 'react-redux';
 
@@ -10,6 +10,7 @@ function PayRefuse ({setIsPayRefuse}) {
     const {payCode} = useParams();
     const [ isSave, setIsSave ] = useState(false);
     const [ reason, setReason ] = useState(); 
+    const navigator = useNavigate();
     const disPatch = useDispatch();
 
     const today = () => {
@@ -40,7 +41,6 @@ function PayRefuse ({setIsPayRefuse}) {
     
 
     const onClickSaveHandler = () => {
-        console.log("reason : ", reason);
         const form = {
             payCode,
             "paymentMember" : [
@@ -51,9 +51,9 @@ function PayRefuse ({setIsPayRefuse}) {
                 }
             ]
         }
-        console.log(" payCode : ", form);
+
         disPatch(CallPaymentUpdateAPI({form}));
-        Navigate("/pay/wait");
+        navigator("/pay/wait");
 
 
     }

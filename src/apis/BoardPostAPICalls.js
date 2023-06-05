@@ -116,14 +116,14 @@ export const callBoardPostDetailAPI = ({ postCode }) => {
 
      return async (dispatch, getState) => {
 
-        const result = await fetch(requestURL).then(response => response.json());
-        // const result = await fetch(requestURL, {
-        //     method: 'GET',
-        //     headers: {
-        //         "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
-        //     },
+        //const result = await fetch(requestURL).then(response => response.json());
+        const result = await fetch(requestURL, {
+            method: 'GET',
+            headers: {
+                "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+            },
         
-        // }).then(response => response.json());
+        }).then(response => response.json());
 
         if (result.status === 200) {
              console.log("[BoardpostAPICalls] callBoardpostBoardsListAPI result : ", result);
@@ -131,6 +131,32 @@ export const callBoardPostDetailAPI = ({ postCode }) => {
        }
      }
  }
+
+
+ 
+// 게시판 코드별 조회
+export const callBoardpostBoardsListForAdminAPI = ({ boardCode, currentPage = 1 }) => {
+
+    const requestURL = `${PRE_URL}/boardPosts-management/boards/${boardCode}?page=${currentPage}`;
+
+    return async (dispatch, getState) => {
+
+       //const result = await fetch(requestURL).then(response => response.json());
+       const result = await fetch(requestURL, {
+           method: 'GET',
+           headers: {
+               "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+           },
+       
+       }).then(response => response.json());
+
+       if (result.status === 200) {
+            console.log("[BoardpostAPICalls] callBoardpostBoardsListForAdminAPI result : ", result);
+            dispatch(getBoardposts(result));
+      }
+    }
+}
+
 
 
 
@@ -179,6 +205,7 @@ export const callBoardPostUpdateAPI = (formData) => {
              body: formData
          }).then(response => response.json());
 
+
         if (result.status === 200) {
             console.log('[BoardPostAPICalls] callBoardPostUpdateAPI result :', result);
             dispatch(putBoardpost(result));
@@ -207,6 +234,7 @@ export const callBoardPostDeleteAPI =({ postCode }) => {
           },
         }).then(res => res.json());
   
+
         if(result?.status === 200){
             console.log("[BoardPostDeleteAPI] callBoardPostDeleteAPI result : ", result);
             dispatch(putBoardpostdelete(result));

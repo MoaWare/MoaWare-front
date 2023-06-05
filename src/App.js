@@ -107,8 +107,10 @@ function App() {
             <Route path="refuse" element={<PaymentRefuseBoard />} />
             <Route path="storage" element={<PaymentStorageBoard />} />
             <Route path="sign" element={<PaymentSign />} />
-            <Route path="payDetail/:payCode" element={ <PaymentDetail/> }/>
             <Route path="payWaitDetail/:payCode" element={ <PaymentWaitDetail/> }/>
+            <Route path="payPayingDetail/:payCode" element={ <PaymentDetail/> }/>
+            <Route path="payCompletedDetail/:payCode" element={ <PaymentDetail/> }/>
+            <Route path="payRefuseDetail/:payCode" element={ <PaymentDetail/> }/>
             <Route path="payStorageDetail/:payCode" element={ <PaymentStorageDetail/> }/>
           </Route>
 
@@ -124,7 +126,11 @@ function App() {
             <Route index element={<BoardPostList />} />
             <Route path=":postCode" element={<BoardPostDetail />} />
             <Route path="boards/:boardCode" element={<BoardPostList />} />
-            <Route path="regist" element={<BoardPostRegist />}/> 
+            <Route path="regist" element={
+              <ProtectedRoute postCheck={true}>
+                <BoardPostRegist />
+              </ProtectedRoute>
+              }/> 
             <Route path="modify/:postCode" element={<BoardPostModify />}/>
 
 
@@ -158,19 +164,8 @@ function App() {
             <Login />
           </ProtectedRoute>}>
         </Route>
-        <Route
-          path="idfind"
-          element={
-            <ProtectedRoute loginCheck={false}>
-              <LoginIdFind />
-            </ProtectedRoute>
-          } />
-        <Route
-          path="pwdfind"
-          element={
-              <LoginPwdFind />
-          } />
-
+        <Route path="idfind" element={ <LoginIdFind /> } />
+        <Route path="pwdfind" element={ <LoginPwdFind /> } />
          {/* 프로젝트 */}
          <Route path="task/:projCode" 
           element={              

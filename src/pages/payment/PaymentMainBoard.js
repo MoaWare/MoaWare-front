@@ -13,7 +13,6 @@ function PaymentMainBoard ({setPayWait}) {
     const pageInfo = payment.pageInfo;
     const [ currentPage, setCurrentPage ] = useState(1);
 
-    console.log("PaymentMainBoard의 pay는 : ", payment);
 
     useEffect( ()=>{
         disPatch(CallPaymentWaitListAPI(currentPage));

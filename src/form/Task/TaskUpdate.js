@@ -7,6 +7,9 @@ import { getMemberId } from "../../utils/TokenUtils";
 import ReviewItem from "../../pages/review/project/ReviewItem";
 import { callReviewsAPI } from "../../apis/ReviewAPICalls";
 import ReviewList from "../../pages/review/project/ReviewList";
+import { toast } from "react-toastify";
+
+
 
 
 function TaskUpdate() {
@@ -31,7 +34,6 @@ function TaskUpdate() {
       project : {},
     });
 
-
     let endDate = '';
 
             
@@ -55,7 +57,7 @@ function TaskUpdate() {
         
         if(task){
           endDate = task.project.endDate.substring(10,0);
-        //   console.log("endDate ------------------------------", endDate);
+
           setForm((prevForm) => ({
               ...prevForm,
               project: task.project,
@@ -68,7 +70,6 @@ function TaskUpdate() {
               stage: task.stage,
             }));
           }
-        // console.log("form ------------------------------",form);
 
     },[ ]);
 
@@ -76,7 +77,11 @@ function TaskUpdate() {
     useEffect(() => {
 
         if(put?.status === 200){
-            alert(put.message);
+            toast.success(put.message, {
+                position: toast.POSITION.TOP_CENTER, 
+                autoClose: 2000, 
+                hideProgressBar: false,
+              });
             navigate(`/task/${form?.project?.projCode}`);
         }   
 
@@ -89,8 +94,6 @@ function TaskUpdate() {
             ...prevForm,
             [e.target.name] : e.target.value,
         }));
-
-        console.log(form);
     }
 
 
@@ -99,14 +102,23 @@ function TaskUpdate() {
         if(getMemberId() === task.author.empID){
             dispatch(callTaskUpdateAPI( form ));
         } else {
-            alert('최초 작성자만 수정이 가능합니다.');
+            toast.error('최초 작성자만 수정이 가능합니다.', {
+                position: toast.POSITION.TOP_CENTER, 
+                autoClose: 2000, 
+                hideProgressBar: false, 
+                progressStyle: {
+                  backgroundColor: '#ff000074', 
+                  height: '5px', 
+                },
+              });
+
             navigate(`/task/${task.project.projCode}`);
         }
     };
 
 
 
-    return  task && (
+    return  (
         <div className={TaskCSS.wrapper}>
             <div className={TaskCSS.wrap}>
                 <div className={TaskCSS.mainTitle}>
@@ -116,7 +128,7 @@ function TaskUpdate() {
                     <div className={TaskCSS.leftDiv}>
                         <div className={TaskCSS.leftTitle}>
                             <p className={TaskCSS.projTitlebold}>프로젝트 명</p>
-                            <span className={TaskCSS.projTitle}>{ task?.project?.projName }</span>
+                            <span className={TaskCSS.projTitle}>{ task && task?.project?.projName }</span>
                         </div>  
                         <div className={TaskCSS.leftContent}>
                             <div className={TaskCSS.tableDiv}>
@@ -187,6 +199,7 @@ function TaskUpdate() {
                                             <td className={TaskCSS.tableTitle}>공지사항</td>
                                             <td className={TaskCSS.tableBorder}>
                                                 <textarea 
+                                                    maxlength="100"
                                                     value={form?.taskNotice}
                                                     className={TaskCSS.tableTextbox}
                                                     name="taskNotice"

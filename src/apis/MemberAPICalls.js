@@ -1,4 +1,7 @@
 import { postMemberInfo, getMemberInfo, postMemberModify } from "../modules/MemberModule";
+import { toast } from "react-toastify";
+
+
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const RESTAPI_SERVER_PORT = `${ process.env.REACT_APP_RESTAPI_SERVER_PORT}`
@@ -23,12 +26,18 @@ export const callMemberInfoLoginAPI = (form) => {
         })
         .then(response => response.json());
 
-        console.log('[MemberAPICalls] callMemberInfoLoginAPI result : ', result);
-
         if(result.status === 200) {
             dispatch(postMemberInfo(result));
         } else {
-            alert(result?.message);
+            toast.error(result.message, {
+                position: toast.POSITION.TOP_CENTER, 
+                autoClose: 2000, 
+                hideProgressBar: false, 
+                progressStyle: {
+                  backgroundColor: '#ff000074', 
+                  height: '5px', 
+                },
+              });
         }
     }
 }
@@ -50,8 +59,6 @@ export const callMemberInfoAPI = () => {
             body : JSON.stringify()
         })
         .then(response => response.json());
-
-        console.log('[MemberAPICalls] callMemberInfoAPI result : ', result);
 
         if(result.status === 200) {
             dispatch(getMemberInfo(result));
@@ -77,7 +84,6 @@ export const callMemberModifyAPI = (formData) => {
 
         console.log(result);
         if ( result.status === 200 ) {
-            console.log ("[MemberAPICalls] callMemberModifyAPI result : ", result);
             dispatch(postMemberModify(result));
         }
     };

@@ -38,7 +38,6 @@ function PayModal({setIsPayModal}) {
                 }
             ]
         }
-        console.log(" payCode : ", form);
         disPatch(CallPaymentUpdateAPI({form}));
         disPatch(setPayment(false));
         navigate("/pay/wait");
@@ -56,7 +55,6 @@ function PayModal({setIsPayModal}) {
                 }
             ]
         }
-        console.log(" payCode : ", form);
         disPatch(CallPaymentUpdateAPI({form}));
         disPatch(setPayment(false));
         navigate("/pay/wait");

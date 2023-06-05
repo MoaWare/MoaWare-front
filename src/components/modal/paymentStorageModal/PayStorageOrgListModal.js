@@ -8,7 +8,6 @@ function PayStorageOrgListModal({org , empCode}) {
 
     const{searchForm, setSearchForm, setFocusEmp, focusEmp, isFocus , setIsFocus} = useContext(payStorageContext);
 
-    console.log("org : ", org);
     const [ isOpen, setIsOpen ] = useState({});
     
 
@@ -26,13 +25,11 @@ function PayStorageOrgListModal({org , empCode}) {
         ()=>{
            
             focusEmp.map(member =>  isFocus.push(member.emp.empCode))    
-            console.log("우ㅏ아아앙 : " , isFocus)
             
         },[]
     )
 
     const onClickImgHandler = (e) => {
-        console.log([e.target.getAttribute("name")]);
 
         if(isOpen[e.target.getAttribute("name")]) {
             setIsOpen({
@@ -102,9 +99,6 @@ function PayStorageOrgListModal({org , empCode}) {
     }
 
     const onClickEmp = (e, emp, sub) => {
-        console.log("클릭 emp " , emp)
-        console.log("클릭 e " , e.target)
-        console.log("클릭 sub " , sub)
         
        const isDuplicatteFocusEmp = focusEmp.some(
             (focus) => focus.emp.empName === emp.empName 
@@ -121,8 +115,6 @@ function PayStorageOrgListModal({org , empCode}) {
         }
         setIsFocus([...isFocus, emp.empCode]);
     }
-
-    console.log("searchForm :" ,searchForm);
        
     return (
         <div className={ orgCSS.background}>

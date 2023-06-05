@@ -3,14 +3,12 @@ import PagingBar from '../../components/common/PagingBar';
 import payBoardCSS from './PaymentBoard.module.css';
 import { ImAttachment } from 'react-icons/im';
 
-function PaymentBoardContext ({pay, pageInfo, setCurrentPage}) {
+function PaymentBoardContext ({pay, pageInfo, setCurrentPage,status}) {
 
-    console.log("PaymentBoardContext의 pay는 ? : " , pay);
     const navigate = useNavigate();
 
     const onClickDetailHandler = (e) => {
-        console.log("value : ", e.target.getAttribute("value"));
-        navigate(`/pay/payDetail/${e.target.getAttribute("value")}`)
+        navigate(`/pay/pay${status}Detail/${e.target.getAttribute("value")}`)
     }
 
 

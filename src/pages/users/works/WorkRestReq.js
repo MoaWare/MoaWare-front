@@ -8,6 +8,7 @@ import { callMemberInfoAPI } from '../../../apis/MemberAPICalls';
 import { useDispatch, useSelector } from 'react-redux';
 import { callLeaveRequestAPI } from '../../../apis/LeavePayAPICalls';
 import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 function WorkRestReq() {
 
@@ -37,12 +38,25 @@ function WorkRestReq() {
     const onClickCreate = () => {
 
         if(selectedEndDate == null ){
-            alert('날짜를 입력해주세요.');          
+            toast.success('날짜를 입력해주세요.', {
+                position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+                autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+                hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+              });          
         } else if(selectedStartDate > selectedEndDate) {
-            alert('종료일이 시작일 보다 빠릅니다.');
+            toast.success('종료일이 시작일 보다 빠릅니다.', {
+                position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+                autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+                hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+              });    
             return;
         } else if(selectedStartDate == null) {
-            alert('날짜를 입력해주세요.');
+            toast.success('날짜를 입력해주세요.', {
+                position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+                autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+                hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+              });    
+            
         }
         /* 서버로 전달할 FormData 형태의 객체 설정 */
         const formData = new FormData();
@@ -51,13 +65,9 @@ function WorkRestReq() {
         formData.append("leaveStartDay", moment(selectedStartDate).format('YYYY-MM-DD'));
         formData.append("leaveEndDate", moment(selectedEndDate).format('YYYY-MM-DD'));
 
-        console.log(moment(selectedEndDate).format('YYYY-MM-DD'))
-        console.log(moment(selectedStartDate).format('YYYY-MM-DD'))
 
         for (const entry of formData.entries()) {
-            console.log('f폼이다', entry);
         }
-        console.log('f폼이다', formData);
 
         dispatch(callLeaveRequestAPI(formData))
     }
@@ -115,7 +125,6 @@ function WorkRestReq() {
                     <select value={selectedOption} onChange={handleSelectChange}
                         className={WorkRestReqCSS.selectBox}
                     >
-                        {/* <option value="">선택</option> */}
                         {options.map((option) => (
                             <option key={option} value={option}>
                                 {option}
