@@ -43,8 +43,6 @@ function BoardPostRegist() {
     const onClickRegistHandler = () => {
             /* 서버로 전달할 FormData 형태의 객체 설정 */
             const formData = new FormData();
-//            formData.append("postCode", form.postCode);
-            //formData.append("boardCode", form.boardCode);
 
             formData.append("board.boardCode", form.boardCode);
             formData.append("writer.empCode", form.empCode);
