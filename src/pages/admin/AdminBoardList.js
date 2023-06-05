@@ -39,7 +39,6 @@ function AdminBoardList() {
         }
     };
     const onClickDelete = () => {
-        console.log('클릭ㅎㅎ', selectedLists)
         dispatch(callAdminBoardDeleteAPI({ boardCode: selectedLists }));
     };
     return (
