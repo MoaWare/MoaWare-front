@@ -5,11 +5,9 @@ import '../schedule/Calendar.css';
 import MainCSS from './Main.module.css';
 import { NavLink } from 'react-router-dom';
 import { callProjectProgressListAPI } from '../../apis/ProjectAPICalls';
-import { CallPaymentingListAPI, CallPaymentWaitListAPI } from '../../apis/PaymentAPICalls';
+import { CallPaymentingListAPI } from '../../apis/PaymentAPICalls';
 import ProjectList from "../project/ProjectList";
-import PaymentBoardContext from '../payment/PaymentBoardContext';
-import PaymentWaitBoardContext from '../payment/PaymentWaitBoardContext';
-import BoardPostList from "../board/BoardPostList";
+import PaymentBoardContext from "../payment/PaymentBoardContext";
 
 function Main() {
     const dispatch = useDispatch();
@@ -33,18 +31,10 @@ function Main() {
         setSeletProjCode(projCode)
     }
 
-    /* 결재 사항 - 대기 */
-    const { isPayment } = useSelector(state => state.paymentReducer);
-    const paymentWait = useSelector(state => state.paymentReducer);
-    const payWait = paymentWait.data && paymentWait.data.content;
-
-    useEffect(() => {
-        dispatch(CallPaymentWaitListAPI(currentPage));
-    }, [currentPage, isPayment]);
-
     /* 결재 사항 - 진행 */
-    const paymentProg = useSelector(state => state.paymentReducer);
-    const payProg = paymentProg.data && paymentProg.data.content ? paymentProg.data.content.slice(0, 4) : [];
+    const payment  = useSelector( state => state.paymentReducer);
+    const pay = payment.data &&payment.data.content;
+    const [ status , setStatus ] = useState("Paying");
 
     useEffect(() => {
         dispatch(CallPaymentingListAPI(currentPage));
@@ -57,7 +47,7 @@ function Main() {
                     <div className={MainCSS.myProg}>
                         <div className={MainCSS.prog}>결재 진행</div>
                         <div className={MainCSS.progList}>
-                            <PaymentBoardContext pay={payProg} setCurrentPage={setCurrentPage} />
+                            <PaymentBoardContext pay={pay} setCurrentPage={setCurrentPage} status={status} />
                         </div>
                     </div>
                 </div>
@@ -148,6 +138,16 @@ function Main() {
                                 <td>2023.05.26</td>
                                 <td>공지사항</td>
                                 <td>IT 관련 공지</td>
+                            </tr>
+                            <tr>
+                                <td>2023.05.24</td>
+                                <td>공지사항</td>
+                                <td>시스템 장애안내</td>
+                            </tr>
+                            <tr>
+                                <td>2023.05.18</td>
+                                <td>이벤트</td>
+                                <td>IT 이벤트 안내</td>
                             </tr>
                         </tbody>
                     </table>
