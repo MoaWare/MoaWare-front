@@ -54,7 +54,7 @@ function WorkRestList() {
     
     useEffect(() => {
         if (formattedDate) {
-            console.log('formattedDate : ', formattedDate)
+            
             dispatch(callWorkMyListAPI({ workDate: formattedDate, currentPage }));
             } 
             else {
@@ -70,8 +70,6 @@ function WorkRestList() {
     );
 
     useEffect(() => {
-        console.log('year2 : ', year2);
-        console.log('month2 : ', month2);
         
         if(year2 && month2) {
             if(month2 <10 ){
