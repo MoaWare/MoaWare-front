@@ -9,7 +9,6 @@ export default function DateSelect(props) {
       props.onYearChange(year2, parseInt(e.target.value));
     };
 
-    console.log(month2);
   
     const onChangeMonthHandler = (e) => {
       setMonth(parseInt(e.target.value));
