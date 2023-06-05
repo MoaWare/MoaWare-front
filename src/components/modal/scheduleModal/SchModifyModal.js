@@ -39,7 +39,6 @@ function SchModifyModal({ setSchModifyModal }) {
 
   const onChangeHandler = (e) => {
     
-    console.log("일정 타입 : ", e.target.name === 'schCategoryCode');
 
     if(e.target.name === 'schCategoryCode') {
       setForm({
