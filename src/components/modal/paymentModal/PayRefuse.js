@@ -41,7 +41,6 @@ function PayRefuse ({setIsPayRefuse}) {
     
 
     const onClickSaveHandler = () => {
-        console.log("reason : ", reason);
         const form = {
             payCode,
             "paymentMember" : [
