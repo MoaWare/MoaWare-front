@@ -48,7 +48,6 @@ function AdminEmployees() {
     };
 
     const onClickDelete = () => {
-        console.log('클릭ㅎㅎ', selectedEmps)
         dispatch(callAdminEmpDeleteAPI({ empCode: selectedEmps }));
     };
 
