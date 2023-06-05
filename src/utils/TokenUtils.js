@@ -27,6 +27,7 @@ export function isBoardAdmin() {
 
 export function isPost() {
     const token = decodeJwt();
+    console.log("isPost----------------------------------------",token.auth);
     return (token && token.exp * 1000 > Date.now() && token.auth.includes('POST'));
 }
 

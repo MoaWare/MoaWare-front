@@ -44,6 +44,7 @@ function LoginPwdFind(){
         }
 
         dispatch(callFindPwdAccountAPI(form));
+        setForm('');
     };
 
     const onClickLoginHandler = () => {

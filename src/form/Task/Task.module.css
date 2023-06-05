@@ -141,6 +141,7 @@
     align-items: center;
     justify-content: flex-end;
     text-align: center;
+    cursor: pointer;
 }
 
 
@@ -153,6 +154,7 @@
     margin: 0vh 0.3vw;
     background-color: #254F70;
     color: white;
+    cursor: pointer;
 }
 
 .btn a:first-child{
@@ -165,12 +167,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 
 .btn button:last-child{
     background-color: white;
     color: #254F70;
+    cursor: pointer;
 }
 
 .inputbox{
@@ -222,6 +226,7 @@
     font-weight: bold;
     background-color: #254F70;
     color: white;
+    cursor: pointer;
 }
 
 
@@ -307,6 +312,7 @@
 
 .listBtn{
     width: 7.3vw;
+    cursor: pointer;
     /* display: flex;
     flex-direction: row;
     justify-content: space-between; */
@@ -321,6 +327,7 @@
     color: white;
     padding: 0.27vh 0vw;
     margin-left: 0.2vw;
+    cursor: pointer;
 }
 
 .listBtn button:first-child{
@@ -330,6 +337,7 @@
     border-radius: 5px;
     font-weight: bold;
     padding: 0.27vh 0vw;
+    cursor: pointer;
 }
 
 .listLow{
@@ -375,6 +383,7 @@
 .textareaBtn {
     font-size: 2.5vh;
     color: #50A4E4;
+    cursor: pointer;
     /* width: 2.5vw;
     height: 2.7vh;
     color: white;
@@ -426,4 +435,5 @@
     font-weight: bold;
     color: #494949;
     background-color: transparent;
+    cursor: pointer;
 }

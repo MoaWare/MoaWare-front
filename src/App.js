@@ -124,7 +124,11 @@ function App() {
             <Route index element={<BoardPostList />} />
             <Route path=":postCode" element={<BoardPostDetail />} />
             <Route path="boards/:boardCode" element={<BoardPostList />} />
-            <Route path="regist" element={<BoardPostRegist />}/> 
+            <Route path="regist" element={
+              <ProtectedRoute postCheck={true}>
+                <BoardPostRegist />
+              </ProtectedRoute>
+              }/> 
             <Route path="modify/:postCode" element={<BoardPostModify />}/>
 
 
@@ -158,19 +162,8 @@ function App() {
             <Login />
           </ProtectedRoute>}>
         </Route>
-        <Route
-          path="idfind"
-          element={
-            <ProtectedRoute loginCheck={false}>
-              <LoginIdFind />
-            </ProtectedRoute>
-          } />
-        <Route
-          path="pwdfind"
-          element={
-              <LoginPwdFind />
-          } />
-
+        <Route path="idfind" element={ <LoginIdFind /> } />
+        <Route path="pwdfind" element={ <LoginPwdFind /> } />
          {/* 프로젝트 */}
          <Route path="task/:projCode" 
           element={              

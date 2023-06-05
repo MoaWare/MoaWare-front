@@ -193,6 +193,7 @@ function TaskRegist() {
                                             <td className={TaskCSS.tableTitle}>공지사항</td>
                                             <td className={TaskCSS.tableBorder}>
                                                 <textarea 
+                                                    maxlength="100"
                                                     className={TaskCSS.inputbox}
                                                     name="taskNotice"
                                                     onChange={onChangeHandler}

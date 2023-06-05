@@ -19,6 +19,9 @@
     flex-direction: column;
     font-weight: bold;
     font-size: 1.83vh;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .divTop{
@@ -27,6 +30,13 @@
     margin: 0vh 1vw;
     margin-top: 1.38vh;
 }
+
+.divTop span{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 
 .divRight button{
     border: none;
@@ -51,6 +61,6 @@
 
 
 .lowMiddle{
-    margin-right: 11vw;
+    margin-right: 8vw;
 }
 
