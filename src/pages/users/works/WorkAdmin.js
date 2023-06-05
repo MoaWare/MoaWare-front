@@ -225,7 +225,7 @@ function WorkAdmin({ adminList }) {
                                         <option value="연차">연차</option>            
                                         <option value="반차">반차</option>            
                                         <option value="공무">공무</option>            
-                                        <option value="출근">출근</option>           
+                                        <option value="정상출근">정상출근</option>           
                                     </select>
                                 </td>
                             </tr> 
