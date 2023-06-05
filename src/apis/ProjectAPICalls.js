@@ -270,6 +270,7 @@ export const callDeptEmpListAPI = ({ deptCode }) => {
             method : 'GET',
             headers : {
                 "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
             }
         }).then(res => res.json());
 
@@ -326,6 +327,7 @@ export const callPorjectDeleteAPI = ({projCode}) => {
         method : 'PUT',
         headers : {
             "Content-Type" : "application/json",
+            "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
         }
     }).then(res => res.json());
 
