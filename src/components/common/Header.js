@@ -16,7 +16,6 @@ const Header = () => {
 
   useEffect(() => {
     dispatch(callHeaderNameAPI());
-    console.log("Header name: ",name);
   }, [])
 
 
@@ -27,9 +26,7 @@ const Header = () => {
       localStorage.removeItem('clickTime');
       localStorage.removeItem('workbtn');
       dispatch(setBtnState(!btn));
-      console.log('로그아웃 확인');
       navigate('/login');
-      console.log('로그아웃 확인');
     }
   }
 

@@ -20,7 +20,6 @@ export const callScheduleListAPI = () => {
         }).then(res => res.json());
 
         if(result.status === 200){
-            console.log("[ScheduleAPICalls] callScheduleListAPI result : ", result);
             dispatch(getSchedules(result));
         }
 
@@ -44,7 +43,6 @@ export const callScheduleDetailAPI = ({ schCode }) => {
         }).then(res => res.json());
 
         if(result.status === 200){
-            console.log("[ScheduleAPICalls] callScheduleDetailAPI result : ", result);
             dispatch(getSchedule(result));
         }
 
@@ -69,7 +67,6 @@ export const callScheduleInsertAPI = ( form ) => {
         }).then(res => res.json());
       
         if(result.status === 200) {
-            console.log('[ScheduleAPICalls] callScheduleInsertAPI : ', result);
             dispatch(postSchedule(result));
         
         } 
@@ -81,7 +78,6 @@ export const callScheduleInsertAPI = ( form ) => {
 /* 일정 삭제 */
 export const callScheduleDeleteAPI = ({ schCode }) => {
 
-    console.log('Delete schCode', schCode)
 
     const requestURL = `${PRE_URL}/calendar/${schCode}`;
 
@@ -96,7 +92,6 @@ export const callScheduleDeleteAPI = ({ schCode }) => {
         }).then(res => res.json());
 
         if(result.status === 200){
-            console.log("[ScheduleAPICalls] callScheduleDeleteAPI result : ", result);
             dispatch(putSchedule(result));
         }
 
