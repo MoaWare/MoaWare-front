@@ -5,6 +5,8 @@ import HeaderCSS from './Header.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getHeaderName } from '../../modules/EmployeeModule';
 import { callHeaderNameAPI } from '../../apis/EmployeeAPICalls';
+import ProtectedRoute from '../router/ProtectedRoute';
+import { isAdmin } from '../../utils/TokenUtils';
 import { setBtnState } from '../../modules/WorkTimeModule';
 
 const Header = () => {
@@ -44,15 +46,17 @@ const Header = () => {
           <li><Link to="/">홈</Link></li>
           <li><Link to="/project">프로젝트</Link></li>
           <li><Link to="/pay">전자결재</Link></li>
-          <li><Link to="/">시설예약</Link></li>
+          <li><Link >시설예약</Link></li>
 
           <li><Link to="/schedule">일정관리</Link></li>
           <li><Link to="/boardPosts">게시판</Link></li>
 
           <li><Link to="/work">근태관리</Link></li>
-          <li><Link to="/">메신저</Link></li>
+          <li><Link >메신저</Link></li>
           <li><Link to="/org">조직도</Link></li>
-          <li><Link to="/admin">관리자</Link></li>
+          {isAdmin() ?
+          <li><Link to="/admin">관리자</Link></li> : ""
+          }
         </ul>
       </div>
       <div className={HeaderCSS.userInfo}>

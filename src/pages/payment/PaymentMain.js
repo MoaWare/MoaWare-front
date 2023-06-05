@@ -14,7 +14,6 @@ function PaymentMain () {
     const  { pay }  = useSelector( state => state.paymentReducer);
     const [ payWait, setPayWait] = useState(1);
    
-    console.log("payMain 는 : ", pay);
     useEffect(
         () => {
             disPatch(CallPaymentAllListAPI());

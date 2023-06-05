@@ -12,7 +12,6 @@ import PayRefuse from '../../components/modal/paymentModal/PayRefuse';
 function PaymentDetail () {
 
     const { payCode } = useParams();
-    console.log("PaymentDetail payCode : " , payCode);
     const disPatch = useDispatch();
     const { payDetail } = useSelector( state => state.paymentReducer);
     const htmlRef = useRef();

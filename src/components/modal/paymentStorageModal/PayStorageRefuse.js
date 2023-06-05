@@ -40,7 +40,7 @@ function PayStorageRefuse ({setIsPayRefuse}) {
     
 
     const onClickSaveHandler = () => {
-        console.log("reason : ", reason);
+
         const form = {
             payCode,
             "paymentMember" : [
@@ -51,7 +51,7 @@ function PayStorageRefuse ({setIsPayRefuse}) {
                 }
             ]
         }
-        console.log(" payCode : ", form);
+
         disPatch(CallPaymentUpdateAPI({form}));
         Navigate("/pay/wait");
 

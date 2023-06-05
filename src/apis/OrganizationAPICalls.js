@@ -15,9 +15,8 @@ export const CallOrganizationListAPI = () => {
             method: 'GET'
         }).then( res => res.json());
 
-        console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[OrganizationAPICalls] CallOrganizationListAPI result : ", result);
+
             dispatch(getOrganization(result));
         }
     };
@@ -26,7 +25,6 @@ export const CallOrganizationListAPI = () => {
 
 /* 조직도 하위 부서 및 직원 검색  */
 export const CallOrganizationSubListAPI = ({deptCode}) => {
-    console.log("deptCode  : " , deptCode);
     const requestURL = `${ PRE_URL}/org/subList/${deptCode}`;
     
     return async( dispatch, getState ) => {
@@ -35,10 +33,8 @@ export const CallOrganizationSubListAPI = ({deptCode}) => {
             method: 'GET',
         }).then( res => res.json());
 
-        console.log( result);
         if ( result.status === 200) {
-            console.log ("[OrganizationAPICalls] CallOrganizationListAPI result : ", result);
-    
+
             dispatch(getOrganizationSub(result));
         }
     };
@@ -56,9 +52,7 @@ export const CallOrganizationSearchAPI = ({ search }) => {
             method: 'GET'
         }).then( res => res.json());
 
-        console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[OrganizationAPICalls] CallOrganizationSearchAPI result : ", result);
             dispatch(getOrganizationSearch(result));
         }
     };
@@ -76,9 +70,7 @@ export const CallOrganizationDetailAPI = ({ empCode }) => {
             method: 'GET'
         }).then( res => res.json());
 
-        console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[OrganizationAPICalls] CallOrganizationDetailAPI result : ", result);
             dispatch(getOrganizationDetail(result));
         }
     };

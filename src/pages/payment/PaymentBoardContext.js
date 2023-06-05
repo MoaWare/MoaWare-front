@@ -5,11 +5,9 @@ import { ImAttachment } from 'react-icons/im';
 
 function PaymentBoardContext ({pay, pageInfo, setCurrentPage,status}) {
 
-    console.log("PaymentBoardContext의 pay는 ? : " , pay);
     const navigate = useNavigate();
 
     const onClickDetailHandler = (e) => {
-        console.log("value : ", e.target.getAttribute("value"));
         navigate(`/pay/pay${status}Detail/${e.target.getAttribute("value")}`)
     }
 

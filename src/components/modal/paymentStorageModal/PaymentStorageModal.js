@@ -11,8 +11,6 @@ function PaymentStorageModal( {setPaymentModal, payEmp, payDetail }) {
 
     const{searchForm, setSearchForm, setFocusEmp, focusEmp, isFocus , setIsFocus, setPayMember} = useContext(payStorageContext);
 
-    console.log("과연! focus는 : " , focusEmp);
-
     const onClickSavedHandler = () => {
         setPaymentModal(false);
         setPayMember(focusEmp.map(focus => focus.emp));
@@ -25,11 +23,6 @@ function PaymentStorageModal( {setPaymentModal, payEmp, payDetail }) {
         
       };
     
-    
-    console.log("searchForm search 는 : ", searchForm.search);
-    console.log("searchForm isSearch 는 : ", searchForm.isSearch);
-
-
 
     const removePayment = (focus,index) => {
 
@@ -40,8 +33,6 @@ function PaymentStorageModal( {setPaymentModal, payEmp, payDetail }) {
         setIsFocus( isFocus.filter( empCode => empCode !== focus.emp.empCode));
       }
     };  
-   
-    console.log("변해라아아 : ", focusEmp);
     
 
     return(

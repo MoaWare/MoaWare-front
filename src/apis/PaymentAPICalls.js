@@ -19,9 +19,7 @@ export const CallPaymentAllListAPI = () => {
             }
         }).then( res => res.json());
 
-        console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[PaymentAPICalls] CallPaymentAllListAPI result : ", result);
             dispatch(getPayment(result));
         }
     };
@@ -43,9 +41,8 @@ export const CallPaymentFormAPI = () => {
             }
         }).then( res => res.json());
 
-        console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[PaymentAPICalls] CallPaymentFormAPI result : ", result);
+
             dispatch(getPaymentform(result));
         }
     };
@@ -67,9 +64,8 @@ export const CallPaymentRegistAPI = (formData) => {
             body : formData
         }).then( res => res.json());
 
-        console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[PaymentAPICalls] CallPaymentRegistAPI  result : ", result);
+       
             dispatch(postPayment(result));
         }
     };
@@ -90,9 +86,8 @@ export const CallPaymentWaitListAPI = (currentPage = 1) => {
             }
         }).then( res => res.json());
 
-        console.log( result);
+
         if ( result.status === 200 ) {
-            console.log ("[PaymentAPICalls] CallPaymentWaitListAPI result : ", result);
             dispatch(getPaymentwait(result));
         }
     };
@@ -113,9 +108,8 @@ export const CallPaymentingDetailAPI = ({payCode}) => {
             }
         }).then( res => res.json());
 
-        console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[PaymentAPICalls] CallPaymentingDetailAPI result : ", result);
+
             dispatch(getPaymentdetail(result));
         }
     };
@@ -140,9 +134,8 @@ export const CallPaymentUpdateAPI = ({form}) => {
             body : JSON.stringify(form)
         }).then( res => res.json());
 
-        console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[PaymentAPICalls] CallPaymentUpdateAPI result : ", result);
+
             dispatch(putPaymentUpdate(result));
         }
     };
@@ -163,9 +156,8 @@ export const CallPaymentingListAPI = (currentPage = 1) => {
             }
         }).then( res => res.json());
 
-        console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[PaymentAPICalls] CallPaymentingListAPI result : ", result);
+
             dispatch(getPaymenting(result));
         }
     };
@@ -190,9 +182,8 @@ export const CallPaymentCompleteListAPI = (currentPage = 1) => {
             }
         }).then( res => res.json());
 
-        console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[PaymentAPICalls] CallPaymentCompleteListAPI result : ", result);
+
             dispatch(getPaymentComplete(result));
         }
     };
@@ -213,9 +204,8 @@ export const CallPaymentRefuseListAPI = (currentPage = 1) => {
             }
         }).then( res => res.json());
 
-        console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[PaymentAPICalls] CallPaymentRefuseListAPI result : ", result);
+
             dispatch(getPaymentRefuse(result));
         }
     };
@@ -236,9 +226,8 @@ export const CallPaymentStorageListAPI = (currentPage = 1) => {
             }
         }).then( res => res.json());
 
-        console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[PaymentAPICalls] CallPaymentStorageListAPI result : ", result);
+
             dispatch(getPaymentStorage(result));
         }
     };
@@ -260,9 +249,8 @@ export const CallPaymentSigntAPI = () => {
             }
         }).then( res => res.json());
 
-        console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[PaymentAPICalls] CallPaymentStorageListAPI result : ", result);
+
             dispatch(getPaymentSign(result));
         }
     };
@@ -285,9 +273,8 @@ export const CallPaymentSignRegistAPI = (formData) => {
             body : formData
         }).then( res => res.json());
 
-        console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[PaymentAPICalls] CallPaymentRegistAPI  result : ", result);
+
             dispatch(postPaymentSign(result));
         }
     };
@@ -310,9 +297,7 @@ export const CallPaymentSignUpdateAPI = (formData) => {
             body : formData
         }).then( res => res.json());
 
-        console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[PaymentAPICalls] CallPaymentRegistAPI  result : ", result);
             dispatch(putPaymentSign(result));
         }
     };
@@ -322,7 +307,6 @@ export const CallPaymentSignUpdateAPI = (formData) => {
 /* 결재문서 업데이트 */
 export const CallPaymentStorageUpdateAPI = (formData) => {
 
-    console.log("리듀서 formData : ", [...formData.entries()])
 
     const requestURL = `${PRE_URL}/storage`;
 
@@ -336,9 +320,8 @@ export const CallPaymentStorageUpdateAPI = (formData) => {
             body : formData
         }).then( res => res.json());
 
-        console.log( result);
         if ( result.status === 200 ) {
-            console.log ("[PaymentAPICalls] CallPaymentRegistAPI  result : ", result);
+
             dispatch(putPaymentStorageUpdate(result));
         }
     };
