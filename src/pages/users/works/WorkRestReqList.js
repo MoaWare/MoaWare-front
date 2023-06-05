@@ -35,8 +35,9 @@ function WorkRestReqList() {
                             <th>이름</th>
                             <th>연차 사유</th>
                             <th>상태</th>
-                            <th>사용기간</th>
-                            <th>사용 일</th>
+                            <th>연차 시작일</th>
+                            <th>연차 종료일</th>
+                            {/* <th>사용 일</th> */}
                         </tr>
                     </thead>
                     {rqListItem && <WorkReqListItem rqListItem={rqListItem} infoItem={infoItem}/>}
