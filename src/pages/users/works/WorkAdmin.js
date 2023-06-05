@@ -3,7 +3,7 @@ import WorkCSS from './Work.module.css';
 import PagingBar from "../../../components/common/PagingBar";
 import { useDispatch, useSelector } from 'react-redux';
 import { callWorkMyListAPI } from '../../../apis/WorkAPICalls';
-import { callAdminWorkListAPI, inputNameAPI, putWorkStatusModifyAPI } from '../../../apis/AdminWorkAPICalls';
+import { callAdminWorkListAPI, inputNameAPI, inputNameAPI2, putWorkStatusModifyAPI } from '../../../apis/AdminWorkAPICalls';
 import { callWorkstatusAPI } from '../../../apis/WorkStatusAPICalls';
 import { useNavigate } from 'react-router-dom';
 import DateSelect from '../../../components/Work/DateSelect';
@@ -14,6 +14,7 @@ function WorkAdmin({ adminList }) {
     const navigate = useNavigate();
     const { myWork } = useSelector(state => state.workReducer);
     const [selectedDate, setSelectedDate] = useState(null)
+    const [selectedDate2, setSelectedDate2] = useState(null)
     const [year, setYear] = useState(new Date().getFullYear());
     const [month, setMonth] = useState(new Date().getMonth() + 1);
     const [currentPage, setCurrentPage] = useState(1);
@@ -58,6 +59,8 @@ function WorkAdmin({ adminList }) {
         setSelectedDate(date);
         console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', e.target.name, e.target.value);
         console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', date);
+        console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', selectedDate);
+        console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', selectedDate2);
         // dispatch(callAdminWorkListAPI({ date, currentPage }))
     }
 
@@ -106,9 +109,9 @@ function WorkAdmin({ adminList }) {
     function handleKeyPress(event) {
         if (event.key === 'Enter') {
             console.log('Entered value:', insertName);
-            dispatch(inputNameAPI({ name : insertName, workDate : selectedDate ? selectedDate : formattedDate, currentPage}))
+                dispatch(inputNameAPI({ name : insertName, workDate : selectedDate ? selectedDate : formattedDate, currentPage}))
         }
-      }
+    }
 
 
     const onChangeCheckBox = (empCode) => {
@@ -160,26 +163,7 @@ function WorkAdmin({ adminList }) {
         } else if (formattedDate) {
             dispatch(callAdminWorkListAPI({ date: formattedDate, currentPage }))
         } 
-    }, [selectedDate, formattedDate, currentPage, modify])
-
-    useEffect(() => {
-        console.log('year2 : ', year2);
-        console.log('month2 : ', month2);
-
-        if (year2 && month2) {
-            if (month2 < 10) {
-                const month = '0' + month2.toString()
-                const workDate = year2.toString() + '-' + month;
-                console.log(workDate);
-                dispatch(callWorkMyListAPI({ workDate, currentPage }));
-            } else {
-                const workDate = year2.toString() + month2.toString();
-                console.log(workDate);
-                dispatch(callWorkMyListAPI({ workDate, currentPage }));
-            }
-        }
-
-    }, [currentPage]);
+    }, [formattedDate, currentPage, modify])
 
     console.log('currentPage : ', currentPage);
 
@@ -211,7 +195,7 @@ function WorkAdmin({ adminList }) {
                         <input type="date"
                             name="date"
                             onChange={onChangeDateHandler}
-                        ></input>
+                        ></input> 
                         <input className={WorkCSS.inputBox}
                                 value={insertName}
                                 onChange={handleInputChange}
@@ -273,6 +257,8 @@ function WorkAdmin({ adminList }) {
                                         <option value="지각">지각</option>
                                         <option value="결근">결근</option>
                                         <option value="연차">연차</option>            
+                                        <option value="반차">반차</option>            
+                                        <option value="공무">공무</option>            
                                     </select>
                                 </td>
                             </tr> 
