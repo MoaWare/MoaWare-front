@@ -55,9 +55,14 @@ function BoardPostList() {
   useEffect(() => {
     if (del?.status === 200) {
       alert('게시물 삭제가 완료되었습니다.');
-      dispatch(callBoardPostListForAdminAPI({ currentPage }))
+      if (isAdmin()) {
+        dispatch(callBoardPostListForAdminAPI({ currentPage }));
+      } else {
+        dispatch(callBoardPostListAPI({ currentPage }));
+      }
     }
   }, [del]);
+
 
 
 
