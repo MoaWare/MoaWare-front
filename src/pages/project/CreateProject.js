@@ -51,7 +51,7 @@ function CreateProject() {
         if (emps && emps.length > 0) {
           setSelectedEmp(`${emps[0].empCode} ${emps[0].empName} ${emps[0].email}`);
         }
-      }, [emps]);
+      }, [emps, selectedEmpList]);
 
     useEffect(() => {
          dateCheck();
