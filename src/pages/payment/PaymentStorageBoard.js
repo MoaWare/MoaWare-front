@@ -14,7 +14,6 @@ function PaymentStorageBoard () {
     const pageInfo = payment.pageInfo;
     const [ currentPage, setCurrentPage ] = useState(1);
 
-    console.log("PaymentStorageBoard의 pay는 : ", payment);
 
     useEffect( ()=>{
         disPatch(CallPaymentStorageListAPI(currentPage));

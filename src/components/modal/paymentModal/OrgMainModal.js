@@ -6,7 +6,6 @@ import { CallOrganizationListAPI } from "../../../apis/OrganizationAPICalls";
 
 function OrgMainModal({ empCode }) {
 
-    console.log("메인 모달 : empCode : " ,empCode);
     const { org } = useSelector( (state) => state.organizationReducer);
     const dispatch = useDispatch();
 

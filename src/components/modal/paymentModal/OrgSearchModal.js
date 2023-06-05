@@ -10,11 +10,8 @@ function OrgSearchModal ({ empCode }){
     const{searchForm, setSearchForm} = useContext(orgContext);
 
     const search = searchForm.search;
-    console.log("OrgSearchModal search : ", searchForm.search);
     const dispatch = useDispatch();
     const { searchOrg } = useSelector( (state) => state.organizationReducer);
-
-    console.log("searchOrg : ", searchOrg);
 
     useEffect(
         ()=>{

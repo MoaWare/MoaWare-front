@@ -14,8 +14,6 @@ function PaymentCompleteBoard () {
     const pageInfo = payment.pageInfo;
     const [ currentPage, setCurrentPage ] = useState(1);
 
-    console.log("PaymentCompleteBoard의 pay는 : ", payment);
-
     useEffect( ()=>{
         disPatch(CallPaymentCompleteListAPI(currentPage));
     },[currentPage]

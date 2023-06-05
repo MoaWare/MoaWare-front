@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 function OrganizationList({org, isSearch}) {
 
-    console.log("org : ", org);
     const [ isOpen, setIsOpen ] = useState({});
     const [ search, setSearch ] = useState('');
     const navigate = useNavigate();
@@ -23,7 +22,6 @@ function OrganizationList({org, isSearch}) {
     }
 
     const onClickImgHandler = (e) => {
-        console.log([e.target.getAttribute("name")]);
 
         if(isOpen[e.target.getAttribute("name")]) {
             setIsOpen({
@@ -82,9 +80,7 @@ function OrganizationList({org, isSearch}) {
             } 
         } 
     }
-
-    console.log("search :" ,search);
-  
+ 
        
     return (
         <div className={ orgCSS.background}>

@@ -12,7 +12,7 @@ function RefPaymentStorageModal( {setRefPaymentModal, payEmp }) {
 
   const{searchForm, setSearchForm, setFocusEmp, focusEmp, isFocus , setIsFocus, setRefPayMember} = useContext(payStorageContext);
 
-    console.log( " 참조장  : payEmp : ", payEmp);
+
     const onClickSavedHandler = () => {
       setRefPaymentModal(false);
       setRefPayMember(focusEmp.map(focus => focus.emp));
@@ -23,13 +23,7 @@ function RefPaymentStorageModal( {setRefPaymentModal, payEmp }) {
 
     }
 
-    
-    
-    console.log("searchForm search 는 : ", searchForm.search);
-    console.log("searchForm isSearch 는 : ", searchForm.isSearch);
 
-
-    console.log("모달 : " , focusEmp);
 
     const removePayment = (focus,index) => {
 
@@ -39,7 +33,7 @@ function RefPaymentStorageModal( {setRefPaymentModal, payEmp }) {
       if(isFocus.includes(focus.emp.empCode)){
         setIsFocus( isFocus.filter( empCode => empCode !== focus.emp.empCode));
       }
-      console.log("변해라아아 : ", focus.emp.empCode);
+
     };  
 
     

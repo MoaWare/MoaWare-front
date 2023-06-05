@@ -7,8 +7,6 @@ function PaymentRefuseDetail ({payDetail}) {
 
     const htmlRef = useRef();
 
-    console.log( " PaymentRefuseDetail 의 pay ", payDetail);
-
     useEffect(() => {
 
         const targetElement = htmlRef.current.getElementsByTagName('input');

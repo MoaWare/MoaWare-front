@@ -51,9 +51,6 @@ function Payment () {
    
   }
 
-  console.log("payEmp : ", payEmp);
-  console.log("payForm : ", payForm);
-
     const onChangeHandler = (e) => {
       const { name, value } = e.target;
       if(name === 'total'){
@@ -70,10 +67,8 @@ function Payment () {
         [name]: value
       }));
     }
-      console.log( "폼의 값 : ", form);
     }
 
-    console.log('form', form);
 
     const onChangeSelect= (e) => {
      
@@ -85,7 +80,6 @@ function Payment () {
     const onButtonHandler= () => {
 
       const HTML = savePayment();
-      console.log(`saveHTML`, HTML)
 
       const formData = new FormData();
       if(file){
@@ -100,7 +94,6 @@ function Payment () {
       formData.append("payFileCategory.pay.form.formCode", select);
       formData.append("payFileCategory.pay.payStatus", "진행중")
       payMember && payMember.forEach( (member, index) => { 
-        console.log("이얃!!! : " , payMember.length);
         formData.append(`payFileCategory.pay.PaymentMember[${index}].PaymentMemberPk.payCode`, 0)
         formData.append(`payFileCategory.pay.PaymentMember[${index}].PaymentMemberPk.empCode`, member.empCode)
         formData.append(`payFileCategory.pay.PaymentMember[${index}].payRank`, index+1)
@@ -113,7 +106,6 @@ function Payment () {
         formData.append(`payFileCategory.pay.refenceMember[${index}].refenceMemberPk.empCode`, member.empCode)
       } );
 
-      console.log("저장한다 : ", [...formData.entries()]);
 
       dispatch(CallPaymentRegistAPI(formData));
 
@@ -135,7 +127,6 @@ function Payment () {
 
 
     const onChangeFile = (e) => {
-      console.log("첨부파일 : " , e.target.files[0]);
       setFile(e.target.files[0]);
     }
     
@@ -153,7 +144,6 @@ function Payment () {
 
     useEffect( 
       ()=> {
-        console.log("셀렉트 값은?! : ", select)
 
         dispatch(CallPaymentFormAPI());
 
@@ -174,14 +164,12 @@ function Payment () {
           return modifiedHTML;
         };
         
-        console.log("form : ", form);
         // DB에서 가져온 HTML 문자열
         const payPath = select && payForm && payForm[select-1].formString
         const htmlFromDB = payPath;
         if (payPath) {
         const filteredHTML = processHtmlString(htmlFromDB);
         setHtmlString(filteredHTML);
-        console.log("filteredHTML 이당!? : ", filteredHTML);
         if(!form.total){setForm({})};
         }
 
@@ -212,8 +200,6 @@ function Payment () {
           return modifiedHTML;
         };
         
-        console.log("form : ", form);
-        // DB에서 가져온 HTML 문자열
         const payPath = select&& payForm&&payForm[select-1].formString
         const htmlFromDB = payPath;
         if (payPath) {
@@ -245,8 +231,6 @@ function Payment () {
         return modifiedHTML;
       };
       
-      console.log("form : ", form);
-      // DB에서 가져온 HTML 문자열
       const payPath = select&& payForm&&payForm[select-1].formString
       const htmlFromDB = payPath;
       if (payPath) {
@@ -272,7 +256,6 @@ function Payment () {
 
       }
       setCountInput(targetElement.length);
-      console.log("htmlRef : ", htmlRef.current.getElementsByTagName('input'));
     }, [htmlString]);
 
 
@@ -280,7 +263,6 @@ function Payment () {
     const onSavePayment = () => {
 
       const HTML = storagePayment();
-      console.log(`saveHTML`, HTML)
 
       const formData = new FormData();
       if(file){
@@ -295,7 +277,6 @@ function Payment () {
       formData.append("payFileCategory.pay.form.formCode", select);
       formData.append("payFileCategory.pay.payStatus", "임시")
       payMember && payMember.forEach( (member, index) => { 
-        console.log("이얃!!! : " , payMember.length);
         formData.append(`payFileCategory.pay.PaymentMember[${index}].PaymentMemberPk.payCode`, 0)
         formData.append(`payFileCategory.pay.PaymentMember[${index}].PaymentMemberPk.empCode`, member.empCode)
         formData.append(`payFileCategory.pay.PaymentMember[${index}].payRank`, index+1)
@@ -308,9 +289,6 @@ function Payment () {
         formData.append(`payFileCategory.pay.refenceMember[${index}].refenceMemberPk.empCode`, member.empCode)
       } );
       
-     
-
-      console.log("임시저장한다 : ", [...formData.entries()]);
 
       dispatch(CallPaymentRegistAPI(formData));
 
@@ -332,10 +310,6 @@ function Payment () {
    const onCancelHandler = () => {
       navigator('/pay');
    }
-
-   console.log("모달 : " , focusEmp);
-   console.log("모달완료?! : " , payMember);
-   console.log("모달참조완료?! : " , refPayMember);
 
     return (
       <div className={payCSS.background}>

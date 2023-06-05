@@ -9,9 +9,8 @@ function OrganizationDetail () {
 
     const { empCode } = useParams();
     const dispatch = useDispatch();
-    console.log("empCode : ", empCode);
     const { emp } = useSelector( state => state.organizationReducer) 
-    console.log("emp : ", emp);
+    
     useEffect(
         ()=> {
             dispatch(CallOrganizationDetailAPI({empCode}));

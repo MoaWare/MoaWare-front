@@ -1,11 +1,8 @@
 import PaymentModalCSS from './PaymentModal.module.css';
 import OrgMainModal from './OrgMainModal';
-import { createContext, useContext, useRef, useState } from 'react';
+import { useContext } from 'react';
 import OrgSearchModal from './OrgSearchModal';
 import { TbSquareRoundedChevronLeft, TbSquareRoundedChevronRight } from 'react-icons/tb';
-
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import { orgContext } from '../../../pages/payment/Payment';
 
 
@@ -22,16 +19,7 @@ function PaymentModal( {setPaymentModal, payEmp }) {
         setPaymentModal(false);
         
       };
-    
-    
-    console.log("searchForm search 는 : ", searchForm.search);
-    console.log("searchForm isSearch 는 : ", searchForm.isSearch);
 
-    // const modalContainerRef = useRef(''); // 드래그 할 영역 네모 박스 Ref
-    // const dragComponentRef = useRef<HTMLDivElement>(null); // // 움직일 드래그 박스 Ref
-    // const [originPos, setOriginPos] = useState({ x: 0, y: 0 }); // 드래그 전 포지션값 (e.target.offset의 상대 위치)
-    // const [clientPos, setClientPos] = useState({ x: 0, y: 0 }); // 실시간 커서위치인 e.client를 갱신하는값
-    // const [pos, setPos] = useState({ left: 0, top: 0 }); // 실제 drag할 요소가 위치하는 포지션값
 
 
     const removePayment = (focus,index) => {
@@ -43,8 +31,6 @@ function PaymentModal( {setPaymentModal, payEmp }) {
         setIsFocus( isFocus.filter( empCode => empCode !== focus.emp.empCode));
       }
     };  
-   
-    console.log("변해라아아 : ", focusEmp);
     
 
     return(

@@ -12,14 +12,11 @@ import PayRefuse from '../../components/modal/paymentModal/PayRefuse';
 function PaymentWaitDetail () {
 
     const { payCode } = useParams();
-    console.log("PaymentDetail payCode : " , payCode);
     const disPatch = useDispatch();
     const { payDetail } = useSelector( state => state.paymentReducer);
     const navigator = useNavigate();
     const [ isPayModal, setIsPayModal ] = useState(false);
     const [ isPayRefuse, setIsPayRefuse ] = useState(false);
-   
-    console.log("PaymentDetail payDetail : 우아라아앙" , payDetail);
 
     useEffect(
         ()=>{
