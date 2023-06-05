@@ -7,6 +7,7 @@ import { CallPaymentCompleteListAPI } from '../../apis/PaymentAPICalls';
 
 function PaymentCompleteBoard () {
 
+    const [ status , setStatus ] = useState("Completed");
     const disPatch = useDispatch();
     const  payment  = useSelector( state => state.paymentReducer);
     const pay = payment.data &&payment.data.content;
@@ -29,7 +30,7 @@ function PaymentCompleteBoard () {
 
             </div>
 
-            <PaymentBoardContext pay={pay} pageInfo={pageInfo} setCurrentPage={setCurrentPage}/>
+            <PaymentBoardContext pay={pay} pageInfo={pageInfo} setCurrentPage={setCurrentPage} status={status}/>
 
         </div>
     );

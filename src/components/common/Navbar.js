@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { callMyWorkAPI } from '../../apis/WorkStatusAPICalls';
 import { callHeaderNameAPI } from '../../apis/EmployeeAPICalls';
 import { callMemberInfoAPI } from "../../apis/MemberAPICalls";
+import { setBtnState } from '../../modules/WorkTimeModule';
 
 function Navbar() {
 
@@ -48,12 +49,13 @@ function Navbar() {
   const [year2, setYear2] = useState(new Date().getFullYear());
   const [month2, setMonth2] = useState(new Date().getMonth() + 1);
   const { work } = useSelector(state => state.workReducer);
-
+  const { login } = useSelector(state => state.employeeReducer);
   const { wDay } = useSelector(state => state.workStatusReducer);
   const today = new Date();
+  const btn = useSelector(state => state.workTimeReducer.btn);
 
   const formattedDate = formatDate(today);
-  // const [formattedDate, setFormattedDate] = useState(null);
+
 
   function formatDate(date) {
       const year = date.getFullYear();
@@ -68,24 +70,21 @@ function Navbar() {
       dispatch(callMyWorkAPI({ workDate : formattedDate }));
   },[])
 
-  console.log(wDay);
   useEffect(() => {
-    if (wDay && wDay.data) {
-      console.log('1번');
+    if (wDay && wDay.data !== null && wDay.data !== undefined) {
       if (wDay.data.workTime && !wDay.data.quitTime) {
         const timeString = new Date(wDay.data.workTime);
         localStorage.setItem('clickTime', timeString);
         localStorage.setItem('workbtn', true);
-        console.log('2번');
       } else if (wDay.data.workTime && wDay.data.quitTime) {
-        console.log('3번');
         localStorage.removeItem('clickTime');
         localStorage.removeItem('workbtn');
       } else {
         return;
       }
     } else {
-      return;
+      localStorage.setItem('workbtn', false);
+      return; // data가 null인 경우 리턴문 실행
     }
   }, [wDay, formattedDate, currentPage]);
   
@@ -95,11 +94,9 @@ function Navbar() {
       if (month2 < 10) {
           const month = '0' + month2.toString()
           const workDate = year2.toString() + '-' + month;
-          console.log(workDate);
           dispatch(callWorkMyListAPI({ workDate, currentPage }));
       } else {
           const workDate = year2.toString() + month2.toString();
-          console.log(workDate);
           dispatch(callWorkMyListAPI({ workDate, currentPage }));
       }
     }

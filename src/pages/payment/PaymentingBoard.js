@@ -9,6 +9,7 @@ import PaymentBoardContext from './PaymentBoardContext';
 
 function PaymentingBoard() {
 
+    const [ status , setStatus ] = useState("Paying");
     const disPatch = useDispatch();
     const payment  = useSelector( state => state.paymentReducer);
     const pay = payment.data &&payment.data.content;
@@ -33,7 +34,7 @@ function PaymentingBoard() {
 
             </div>
 
-            <PaymentBoardContext pay={pay} pageInfo={pageInfo} setCurrentPage={setCurrentPage}/>
+            <PaymentBoardContext pay={pay} pageInfo={pageInfo} setCurrentPage={setCurrentPage} status={status}/>
 
         </div>
 

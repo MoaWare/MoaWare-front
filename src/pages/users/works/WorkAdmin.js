@@ -30,20 +30,13 @@ function WorkAdmin({ adminList }) {
     const [ selectValue, setSelectValue ] = useState(undefined);
     const [ insertName, setInsertName ] = useState(undefined);
     
-    // const [isFirstRender, setFirstRender] = useState(true);
-    // const pageInfo = myWork.pageInfo;
     const pageInfo = admin && admin ? admin.pageInfo : null;
     console.log("페이징 처리ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ",pageInfo);
-    // 나중에 수정
-
-    // console.log('admin :', admin ? admin.data : "");
-    // console.log('status :', status);
     console.log('name :', name);
 
     const today = new Date();
 
     const formattedDate = formatDate(today);
-    // const [formattedDate, setFormattedDate] = useState(null);
 
     function formatDate(date) {
         const year = date.getFullYear();
@@ -56,19 +49,16 @@ function WorkAdmin({ adminList }) {
 
     const onChangeDateHandler = (e) => {
         const date = e.target.value;
-        setSelectedDate(date);
         console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', e.target.name, e.target.value);
         console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', date);
         console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', selectedDate);
         console.log('날짜나와라 ㄹㄹㄹㄹㄹㄹㄹㄹ', selectedDate2);
-        // dispatch(callAdminWorkListAPI({ date, currentPage }))
     }
 
     const baicTime = '09:00:00';
 
 
     const dateObj = new Date(`1970-01-01T${baicTime}.000Z`);
-    // const dateObj2 = new Date(`1970-01-01T${quitTIme}.000Z`);
 
     // getTime() 메서드로 밀리초 단위 시간으로 변환
     const timeInMs = dateObj.getTime();
@@ -108,7 +98,6 @@ function WorkAdmin({ adminList }) {
 
     function handleKeyPress(event) {
         if (event.key === 'Enter') {
-            console.log('Entered value:', insertName);
                 dispatch(inputNameAPI({ name : insertName, workDate : selectedDate ? selectedDate : formattedDate, currentPage}))
         }
     }
@@ -117,7 +106,6 @@ function WorkAdmin({ adminList }) {
     const onChangeCheckBox = (empCode) => {
 
         setSelectCheck(empCode);
-        console.log(selectCheck)
         if(selectCheck == empCode) {
             setSelectCheck(null);
         }
@@ -127,8 +115,6 @@ function WorkAdmin({ adminList }) {
     const onChangeSelect = e => {
         const selectvalue = e.target.value;
         const updatedDate = selectedDate ? selectedDate : formattedDate;
-        // const workDate = admin.workPk.workDate;
-        // console.log('날짜확인ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ', workDate);
         setForm({
             ...form,
             workPk : {
@@ -165,8 +151,6 @@ function WorkAdmin({ adminList }) {
         } 
     }, [formattedDate, currentPage, modify])
 
-    console.log('currentPage : ', currentPage);
-
 
 
     return (
@@ -175,23 +159,12 @@ function WorkAdmin({ adminList }) {
             <div className={WorkCSS.main}>
                 <p className={WorkCSS.p}>근태 관리</p>
                 <div className={WorkCSS.btnContainer}>
-                    <button className={WorkCSS.btn}>&lt;</button>
-                    <p className={WorkCSS.pMonth}>2023-05</p>
-                    <button className={WorkCSS.btn2}>&gt;</button>
+                    <p className={WorkCSS.pMonth}>{formattedDate}</p>
                     <button className={WorkCSS.btn3}>Today</button>
                 </div>
                 <hr className={WorkCSS.hr}></hr>
                 <div className={WorkCSS.btnContainer2}>
                     <div className={WorkCSS.dateSelect}>
-                        {/* <DateSelect 
-                        year2={year2}
-                        month2={month2}
-                        
-                        onYearChange={handleYearChange} onMonthChange={handleMonthChange}
-                        
-                        // onChageHandler={ onChageHandler }
-                        
-                        /> */}
                         <input type="date"
                             name="date"
                             onChange={onChangeDateHandler}
@@ -230,7 +203,6 @@ function WorkAdmin({ adminList }) {
                                         onChange={() => onChangeCheckBox(name.empCode)}
                                     />
                                 </td>
-                                {/* <td>{selectedDate ? selectedDate : formattedDate}</td> */}
                                 <td>{name.work && name.work.workPk.workDate ? name.work.workPk.workDate.substring(0,10) : selectedDate ? selectedDate : formattedDate ? formattedDate : "" }</td>
                                 <td>{name.dept.deptName}</td>
                                 <td>{name.job.jobName}</td>

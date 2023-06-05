@@ -122,15 +122,35 @@
     
 }
 
-
-
-.td{
-    display: flex;
-    margin-bottom: 1.5vw;
-    justify-content: space-between;
-
+.container {
+    padding: 3vh;
 }
 
+
+.th {
+    
+    
+    border-radius: 1px;
+    padding: 10px;
+    background-color: #E0E9F4;
+    height: 50px;
+    border: 1px solid #c9c9c9;
+    width: 10vw;
+    box-shadow: 2px 2px 2px 2px #E0E9F4;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.td {
+    
+    border-radius: 6px;
+    font-size: 20px;
+    background-color: #ffffff;
+    padding-left: 4.5vw;
+    border: 1px solid #c9c9c9;
+    width: 60vw;
+
+}
 .content1 {
     
     width: 55vw;

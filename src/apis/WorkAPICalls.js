@@ -19,7 +19,6 @@ export const callWorkMyListAPI = ({ workDate, currentPage = 1 }) => {
         }).then(response => response.json());
 
         if(result.status === 200) {
-            console.log("[WorkAPICalls] callWorkMyListAPI result : ", result);
             dispatch(getWorklist(result))
         }
 
@@ -34,7 +33,6 @@ export const callTimeInsertAPI = ({ workDate }) => {
 
             //시간 등록을 위해 Post 방식으로 보내지만 DB에 저장할 정보를 백에서 다 만들었기 때문에
             //빈 객체라도 보내준다.
-            console.log('workDate : ', workDate);
 
             const result = await fetch(requestURL, {
                 method: 'POST',
@@ -49,7 +47,6 @@ export const callTimeInsertAPI = ({ workDate }) => {
               }).then((response) => response.json());
 
               if(result.status === 200) {
-                console.log("[WorkAPICalls] callTimeInsertAPI result : ", result);
                 dispatch(postInsertstart(result));
             }
 
@@ -65,7 +62,6 @@ export const callTimeQuitAPI = ({ quitTime }) => {
 
             //시간 등록을 위해 Post 방식으로 보내지만 DB에 저장할 정보를 백에서 다 만들었기 때문에
             //빈 객체라도 보내준다.
-            console.log('quitTime : ', quitTime);
 
             const result = await fetch(requestURL, {
                 method: 'PUT',
@@ -79,7 +75,6 @@ export const callTimeQuitAPI = ({ quitTime }) => {
               }).then((response) => response.json());
 
               if(result.status === 200) {
-                console.log("[WorkAPICalls] callTimeModifyAPI result : ", result);
                 dispatch(putQuittime(result));
             }
 

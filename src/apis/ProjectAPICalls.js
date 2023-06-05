@@ -254,7 +254,6 @@ export const callProjectProgressListAPI = ({ currentPage = 1 }) => {
       }).then((response) => response.json());
   
       if (result.status === 200) {
-        console.log("[ProjectAPICalls] callProjectProgressListAPI result : ", result);
   
         dispatch(getProgress(result));
       }
@@ -276,7 +275,6 @@ export const callProjectProgressListAPI = ({ currentPage = 1 }) => {
       }).then((response) => response.json());
   
       if (result.status === 200) {
-        console.log("[ProjectAPICalls] callProjectDoneListAPI result : ", result);
   
         dispatch(getDone(result));
       }
@@ -302,7 +300,6 @@ export const callDeptEmpListAPI = ({ deptCode }) => {
         }).then(res => res.json());
 
         if(result.status === 200){
-            console.log("[ProjectAPICalls] callDeptListAPI result : ", result);
             dispatch(getDeptemplist(result));
         }
     }
@@ -336,7 +333,6 @@ export const callProjectRegistAPI = (formData, selectedEmpList) => {
       }).then((res) => res.json());
   
       if (result.status === 200) {
-        console.log('[ProjectAPICalls] callDeptListAPI result: ', result);
         dispatch(postProject(result));
       }
     };
@@ -359,7 +355,6 @@ export const callPorjectDeleteAPI = ({projCode}) => {
     }).then(res => res.json());
 
     if(result.status === 200){
-        console.log("[ProjectAPICalls] callPorjectDeleteAPI result : ", result);
         dispatch(putProjdelete(result));
     }
   }

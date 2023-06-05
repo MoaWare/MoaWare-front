@@ -7,7 +7,7 @@ import { CallPaymentRefuseListAPI, CallPaymentWaitListAPI } from '../../apis/Pay
 
 function PaymentRefuseBoard () {
 
-
+    const [ status , setStatus ] = useState("Refuse");
     const disPatch = useDispatch();
     const  payment  = useSelector( state => state.paymentReducer);
     const pay = payment.data &&payment.data.content;
@@ -30,7 +30,7 @@ function PaymentRefuseBoard () {
 
             </div>
 
-            <PaymentBoardContext pay={pay} pageInfo={pageInfo} setCurrentPage={setCurrentPage}/>
+            <PaymentBoardContext pay={pay} pageInfo={pageInfo} setCurrentPage={setCurrentPage} status={status}/>
 
         </div>
     );

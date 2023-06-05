@@ -28,7 +28,8 @@ const boardPostReducer = handleActions(
         [GET_BOARDPOST]: (state, { payload }) => ({ detail: payload }),
         [POST_BOARDPOST]: (state, { payload }) => ({ regist: payload }),
         [PUT_BOARDPOST]: (state, { payload }) => ({ modify: payload }),
-        
+        [PUT_BOARDPOSTDELETE]: (state, { payload }) => ({ del : payload })
+
     }
     , initialState);
 
