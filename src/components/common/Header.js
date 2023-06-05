@@ -5,12 +5,14 @@ import HeaderCSS from './Header.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getHeaderName } from '../../modules/EmployeeModule';
 import { callHeaderNameAPI } from '../../apis/EmployeeAPICalls';
+import { setBtnState } from '../../modules/WorkTimeModule';
 
 const Header = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { name } = useSelector(state=> state.employeeReducer);
+  const btn = useSelector(state => state.workTimeReducer.btn);
 
   useEffect(() => {
     dispatch(callHeaderNameAPI());
@@ -24,6 +26,7 @@ const Header = () => {
       window.localStorage.removeItem('accessToken');
       localStorage.removeItem('clickTime');
       localStorage.removeItem('workbtn');
+      dispatch(setBtnState(!btn));
       console.log('로그아웃 확인');
       navigate('/login');
       console.log('로그아웃 확인');

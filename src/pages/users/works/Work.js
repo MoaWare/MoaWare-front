@@ -18,17 +18,13 @@ function Work() {
     //nabvar 에서의 변경값이 있을 떄 변경 해주기 위한 설정 
     const { insert } = useSelector(state => state.workReducer);
     const { quit } = useSelector(state => state.workReducer);
-    // const [isFirstRender, setFirstRender] = useState(true);
-    // const pageInfo = myWork.pageInfo;
     const pageInfo = myWork && myWork ? myWork.pageInfo : null;
     // 나중에 수정
-    
-    console.log('myWork :', insert );
     
     const today = new Date();
     
     const formattedDate = formatDate(today);
-    // const [formattedDate, setFormattedDate] = useState(null);
+
     
     function formatDate(date) {
         const year = date.getFullYear();
@@ -70,81 +66,45 @@ function Work() {
 
     // 연장 시간을 계산하기 위한 기본 근무 시간 
     const baicTime = '09:00:00';
-    // const quitTIme = '18:00:00';
-    //퇴근 시간 이후에 퇴근 했;는지 알기위한 퇴근 고정시간
-    // const fiexdQuit = new Date("18:00:00");
-    // const fiexdQuit = new Date(formatQuit)
-      // Date 객체 생성
-    
     const dateObj = new Date(`1970-01-01T${baicTime}.000Z`);
-    // const dateObj2 = new Date(`1970-01-01T${quitTIme}.000Z`);
-
-    // getTime() 메서드로 밀리초 단위 시간으로 변환
     const timeInMs = dateObj.getTime();
 
-    // 점심 시간을 계산하기 위한 변수 설정
-    // const lunchTime = '01:00:00';
-
-    // const lunchObj = new Date(`1970-01-01T${lunchTime}.000Z`);
-
-    // const timeInMs2 = lunchObj.getTime();
-
-    // // 다시 Date 객체로 변환
-    // const timeObj = new Date(timeInMs);
-    
-    // 주석된 formattedDate와 같이 사용
-    // useEffect(
-    //     () => {
-    //         const formattedDate = formatDate(today);
-    //         setFormattedDate(formattedDate);
-    //     }, []);
 
     
     const handleYearChange = (bYear, year) => {
         setYear2(year);
-        console.log('bYear : ', bYear);
-        console.log('year : ', year);
         setCurrentPage(1);
     };
     
     const handleMonthChange = (bMonth, month) => {
         setMonth2(month);
-        console.log('bMonth : ', bMonth);
-        console.log('month : ', month);
         setCurrentPage(1);
     }
 
     useEffect(() => {
         if (formattedDate) {
-            console.log('formattedDate : ', formattedDate)
             dispatch(callWorkMyListAPI({ workDate: formattedDate, currentPage }));
-            // setFirstRender(false);
             } 
             else {
             dispatch(callWorkMyListAPI({ workDate: formattedDate, currentPage }));
             }
     }, [formattedDate, insert, quit ]);
 
-    useEffect(() => {
-        console.log('year2 : ', year2);
-        console.log('month2 : ', month2);
+    useEffect(() => {;
         
         if(year2 && month2) {
             if(month2 <10 ){
                 const month = '0'+month2.toString()
                 const workDate = year2.toString()+'-'+month;
-                console.log(workDate);
                 dispatch(callWorkMyListAPI({ workDate, currentPage }));
             } else {
                 const workDate = year2.toString()+month2.toString();
-                console.log(workDate);
                 dispatch(callWorkMyListAPI({ workDate, currentPage }));
             }
         }
 
     },[year2, month2, currentPage]);
 
-    console.log('currentPage : ', currentPage);
 
 
       
@@ -155,7 +115,7 @@ function Work() {
                 <p className={ WorkCSS.p }>근태 관리</p>
                 <div className={ WorkCSS.btnContainer }>
                 <button className={ WorkCSS.btn }>&lt;</button>
-                <p className={ WorkCSS.pMonth }>2023-05</p>
+                <p className={ WorkCSS.pMonth }>{formattedDate}</p>
                 <button className={ WorkCSS.btn2 }>&gt;</button>
                 <button className={ WorkCSS.btn3 }>Today</button>
                 </div>
@@ -169,10 +129,8 @@ function Work() {
                         
                         onYearChange={handleYearChange} onMonthChange={handleMonthChange} 
                         
-                        // onChageHandler={ onChageHandler }
                         
                         />
-                        {/* <input className={ WorkCSS.inputBox }></input> */}
                     </div>
                 </div>
                 <hr className={ WorkCSS.hr }></hr>

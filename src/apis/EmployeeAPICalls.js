@@ -116,7 +116,6 @@ export const callDeptListAPI = () => {
         }).then(res => res.json());
 
         if(result.status === 200){
-            console.log("[ProjectAPICalls] callDeptListAPI result : ", result);
             dispatch(getDeptlist(result));
         }
     }
