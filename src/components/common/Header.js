@@ -13,6 +13,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const { name } = useSelector(state=> state.employeeReducer);
   const btn = useSelector(state => state.workTimeReducer.btn);
+
   useEffect(() => {
     dispatch(callHeaderNameAPI());
     console.log("Header name: ",name);
