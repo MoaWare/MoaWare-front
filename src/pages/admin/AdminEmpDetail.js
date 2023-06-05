@@ -15,8 +15,6 @@ function AdminEmpDetail() {
     const navigate = useNavigate();
 
 
-    console.log('detail:', detail )
-
     useEffect(() => {
         dispatch(callAdminEmpDetailAPI({ empCode }));
     }, []);
@@ -37,49 +35,49 @@ function AdminEmpDetail() {
         <>
             <div className={CSS.main}>
 
-            <div class={CSS.menutitle}> 계정 관리 {">"} 상세 정보 </div>
+                <div class={CSS.menutitle}> 계정 관리 {">"} 상세 정보 </div>
 
                 <table className={CSS.container} >
-                        <tbody>
-                            {detail &&(
+                    <tbody>
+                        {detail && (
                             <>
-                            
-                            <tr key={detail.empCode}>   
-                                
-                                    <th className={ CSS.th } >사번</th>
-                                    <td className={ CSS.td }>{detail.empCode}</td>
-                                </tr>
-                                <tr>
-                                    <th className={ CSS.th }>이름</th>
-                                    <td className={ CSS.td }>{detail.empName}</td>
-                                </tr>
-                                <tr>
-                                    <th className={ CSS.th } >ID</th>    
-                                    <td className={ CSS.td }>{detail.empID}</td>
-                                </tr>
-                                <tr>
-                                    <th className={ CSS.th }>직급</th>
-                                    <td className={ CSS.td }>{detail.job.jobName}</td>
-                                </tr>
-                                <tr>
-                                    <th className={ CSS.th }>부서</th>
-                                    <td className={ CSS.td }>{detail.dept.deptName}</td>
-                            </tr>
 
-                            
-                                </>
-                                )}
-                                
-                        </tbody>
+                                <tr key={detail.empCode}>
+
+                                    <th className={CSS.th} >사번</th>
+                                    <td className={CSS.td}>{detail.empCode}</td>
+                                </tr>
+                                <tr>
+                                    <th className={CSS.th}>이름</th>
+                                    <td className={CSS.td}>{detail.empName}</td>
+                                </tr>
+                                <tr>
+                                    <th className={CSS.th} >ID</th>
+                                    <td className={CSS.td}>{detail.empID}</td>
+                                </tr>
+                                <tr>
+                                    <th className={CSS.th}>직급</th>
+                                    <td className={CSS.td}>{detail.job.jobName}</td>
+                                </tr>
+                                <tr>
+                                    <th className={CSS.th}>부서</th>
+                                    <td className={CSS.td}>{detail.dept.deptName}</td>
+                                </tr>
+
+
+                            </>
+                        )}
+
+                    </tbody>
                 </table>
                 <div className={CSS.content}>
-                                    <button onClick = { onClickBackHandler } >이전</button>
-                                    <button onClick = { onClickModifyHandler }>수정</button>
-                                    </div>
+                    <button onClick={onClickBackHandler} >이전</button>
+                    <button onClick={onClickModifyHandler}>수정</button>
+                </div>
 
 
             </div>
-        
+
         </>
     );
 }

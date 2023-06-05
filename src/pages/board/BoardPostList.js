@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callBoardpostBoardsListForAdminAPI, callBoardPostDeleteAPI, callBoardpostBoardsListAPI, callBoardPostListAPI, callBoardPostListForAdminAPI} from '../../apis/BoardPostAPICalls';
+import { callBoardpostBoardsListForAdminAPI, callBoardPostDeleteAPI, callBoardpostBoardsListAPI, callBoardPostListAPI, callBoardPostListForAdminAPI } from '../../apis/BoardPostAPICalls';
 import PagingBar from "../../components/common/PagingBar";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import CSS from "./BoardPostList.module.css";
@@ -23,27 +23,27 @@ function BoardPostList() {
   const { boardCode } = useParams();
   console.log("boardCode: ", boardCode);
 
-  
-  
+  const [currentPage, setCurrentPage] = useState(1);
 
-const [currentPage, setCurrentPage] = useState(1);
-useEffect(() => {
-  if (boardCode) {
-    /* 게시판 코드별 게시판에 대한 요청 */
-    if (isAdmin()) {
-      dispatch(callBoardpostBoardsListForAdminAPI({ boardCode, currentPage }));
+  useEffect(() => {
+
+    if (boardCode) {
+      /* 게시판 코드별 게시판에 대한 요청 */
+      if (isAdmin()) {
+        dispatch(callBoardpostBoardsListForAdminAPI({ boardCode, currentPage }));
+      } else {
+        dispatch(callBoardpostBoardsListAPI({ boardCode, currentPage }));
+      }
     } else {
-      dispatch(callBoardpostBoardsListAPI({ boardCode, currentPage }));
+
+      /* 모든 게시물 대한 요청 */
+      if (isAdmin()) {
+        dispatch(callBoardPostListForAdminAPI({ currentPage }));
+      } else {
+        dispatch(callBoardPostListAPI({ currentPage }));
+      }
     }
-  } else {
-    /* 모든 게시물 대한 요청 */
-    if (isAdmin()) {
-      dispatch(callBoardPostListForAdminAPI({ currentPage }));
-    } else {
-      dispatch(callBoardPostListAPI({ currentPage }));
-    }
-  }
-}, [boardCode, currentPage, empCode]);
+  }, [boardCode, currentPage, empCode]);
 
 
   //테이블 클릭시 상세 및 수정 페이지로 라우팅
@@ -52,30 +52,29 @@ useEffect(() => {
   };
 
 
-useEffect(() => {
-  if (del?.status === 200) {
-    alert('게시물 삭제가 완료되었습니다.');
-    dispatch(callBoardPostListForAdminAPI({ currentPage }))
-  }
-}, [del]);
-   
+  useEffect(() => {
+    if (del?.status === 200) {
+      alert('게시물 삭제가 완료되었습니다.');
+      dispatch(callBoardPostListForAdminAPI({ currentPage }))
+    }
+  }, [del]);
+
 
 
   const handleCheckboxChange = (event, postCode) => {
-        // 이벤트 전파 방지
-        event.stopPropagation(); 
-        setSelectedPosts(postCode);
-        if(selectedPosts == postCode) {
-          setSelectedPosts(null);
-        }
-    };
-
-  const onClickDelete = () => {
-    console.log('클릭ㅎㅎ',selectedPosts)
-    dispatch(callBoardPostDeleteAPI({ postCode : selectedPosts})); // postCode 배열 전달
+    event.stopPropagation();
+    setSelectedPosts(postCode);
+    if (selectedPosts == postCode) {
+      setSelectedPosts(null);
+    }
   };
 
-  
+  const onClickDelete = () => {
+    console.log('클릭ㅎㅎ', selectedPosts)
+    dispatch(callBoardPostDeleteAPI({ postCode: selectedPosts }));
+  };
+
+
   return (
     <>
       <div className={CSS.main}>
@@ -104,38 +103,35 @@ useEffect(() => {
                 >
                   <td>
                     <input
-                      type="checkbox" 
-                      // checked={selectedPosts.includes(post.postCode)}
+                      type="checkbox"
                       checked={selectedPosts === post.postCode}
                       onChange={(event) => handleCheckboxChange(event, post.postCode)}
-                                onClick={(event) => event.stopPropagation()}
-                                />
-                                </td>
-                                <td>{post.postCode}</td>
-                                <td>{post.postCategory}</td>
-                                <td>{post.postTitle}</td>
-                                <td>{post.createDate}</td>
-                                <td>{post.modifyDate}</td>
-                                <td>{post.status}</td>
-                                </tr>
-                                ))}
-                                </tbody>
-                                </table>
-                                <div className={CSS.deletepost}>
-                                <button
-                                        
-                                        onClick={onClickDelete}
-                                      >
-                                삭제하기
-                                </button>
-                                </div>
-                                
-                                <div>
-                                {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
-                                </div>
-                                </div>
-                                </>
-                                );
-                                }
+                      onClick={(event) => event.stopPropagation()}
+                    />
+                  </td>
+                  <td>{post.postCode}</td>
+                  <td>{post.postCategory}</td>
+                  <td>{post.postTitle}</td>
+                  <td>{post.createDate}</td>
+                  <td>{post.modifyDate}</td>
+                  <td>{post.status}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
 
-                                export default BoardPostList;
+        <div className={CSS.deletepost}>
+          <button onClick={onClickDelete}  >
+            삭제하기
+          </button>
+        </div>
+
+        <div>
+          {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default BoardPostList;

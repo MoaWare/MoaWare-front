@@ -9,22 +9,19 @@ const PRE_URL = `http://${SERVER_IP}:${SERVER_PORT}/admin/board`;
 export const callAdminBoardListAPI = ({ currentPage = 1 }) => {
 
     const requestURL = `${PRE_URL}/list?page=${currentPage}`;
-
     return async (dispatch, getState) => {
 
-    
-    //   const result = await fetch(requestURL).then(response => response.json());
+
         const result = await fetch(requestURL, {
-            method : 'GET',
-            headers : {
-                'Content-Type' : 'application/json',
-                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
             }
         }).then(response => response.json());
 
 
         if (result.status === 200) {
-            console.log('[AdminBoardAPICalls] : callAdminBoardListAPI result : ', result);
             dispatch(getBoards(result));
         }
     }
@@ -35,57 +32,45 @@ export const callAdminBoardListAPI = ({ currentPage = 1 }) => {
 export const callAdminBoardRegistAPI = (formData) => {
 
     const requestURL = `${PRE_URL}/regist`;
-   
     return async (dispatch, getState) => {
-   
 
         const result = await fetch(requestURL, {
-                method: 'POST',
-               headers: {
-                   "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
-               },
-                body: formData
-             }).then(response => response.json()); 
+            method: 'POST',
+            headers: {
+                "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+            },
+            body: formData
+        }).then(response => response.json());
 
-
-
-        //      body : JSON.stringify(formData)
-        //   }) .then(response => response.json());
-   
-           if (result.status === 200) {
-               console.log('[AdminBoardAPICalls] : callAdminBoardRegistAPI result : ', result);
+        if (result.status === 200) {
             dispatch(postBoard(result));
-            }
-       }
+        }
     }
+}
 
 
 
 
-    /* 게시글 삭제 */
-export const callAdminBoardDeleteAPI =({ boardCode }) => {
+/* 게시글 삭제 */
+export const callAdminBoardDeleteAPI = ({ boardCode }) => {
 
     const requestURL = `${PRE_URL}/delete/${boardCode}`;
-  
+
     console.log(boardCode);
 
     return async (dispatch, getState) => {
 
-        
-
         const result = await fetch(requestURL, {
-          method : "PUT",
-          headers : {
-            "Content-Type" : "application/json",
-                  "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
-          },
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+            },
         }).then(res => res.json());
-  
-        
-        if(result?.status === 200){
-            console.log("[AdminBoardAPICalls] callAdminBoardDeleteAPI result : ", result);
+
+
+        if (result?.status === 200) {
             dispatch(putBoarddelete(result));
-        
         }
     }
-  }
+}
