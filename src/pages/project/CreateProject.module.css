@@ -43,7 +43,7 @@
     border: 1px solid;   
     background-color: #254F70;
     color: white;
-    width: 200px;
+    width: 201px;
     height: 43px;
     text-align: center;
     display: flex;
@@ -70,7 +70,7 @@
 }
 
 .datepicker {
-    width: 200px;
+    width: 198px;
     height: 40px;
     font-size: 16px;
 }
@@ -148,7 +148,7 @@ margin-left: 10px;
     color: white;
     border-radius: 10px;
     width: 100px;
-    height: 4vh;
+    height: 5vh;
     font-weight: bold;
 }
 
