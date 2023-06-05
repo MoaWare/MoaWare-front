@@ -8,6 +8,7 @@ import moment from "moment";
 import { Navigate, useNavigate } from 'react-router-dom';
 import { callDeptListAPI } from '../../apis/EmployeeAPICalls';
 import { callMemberInfoAPI } from '../../apis/MemberAPICalls';
+import { toast } from "react-toastify";
 
 function CreateProject() {
 
@@ -54,7 +55,11 @@ function CreateProject() {
 
     useEffect(() => {
         if (regist?.status === 200) {
-          alert('생성 완료.');
+        toast.success('생성 완료 ', {
+            position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+            autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+            hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+          });
           navigate("/project");
         } else if (regist?.state === 400) {
           alert(regist.message);
@@ -128,15 +133,31 @@ function CreateProject() {
     const onClickCreate = () => {
 
         if(!form.projName || !form.projContent) {
-            alert('정보를 모두 입력해주세요');
+            toast.success('정보를 모두 입력해주세요. ', {
+                position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+                autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+                hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+              });
             return;
         } else if(selectedEndDate == null ){
-            alert('날짜를 입력해주세요.');          
+            toast.success('날짜를 입력해주세요.', {
+                position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+                autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+                hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+              });         
         } else if(selectedStartDate > selectedEndDate) {
-            alert('종료일이 시작일 보다 빠릅니다.');
+            toast.success('종료일이 시작일 보다 빠릅니다.', {
+                position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+                autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+                hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+              });      
             return;
         } else if(selectedStartDate == null) {
-            alert('날짜를 입력해주세요.');
+            toast.success('날짜를 입력해주세요.', {
+                position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+                autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+                hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+              });      
         }
         /* 서버로 전달할 FormData 형태의 객체 설정 */
         const formData = new FormData();
