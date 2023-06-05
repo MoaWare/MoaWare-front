@@ -274,7 +274,7 @@ function AdminEmpModify() {
                     <button className={CSS.cancel} onClick={onClickBackHandler}>이전</button>
                     {!modifyMode &&
                         <button
-                            onClick={onClickModifyModeHandler}    >
+                            onClick={onClickModifyModeHandler}>
                             수정 모드
                         </button>
                     }
