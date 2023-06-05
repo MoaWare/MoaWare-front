@@ -54,6 +54,8 @@ function Navbar() {
   const formattedDate = formatDate(today);
   // const [formattedDate, setFormattedDate] = useState(null);
 
+  const userImage = '../icon/user.jpg';
+
   function formatDate(date) {
       const year = date.getFullYear();
       //월은 더하기 1 .padStart는 ???
@@ -116,6 +118,7 @@ function Navbar() {
             <img 
               src={ !imageUrl ? file?.file?.filePath : imageUrl } 
               className={ NavbarCSS.memberImage } 
+              onError={(e) => {e.target.src = userImage;}}
               alt="profile"
             />
           </div>

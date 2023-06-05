@@ -1,4 +1,4 @@
-import { getDeptlist, getHeaderName, postFindId, postFindPwd, postLogin, getProfile } from "../modules/EmployeeModule";
+import { getDeptlist, getHeaderName, postFindId, postFindPwd, postLogin } from "../modules/EmployeeModule";
 import { postMemberInfo, getMemberInfo } from "../modules/MemberModule";
 
 const RESTAPI_SERVER_IP = `${ process.env.REACT_APP_RESTAPI_SERVER_IP}`;

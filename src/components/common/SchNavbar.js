@@ -15,13 +15,6 @@ function SchNavbar() {
         // 선택된 날짜로 원하는 작업 수행하기
     };
 
-    /* 일정 등록 */
-    const EventInsertClick = () => {
-        console.log('일정 등록할래ㅠ0ㅠ: ');
-        setSchInsertModal(true); // schInsertModal 열기
-        console.log('모달창 클릭티비:', schInsertModal);
-    };
-
     return (
     <>
     {/* { schInsertModal ? <SchInsertModal setSchInsertModal={setSchInsertModal} schedule={schedule} /> : null} */}
@@ -47,22 +40,34 @@ function SchNavbar() {
                 </div> */}
                 <div className={SchNavbarCSS.share}>
                     <div className={SchNavbarCSS.type}>공유일정</div>
-                    <div>회사 일정</div>
-                    <div>프로젝트 일정</div>
-                    <div>직급별 일정</div>
-                    <div>부서별 일정</div>
-                    <div>팀별 일정</div>
+                    <div className={SchNavbarCSS.boxwrap}>
+                        <span>회사 일정</span>
+                        <div className={SchNavbarCSS.box1}></div>
+                    </div>
+                    <div className={SchNavbarCSS.boxwrap}>
+                        <span>프로젝트 일정</span>
+                        <div className={SchNavbarCSS.box2}></div>
+                    </div>
+                    <div className={SchNavbarCSS.boxwrap}>
+                        <span>직급별 일정</span>
+                        <div className={SchNavbarCSS.box3}></div>
+                    </div>
+                    <div className={SchNavbarCSS.boxwrap}>
+                        <span>부서별 일정</span>
+                        <div className={SchNavbarCSS.box4}></div>
+                    </div>
+                    <div className={SchNavbarCSS.boxwrap}>
+                        <span>팀별 일정</span>
+                        <div className={SchNavbarCSS.box5}></div>
+                    </div>
                 </div>
                 <div className={SchNavbarCSS.unshare}>
                 <div className={SchNavbarCSS.type}>내 일정</div>
-                    <div>개인 일정</div>
+                    <div className={SchNavbarCSS.boxwrap}>
+                        <span>개인 일정</span>
+                        <div className={SchNavbarCSS.box6}></div>
+                    </div>
                 </div>
-                <button 
-                    className={SchNavbarCSS.createSch}
-                    onClick={EventInsertClick}
-                >
-                + 일정 생성
-                </button>
             </div>
         </nav>
     </>

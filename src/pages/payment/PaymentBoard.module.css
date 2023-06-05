@@ -45,5 +45,6 @@
 
 .payListTable td {
     text-align: center;
-    height: 5vh;
+    height: 3vh;
+    padding: 1vh;
 }

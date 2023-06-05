@@ -1,17 +1,64 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Calendar from 'react-calendar';
 import '../schedule/Calendar.css';
 import MainCSS from './Main.module.css';
 import { NavLink } from 'react-router-dom';
+import { callProjectProgressListAPI } from '../../apis/ProjectAPICalls';
+import { CallPaymentingListAPI } from '../../apis/PaymentAPICalls';
+import ProjectList from "../project/ProjectList";
+import PaymentBoardContext from '../payment/PaymentBoardContext';
+import PaymentWaitBoardContext from '../payment/PaymentWaitBoardContext';
+// import { setPayment } from '../../modules/PayMentModule';
 
 function Main() {
+
+    const dispatch = useDispatch();
 
     const [date, setDate] = useState(new Date());
 
     const handleDateChange = (selectedDate) => {
-        setDate(selectedDate);
-        // 선택된 날짜로 원하는 작업 수행하기
+        setDate(selectedDate); // 선택된 날짜로 원하는 작업 수행하기
     };
+
+    /* 프로젝트 */
+    const { progress } = useSelector(state => state.projectReducer);
+    const projectList = progress && progress.data ? progress.data.data : '';
+    const mainPrj = projectList && projectList.length > 0 ? projectList[0] : null;
+    const [selectPorjCode, setSeletProjCode] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    useEffect(() => {
+                dispatch(callProjectProgressListAPI({ currentPage }))
+        },[currentPage, dispatch]
+    );
+
+    const onSelectHandler = (projCode) => {
+        setSeletProjCode(projCode)
+        console.log(projCode);
+    }
+
+    /* 결재 사항 - 대기 */
+    // const { isPayment } = useSelector(state=>state.paymentReducer);
+    // const  payment  = useSelector( state => state.paymentReducer);
+    // const pay1 = payment.data && payment.data.content;
+
+    // useEffect(() => {
+    //     dispatch(CallPaymentWaitListAPI(currentPage));
+    //     dispatch(setPayment(true));
+    // }, [currentPage,isPayment]);
+
+    /* 결재 사항 - 진행 */
+    const payment  = useSelector( state => state.paymentReducer);
+    // const pay = payment.data &&payment.data.content;
+    // const pay = payment.data && payment.data.content ? [payment.data.content[0]] : [];
+    /* 몇개를 보여줄건지 설정 */
+    const pay = payment.data && payment.data.content ? payment.data.content.slice(0, 4) : [];
+
+    useEffect(() => {
+        dispatch(CallPaymentingListAPI(currentPage));
+    }, [currentPage]);
+
 
     return (
         <div className={MainCSS.wrapper}>
@@ -19,73 +66,15 @@ function Main() {
                 <div className={MainCSS.payment}>
                     <div className={MainCSS.myWait}>
                         <div className={MainCSS.wait}>결재 대기</div>
-                        <table className={MainCSS.waitList}>
-                            <tbody>
-                            <tr>
-                                <td>2023.05.01</td>
-                                <td>회계품의서</td>
-                                <td>최신 노트북 추가구매</td>
-                                <td>0004</td>
-                                <td>홍길동</td>
-                            </tr>
-                            <tr>
-                                <td>2023.05.01</td>
-                                <td>회계품의서</td>
-                                <td>최신 노트북 추가구매</td>
-                                <td>0004</td>
-                                <td>홍길동</td>
-                            </tr>
-                            <tr>
-                                <td>2023.05.01</td>
-                                <td>회계품의서</td>
-                                <td>최신 노트북 추가구매</td>
-                                <td>0004</td>
-                                <td>홍길동</td>
-                            </tr>
-                            <tr>
-                                <td>2023.05.01</td>
-                                <td>회계품의서</td>
-                                <td>최신 노트북 추가구매</td>
-                                <td>0004</td>
-                                <td>홍길동</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div className={MainCSS.waitList}>
+                            <PaymentWaitBoardContext setCurrentPage={setCurrentPage}/>
+                        </div>
                     </div>
                     <div className={MainCSS.myProg}>
                         <div className={MainCSS.prog}>결재 진행</div>
-                        <table className={MainCSS.progList}>
-                            <tbody>
-                            <tr>
-                                <td>2023.05.01</td>
-                                <td>회계품의서</td>
-                                <td>최신 노트북 추가구매</td>
-                                <td>0004</td>
-                                <td>홍길동</td>
-                            </tr>
-                            <tr>
-                                <td>2023.05.01</td>
-                                <td>회계품의서</td>
-                                <td>최신 노트북 추가구매</td>
-                                <td>0004</td>
-                                <td>홍길동</td>
-                            </tr>
-                            <tr>
-                                <td>2023.05.01</td>
-                                <td>회계품의서</td>
-                                <td>최신 노트북 추가구매</td>
-                                <td>0004</td>
-                                <td>홍길동</td>
-                            </tr>
-                            <tr>
-                                <td>2023.05.01</td>
-                                <td>회계품의서</td>
-                                <td>최신 노트북 추가구매</td>
-                                <td>0004</td>
-                                <td>홍길동</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div className={MainCSS.progList}>
+                            <PaymentBoardContext pay={pay} setCurrentPage={setCurrentPage}/>
+                        </div>
                     </div>
                 </div>
                 <div className={MainCSS.icon}>
@@ -102,7 +91,7 @@ function Main() {
                         </NavLink>
                     </div>
                     <div>
-                        <NavLink to="/">
+                        <NavLink to="/pay">
                             <img src='/icon/icon3.png' alt='전자결재' />
                             <span>전자결재</span>
                         </NavLink>
@@ -120,7 +109,7 @@ function Main() {
                         </NavLink>
                     </div>
                     <div>
-                        <NavLink to="/">
+                        <NavLink to="/schedule">
                             <img src='/icon/icon6.png' alt='일정관리' />
                             <span>일정관리</span>
                         </NavLink>
@@ -130,81 +119,56 @@ function Main() {
                 <div className={MainCSS.program}>
                     <div className={MainCSS.project}>프로젝트</div>
                     <table className={MainCSS.myPrj}>
-                        <tbody>
-                        <tr>
-                            <th>업무 번호</th>
-                            <th>업무 제목</th>
-                            <th>완료기한</th>
-                            <th>진행률</th>
-                            <th>상태</th>
-                            <th>담당자</th>
-                        </tr>
-                        <tr>
-                            <td>0001</td>
-                            <td>모아웨어 프로젝트</td>
-                            <td>~ 2023.06.09</td>
-                            <td>
-                                <progress className={MainCSS.progress} value={50} min={0} max={100}></progress>
-                            </td>
-                            <td>진행중</td>
-                            <td>홍길동 이사</td>
-                        </tr>
-                        <tr>
-                            <td>0001</td>
-                            <td>모아웨어 프로젝트</td>
-                            <td>~ 2023.06.09</td>
-                            <td>
-                                <progress className={MainCSS.progress} value={50} min={0} max={100}></progress>
-                            </td>
-                            <td>진행중</td>
-                            <td>홍길동 이사</td>
-                        </tr>
-                        <tr>
-                            <td>0001</td>
-                            <td>모아웨어 프로젝트</td>
-                            <td>~ 2023.06.09</td>
-                            <td>
-                                <progress className={MainCSS.progress} value={50} min={0} max={100}></progress>
-                            </td>
-                            <td>진행중</td>
-                            <td>홍길동 이사</td>
-                        </tr>
-                        </tbody>
+                        <thead>
+                            <tr className={MainCSS.prjth}>
+                                <th>프로젝트 번호</th>
+                                <th>프로젝트 제목</th>
+                                <th>프로젝트 기간</th>
+                                <th>상태</th>
+                                <th>담당자</th>
+                                <th>참여자 수</th>
+                            </tr>
+                        </thead>
+                        {/* { mainPrj && <ProjectList projectList={[mainPrj]} onProjectSelectHandler={onSelectHandler} />} */}
+                        {/* 6개만 보여주게 설정한 구문 */}
+                        {projectList && ( <ProjectList
+                            projectList={projectList.slice(0, 6)}
+                            onProjectSelectHandler={onSelectHandler}
+                        /> )}
+                        {/* { projectList && <ProjectList projectList={projectList} onProjectSelectHandler={onSelectHandler} /> } */}
                     </table>
                 </div>
             </div>
             <div className={MainCSS.wrap2}>
                 <div className={MainCSS.notification}>
                     <div className={MainCSS.announcement}>공지사항</div>
-
                     <table className={MainCSS.notice}>
                         <tbody>
-
-                        <tr>
-                            <th>날짜</th>
-                            <th>분류</th>
-                            <th>제목</th>
-                        </tr>
-                        <tr>
-                            <td>2023.05.01</td>
-                            <td>정부정책</td>
-                            <td>공부하기 싫다</td>
-                        </tr>
-                        <tr>
-                            <td>2023.05.01</td>
-                            <td>정부정책</td>
-                            <td>공부하기 싫다</td>
-                        </tr>
-                        <tr>
-                            <td>2023.05.01</td>
-                            <td>정부정책</td>
-                            <td>냐냐냐냐뇨뇬ㄴ뇨뇬뇨뇨뇨뇨뇨링~</td>
-                        </tr>
-                        <tr>
-                            <td>2023.05.01</td>
-                            <td>정부정책</td>
-                            <td>공부하기 싫다</td>
-                        </tr>
+                            <tr>
+                                <th>날짜</th>
+                                <th>분류</th>
+                                <th>제목</th>
+                            </tr>
+                            <tr>
+                                <td>2023.05.01</td>
+                                <td>정부정책</td>
+                                <td>공부하기 싫다</td>
+                            </tr>
+                            <tr>
+                                <td>2023.05.01</td>
+                                <td>정부정책</td>
+                                <td>공부하기 싫다</td>
+                            </tr>
+                            <tr>
+                                <td>2023.05.01</td>
+                                <td>정부정책</td>
+                                <td>냐냐냐냐뇨뇬ㄴ뇨뇬뇨뇨뇨뇨뇨링~</td>
+                            </tr>
+                            <tr>
+                                <td>2023.05.01</td>
+                                <td>정부정책</td>
+                                <td>공부하기 싫다</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
