@@ -52,8 +52,8 @@ function PaymentMainBoard ({setPayWait}) {
             )}   
         </tbody>
     </table>
-    <div>
-    { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage } /> }
+    <div className={payCSS.paging}>
+        { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage } /> }
     </div>
     </div>
     )
