@@ -5,7 +5,7 @@ import PagingBar from "../../components/common/PagingBar";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import CSS from "./BoardPostList.module.css";
 import { isAdmin } from "../../utils/TokenUtils";
-
+import { toast } from "react-toastify";
 
 
 function BoardPostList() {
