@@ -21,7 +21,6 @@ function BoardPostList() {
 
   /* 게시판 코드별 요청시 사용할 값 */
   const { boardCode } = useParams();
-  console.log("boardCode: ", boardCode);
 
   const [currentPage, setCurrentPage] = useState(1);
 
