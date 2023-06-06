@@ -199,7 +199,7 @@ function TaskUpdate() {
                                             <td className={TaskCSS.tableTitle}>공지사항</td>
                                             <td className={TaskCSS.tableBorder}>
                                                 <textarea 
-                                                    maxlength="100"
+                                                    maxLength="100"
                                                     value={form?.taskNotice}
                                                     className={TaskCSS.tableTextbox}
                                                     name="taskNotice"

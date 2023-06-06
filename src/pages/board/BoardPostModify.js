@@ -5,6 +5,7 @@ import { callBoardPostDetailForAdminAPI, callBoardPostUpdateAPI } from '../../ap
 import CSS from "./BoardPostModify.module.css";
 import { toast } from "react-toastify";
 
+
 function BoardPostModify() {
     const { postCode } = useParams();
     const { detail } = useSelector(state => state.boardPostReducer);

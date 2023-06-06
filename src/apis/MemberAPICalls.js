@@ -82,7 +82,6 @@ export const callMemberModifyAPI = (formData) => {
             body : formData
         }).then( res => res.json());
 
-        console.log(result);
         if ( result.status === 200 ) {
             dispatch(postMemberModify(result));
         }
