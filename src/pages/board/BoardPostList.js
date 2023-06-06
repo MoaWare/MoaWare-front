@@ -75,7 +75,6 @@ function BoardPostList() {
   };
 
   const onClickDelete = () => {
-    console.log('클릭ㅎㅎ', selectedPosts)
     dispatch(callBoardPostDeleteAPI({ postCode: selectedPosts }));
   };
 
