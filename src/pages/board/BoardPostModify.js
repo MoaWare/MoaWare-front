@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { callBoardPostDetailForAdminAPI, callBoardPostUpdateAPI } from '../../apis/BoardPostAPICalls';
 import CSS from "./BoardPostModify.module.css";
+import { toast } from "react-toastify";
 
 function BoardPostModify() {
     const { postCode } = useParams();
