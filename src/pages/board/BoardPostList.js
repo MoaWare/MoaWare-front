@@ -9,11 +9,6 @@ import { toast } from "react-toastify";
 
 
 
-
-
-
-
-
 function BoardPostList() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
