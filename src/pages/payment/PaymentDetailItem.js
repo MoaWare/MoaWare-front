@@ -21,7 +21,7 @@ function PaymentDetailItem ({payDetail}) {
         }
       }, [payDetail]
     );
-
+  
     return(
         <>
         <div className={PayDetailCSS.payApproval}>
@@ -46,9 +46,9 @@ function PaymentDetailItem ({payDetail}) {
               <div className={PayDetailCSS.payName}>{pay.emp.empName}</div>
               <div className={PayDetailCSS.paySign}>
                 {pay.payType ==="결재" ? 
-                pay.emp.payFileCategory.filter( file => file.fcategoryType === "sign").length > 0 ?
+                (pay.emp.payFileCategory.filter( file => file.fcategoryType === "sign").length > 0 ?
                 <img src={pay.emp.payFileCategory.filter( file => file.fcategoryType === "sign")[0].file.filePath} className={PayDetailCSS.signImg}/>
-                : pay.emp.empName : pay.payType ==="반려" ? "반려" : pay.payType === null && array.filter( paym => paym.payTotalYn==="Y" ).length>0 ?  array.filter( paym => paym.payTotalYn==="Y" )[0].emp.empName + " 전결" : "" 
+                : pay.emp.empName ): pay.payType ==="반려" ? "반려" : pay.payType === null && array.filter( paym => paym.payTotalYn==="Y" ).length>0 ?  array.filter( paym => paym.payTotalYn==="Y" )[0].emp.empName + " 전결" : "" 
                 }
               </div>
             </div>
@@ -103,7 +103,7 @@ function PaymentDetailItem ({payDetail}) {
                 <th>첨부파일</th>
                 <td colSpan="5">
                     { payDetail && payDetail.payFileCategory? 
-                    <a href={payDetail.payFileCategory.file.filePath} className={PayDetailCSS.a} download={payDetail.payFileCategory.file.originalFileName}> {payDetail.payFileCategory.file.originalFileName}</a> : 
+                    <a href={payDetail.payFileCategory.file.filePath} target='_blank' rel='noreferrer' className={PayDetailCSS.a} download={payDetail.payFileCategory.file.originalFileName}> {payDetail.payFileCategory.file.originalFileName}</a> : 
                     <div className={PayDetailCSS.a}>첨부파일 없음 </div>
                     }
                 </td>
