@@ -335,8 +335,6 @@ export const callPorjectDeleteAPI = ({projCode}) => {
 
   const requestURL = `${PRE_URL}/delete/${projCode}`
 
-  console.log(projCode);
-
   return async (dispatch, getState) => {
 
     const result = await fetch(requestURL, {
@@ -356,8 +354,6 @@ export const callPorjectDeleteAPI = ({projCode}) => {
 export const callPorjectProgressDoneAPI = ({projCode}) => {
 
   const requestURL = `${PRE_URL}/update/done/${projCode}`
-
-  console.log(projCode);
 
   return async (dispatch, getState) => {
 
