@@ -144,9 +144,6 @@ function ReviewItem({ review }){
                     <div className={TaskCSS.listLow}>
                         {review.content} 
                     </div>}
-                {/* <div className={TaskCSS.listLow}>
-                    {review.content} 
-                </div> */}
                 </div>
             </div>
       );
