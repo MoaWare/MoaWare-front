@@ -56,8 +56,6 @@ export const callAdminBoardDeleteAPI = ({ boardCode }) => {
 
     const requestURL = `${PRE_URL}/delete/${boardCode}`;
 
-    console.log(boardCode);
-
     return async (dispatch, getState) => {
 
         const result = await fetch(requestURL, {
