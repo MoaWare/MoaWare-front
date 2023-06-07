@@ -179,15 +179,19 @@ function PaymentStorageDetail () {
     if(file){
       formData.append("originalFileName", file.name)
       formData.append("fileInfo", file)
-    }
+    } else if(payDetail.payFileCategory?.file) {
+      formData.append("originalFileName", payDetail.payFileCategory.file.originalFileName)
+      formData.append("savedFileName", payDetail.payFileCategory.file.savedFileName)
+      formData.append("payFileCategory.fCategoryName", form.draftTitle? form.draftTitle: payDetail.draftTitle)
+      formData.append("payFileCategory.fCategoryType", "payment")
+    } 
     formData.append("payFileCategory.pay.payCode", payDetail.payCode)
-    formData.append("payFileCategory.fCategoryName", form.draftTitle? form.draftTitle: payDetail.draftTitle)
-    formData.append("payFileCategory.fCategoryType", "payment")
     formData.append("payFileCategory.pay.draftDate", payDetail.draftDate);
     formData.append("payFileCategory.pay.draftTitle", form.draftTitle? form.draftTitle: payDetail.draftTitle);
     formData.append("payFileCategory.pay.draftContent",HTML);
     formData.append("payFileCategory.pay.form.formCode", payDetail.form.formCode);
     formData.append("payFileCategory.pay.payStatus", "진행중")
+    
     payMember && payMember.forEach( (member, index) => { 
 
       formData.append(`payFileCategory.pay.PaymentMember[${index}].PaymentMemberPk.payCode`, 0)
@@ -225,17 +229,18 @@ function PaymentStorageDetail () {
     } else if(payDetail.payFileCategory?.file) {
       formData.append("originalFileName", payDetail.payFileCategory.file.originalFileName)
       formData.append("savedFileName", payDetail.payFileCategory.file.savedFileName)
+      formData.append("payFileCategory.fCategoryName", form.draftTitle? form.draftTitle: payDetail.draftTitle)
+      formData.append("payFileCategory.fCategoryType", "payment")
     } 
 
 
     formData.append("payFileCategory.pay.payCode", payDetail.payCode)
-    formData.append("payFileCategory.fCategoryName", form.draftTitle? form.draftTitle: payDetail.draftTitle)
-    formData.append("payFileCategory.fCategoryType", "payment")
     formData.append("payFileCategory.pay.draftDate", payDetail.draftDate);
     formData.append("payFileCategory.pay.draftTitle", form.draftTitle? form.draftTitle: payDetail.draftTitle);
     formData.append("payFileCategory.pay.draftContent",HTML);
     formData.append("payFileCategory.pay.form.formCode", payDetail.form.formCode);
     formData.append("payFileCategory.pay.payStatus", "임시")
+    
     payMember && payMember.forEach( (member, index) => { 
       formData.append(`payFileCategory.pay.PaymentMember[${index}].PaymentMemberPk.payCode`, 0)
       formData.append(`payFileCategory.pay.PaymentMember[${index}].PaymentMemberPk.empCode`, member.empCode)

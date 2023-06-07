@@ -85,9 +85,9 @@ function Payment () {
       if(file){
         formData.append("originalFileName", file.name)
         formData.append("fileInfo", file)
+        formData.append("payFileCategory.fCategoryName", form.draftTitle)
+        formData.append("payFileCategory.fCategoryType", "payment")
       }
-      formData.append("payFileCategory.fCategoryName", form.draftTitle)
-      formData.append("payFileCategory.fCategoryType", "payment")
       formData.append("payFileCategory.pay.draftDate", today());
       formData.append("payFileCategory.pay.draftTitle", form.draftTitle);
       formData.append("payFileCategory.pay.draftContent",HTML);
@@ -268,9 +268,9 @@ function Payment () {
       if(file){
         formData.append("originalFileName", file.name)
         formData.append("fileInfo", file)
+        formData.append("payFileCategory.fCategoryName", form.draftTitle)
+        formData.append("payFileCategory.fCategoryType", "payment")
       }
-      formData.append("payFileCategory.fCategoryName", form.draftTitle)
-      formData.append("payFileCategory.fCategoryType", "payment")
       formData.append("payFileCategory.pay.draftDate", today());
       formData.append("payFileCategory.pay.draftTitle", form.draftTitle);
       formData.append("payFileCategory.pay.draftContent",HTML);
