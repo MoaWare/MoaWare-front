@@ -5,6 +5,8 @@ import PagingBar from "../../components/common/PagingBar";
 import { useNavigate } from "react-router-dom";
 import CSS from "./AdminEmployees.module.css";
 import { NavLink } from 'react-router-dom';
+import { toast } from "react-toastify";
+
 
 function AdminEmployees() {
     const dispatch = useDispatch();
@@ -32,7 +34,11 @@ function AdminEmployees() {
 
     useEffect(() => {
         if (del?.status === 200) {
-            alert('퇴직 처리가 완료되었습니다.');
+            toast.success('퇴직 처리가 완료 되었습니다.', {
+                position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+                autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+                hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+            });
             dispatch(callAdminEmpListAPI({ currentPage }))
         }
     }, [del]);
