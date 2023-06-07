@@ -8,7 +8,6 @@ function WorkReqListItem({ rqListItem, infoItem }) {
         navigate(`/work/reqListItem/${leaveCode}`);
     }
 
-    console.log(rqListItem);
     return(
 
         <>
