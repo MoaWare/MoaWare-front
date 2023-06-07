@@ -75,14 +75,21 @@ function Navbar() {
         const timeString = new Date(wDay.data.workTime);
         localStorage.setItem('clickTime', timeString);
         localStorage.setItem('workbtn', true);
+        if (btn === false) {
+          dispatch(setBtnState(!btn));
+        }
       } else if (wDay.data.workTime && wDay.data.quitTime) {
         localStorage.removeItem('clickTime');
         localStorage.removeItem('workbtn');
+        if (btn === true) {
+          dispatch(setBtnState(!btn));
+        }
       } else {
+        // dispatch(setBtnState(!btn));
         return;
       }
     } else {
-
+      // dispatch(setBtnState(!btn));
       localStorage.setItem('workbtn', false);
       return; // data가 null인 경우 리턴문 실행
     }
