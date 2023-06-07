@@ -47,6 +47,7 @@ function WorkAdmin({ adminList }) {
 
     const onChangeDateHandler = (e) => {
         const date = e.target.value;
+        setSelectedDate(date);
     }
 
     const baicTime = '09:00:00';
