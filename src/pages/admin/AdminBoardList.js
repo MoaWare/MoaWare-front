@@ -4,6 +4,8 @@ import { callAdminBoardDeleteAPI, callAdminBoardListAPI } from '../../apis/Admin
 import PagingBar from "../../components/common/PagingBar";
 import CSS from "./AdminBoardList.module.css";
 import { NavLink, useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
+
 
 function AdminBoardList() {
     const dispatch = useDispatch();
@@ -23,7 +25,11 @@ function AdminBoardList() {
 
     useEffect(() => {
         if (del?.status === 200) {
-            alert('게시판 삭제가 완료되었습니다.');
+            toast.success('게시판 삭제가 완료 되었습니다.', {
+                position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+                autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+                hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+            });
             dispatch(callAdminBoardListAPI({ currentPage }))
         }
     }, [del]);
