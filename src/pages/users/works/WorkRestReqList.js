@@ -43,7 +43,7 @@ function WorkRestReqList() {
                     {rqListItem && <WorkReqListItem rqListItem={rqListItem} infoItem={infoItem}/>}
                 </table>
                 <div>
-                    <button className={ WorkRestReqListCSS.workBtn1 }>취소하기</button>
+                    {/* <button className={ WorkRestReqListCSS.workBtn1 }>취소하기</button> */}
                 </div>
                 <div>
                 { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage } /> }

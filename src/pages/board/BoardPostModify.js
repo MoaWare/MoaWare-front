@@ -3,6 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { callBoardPostDetailForAdminAPI, callBoardPostUpdateAPI } from '../../apis/BoardPostAPICalls';
 import CSS from "./BoardPostModify.module.css";
+import { toast } from "react-toastify";
+
 
 function BoardPostModify() {
     const { postCode } = useParams();
@@ -24,7 +26,11 @@ function BoardPostModify() {
     useEffect(
         () => {
             if (modify?.status === 200) {
-                alert('게시물 수정이 완료 되었습니다.');
+                toast.success('게시물 수정이 완료 되었습니다.', {
+                  position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+                  autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+                  hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+                });
                 navigate('/boardPosts', { replace: true });
             }
         },

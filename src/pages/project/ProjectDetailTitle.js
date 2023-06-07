@@ -9,7 +9,7 @@ function ProjDetailTitle({ project, progress }){
     const endDate = project?.endDate?.substring(10, 0).replace('-','.');
 
     /* 디데이 계산 */
-    const dday = Math.floor((new Date() - new Date(project?.endDate)) / (1000*60*60*24)) || 0;
+    const dday = Math.floor((new Date(project?.endDate) - new Date()) / (1000*60*60*24)) || 0;
 
     return(
         <div className={ProjCSS.topDiv}>

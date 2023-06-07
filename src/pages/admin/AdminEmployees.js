@@ -9,8 +9,8 @@ import { NavLink } from 'react-router-dom';
 function AdminEmployees() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const employees = useSelector(state => state.employeeReducer);
-    const pageInfo = employees.pageInfo;
+    const { emps } = useSelector(state => state.employeeReducer);
+    const pageInfo = emps?.pageInfo;
     const [selectedEmps, setSelectedEmps] = useState([]);
 
 
@@ -48,7 +48,6 @@ function AdminEmployees() {
     };
 
     const onClickDelete = () => {
-        console.log('클릭ㅎㅎ', selectedEmps)
         dispatch(callAdminEmpDeleteAPI({ empCode: selectedEmps }));
     };
 
@@ -95,8 +94,8 @@ function AdminEmployees() {
                     </thead>
                     <tbody >
 
-                        {employees?.data &&
-                            employees.data.map((e) => (
+                        {emps?.data &&
+                            emps.data.map((e) => (
 
                                 <tr
                                     className={CSS.td}
@@ -125,7 +124,7 @@ function AdminEmployees() {
                 </table>
                 <div className={CSS.deletepost}>
                     <button onClick={onClickDelete}>
-                        퇴직처리
+                        퇴직 처리
                     </button>
                 </div>
                 <div>

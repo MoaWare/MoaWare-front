@@ -133,8 +133,6 @@ function MemberInfoModify(){
         }
         
 
-        console.log("callLoginAPI",form);
-
         const formData = new FormData();
 
         formData.append("fileCategory.emp.empPwd", form?.empPwd);
@@ -145,8 +143,6 @@ function MemberInfoModify(){
         if(image){
             formData.append("fileInfo", image);
         }
-
-        console.log("formData", formData);
 
         dispatch(callMemberModifyAPI(formData));
     }
@@ -167,8 +163,6 @@ function MemberInfoModify(){
         }
     },[info]);
     
-    console.log("file",file?.file?.filePath);
-
     return info && (
         <div className={MemCSS.wrapper}>
             <div className={MemCSS.divTop}>

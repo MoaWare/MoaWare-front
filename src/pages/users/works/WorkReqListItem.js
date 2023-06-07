@@ -8,6 +8,7 @@ function WorkReqListItem({ rqListItem, infoItem }) {
         navigate(`/work/reqListItem/${leaveCode}`);
     }
 
+    console.log(rqListItem);
     return(
 
         <>
@@ -20,7 +21,7 @@ function WorkReqListItem({ rqListItem, infoItem }) {
                             <td>{infoItem?.job?.jobName ? infoItem?.job?.jobName : ""}</td>
                             <td>{infoItem?.empName? infoItem?.empName : ""}</td>
                             <td>{rqList.leaveType}</td>
-                            <td>{rqList.lPayStatus}</td>
+                            <td>{rqList.lpayStatus}</td>
                             <td>{rqList.leaveStartDay.substring(0, 10)}</td>
                             <td>{rqList.leaveEndDate.substring(0, 10) ? rqList.leaveEndDate.substring(0, 10) : ""}</td>
                         </tr>

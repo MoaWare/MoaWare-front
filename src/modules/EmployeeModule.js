@@ -17,34 +17,34 @@ const GET_DEPTLIST = 'emp/GET_DEPTLIST';
 
 
 
-export const { emp : { postLogin,resetEmp, postFindPwd, postFindId, getHeaderName, getEmployees, getEmployee, getDeptlist }} = createActions({
-    [POST_LOGIN] : res => res,
-    [RESET_EMP] : () => {},
-    [POST_FIND_PWD] : res => res,
-    [POST_FIND_ID] : res => res,
-    [GET_HEADER_NAME] : res => res.data,
-    
-    [GET_EMPLOYEES] : res => res.data,
-    [GET_EMPLOYEE] : res => res.data,
+export const { emp: { postLogin, resetEmp, postFindPwd, postFindId, getHeaderName, getEmployees, getEmployee, getDeptlist } } = createActions({
+    [POST_LOGIN]: res => res,
+    [RESET_EMP]: () => { },
+    [POST_FIND_PWD]: res => res,
+    [POST_FIND_ID]: res => res,
+    [GET_HEADER_NAME]: res => res.data,
 
-    [GET_DEPTLIST] : res => res.data,
+    [GET_EMPLOYEES]: res => res.data,
+    [GET_EMPLOYEE]: res => res.data,
+
+    [GET_DEPTLIST]: res => res.data,
 
 })
 
 /* 리듀서 */
 const employeeReducer = handleActions({
-    [POST_LOGIN] : (state, { payload } ) => ({ login : payload }),
-    [RESET_EMP] : (state, action) => initialState,
-    [POST_FIND_PWD] : (state, { payload }) => ({ password : payload}),
-    [POST_FIND_ID] : (state, { payload }) => ({ id : payload }),
-    [GET_HEADER_NAME] : (state, { payload }) => ({...state, name : payload }),
+    [POST_LOGIN]: (state, { payload }) => ({ login: payload }),
+    [RESET_EMP]: (state, action) => initialState,
+    [POST_FIND_PWD]: (state, { payload }) => ({ password: payload }),
+    [POST_FIND_ID]: (state, { payload }) => ({ id: payload }),
+    [GET_HEADER_NAME]: (state, { payload }) => ({ ...state, name: payload }),
 
-    [GET_EMPLOYEES] : (state, { payload }) => payload ,
-    [GET_EMPLOYEE] : (state, { payload }) => ({...state, detail : payload }),
+    [GET_EMPLOYEES]: (state, { payload }) => ({ ...state, emps: payload }),
+    [GET_EMPLOYEE]: (state, { payload }) => ({ ...state, detail: payload }),
 
-    [GET_DEPTLIST] : (state, {payload}) => ({ depts : payload }),
+    [GET_DEPTLIST]: (state, { payload }) => ({ depts: payload }),
 
-    
+
 }, initialState)
 
 export default employeeReducer;     

@@ -5,6 +5,7 @@ import PagingBar from "../../components/common/PagingBar";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import CSS from "./BoardPostList.module.css";
 import { isAdmin } from "../../utils/TokenUtils";
+import { toast } from "react-toastify";
 
 
 
@@ -21,7 +22,6 @@ function BoardPostList() {
 
   /* 게시판 코드별 요청시 사용할 값 */
   const { boardCode } = useParams();
-  console.log("boardCode: ", boardCode);
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -54,10 +54,19 @@ function BoardPostList() {
 
   useEffect(() => {
     if (del?.status === 200) {
-      alert('게시물 삭제가 완료되었습니다.');
-      dispatch(callBoardPostListForAdminAPI({ currentPage }))
+      toast.success('게시물 삭제가 완료되었습니다.', {
+          position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+          autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+          hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+        });
+      if (isAdmin()) {
+        dispatch(callBoardPostListForAdminAPI({ currentPage }));
+      } else {
+        dispatch(callBoardPostListAPI({ currentPage }));
+      }
     }
   }, [del]);
+
 
 
 
@@ -70,7 +79,6 @@ function BoardPostList() {
   };
 
   const onClickDelete = () => {
-    console.log('클릭ㅎㅎ', selectedPosts)
     dispatch(callBoardPostDeleteAPI({ postCode: selectedPosts }));
   };
 
@@ -122,7 +130,7 @@ function BoardPostList() {
 
         <div className={CSS.deletepost}>
           <button onClick={onClickDelete}  >
-            삭제하기
+            삭제 하기
           </button>
         </div>
 

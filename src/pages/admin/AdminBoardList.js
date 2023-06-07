@@ -39,7 +39,6 @@ function AdminBoardList() {
         }
     };
     const onClickDelete = () => {
-        console.log('클릭ㅎㅎ', selectedLists)
         dispatch(callAdminBoardDeleteAPI({ boardCode: selectedLists }));
     };
     return (
@@ -86,7 +85,7 @@ function AdminBoardList() {
                 </table>
 
                 <div className={CSS.deletepost}>
-                    <button onClick={onClickDelete}>삭제하기
+                    <button onClick={onClickDelete}>삭제 하기
                     </button>
                 </div>
                 <div>

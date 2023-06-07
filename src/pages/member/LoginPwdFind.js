@@ -24,7 +24,7 @@ function LoginPwdFind(){
         if(password?.status === 200){
 
             alert("비밀번호가 이메일로 전송되었습니다. \n확인 후 비밀번호를 재설정해주세요.");
-            dispatch(resetEmp);
+            dispatch(resetEmp());
             navigate("/");
         } 
     },[password])

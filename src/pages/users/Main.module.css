@@ -21,7 +21,7 @@ a {
 .payment {
     margin-top: 3vh;
     /* width: 60vw; */
-    /* height: 25vh; */
+    height: 25vh;
     border-radius: 30px;
     background-color: white;
     display: flex;
@@ -94,8 +94,8 @@ a {
 }
 
 .progList {
-    width: 94%;
-    margin: 1rem;
+    width: 96%;
+    margin: 1rem auto;
     font-size: 12px;
     text-align: center;
     border-collapse : collapse;
@@ -237,7 +237,7 @@ a {
     margin: 3vh 2vw;
     padding-bottom: 0.5rem;
     width: 16vw;
-    /* height: 28vh; */
+    height: 47vh;
 }
 
 .notice {

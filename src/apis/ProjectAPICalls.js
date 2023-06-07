@@ -1,4 +1,4 @@
-import { getProject, getTasks, getDone, getProgress, getDeptlist, getDeptemplist, postProject, getTask, postTask, putTask, deleteTask, putProjdelete } from "../modules/ProjectModule";
+import { getProject, getTasks, getDone, getProgress, getDeptlist, getDeptemplist, postProject, getTask, postTask, putTask, deleteTask, putProjdelete, putProgressdone } from "../modules/ProjectModule";
 import { toast } from "react-toastify";
 
 
@@ -335,8 +335,6 @@ export const callPorjectDeleteAPI = ({projCode}) => {
 
   const requestURL = `${PRE_URL}/delete/${projCode}`
 
-  console.log(projCode);
-
   return async (dispatch, getState) => {
 
     const result = await fetch(requestURL, {
@@ -349,6 +347,26 @@ export const callPorjectDeleteAPI = ({projCode}) => {
 
     if(result.status === 200){
         dispatch(putProjdelete(result));
+    }
+  }
+}
+
+export const callPorjectProgressDoneAPI = ({projCode}) => {
+
+  const requestURL = `${PRE_URL}/update/done/${projCode}`
+
+  return async (dispatch, getState) => {
+
+    const result = await fetch(requestURL, {
+        method : 'PUT',
+        headers : {
+            "Content-Type" : "application/json",
+            "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+        }
+    }).then(res => res.json());
+
+    if(result.status === 200){
+        dispatch(putProgressdone(result));
     }
   }
 }

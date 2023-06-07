@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import CSS from './BoardPostRegist.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { toast } from "react-toastify";
 import { callBoardPostRegistAPI } from '../../apis/BoardPostAPICalls';
 
 function BoardPostRegist() {
@@ -20,7 +20,11 @@ function BoardPostRegist() {
     useEffect(
         () => {
             if (regist?.status === 200) {
-                alert('게시글 등록이 완료 되었습니다.');
+                toast.success('게시글 등록이 완료 되었습니다.', {
+                  position: toast.POSITION.TOP_CENTER, // 토스트 위치 (옵션)
+                  autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
+                  hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
+                });
                 navigate('/boardPosts', { replace: true });
             }
         },
