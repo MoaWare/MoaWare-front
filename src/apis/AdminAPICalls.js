@@ -77,7 +77,6 @@ export const callAdminEmpDeleteAPI = ({ empCode }) => {
 
     const requestURL = `${PRE_URL}/delete/${empCode}`;
 
-    console.log(empCode);
 
     return async (dispatch, getState) => {
 

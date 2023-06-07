@@ -10,7 +10,6 @@ function AdminEmpRegist() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { regist } = useSelector(state => state.adminReducer);
-    console.log('regist: ', regist)
 
     const [form, setForm] = useState({});
 

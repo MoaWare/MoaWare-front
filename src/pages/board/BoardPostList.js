@@ -21,7 +21,6 @@ function BoardPostList() {
 
   /* 게시판 코드별 요청시 사용할 값 */
   const { boardCode } = useParams();
-  console.log("boardCode: ", boardCode);
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -44,6 +43,19 @@ function BoardPostList() {
       }
     }
   }, [boardCode, currentPage, empCode]);
+
+
+  useEffect(() => {
+    if (del?.status === 200) {
+      alert('게시물 삭제가 완료되었습니다.');
+      if (isAdmin()) {
+        dispatch(callBoardPostListForAdminAPI({ currentPage }));
+      } else {
+        dispatch(callBoardPostListAPI({ currentPage }));
+      }
+    }
+  }, [del]);
+
 
 
   //테이블 클릭시 상세 및 수정 페이지로 라우팅
@@ -75,7 +87,6 @@ function BoardPostList() {
   };
 
   const onClickDelete = () => {
-    console.log('클릭ㅎㅎ', selectedPosts)
     dispatch(callBoardPostDeleteAPI({ postCode: selectedPosts }));
   };
 

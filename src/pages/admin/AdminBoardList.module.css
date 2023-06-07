@@ -209,6 +209,7 @@
     margin-right: 1vw;
 }
 
+
 .deletepost button {
     border: 10px;
     border-radius: 8px;
@@ -225,5 +226,34 @@
 }
 
 .deletepost button:hover {
+    background-color: #87909B;
+}
+
+
+
+.content2 {
+    float: right;
+    display: flex;
+    flex-direction: row-reverse;
+    height: 0vh;
+    margin-right: 1.5vw;
+}
+
+.content2 button {
+    border: 10px;
+    border-radius: 8px;
+    width: 100px;
+    font-size: 16px;
+    height: 30px;
+    
+    background-color: #254F70;
+    color: #ffffff;
+    margin-left: 10px;
+    cursor: pointer;
+    box-shadow: 3px 3px 1px 2px #E0E9F4;
+
+}
+
+.content2 button:hover {
     background-color: #87909B;
 }

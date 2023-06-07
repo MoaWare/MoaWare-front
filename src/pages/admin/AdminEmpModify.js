@@ -12,8 +12,10 @@ function AdminEmpModify() {
     const navigate = useNavigate();
     const [form, setForm] = useState({});
 
+
     /* 읽기모드와 수정모드를 구분 */
     const [modifyMode, setModifyMode] = useState(false);
+
 
     /* 최초 랜더링 시 게시물 상세 정보 조회 */
     useEffect(() => {
@@ -23,11 +25,12 @@ function AdminEmpModify() {
         () => {
             if (modify?.status === 200) {
                 alert('계정정보 수정이 완료 되었습니다.');
-                navigate('/admin/emp/list', { replace: true });
+                navigate('/admin/emp/list');
             }
         },
         [modify]
     )
+
 
     /* 입력 양식의 값 변경될 때 */
     const onChangeHandler = (e) => {
@@ -37,13 +40,14 @@ function AdminEmpModify() {
         });
     }
 
+
     /* 수정 모드 변경 이벤트 */
     const onClickModifyModeHandler = () => {
         setModifyMode(true);
         setForm({ ...detail });
     }
 
-    /* 게가 변경될 때 */
+
     const onChangeJobCodeHandler = (e) => {
         setForm({
             ...form,
@@ -51,7 +55,7 @@ function AdminEmpModify() {
         });
     }
 
-    /* 게시판 (코드별) 분류가 변경될 때 */
+
     const onChangeDeptCodeHandler = (e) => {
         setForm({
             ...form,
@@ -61,6 +65,7 @@ function AdminEmpModify() {
 
     /* 게시물 수정 저장 버튼 클릭 이벤트 */
     const onClickAdminEmpUpdateHandler = () => {
+
         const formData = new FormData();
         formData.append("empCode", form.empCode);
         formData.append("empName", form.empName);
@@ -68,6 +73,7 @@ function AdminEmpModify() {
         formData.append("empID", form.empID);
         formData.append("job.jobCode", form.job.jobCode);
         formData.append("dept.deptCode", form.dept.deptCode);
+
         dispatch(callAdminEmpUpdateAPI(formData));
     }
 
@@ -82,7 +88,7 @@ function AdminEmpModify() {
     return (
         <>
             <div className={CSS.main}>
-                <div class={CSS.menutitle}> 계정정보 {">"} 수정 </div>
+                <div className={CSS.menutitle}> 계정정보 {">"} 수정 </div>
                 {detail && (
                     <table>
                         <div key={detail.empCode}>

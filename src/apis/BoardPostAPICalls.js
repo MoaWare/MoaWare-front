@@ -203,7 +203,6 @@ export const callBoardPostDeleteAPI = ({ postCode }) => {
 //         const result = await fetch(requestURL).then(response => response.json());
 
 //         if (result.status === 200) {
-//             console.log("[BoardpostAPICalls] call[BoardpostSearchListAPI result : ", result);
 //             dispatch(getBoardPosts(result));
 //         }
 //     }

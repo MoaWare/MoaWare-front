@@ -28,19 +28,21 @@ export const callAdminBoardListAPI = ({ currentPage = 1 }) => {
 }
 
 
-//  게시판 등록
+//  게시판 등록(생성)
 export const callAdminBoardRegistAPI = (formData) => {
 
     const requestURL = `${PRE_URL}/regist`;
     return async (dispatch, getState) => {
 
-        const result = await fetch(requestURL, {
-            method: 'POST',
-            headers: {
-                "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
-            },
-            body: formData
-        }).then(response => response.json());
+        const result = await
+
+            fetch(requestURL, {
+                method: 'POST',
+                headers: {
+                    "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+                },
+                body: formData
+            }).then(response => response.json());
 
         if (result.status === 200) {
             dispatch(postBoard(result));
@@ -56,7 +58,6 @@ export const callAdminBoardDeleteAPI = ({ boardCode }) => {
 
     const requestURL = `${PRE_URL}/delete/${boardCode}`;
 
-    console.log(boardCode);
 
     return async (dispatch, getState) => {
 
