@@ -16,7 +16,7 @@ function WorkRestReq() {
     const navigate = useNavigate();
     const [selectedStartDate, setSelectedStartDate] = useState(null)
     const [selectedEndDate, setSelectedEndDate] = useState(null)
-    const [selectedOption, setSelectedOption] = useState("");
+    const [selectedOption, setSelectedOption] = useState("연차");
     const { info } = useSelector((state) => state.memberReducer);
     const { request } = useSelector((state) => state.leavePayReducer);
     const today = new Date().toISOString().slice(0, 10);

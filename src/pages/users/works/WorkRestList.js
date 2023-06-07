@@ -74,12 +74,10 @@ function WorkRestList() {
             if(month2 <10 ){
                 const month = '0'+month2.toString()
                 const workDate = year2.toString()+'-'+month;
-                console.log(workDate);
                 dispatch(callSelectMyLeaveListAPI({ workDate, currentPage }));
                 dispatch(callLeaveYearAPI({ year : year2 }))
             } else {
                 const workDate = year2.toString()+month2.toString();
-                console.log(workDate);
                 dispatch(callSelectMyLeaveListAPI({ workDate, currentPage }));
                 dispatch(callLeaveYearAPI({ year : year2 }))
             }
