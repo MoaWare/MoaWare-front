@@ -66,7 +66,7 @@ function BoardPostModify() {
 
 
 
-    /* 게시물 수정 저장 버튼 클릭 이벤트 */ㄴ
+    /* 게시물 수정 저장 버튼 클릭 이벤트 */
     const inputStyle = !modifyMode ? { backgroundColor: 'lightgrey' } : null;
     const checkValue = !modifyMode ? detail.board?.boardCode : form.board?.boardCode;
 
