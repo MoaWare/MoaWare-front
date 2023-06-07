@@ -87,7 +87,7 @@ function BoardPostModify() {
     return (
         <>
             <div className={CSS.main}>
-                <div class={CSS.menutitle}> 게시판 {">"} 수정 </div>
+                <div className={CSS.menutitle}> 게시판 {">"} 수정 </div>
                 {detail && (
                     <table>
                         <div className={CSS.container} key={detail.postCode}>

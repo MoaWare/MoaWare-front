@@ -1,11 +1,7 @@
-import { useEffect, useState } from 'react';
-import BoardPostModal from '../modal/boardPostModal/BoardPostModal';
 
-import { useNavigate  } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import NavbarCSS from './BoardNavbar.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-//s
+
 function BoardNavbar() {
 
 
@@ -31,19 +27,19 @@ function BoardNavbar() {
                             부서&직급 게시판
                         </NavLink>
                     </li>
-                
+
                 </ul>
-            
-                    <div className={NavbarCSS.boardPostButtonDiv}>
+
+                <div className={NavbarCSS.boardPostButtonDiv}>
                     <button>
                         <NavLink to="/boardPosts/regist">
-                        글 작성
+                            글 작성
                         </NavLink>
                     </button>
-                    </div>
+                </div>
 
-                
-              
+
+
             </div>
         </nav>
     );

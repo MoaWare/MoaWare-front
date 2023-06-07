@@ -46,6 +46,19 @@ function BoardPostList() {
   }, [boardCode, currentPage, empCode]);
 
 
+  useEffect(() => {
+    if (del?.status === 200) {
+      alert('게시물 삭제가 완료되었습니다.');
+      if (isAdmin()) {
+        dispatch(callBoardPostListForAdminAPI({ currentPage }));
+      } else {
+        dispatch(callBoardPostListAPI({ currentPage }));
+      }
+    }
+  }, [del]);
+
+
+
   //테이블 클릭시 상세 및 수정 페이지로 라우팅
   const onClickTableTr = (postCode) => {
     navigate(`/boardPosts/${postCode}`);

@@ -17,11 +17,11 @@ function AdminNavbar() {
                             계정 관리
                         </NavLink>
                     </li>
-                    <li>
+                    {/* <li>
                         <NavLink to="/" activeclassname={NavbarCSS.active}>
                             권한 관리
                         </NavLink>
-                    </li>
+                    </li> */}
                     <li>
                         <NavLink to="/admin/board/list" activeclassname={NavbarCSS.active}>
                             게시판 관리

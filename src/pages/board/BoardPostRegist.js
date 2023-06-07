@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import CSS from './BoardPostRegist.module.css';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
 import { callBoardPostRegistAPI } from '../../apis/BoardPostAPICalls';

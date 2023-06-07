@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callAdminBoardDeleteAPI, callAdminBoardListAPI } from '../../apis/AdminBoardAPICalls';
 import PagingBar from "../../components/common/PagingBar";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import CSS from "./AdminBoardList.module.css";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 function AdminBoardList() {
     const dispatch = useDispatch();
@@ -88,8 +87,13 @@ function AdminBoardList() {
                     <button onClick={onClickDelete}>삭제 하기
                     </button>
                 </div>
+
                 <div>
                     {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
+                </div>
+                <div className={CSS.content2}>
+                    <button>수정 하기
+                    </button>
                 </div>
             </div>
 

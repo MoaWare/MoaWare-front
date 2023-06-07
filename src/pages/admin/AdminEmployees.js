@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callAdminEmpDeleteAPI, callAdminEmpListAPI } from '../../apis/AdminAPICalls';
 import PagingBar from "../../components/common/PagingBar";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CSS from "./AdminEmployees.module.css";
 import { NavLink } from 'react-router-dom';
 
