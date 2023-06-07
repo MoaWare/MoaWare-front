@@ -4,6 +4,7 @@ import TaskCSS from './Task.module.css';import { callProjectAPI, callTaskDetailA
 import { useNavigate, useParams } from "react-router-dom";
 import { getMemberId } from "../../utils/TokenUtils";
 import { toast } from "react-toastify";
+import { resetTask } from "../../modules/ProjectModule";
 
 
 
@@ -61,6 +62,7 @@ function TaskRegist() {
                 hideProgressBar: false,
               });
             navigate(`/task/${form.project.projCode}`);
+            dispatch(resetTask());
         }
     },[post]);
 
@@ -180,7 +182,7 @@ function TaskRegist() {
                                             <td className={TaskCSS.tableTitle}>공지사항</td>
                                             <td className={TaskCSS.tableBorder}>
                                                 <textarea 
-                                                    maxlength="100"
+                                                    maxLength="100"
                                                     className={TaskCSS.inputbox}
                                                     name="taskNotice"
                                                     onChange={onChangeHandler}

@@ -47,6 +47,7 @@ function WorkAdmin({ adminList }) {
 
     const onChangeDateHandler = (e) => {
         const date = e.target.value;
+        setSelectedDate(date);
     }
 
     const baicTime = '09:00:00';
@@ -143,7 +144,7 @@ function WorkAdmin({ adminList }) {
         } else if (formattedDate) {
             dispatch(callAdminWorkListAPI({ date: formattedDate, currentPage }))
         } 
-    }, [formattedDate, currentPage, modify])
+    }, [formattedDate, currentPage, modify, selectedDate])
 
 
 

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { callTimeInsertAPI, callTimeQuitAPI, } from '../../apis/WorkAPICalls';
 import WorkTime from '../Work/WorkTime';
 import { isAdmin } from '../../utils/TokenUtils';
-// import { setBtnState } from '../../modules/WorkTimeModule';
+
 
 function WorkNavbar() {
 
@@ -91,12 +91,7 @@ function WorkNavbar() {
             </div>
             {/* data 객체가 있다면 */}
             {myWork.data && myWork.data.length > 0 ? (
-              /* 원래 유명님의 코드 */
-              // <div className={WorkNavbarCSS.p2} key={myWork.data[0].workPk.workTime}>
-              //   <p className={WorkNavbarCSS.ptime2}>출근 시간 {myWork.data[0].workTime ? myWork.data[0].workTime.substring(11, 19) : ""}</p>
-              //   <p className={WorkNavbarCSS.ptime2}>퇴근 시간 {myWork.data[0].quitTime ? myWork.data[0].quitTime.substring(11, 19) : ""}</p>
-              // </div>
-              /* 효진 수정 코드 */
+
               <div className={WorkNavbarCSS.p2} key={myWork.data[0].workPk.workTime}>
                 <div>
                   <p className={WorkNavbarCSS.ptime2}>출근시간</p>

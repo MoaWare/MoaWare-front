@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-// import DateSelect from '../../../components/Work/DateSelect';
 import WorkRestListCSS from './WorkRestList.module.css';
 import { callLeavePostAPI, callLeaveYearAPI } from '../../../apis/LeaveAPICalls';
 import { useDispatch, useSelector } from 'react-redux';
@@ -54,7 +53,7 @@ function WorkRestList() {
     
     useEffect(() => {
         if (formattedDate) {
-            console.log('formattedDate : ', formattedDate)
+            
             dispatch(callWorkMyListAPI({ workDate: formattedDate, currentPage }));
             } 
             else {
@@ -70,19 +69,15 @@ function WorkRestList() {
     );
 
     useEffect(() => {
-        console.log('year2 : ', year2);
-        console.log('month2 : ', month2);
         
         if(year2 && month2) {
             if(month2 <10 ){
                 const month = '0'+month2.toString()
                 const workDate = year2.toString()+'-'+month;
-                console.log(workDate);
                 dispatch(callSelectMyLeaveListAPI({ workDate, currentPage }));
                 dispatch(callLeaveYearAPI({ year : year2 }))
             } else {
                 const workDate = year2.toString()+month2.toString();
-                console.log(workDate);
                 dispatch(callSelectMyLeaveListAPI({ workDate, currentPage }));
                 dispatch(callLeaveYearAPI({ year : year2 }))
             }

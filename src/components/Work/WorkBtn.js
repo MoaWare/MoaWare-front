@@ -29,7 +29,6 @@ function WorkBtn() { // 컴포넌트 이름을 대문자로 시작하도록 수�
     const min = now.getMinutes().toString().padStart(2, '0');
     const sec = now.getSeconds().toString().padStart(2, '0');
     const quitTime = new Date().toISOString().substr(0, 11) + `${hours}:${min}:${sec}`;
-    console.log(quitTime);
     dispatch(callTimeQuitAPI({ quitTime }));
   };
 
@@ -49,8 +48,6 @@ function WorkBtn() { // 컴포넌트 이름을 대문자로 시작하도록 수�
     }
   }, [insert, quit]);
 
-  // console.log('insert: ', insert);
-  // console.log('btn: ', btn);
 
   return (
     <nav className={WorkBtnCSS.navbar}>

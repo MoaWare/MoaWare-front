@@ -17,11 +17,12 @@ const PUT_TASK = 'project/PUT_TASK';
 const DELETE_TASK = 'project/DELETE_TASK';
 const PUT_PROJDELETE = 'project/PUT_PROJDELETE';
 const PUT_PROGRESSDONE = 'project/PUT_PROGRESSDONE';
+const RESET_TASK = 'project/RESET_TASK';
 
 
 
 export const { project : 
-    { getProject, getTasks, getProgress ,getDone, getDeptemplist, postProject, getTask, postTask, putTask, deleteTask, putProjdelete, putProgressdone }} = createActions({
+    { getProject, getTasks, getProgress ,getDone, getDeptemplist, postProject, getTask, postTask, putTask, deleteTask, putProjdelete, putProgressdone, resetTask }} = createActions({
     [GET_PROJECT] : res => res.data,
     [GET_TASKS] : res => res.data,
     [GET_PROGRESS] : res => res,
@@ -34,6 +35,7 @@ export const { project :
     [DELETE_TASK] : res => res,
     [PUT_PROJDELETE] : res => res,
     [PUT_PROGRESSDONE] : res => res,
+    [RESET_TASK] : () => {},
 }); 
 
 
@@ -52,6 +54,7 @@ const projectReducer = handleActions(
         [DELETE_TASK] : (state, { payload }) => ({ del : payload }),
         [PUT_PROJDELETE] : (state, { payload }) => ({ delProj : payload }),
         [PUT_PROGRESSDONE] : (state, { payload }) => ({ proDone : payload }),
+        [RESET_TASK] : (state, action) => initialState,
     }
 , initialState);
 
