@@ -4,6 +4,7 @@ import { FiX } from 'react-icons/fi';
 import { useNavigate, useParams } from 'react-router-dom';
 import { CallPaymentUpdateAPI } from '../../../apis/PaymentAPICalls';
 import { useDispatch } from 'react-redux';
+import { setPayment } from '../../../modules/PayMentModule';
 
 
 function PayRefuse ({setIsPayRefuse}) {
@@ -53,6 +54,7 @@ function PayRefuse ({setIsPayRefuse}) {
         }
 
         disPatch(CallPaymentUpdateAPI({form}));
+        disPatch(setPayment(false));
         navigator("/pay/wait");
 
 

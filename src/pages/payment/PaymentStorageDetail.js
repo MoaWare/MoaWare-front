@@ -218,11 +218,11 @@ function PaymentStorageDetail () {
 
     const formData = new FormData();
 
-    
+     
     if(file){
       formData.append("originalFileName", file.name)
       formData.append("fileInfo", file)
-    } else if(payDetail.payFileCategory.file) {
+    } else if(payDetail.payFileCategory?.file) {
       formData.append("originalFileName", payDetail.payFileCategory.file.originalFileName)
       formData.append("savedFileName", payDetail.payFileCategory.file.savedFileName)
     } 
