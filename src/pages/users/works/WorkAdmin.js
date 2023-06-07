@@ -144,7 +144,7 @@ function WorkAdmin({ adminList }) {
         } else if (formattedDate) {
             dispatch(callAdminWorkListAPI({ date: formattedDate, currentPage }))
         } 
-    }, [formattedDate, currentPage, modify])
+    }, [formattedDate, currentPage, modify, selectedDate])
 
 
 
