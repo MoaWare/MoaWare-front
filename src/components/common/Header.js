@@ -27,7 +27,6 @@ const Header = () => {
       window.localStorage.removeItem('accessToken');
       localStorage.removeItem('clickTime');
       localStorage.removeItem('workbtn');
-      dispatch(setBtnState(!btn));
       navigate('/login');
     }
   }
