@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { callAdminEmpUpdateAPI, callAdminEmpDetailAPI } from '../../apis/AdminAPICalls';
 import CSS from "./AdminEmpModify.module.css";
 import { toast } from "react-toastify";
+import { resetAdminEmp } from "../../modules/AdminModule";
 
 
 function AdminEmpModify() {
@@ -31,12 +32,13 @@ function AdminEmpModify() {
                     autoClose: 2000, // 자동으로 닫히는 시간 (ms) (옵션)
                     hideProgressBar: false, // 진행 막대 숨김 여부 (옵션)
                 });
-                navigate('/admin/emp/list');
+                navigate('/admin/emp/list', { replace: true });
+                setModifyMode(false);
+                dispatch(resetAdminEmp());
             }
         },
         [modify]
     )
-
 
     /* 입력 양식의 값 변경될 때 */
     const onChangeHandler = (e) => {
