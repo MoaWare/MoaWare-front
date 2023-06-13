@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# 개발기간
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+23.04.24 ~ 23.06.08
 
 ## Available Scripts
 
