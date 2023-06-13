@@ -19,11 +19,8 @@
 
 ### 개발환경
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![image](https://github.com/MoaWare/MoaWare-front/assets/126305652/e65c9ad0-ed90-45f6-8956-c70ba39753b4)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
 ### `npm test`
 
