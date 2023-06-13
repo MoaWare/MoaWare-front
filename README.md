@@ -17,7 +17,7 @@
   
   -팀원 전효진 : 메인페이지,CSS 총괄, 일정관리, 산출물 관리
 
-### `npm start`
+### 개발환경
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
