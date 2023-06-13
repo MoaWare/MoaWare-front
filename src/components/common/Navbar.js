@@ -90,6 +90,7 @@ function Navbar() {
       }
     } else {
       // dispatch(setBtnState(!btn));
+      localStorage.setItem('clickTime', today);
       localStorage.setItem('workbtn', false);
       return; // data가 null인 경우 리턴문 실행
     }
