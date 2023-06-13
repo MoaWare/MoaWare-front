@@ -19,7 +19,11 @@
 
 ### 개발환경
 
+HTML. CSS. JS, REACT
 
+JAVA,JPA,Spring Boot
+
+Oracle, MySql
 
 ### `npm test`
 
