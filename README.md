@@ -19,8 +19,6 @@
 
 ### 개발환경
 
-![image](https://github.com/MoaWare/MoaWare-front/assets/126305652/a3e9ab34-8381-44e0-9fd7-839c38d78a8a)
-
 
 
 ### `npm test`
