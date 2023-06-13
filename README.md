@@ -18,8 +18,8 @@
   -팀원 전효진 : 메인페이지,CSS 총괄, 일정관리, 산출물 관리
 
 ### 개발환경
+![image](https://github.com/MoaWare/MoaWare-front/assets/126305652/c2d51cc0-395b-4bb5-8072-6108f3111306)
 
-![image](https://github.com/MoaWare/MoaWare-front/assets/126305652/e65c9ad0-ed90-45f6-8956-c70ba39753b4)
 
 
 ### `npm test`
