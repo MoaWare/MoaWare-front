@@ -25,7 +25,7 @@ JAVA,JPA,Spring Boot
 
 Oracle, MySql
 
-### `npm test`
+### 주요기능
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
